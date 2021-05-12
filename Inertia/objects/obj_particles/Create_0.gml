@@ -1,16 +1,19 @@
 
 function Particle(inst) constructor {
-	relx = irandom_range(-32, 32)
-	rely = irandom_range(-32, 32)
 	follow = inst
-	sp = irandom_range(10, 30) * choose(-1, 1)
-	r = point_distance(0, 0, relx, rely)
-	dir = point_direction(0, 0, relx, rely)
-	
+	dir = random(360)
+	y_phase = random(360)
+	sp = irandom_range(6, 12) * choose(-1, 1)
+	rx = 12 + irandom(4)
+	ry = 12 + irandom(4)
+
+	relx = lengthdir_x(rx, dir)
+	rely = lengthdir_x(ry, dir + y_phase)
+
 	update_pos = function() {
 		dir += sp
-		relx = lengthdir_x(r, dir)
-		rely = lengthdir_y(r, dir)
+		relx = lengthdir_x(rx, dir)
+		rely = lengthdir_x(ry, dir + y_phase)
 	}
 
 	getx = function() { return follow.x + relx }
@@ -22,4 +25,18 @@ function add_particle(inst) {
 	ds_list_add(particles, part)
 }
 
+function remove_particle(inst) {
+	var ind = irandom(ds_list_size(particles) - 1)
+	delete particles[| ind]
+	ds_list_delete(particles, ind)
+}
+
 particles = ds_list_create()
+color = $CCC2A3
+
+// create initial particles
+if instance_exists(obj_man) {
+	repeat obj_man.stamina {
+		add_particle(obj_man)
+	}
+}

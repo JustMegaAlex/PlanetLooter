@@ -61,3 +61,6 @@ reload_time = 10
 reloading = 0
 
 side = Sides.human
+
+// create after to draw particles behind man
+instance_create_layer(x, y, layer, obj_particles)

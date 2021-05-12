@@ -26,6 +26,7 @@
     {"id":{"name":"obj_ruby_doll_hitable","path":"objects/obj_ruby_doll_hitable/obj_ruby_doll_hitable.yy",},"order":21,},
     {"id":{"name":"rm_menu","path":"rooms/rm_menu/rm_menu.yy",},"order":2,},
     {"id":{"name":"spr_durance","path":"sprites/spr_durance/spr_durance.yy",},"order":11,},
+    {"id":{"name":"spr_photonie","path":"sprites/spr_photonie/spr_photonie.yy",},"order":14,},
     {"id":{"name":"obj_blob_creation","path":"objects/obj_blob_creation/obj_blob_creation.yy",},"order":13,},
     {"id":{"name":"geometry","path":"scripts/geometry/geometry.yy",},"order":3,},
     {"id":{"name":"obj_stamina","path":"objects/obj_stamina/obj_stamina.yy",},"order":15,},
