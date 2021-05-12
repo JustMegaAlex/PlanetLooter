@@ -32,6 +32,7 @@
     {"id":{"name":"obj_blob","path":"objects/obj_blob/obj_blob.yy",},"order":12,},
     {"id":{"name":"obj_inner_area","path":"objects/obj_inner_area/obj_inner_area.yy",},"order":0,},
     {"id":{"name":"obj_ruby_doll","path":"objects/obj_ruby_doll/obj_ruby_doll.yy",},"order":17,},
+    {"id":{"name":"obj_particles","path":"objects/obj_particles/obj_particles.yy",},"order":22,},
     {"id":{"name":"spr_blob","path":"sprites/spr_blob/spr_blob.yy",},"order":5,},
     {"id":{"name":"spr_stamina","path":"sprites/spr_stamina/spr_stamina.yy",},"order":10,},
     {"id":{"name":"Room2","path":"rooms/Room2/Room2.yy",},"order":1,},
@@ -88,7 +89,7 @@
   ],
   "IncludedFiles": [],
   "MetaData": {
-    "IDEVersion": "2.3.1.542",
+    "IDEVersion": "2.3.2.556",
   },
   "resourceVersion": "1.4",
   "name": "Inertia",
