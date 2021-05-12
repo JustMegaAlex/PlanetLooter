@@ -71,6 +71,6 @@ if sp == spmax {
 	}
 }
 
-scr_camera_set_pos(0, x, y)
-
 scr_move_contact(hsp, vsp)
+
+scr_camera_set_pos(0, x, y)
