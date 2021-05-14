@@ -14,3 +14,4 @@ dashsp = 45
 dashing = false
 dashcooldown = 0
 dashcooldowntime = 20
+timeshiftammount = 180

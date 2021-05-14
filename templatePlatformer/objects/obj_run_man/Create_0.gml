@@ -1,6 +1,7 @@
 
 /// main parameters
 hsp_max = 10
+hsp_inp = 0
 vsp_max = 15
 acc = 1.1
 grav = 0.8
