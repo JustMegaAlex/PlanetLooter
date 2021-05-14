@@ -46,11 +46,13 @@ if input {
 hsp *= sign(hsp) == 1 and right_free or sign(hsp) == -1 and left_free
 vsp *= sign(vsp) == 1 and down_free or sign(vsp) == -1 and up_free
 
+// shoot
 if input_shoot and not reloading and stamina > 0 {
 	with instance_create_layer(x, y, layer, obj_photon) {
 		image_angle = other.image_angle
 		side = other.side
 	}
+	obj_particles.remove_particle()
 	reloading = reload_time
 	stamina--
 }
@@ -71,6 +73,6 @@ if sp == spmax {
 	}
 }
 
-scr_camera_set_pos(0, x, y)
-
 scr_move_contact(hsp, vsp)
+
+scr_camera_set_pos(0, x, y)
