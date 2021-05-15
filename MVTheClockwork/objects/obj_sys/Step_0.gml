@@ -5,8 +5,9 @@ if keyboard_check_pressed(vk_escape)
 	room_goto(rm_main)
 
 if global.timeshifting {
-	global.timeshifting -= global.timeshiftstep
-	global.time--
+	global.timeshifting += global.timesp
+	if not global.timeshifting
+		global.timesp = global.timesp_base
 }
-else
-	global.time++
+
+global.time += global.timesp

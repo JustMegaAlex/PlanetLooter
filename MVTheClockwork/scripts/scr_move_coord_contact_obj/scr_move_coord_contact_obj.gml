@@ -1,24 +1,18 @@
-///@arg hsp
-///@arg vsp
-///@arg obj
-function scr_move_coord_contact_obj(argument0, argument1, argument2) {
 
-	x += argument0
-	y += argument1
-
+function scr_move_coord_contact_obj(hsp, vsp, obj) {
+	x += hsp
+	y += vsp
 	//collision
-	var contact = instance_place(x, y, argument2)
-
-	if contact {
-	
+	var contact = instance_place(x, y, obj)
+	if contact  {
+		// compute relative movement
+		var relhsp = hsp - contact.hsp
+		var relvsp = vsp - contact.vsp
+		var reldir = point_direction(0, 0, relhsp, relvsp)
 		// move out of an object
 		while place_meeting(x, y, contact) {
-		
-	        x -= lengthdir_x(1, dir)
-		
-	        y -= lengthdir_y(1, dir)
+	        x -= lengthdir_x(1, reldir)
+	        y -= lengthdir_y(1, reldir)
 		}
 	}
-
-
 }
