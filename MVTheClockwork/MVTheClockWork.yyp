@@ -28,6 +28,7 @@
     {"id":{"name":"obj_menu_button","path":"objects/obj_menu_button/obj_menu_button.yy",},"order":7,},
     {"id":{"name":"obj_sys","path":"objects/obj_sys/obj_sys.yy",},"order":9,},
     {"id":{"name":"rm_main","path":"rooms/rm_main/rm_main.yy",},"order":1,},
+    {"id":{"name":"obj_run_man_2","path":"objects/obj_run_man_2/obj_run_man_2.yy",},"order":12,},
     {"id":{"name":"rm_0","path":"rooms/rm_0/rm_0.yy",},"order":3,},
     {"id":{"name":"rm_1","path":"rooms/rm_1/rm_1.yy",},"order":7,},
   ],
