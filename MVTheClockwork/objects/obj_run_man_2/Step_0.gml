@@ -14,6 +14,9 @@ move_h = key_right*right_free - key_left*left_free
 // do we try to move?
 input_move_h = key_right - key_left
 
+if abs(input_move_h)
+	dirsign = input_move_h
+
 switch state {
 	case States.walk: {
 		// moving hor
@@ -38,6 +41,14 @@ switch state {
 			vsp = jump_sp
 			state = States.fly
 			jumps -= 1
+		}
+		
+		if key_dash {
+			dashing = dashtime
+			dashdir = dirsign
+			vsp = 0
+			hsp = dashsp * dirsign
+			state = States.dash
 		}
 		
 		// handle collisions
@@ -73,14 +84,34 @@ switch state {
 			vsp = jump_sp
 			jumps -= 1
 		}
+		
 		// handle collisions
 		if abs(hsp) or abs(vsp)
 			scr_move_coord_contact_obj(hsp, vsp, obj_block)
+		
+		if key_dash {
+			dashing = dashtime
+			dashdir = dirsign
+			vsp = 0
+			hsp = dashsp * dirsign
+			state = States.dash
+		}
+		
 		break
 	}
 	
 	case States.dash: {
-
+		scr_move_coord_contact_obj(hsp, vsp, obj_block)
+		if not --dashing {
+			// reset hsp
+			hsp = hsp_max * dashdir
+			dashcooldown = dashcooldowntime
+			if down_free {
+				state = States.fly
+				break
+			}
+			state = States.walk
+		}
 		break
 	}
 	
