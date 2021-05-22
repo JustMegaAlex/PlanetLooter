@@ -1,8 +1,17 @@
 
-event_inherited()
+scr_debug_scripts_update()
 
+scr_debug_show_var("right_free", right_free)
+scr_debug_show_var("left_free", left_free)
+scr_debug_show_var("down_free", down_free)
+scr_debug_show_var("up_free", up_free)
+scr_debug_show_var("hsp", hsp)
+scr_debug_show_var("vsp", vsp)
+scr_debug_show_var("hsp_max", hsp_max)
 scr_debug_show_var("move_h", move_h)
 scr_debug_show_var("state", state)
 scr_debug_show_var("jumps", jumps)
 scr_debug_show_var("y", y)
 scr_debug_show_var("dirsign", dirsign)
+scr_debug_show_var("last_platform_left", last_platform_left)
+scr_debug_show_var("last_platform_right", last_platform_right)
