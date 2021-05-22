@@ -35,22 +35,18 @@ switch state {
 			on_ground = on_ground_delay
 			state = States.fly
 		}
-		
+
 		// jumping
 		if key_jump {
 			vsp = jump_sp
 			state = States.fly
 			jumps -= 1
 		}
-		
+
 		if key_dash {
-			dashing = dashtime
-			dashdir = dirsign
-			vsp = 0
-			hsp = dashsp * dirsign
-			state = States.dash
+			dash()
 		}
-		
+
 		// handle collisions
 		if abs(hsp) or abs(vsp)
 			scr_move_coord_contact_obj(hsp, vsp, obj_block)
@@ -84,22 +80,17 @@ switch state {
 			vsp = jump_sp
 			jumps -= 1
 		}
-		
+
 		// handle collisions
 		if abs(hsp) or abs(vsp)
 			scr_move_coord_contact_obj(hsp, vsp, obj_block)
-		
-		if key_dash {
-			dashing = dashtime
-			dashdir = dirsign
-			vsp = 0
-			hsp = dashsp * dirsign
-			state = States.dash
-		}
-		
+
+		if key_dash
+			dash()
+
 		break
 	}
-	
+
 	case States.dash: {
 		scr_move_coord_contact_obj(hsp, vsp, obj_block)
 		if not --dashing {
@@ -114,7 +105,7 @@ switch state {
 		}
 		break
 	}
-	
+
 	case States.onwall: {
 		
 		break

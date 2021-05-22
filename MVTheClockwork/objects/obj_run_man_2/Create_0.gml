@@ -9,6 +9,14 @@ enum States {
 	onwall,
 }
 
+function dash() {
+	dashing = dashtime
+	dashdir = dirsign
+	vsp = 0
+	hsp = dashsp * dirsign
+	state = States.dash
+}
+
 state = States.walk
 
 jumps_max = 1

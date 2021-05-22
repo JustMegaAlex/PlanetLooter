@@ -3,7 +3,7 @@
 hsp_max = 10
 hsp_inp = 0
 vsp_max = 15
-acc = 1.1
+acc = 3
 grav = 0.8
 jump_sp = -18
 hsp_to = 0	// how sp_x and sp_y change
