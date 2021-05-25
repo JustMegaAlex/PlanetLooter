@@ -7,6 +7,7 @@ enum States {
 	dash,
 	timeshift,
 	onwall,
+	chaindash,
 }
 
 function dash() {
@@ -15,6 +16,22 @@ function dash() {
 	vsp = 0
 	hsp = dashsp * dirsign
 	state = States.dash
+}
+
+function get_chain_target() {
+	var min_len = chain_max_len
+	var target = noone
+	for (var i = 0; i < instance_number(obj_chain_ring); i++) {
+		var ring = instance_find(obj_chain_ring, i)
+		// check player looks in right direction
+		if !(sign(ring.x - x) == dirsign) continue
+		var dist = point_distance(x, y, ring.x, ring.y)
+		if (dist < min_len) {
+			min_len = dist
+			target = ring
+		}
+	}
+	return target
 }
 
 state = States.walk
@@ -35,3 +52,9 @@ dashcooldown = 0
 dashcooldowntime = 20
 timeshiftammount = 180
 timeshift_sp = -2
+
+// chain gun
+chain_attached_to = noone
+chain_dash_sp = 30
+chain_min_len = 15
+chain_max_len = 400

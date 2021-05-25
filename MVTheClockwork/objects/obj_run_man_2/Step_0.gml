@@ -16,6 +16,9 @@ input_move_h = key_right - key_left
 
 if abs(input_move_h)
 	dirsign = input_move_h
+	
+// chain aim
+chain_attached_to = get_chain_target()
 
 switch state {
 	case States.walk: {
