@@ -11,3 +11,7 @@ while room_exists(room_ind) {
 	btn.room_to_start = room_ind
 	room_ind++
 }
+
+// if only one room start immidiately
+if room_ind == 2
+	room_goto(1)
