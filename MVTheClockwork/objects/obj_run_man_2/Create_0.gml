@@ -8,9 +8,11 @@ enum States {
 }
 
 enum MovingCollisions {
-	left,
-	right,
 	none,
+	left_to,
+	right_to,
+	left_from,
+	right_from,
 }
 
 function move_contact(hsp, vsp) {
@@ -19,6 +21,7 @@ function move_contact(hsp, vsp) {
 	//collision
 	var contact = instance_place(x, y, obj_block)
 	if contact  {
+		is_colliding = true
 		// compute relative movement
 		var relhsp = hsp - contact.hsp
 		var relvsp = vsp - contact.vsp
@@ -40,11 +43,18 @@ function move_contact(hsp, vsp) {
 			if not place_meeting(x, y, contact) {
 				if (vsp > 0) and( contact.object_index == obj_platform) {
 					moving_collider = contact
+					// transition to on_platform state
+					last_on_platform = true
 				}
 				return contact
 			}
 		}
 	}
+}
+
+function shoot() {
+	repeat(bullet_number)
+		instance_create_layer(x, y, layer, obj_chain_bullet)
 }
 
 function dash() {
@@ -63,6 +73,15 @@ moving_collision = MovingCollisions.none
 last_platform_left = false
 last_platform_right = false
 moving_collider = noone
+on_platform = false
+last_on_platform = false
+collider_hsp = 0
+collider_vsp = 0
+is_colliding = false
+hsp_restricted_by_collision = false
+
+// shooting
+bullet_number = 8
 
 /// main parameters
 hsp_max_base = 10

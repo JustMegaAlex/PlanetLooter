@@ -6,6 +6,7 @@ function scr_player_input() {
 	key_jump = keyboard_check_pressed(vk_space) or keyboard_check_pressed(ord("Z"))
 	key_dash = keyboard_check_pressed(ord("C"))
 	key_special = keyboard_check_pressed(ord("A"))
+	key_shoot = keyboard_check_pressed(ord("X"))
 
 	if keyboard_check_pressed(ord("R"))
 		room_restart()

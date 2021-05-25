@@ -17,17 +17,15 @@
   "physicsStartAwake": true,
   "physicsKinematic": false,
   "physicsShapePoints": [],
-  "eventList": [
-    {"isDnD":false,"eventNum":0,"eventType":0,"collisionObjectId":null,"parent":{"name":"obj_simple_menu","path":"objects/obj_simple_menu/obj_simple_menu.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
-  ],
+  "eventList": [],
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "Objects",
-    "path": "folders/Objects.yy",
+    "name": "MVTheClockWork",
+    "path": "MVTheClockWork.yyp",
   },
   "resourceVersion": "1.0",
-  "name": "obj_simple_menu",
+  "name": "Object10",
   "tags": [],
   "resourceType": "GMObject",
 }

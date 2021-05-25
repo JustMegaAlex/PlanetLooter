@@ -1,11 +1,16 @@
 
 scr_player_input()
 
+is_colliding = false
+
 // contact walls
+on_platform = place_meeting(x, y + vsp_max, obj_platform) or last_on_platform
 up_free = place_empty(x, y - 1, obj_block)
-down_free = place_empty(x, y + 1, obj_block) and not moving_collider
+down_free = place_empty(x, y + 1, obj_block) and not on_platform
 left_free = place_empty(x - 1, y, obj_block)
 right_free = place_empty(x + 1, y, obj_block)
+
+last_on_platform = false
 
 // detect a platform after collision handling
 // otherwise a player will stuck on a platform due to collision
@@ -21,17 +26,34 @@ input_move_h = key_right - key_left
 
 if abs(input_move_h)
 	dirsign = input_move_h
-	
-// handle collisions with moving platforms
+
+//// handle collisions with moving platforms
+// side
 switch moving_collision {
 	case MovingCollisions.none: {
-		if key_left and last_platform_left
-			moving_collision = MovingCollisions.left
-		if key_right and last_platform_right
-			moving_collision = MovingCollisions.left
+		if key_left and last_platform_left {
+			if moving_collider.hsp > 0 {
+				moving_collision = MovingCollisions.left_from
+				collider_hsp = moving_collider.hsp
+				hsp_restricted_by_collision = true
+				break
+			}
+			moving_collision = MovingCollisions.left_to
+			break
+		}
+
+		if key_right and last_platform_right {
+			if moving_collider.hsp < 0 {
+				moving_collision = MovingCollisions.right_from
+				collider_hsp = moving_collider.hsp
+				hsp_restricted_by_collision = true
+				break
+			}
+			moving_collision = MovingCollisions.right_to
+		}
 		break
 	}
-	case MovingCollisions.left: {
+	case MovingCollisions.left_to: {
 		moving_collider = instance_place(x + hsp + sign(hsp), y, obj_platform)
 		if not moving_collider {
 			moving_collision = MovingCollisions.none
@@ -46,7 +68,7 @@ switch moving_collision {
 		}
 		break
 	}
-	case MovingCollisions.right: {
+	case MovingCollisions.right_to: {
 		moving_collider = instance_place(x + hsp + sign(hsp), y, obj_platform)
 		if not moving_collider {
 			moving_collision = MovingCollisions.none
@@ -59,7 +81,45 @@ switch moving_collision {
 			moving_collision = MovingCollisions.none
 			hsp_max = hsp_max_base
 		}
-		break	
+		break
+	}
+	case MovingCollisions.left_from: {
+		moving_collider = instance_place(x + sign(hsp), y, obj_platform)
+		if not moving_collider or key_right {
+			moving_collision = MovingCollisions.none
+			hsp_restricted_by_collision = false
+			if moving_collider
+				hsp = moving_collider.hsp
+			break
+		}
+		break
+	}
+	case MovingCollisions.right_from: {
+		moving_collider = instance_place(x + sign(hsp), y, obj_platform)
+		if not moving_collider or key_left {
+			moving_collision = MovingCollisions.none
+			hsp_restricted_by_collision = false
+			if moving_collider
+				hsp = moving_collider.hsp
+			break
+		}
+		break
+	}
+}
+last_platform_left = false
+last_platform_right = false
+
+// bottom
+collider_hsp = 0
+collider_vsp = 0
+if on_platform {
+	// moving_collider might be set in side collision code
+	moving_collider = instance_place(x, y + vsp_max, obj_platform)
+	if not moving_collider or key_jump
+		on_platform = false
+	else {
+		collider_hsp = moving_collider.hsp
+		collider_vsp = moving_collider.vsp
 	}
 }
 
@@ -89,13 +149,27 @@ switch state {
 			jumps -= 1
 		}
 
-		if key_dash {
+		if key_dash
 			dash()
+			
+		if key_shoot
+			shoot()
+	
+		if hsp == 0 and key_special {
+			state = States.timeshift
+			global.timeshifting = timeshiftammount
+			global.timesp = timeshift_sp
 		}
 
 		// handle collisions
-		if abs(hsp) or abs(vsp)
-			move_contact(hsp, vsp)
+		res_hsp = hsp + collider_hsp
+		res_vsp = vsp
+		if on_platform
+			res_vsp = collider_vsp
+		if hsp_restricted_by_collision
+			hsp = collider_hsp
+		if abs(res_hsp) or abs(res_vsp)
+			move_contact(res_hsp, res_vsp)
 
 		break
 	}
@@ -117,8 +191,11 @@ switch state {
 		if !down_free {
 			state = States.walk
 			jumps = jumps_max
+			// land on platform
+			if on_platform
+				vsp = collider_vsp
 			// land on ground
-			if vsp > 0
+			else if vsp > 0
 				vsp = 0
 		}
 		// double jumping
@@ -133,6 +210,9 @@ switch state {
 
 		if key_dash
 			dash()
+			
+		if key_shoot
+			shoot()
 
 		break
 	}
@@ -156,9 +236,17 @@ switch state {
 		
 		break
 	}
-	
+
 	case States.timeshift: {
-		
+		hsp = collider_hsp
+		vsp = collider_vsp
+		if hsp_restricted_by_collision
+			hsp = collider_hsp
+		if abs(hsp) or abs(vsp)
+			move_contact(hsp, vsp)
+		if not global.timeshifting {
+			state = States.walk
+		}
 		break
 	}
 }

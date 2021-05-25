@@ -1,5 +1,6 @@
 
-scr_debug_INI()
+scr_debug_ini()
+global.DEBUG = true
 
 mouse_pressed = false
 
