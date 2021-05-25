@@ -18,7 +18,7 @@ if abs(input_move_h)
 	dirsign = input_move_h
 	
 // chain aim
-chain_attached_to = get_chain_target()
+chain_target = get_chain_target()
 
 switch state {
 	case States.walk: {
@@ -49,6 +49,9 @@ switch state {
 		if key_dash {
 			dash()
 		}
+		
+		if key_chain and chain_target
+			chain()
 
 		// handle collisions
 		if abs(hsp) or abs(vsp)
@@ -90,6 +93,9 @@ switch state {
 
 		if key_dash
 			dash()
+			
+		if key_chain and chain_target
+			chain()
 
 		break
 	}
@@ -105,6 +111,18 @@ switch state {
 				break
 			}
 			state = States.walk
+		}
+		break
+	}
+	
+	case States.chaindash: {
+		scr_move_coord_contact_obj(hsp, vsp, obj_block)
+		if point_distance(x, y, chain_attached_to.x, chain_attached_to.y) < chain_min_len {
+			// linear interpolate using hsp_max as a reference
+			//hsp *= hsp_max / chain_dash_sp
+			//vsp *= hsp_max / chain_dash_sp
+			chain_attached_to = noone
+			state = States.fly
 		}
 		break
 	}

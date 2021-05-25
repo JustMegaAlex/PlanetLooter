@@ -1,5 +1,5 @@
 
 draw_self()
 
-if chain_attached_to
-	draw_line(x, y, chain_attached_to.x, chain_attached_to.y)
+if chain_target
+	draw_line(x, y, chain_target.x, chain_target.y)

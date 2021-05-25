@@ -19,6 +19,7 @@
     {"id":{"name":"spr_platform","path":"sprites/spr_platform/spr_platform.yy",},"order":6,},
     {"id":{"name":"scr_debug_show_list","path":"scripts/scr_debug_show_list/scr_debug_show_list.yy",},"order":3,},
     {"id":{"name":"obj_chain_ring","path":"objects/obj_chain_ring/obj_chain_ring.yy",},"order":13,},
+    {"id":{"name":"rm_2","path":"rooms/rm_2/rm_2.yy",},"order":8,},
     {"id":{"name":"scr_debug_show_var","path":"scripts/scr_debug_show_var/scr_debug_show_var.yy",},"order":5,},
     {"id":{"name":"scr_debug_scripts_update","path":"scripts/scr_debug_scripts_update/scr_debug_scripts_update.yy",},"order":7,},
     {"id":{"name":"scr_debug_INI","path":"scripts/scr_debug_INI/scr_debug_INI.yy",},"order":9,},
@@ -51,6 +52,7 @@
     {"roomId":{"name":"rm_main","path":"rooms/rm_main/rm_main.yy",},},
     {"roomId":{"name":"rm_0","path":"rooms/rm_0/rm_0.yy",},},
     {"roomId":{"name":"rm_1","path":"rooms/rm_1/rm_1.yy",},},
+    {"roomId":{"name":"rm_2","path":"rooms/rm_2/rm_2.yy",},},
   ],
   "Folders": [
     {"folderPath":"folders/Sprites.yy","order":1,"resourceVersion":"1.0","name":"Sprites","tags":[],"resourceType":"GMFolder",},

@@ -18,6 +18,14 @@ function dash() {
 	state = States.dash
 }
 
+function chain() {
+	chain_attached_to = chain_target
+	var dir = point_direction(x, y, chain_attached_to.x ,chain_attached_to.y)
+	hsp = lengthdir_x(chain_dash_sp, dir)
+	vsp = lengthdir_y(chain_dash_sp, dir)
+	state = States.chaindash
+}
+
 function get_chain_target() {
 	var min_len = chain_max_len
 	var target = noone
@@ -55,6 +63,7 @@ timeshift_sp = -2
 
 // chain gun
 chain_attached_to = noone
+chain_target = noone
 chain_dash_sp = 30
 chain_min_len = 15
 chain_max_len = 400
