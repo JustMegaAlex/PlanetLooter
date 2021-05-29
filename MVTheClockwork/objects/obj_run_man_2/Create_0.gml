@@ -92,6 +92,31 @@ function get_chain_target() {
 	return target
 }
 
+function point_in_object(obj) {
+	var point = self.topleft()
+	if collision_point(point.x_, point.y_, obj, false, true) { return point }
+	point = self.topright()
+	if collision_point(point.x_, point.y_, obj, false, true) { return point }
+	point = self.bottomleft()
+	if collision_point(point.x_, point.y_, obj, false, true) { return point }
+	point = self.bottomright()
+	if collision_point(point.x_, point.y_, obj, false, true) { return point }
+}
+
+function topleft() {
+	return new Point(bbox_left, bbox_top)
+}
+function topright() {
+	return new Point(bbox_right, bbox_top)
+}
+function bottomleft() {
+	return new Point(bbox_left, bbox_bottom)
+}
+function bottomright() {
+	return new Point(bbox_right, bbox_bottom)
+}
+
+
 state = States.walk
 moving_collision = MovingCollisions.none
 last_platform_left = false
@@ -107,7 +132,15 @@ hsp_restricted_by_collision = false
 // shooting
 bullet_number = 8
 
+//// collisions
+right_free = true
+left_free = true
+down_free = true
+up_free = true
+
 /// main parameters
+
+
 hsp_max_base = 10
 hsp_max = hsp_max_base
 hsp_inp = 0
