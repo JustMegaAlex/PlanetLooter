@@ -13,4 +13,4 @@ down_free = place_empty(x, y + 1, obj_block)
 left_free = place_empty(x - 1, y, obj_block)
 right_free = place_empty(x + 1, y, obj_block)
 
-scr_camera_set_center(0, x, y)
+scr_camera_set_pos(0, x, y)

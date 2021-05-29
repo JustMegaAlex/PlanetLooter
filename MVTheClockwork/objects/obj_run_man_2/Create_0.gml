@@ -201,13 +201,10 @@ down_free = true
 up_free = true
 
 /// main parameters
-
-
 hsp_max_base = 10
 hsp_max = hsp_max_base
-hsp_inp = 0
 vsp_max = 15
-acc = 3
+acc = 5
 grav = 0.8
 jump_sp = -18
 hsp_to = 0	// how sp_x and sp_y change

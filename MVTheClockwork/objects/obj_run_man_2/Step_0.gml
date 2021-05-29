@@ -14,6 +14,7 @@ scr_player_input()
 // moving_collider = instance_place(x, y+1, obj_platform)
 
 dashcooldown -= (dashcooldown > 0)
+jump_pressed -= (jump_pressed > 0)
 
 // can we move hor?
 move_h = key_right*right_free - key_left*left_free
@@ -39,7 +40,7 @@ switch state {
 	case States.walk: {
 		// moving hor
 		hsp_to = move_h * hsp_max
-		
+
 		// carried by platform
 		if on_platform {
 			hsp_to += on_platform.hsp
@@ -106,23 +107,32 @@ switch state {
 		//	hsp = collider_hsp
 		//}
 		// handle vertical sp
-		vsp = scr_approach(vsp, vsp_max, grav) 
+		vsp = scr_approach(vsp, vsp_max, grav)
+		if vsp < (jump_sp * 0.15) and !key_jump_hold
+			vsp = jump_sp * 0.15
 		// hit ceil
 		if ((vsp < 0) and !up_free)
 			vsp = 0
 		// reset jumps if on ground
 		if !down_free {
-			state = States.walk
-			jumps = jumps_max
-			// land on ground
-			if vsp > 0
-				vsp = 0
+			if jump_pressed {
+				vsp = jump_sp	
+			} else {
+				state = States.walk
+				jumps = jumps_max
+				// land on ground
+				if vsp > 0
+					vsp = 0
+			}
 		}
 		// double jumping
-		if key_jump and jumps {
-			vsp = jump_sp
-			jumps -= 1
-		}
+		if key_jump 
+			if jumps {
+				vsp = jump_sp
+				jumps -= 1
+			} else {
+				jump_pressed = jump_press_delay
+			}
 
 		if key_dash
 			dash()
