@@ -38,7 +38,7 @@ if down_free {
 switch state {
 	case States.walk: {
 		// moving hor
-		hsp_to = move_h * hsp_max	
+		hsp_to = move_h * hsp_max
 		
 		// carried by platform
 		if on_platform {
@@ -52,8 +52,6 @@ switch state {
 			hsp = collider_hsp
 			hsp_to = collider_hsp
 		}
-		//if ((hsp > 0) and !right_free) or ((hsp < 0) and !left_free)
-		//	hsp = collider_hsp
 
 		dir = point_direction(0, 0, hsp, vsp)
 

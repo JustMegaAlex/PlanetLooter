@@ -140,10 +140,6 @@ function perform_collision_solving(point, obj) {
 	var move = new Line(point.x_, point.y_, point.x_ - relhsp, point.y_ - relvsp)
 	//// check all bounds
 	// get vector multiplier by intersection
-	var tb = obj.top_bound()
-	var bb = obj.bottom_bound()
-	var rb = obj.right_bound()
-	var lb = obj.left_bound()
 	var m = line_intersection(move, obj.left_bound(), false);
 	if (m >= 0) and (m <= 1) {
 		// cut move vector
