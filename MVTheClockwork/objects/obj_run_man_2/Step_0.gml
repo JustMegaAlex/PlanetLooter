@@ -23,6 +23,7 @@ move_h = key_right*right_free - key_left*left_free
 
 // do we try to move?
 input_move_h = key_right - key_left
+abs_input_move_h = abs(input_move_h)
 
 if abs(input_move_h)
 	dirsign = input_move_h
@@ -183,7 +184,8 @@ switch state {
 	case States.fly: {
 		// moving hor
 		hsp_to = move_h * hsp_max
-		hsp = scr_approach(hsp, hsp_to, grav)
+		var hsp_acc = acc * abs_input_move_h + grav * !abs_input_move_h
+		hsp = scr_approach(hsp, hsp_to, hsp_acc)
 		// block hor sp if wall contact
 		if ((hsp > 0) and !right_free) or ((hsp < 0) and !left_free) {
 			hsp = 0
@@ -227,7 +229,7 @@ switch state {
 	}
 
 	case States.dash: {
-		move_contact(hsp, vsp)
+		scr_move_coord(hsp, vsp)
 		if not --dashing {
 			// reset hsp
 			hsp = hsp_max * dashdir
@@ -240,7 +242,7 @@ switch state {
 		}
 		break
 	}
-	
+
 	case States.chaindash: {
 		scr_move_coord_contact_obj(hsp, vsp, obj_block)
 		if point_distance(x, y, chain_attached_to.x, chain_attached_to.y) < chain_min_len {
