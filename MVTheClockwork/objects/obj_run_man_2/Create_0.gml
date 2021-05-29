@@ -65,7 +65,10 @@ function dash() {
 	dashdir = dirsign
 	vsp = 0
 	hsp = dashsp * dirsign
+	// stop on wall
+	hsp = hsp * ((hsp > 0 and right_free) or (hsp < 0 and left_free))
 	state = States.dash
+	on_platform = noone
 }
 
 function chain() {
@@ -115,6 +118,69 @@ function bottomleft() {
 function bottomright() {
 	return new Point(bbox_right, bbox_bottom)
 }
+
+function resolve_collision(obj) {
+	point = self.point_in_object(obj)
+	while point {
+		self.perform_collision_solving(point, obj);
+		point = self.point_in_object(obj)
+	}
+}
+
+function perform_collision_solving(point, obj) {
+	// make reversed speed vector
+	var relhsp
+	if obj.object_index == obj_block
+		// don't count hsp as relative if being pushed by a platform
+		// while colliding with another object
+		relhsp = (hsp - obj.hsp) * (right_free and left_free)
+	else
+		relhsp = (hsp - obj.hsp)
+	var relvsp = vsp - obj.vsp
+	var move = new Line(point.x_, point.y_, point.x_ - relhsp, point.y_ - relvsp)
+	//// check all bounds
+	// get vector multiplier by intersection
+	var tb = obj.top_bound()
+	var bb = obj.bottom_bound()
+	var rb = obj.right_bound()
+	var lb = obj.left_bound()
+	var m = line_intersection(move, obj.left_bound(), false);
+	if (m >= 0) and (m <= 1) {
+		// cut move vector
+		move.mult(m)
+		x += move.xend - move.xst - 1
+		y += move.yend - move.yst
+		collider_hsp = obj.hsp
+		return true
+	}
+	var m = line_intersection(move, obj.top_bound(), false);
+	if (m >= 0) and (m <= 1) {
+		move.mult(m)
+		x += move.xend - move.xst
+		y += move.yend - move.yst - 1
+		on_platform = obj
+		state = States.walk
+		return true
+	}
+	var m = line_intersection(move, obj.right_bound(), false);
+	if (m >= 0) and (m <= 1) {
+		move.mult(m)
+		x += move.xend - move.xst + 1
+		y += move.yend - move.yst
+		collider_hsp = obj.hsp
+		return true
+	}
+	var bb = obj.bottom_bound()
+	var m = line_intersection(move, obj.bottom_bound(), false);
+	if (m >= 0) and (m <= 1) {
+		move.mult(m)
+		x += move.xend - move.xst
+		y += move.yend - move.yst + 1
+		return true
+	}
+	return false
+}
+
 
 
 state = States.walk

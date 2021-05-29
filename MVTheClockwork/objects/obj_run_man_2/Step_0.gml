@@ -38,12 +38,22 @@ if down_free {
 switch state {
 	case States.walk: {
 		// moving hor
-		hsp_to = move_h * hsp_max
+		hsp_to = move_h * hsp_max	
+		
+		// carried by platform
+		if on_platform {
+			hsp_to += on_platform.hsp
+			vsp = on_platform.vsp
+		}
 		hsp = scr_approach(hsp, hsp_to, acc)
 
-		// block hor sp if wall contact
-		if ((hsp > 0) and !right_free) or ((hsp < 0) and !left_free)
+		// control hsp by blocks
+		if ((hsp_to >= 0) and !right_free) or ((hsp_to <= 0) and !left_free) {
 			hsp = collider_hsp
+			hsp_to = collider_hsp
+		}
+		//if ((hsp > 0) and !right_free) or ((hsp < 0) and !left_free)
+		//	hsp = collider_hsp
 
 		dir = point_direction(0, 0, hsp, vsp)
 
@@ -59,6 +69,7 @@ switch state {
 			vsp = jump_sp
 			state = States.fly
 			jumps -= 1
+			on_platform = noone
 		}
 
 		if key_dash
@@ -75,12 +86,9 @@ switch state {
 
 		if key_chain and chain_target
 			chain()
-
-		// handle collisions
-		res_hsp = hsp + collider_hsp
-		res_vsp = collider_vsp
-		if abs(res_hsp) or abs(res_vsp)
-			scr_move_coord(res_hsp, res_vsp)
+		
+		if abs(hsp) or abs(vsp)
+			scr_move_coord(hsp, vsp)
 
 		break
 	}
@@ -89,11 +97,16 @@ switch state {
 		// moving hor
 		hsp_to = move_h * hsp_max
 		var hsp_acc = acc * abs_input_move_h + grav * !abs_input_move_h
+		// control hsp by collider
+		if ((hsp_to >= 0) and !right_free) or ((hsp_to <= 0) and !left_free) {
+			hsp = collider_hsp
+			hsp_to = collider_hsp
+		}
 		hsp = scr_approach(hsp, hsp_to, hsp_acc)
 		// block hor sp if wall contact
-		if ((hsp > 0) and !right_free) or ((hsp < 0) and !left_free) {
-			hsp = collider_hsp
-		}
+		//if ((hsp >= 0) and !right_free) or ((hsp <= 0) and !left_free) {
+		//	hsp = collider_hsp
+		//}
 		// handle vertical sp
 		vsp = scr_approach(vsp, vsp_max, grav) 
 		// hit ceil
@@ -122,6 +135,7 @@ switch state {
 		if key_shoot
 			shoot()
 		
+		//vsp = -6
 		scr_move_coord(hsp, vsp)
 
 		break
