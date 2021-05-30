@@ -1,5 +1,17 @@
 
-event_inherited()
+/// main parameters
+hsp_max = 4
+hsp_inp = 0
+vsp_max = 5
+acc = 1.1
+grav = 0.8
+jump_sp = -12
+hsp_to = 0	// how sp_x and sp_y change
+hsp = 0
+vsp = 0
+dir = 0
+move_h = 0
+input_move_h = 1
 
 jumps_max = 1
 jumps = jumps_max
