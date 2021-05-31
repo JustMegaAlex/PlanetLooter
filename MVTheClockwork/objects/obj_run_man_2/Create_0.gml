@@ -165,7 +165,6 @@ function perform_collision_solving(point, obj) {
 		collider_hsp = obj.hsp
 		return true
 	}
-	var bb = obj.bottom_bound()
 	var m = line_intersection(move, obj.bottom_bound(), false);
 	if (m >= 0) and (m <= 1) {
 		move.mult(m)
@@ -179,7 +178,6 @@ function perform_collision_solving(point, obj) {
 
 
 state = States.walk
-moving_collision = MovingCollisions.none
 last_platform_left = false
 last_platform_right = false
 moving_collider = noone
@@ -188,7 +186,6 @@ last_on_platform = false
 collider_hsp = 0
 collider_vsp = 0
 is_colliding = false
-hsp_restricted_by_collision = false
 
 // shooting
 bullet_number = 8
