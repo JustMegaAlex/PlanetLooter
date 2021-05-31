@@ -9,6 +9,7 @@
     {"id":{"name":"obj_chain_bullet","path":"objects/obj_chain_bullet/obj_chain_bullet.yy",},"order":14,},
     {"id":{"name":"debug","path":"scripts/debug/debug.yy",},"order":22,},
     {"id":{"name":"obj_platform","path":"objects/obj_platform/obj_platform.yy",},"order":11,},
+    {"id":{"name":"obj_agro","path":"objects/obj_agro/obj_agro.yy",},"order":17,},
     {"id":{"name":"scr_approach","path":"scripts/scr_approach/scr_approach.yy",},"order":13,},
     {"id":{"name":"spr_chain_ring","path":"sprites/spr_chain_ring/spr_chain_ring.yy",},"order":5,},
     {"id":{"name":"spr_chain_bullet","path":"sprites/spr_chain_bullet/spr_chain_bullet.yy",},"order":6,},
@@ -25,8 +26,10 @@
     {"id":{"name":"rm_main","path":"rooms/rm_main/rm_main.yy",},"order":1,},
     {"id":{"name":"obj_run_man_2","path":"objects/obj_run_man_2/obj_run_man_2.yy",},"order":12,},
     {"id":{"name":"obj_chain_ring","path":"objects/obj_chain_ring/obj_chain_ring.yy",},"order":15,},
+    {"id":{"name":"spr_agro","path":"sprites/spr_agro/spr_agro.yy",},"order":8,},
     {"id":{"name":"obj_trajectory_end","path":"objects/obj_trajectory_end/obj_trajectory_end.yy",},"order":13,},
     {"id":{"name":"rm_1","path":"rooms/rm_1/rm_1.yy",},"order":7,},
+    {"id":{"name":"obj_solid","path":"objects/obj_solid/obj_solid.yy",},"order":18,},
     {"id":{"name":"rm_2","path":"rooms/rm_2/rm_2.yy",},"order":8,},
   ],
   "Options": [

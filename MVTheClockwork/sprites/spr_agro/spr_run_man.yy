@@ -139,7 +139,7 @@
     "eventStubScript": null,
     "parent": {"name":"spr_run_man","path":"sprites/spr_run_man/spr_run_man.yy",},
     "resourceVersion": "1.3",
-    "name": "spr_run_man",
+    "name": "",
     "tags": [],
     "resourceType": "GMSequence",
   },
