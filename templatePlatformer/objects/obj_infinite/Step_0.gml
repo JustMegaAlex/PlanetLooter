@@ -3,10 +3,10 @@
 repeat(4) {
 
 	// contact walls
-	up_free = place_empty(x, y - 1, obj_block)
-	down_free = place_empty(x, y + 1, obj_block)
-	left_free = place_empty(x - 1, y, obj_block)
-	right_free = place_empty(x + 1, y, obj_block)
+	up_free = place_empty(x, y - 1, obj_block_h)
+	down_free = place_empty(x, y + 1, obj_block_h)
+	left_free = place_empty(x - 1, y, obj_block_h)
+	right_free = place_empty(x + 1, y, obj_block_h)
 
 	//// state control
 	if on_wall {
@@ -39,6 +39,8 @@ repeat(4) {
 
 	hsp = scr_approach(hsp, hsp_to, acc)
 	vsp = scr_approach(vsp, vsp_max, grav)
+	if on_wall
+		vsp = on_wall_vsp
 
 	// reset on_wall
 	on_wall = false

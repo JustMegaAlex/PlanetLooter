@@ -1,9 +1,16 @@
 
-function bound(xx, yy) {
-	instance_create_layer(xx, yy, layer, obj_bound)
+hsp = 0
+vsp = 0
+
+function left_bound() {
+	return new Line(bbox_left, bbox_top, bbox_left, bbox_bottom)
 }
-
-image_xscale = 0.5 + random(4)
-image_yscale = 1 + random(2)
-
-alarm[0] = 1
+function right_bound() {
+	return new Line(bbox_right, bbox_top, bbox_right, bbox_bottom)
+}
+function top_bound() {
+	return new Line(bbox_left, bbox_top, bbox_right, bbox_top)
+}
+function bottom_bound() {
+	return new Line(bbox_left, bbox_bottom, bbox_right, bbox_bottom)
+}

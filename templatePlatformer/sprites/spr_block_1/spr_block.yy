@@ -60,13 +60,14 @@
     "eventStubScript": null,
     "parent": {"name":"spr_block","path":"sprites/spr_block/spr_block.yy",},
     "resourceVersion": "1.3",
-    "name": "",
+    "name": "spr_block",
     "tags": [],
     "resourceType": "GMSequence",
   },
   "layers": [
     {"visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"default","resourceVersion":"1.0","name":"7ab1463e-c5f4-48d9-9e6f-9a817460c590","tags":[],"resourceType":"GMImageLayer",},
   ],
+  "nineSlice": null,
   "parent": {
     "name": "Sprites",
     "path": "folders/Sprites.yy",

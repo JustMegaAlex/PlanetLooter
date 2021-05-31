@@ -14,7 +14,7 @@ function Line(_xst, _yst, _xend, _yend) constructor  {
 	yst = _yst
 	xend = _xend
 	yend = _yend
-
+	
 	static mult = function(m) {
 		xend = xst + (xend - xst) * m
 		yend = yst + (yend - yst) * m

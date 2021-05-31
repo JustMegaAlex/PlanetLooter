@@ -4,6 +4,7 @@ function scr_player_input() {
 	key_left = keyboard_check(vk_left)
 	key_right = keyboard_check(vk_right)
 	key_jump = keyboard_check_pressed(vk_space) or keyboard_check_pressed(ord("Z"))
+	key_jump_hold = keyboard_check(vk_space) or keyboard_check(ord("Z"))
 	key_dash = keyboard_check_pressed(ord("C"))
 	key_special = keyboard_check_pressed(ord("A"))
 

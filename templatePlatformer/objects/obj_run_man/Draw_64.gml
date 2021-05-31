@@ -7,3 +7,5 @@ scr_debug_show_var("down_free", down_free)
 scr_debug_show_var("up_free", up_free)
 scr_debug_show_var("hsp", hsp)
 scr_debug_show_var("vsp", vsp)
+scr_debug_show_var("state", state)
+

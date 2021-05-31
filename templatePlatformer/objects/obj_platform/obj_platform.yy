@@ -1,15 +1,12 @@
 {
-  "spriteId": {
-    "name": "spr_platform",
-    "path": "sprites/spr_platform/spr_platform.yy",
-  },
+  "spriteId": null,
   "solid": false,
   "visible": true,
   "spriteMaskId": null,
   "persistent": false,
   "parentObjectId": {
-    "name": "obj_block",
-    "path": "objects/obj_block/obj_block.yy",
+    "name": "obj_block_h",
+    "path": "objects/obj_block_h/obj_block_h.yy",
   },
   "physicsObject": false,
   "physicsSensor": false,

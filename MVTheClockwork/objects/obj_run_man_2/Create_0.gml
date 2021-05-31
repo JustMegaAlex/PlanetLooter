@@ -155,7 +155,6 @@ function perform_collision_solving(point, obj) {
 		x += move.xend - move.xst
 		y += move.yend - move.yst - 1
 		on_platform = obj
-		state = States.walk
 		return true
 	}
 	var m = line_intersection(move, obj.right_bound(), false);

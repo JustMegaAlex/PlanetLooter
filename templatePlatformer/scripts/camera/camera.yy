@@ -6,7 +6,7 @@
     "path": "folders/Scripts.yy",
   },
   "resourceVersion": "1.0",
-  "name": "scr_move_contact_obj",
+  "name": "camera",
   "tags": [],
   "resourceType": "GMScript",
 }

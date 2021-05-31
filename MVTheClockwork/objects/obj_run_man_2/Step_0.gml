@@ -61,6 +61,7 @@ switch state {
 		if down_free {
 			on_ground = on_ground_delay
 			state = States.fly
+			//on_platform = noone
 		}
 
 		// jumping
@@ -68,7 +69,7 @@ switch state {
 			vsp = jump_sp
 			state = States.fly
 			jumps -= 1
-			on_platform = noone
+			//on_platform = noone
 		}
 
 		if key_dash
