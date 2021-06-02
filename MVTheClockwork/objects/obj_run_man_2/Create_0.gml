@@ -8,6 +8,7 @@ enum States {
 	timeshift,
 	onwall,
 	chaindash,
+	being_hit,
 }
 
 enum MovingCollisions {
@@ -97,6 +98,19 @@ function get_chain_target() {
 	return target
 }
 
+function set_hit() {
+	being_hit = after_hit_delay
+	state = States.being_hit
+}
+
+function melee() {
+	if swing_attack_pause
+		return false
+	instance_create_depth(x, y, depth - 1, obj_swing_attack)
+	swing_attack_pause = swing_attack_delay
+	return true
+}
+
 state = States.walk
 last_platform_left = false
 last_platform_right = false
@@ -156,3 +170,11 @@ chain_target = noone
 chain_dash_sp = 30
 chain_min_len = 15
 chain_max_len = 400
+
+after_hit_delay = 40
+being_hit = 0
+attacker = noone
+
+
+swing_attack_pause = 0
+swing_attack_delay = 15

@@ -8,7 +8,8 @@ function scr_player_input() {
 	key_dash = keyboard_check_pressed(ord("C"))
 	key_chain = keyboard_check_pressed(ord("D"))
 	key_special = keyboard_check_pressed(ord("A"))
-	key_shoot = keyboard_check_pressed(ord("X"))
+	key_attack = keyboard_check_pressed(ord("X"))
+	key_shoot = keyboard_check_pressed(ord("S"))
 
 	if keyboard_check_pressed(ord("R"))
 		room_restart()

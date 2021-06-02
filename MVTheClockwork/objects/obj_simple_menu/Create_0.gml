@@ -20,4 +20,18 @@ while room_exists(room_ind) {
 
 // if only one room start immidiately
 if room_count == 1
-	room_goto(room_ind)
+	room_goto(1)
+
+
+instr = "Controls:\n"
+instr += "moving -- arrows\n"
+instr += "Z or space -- jump\n"
+instr += "X -- attack\n"
+instr += "C -- dash\n"
+instr += "D -- grapple\n"
+instr += "R -- restart the room\n"
+instr += "esc -- go back here\n"
+instr += "E and Q -- increase/decrease game speed\n"
+instr += "(donnow why you need this)\n"
+instr += "If the game hangs relaunch\n"
+instr += "Happy testing!\n"

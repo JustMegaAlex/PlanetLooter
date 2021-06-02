@@ -21,7 +21,7 @@ switch state {
 			hsp = 0
 			throwing = 0
 		}
-			
+
 		hsp = scr_approach(hsp, hsp_to, acc)
 
 		if prepairing_attack {
@@ -48,6 +48,18 @@ switch state {
 			}
 			state = Agro.wander
 		}
+		break
+	}
+
+	case Agro.being_hit: {
+		if not --being_hit
+			state = Agro.wander
+		// control hsp by collider
+		if ((hsp_to >= 0) and !right_free) or ((hsp_to <= 0) and !left_free) {
+			hsp = 0
+		}
+
+		scr_move_coord(hsp, vsp)
 		break
 	}
 }

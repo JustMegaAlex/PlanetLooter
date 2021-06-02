@@ -15,6 +15,7 @@ scr_player_input()
 
 dashcooldown -= (dashcooldown > 0)
 jump_pressed -= (jump_pressed > 0)
+swing_attack_pause -= (swing_attack_pause > 0)
 
 // can we move hor?
 move_h = key_right*right_free - key_left*left_free
@@ -25,6 +26,9 @@ abs_input_move_h = abs(input_move_h)
 
 if abs(input_move_h)
 	dirsign = input_move_h
+
+// enemy
+attacker = instance_place(x, y, obj_agro)
 	
 // chain aim
 chain_target = get_chain_target()
@@ -77,6 +81,9 @@ switch state {
 
 		if key_shoot
 			shoot()
+			
+		if key_attack
+			melee()
 
 		if hsp == 0 and key_special {
 			state = States.timeshift
@@ -89,6 +96,9 @@ switch state {
 		
 		if abs(hsp) or abs(vsp)
 			scr_move_coord(hsp, vsp)
+			
+		if attacker
+			attacker.perform_attack_effect(self)
 
 		break
 	}
@@ -103,10 +113,6 @@ switch state {
 			hsp_to = collider_hsp
 		}
 		hsp = scr_approach(hsp, hsp_to, hsp_acc)
-		// block hor sp if wall contact
-		//if ((hsp >= 0) and !right_free) or ((hsp <= 0) and !left_free) {
-		//	hsp = collider_hsp
-		//}
 		// handle vertical sp
 		vsp = scr_approach(vsp, vsp_max, grav)
 		if vsp < (jump_sp * 0.15) and !key_jump_hold
@@ -144,8 +150,14 @@ switch state {
 		if key_shoot
 			shoot()
 		
+		if key_attack
+			melee()
+		
 		//vsp = -6
 		scr_move_coord(hsp, vsp)
+		
+		if attacker
+			attacker.perform_attack_effect(self)
 
 		break
 	}
@@ -193,6 +205,29 @@ switch state {
 		if not global.timeshifting {
 			state = States.walk
 		}
+		break
+	}
+
+	case States.being_hit: {
+		if not --being_hit
+			state = States.walk
+		// control hsp by collider
+		if ((hsp_to >= 0) and !right_free) or ((hsp_to <= 0) and !left_free) {
+			hsp = collider_hsp
+			hsp_to = collider_hsp
+		}
+		// handle vertical sp
+		vsp = scr_approach(vsp, vsp_max, grav)
+
+		if !down_free {
+			state = States.walk
+			being_hit = 0
+			jumps = jumps_max
+			// land on ground
+			if vsp > 0
+				vsp = 0
+		}
+		scr_move_coord(hsp, vsp)
 		break
 	}
 }

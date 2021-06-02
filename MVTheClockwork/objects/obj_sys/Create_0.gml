@@ -1,6 +1,6 @@
 
 scr_debug_ini()
-global.DEBUG = true
+global.DEBUG = false
 
 mouse_pressed = false
 
