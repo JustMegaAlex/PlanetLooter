@@ -15,9 +15,7 @@ function step_event() {
 		var ii = i + move_h
 		var jj = j + move_v
 		if grid_at(ii, jj) == noone {
-			grid_move_to(ii, jj, self)
-			x = gridx(i)
-			y = gridy(j)
+			move_to(ii, jj)
 			pass_turn()
 		}
 	}

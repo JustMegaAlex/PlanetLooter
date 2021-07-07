@@ -24,6 +24,7 @@ global.turn_controller = {
 					return 0
 				}
 				current_entity = 0
+				all_moves_finished = true
 			}
 			var inst = active_entities[current_entity]
 			if not inst.move_finished {

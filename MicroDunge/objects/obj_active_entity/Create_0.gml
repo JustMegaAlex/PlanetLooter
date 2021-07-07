@@ -10,7 +10,16 @@ function init_move() {
 
 function pass_turn() {
 	my_turn = false
+	move_finished = true
 	global.turn_controller.next_move()
+}
+
+function move_to(ii, jj) {
+	grid_move_to(ii, jj, self)
+	i = ii
+	j = jj
+	x = gridx(i)
+	y = gridy(j)
 }
 
 snap_to_grid(self)

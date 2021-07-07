@@ -8,6 +8,7 @@
     {"id":{"name":"spr_stone","path":"sprites/spr_stone/spr_stone.yy",},"order":14,},
     {"id":{"name":"spr_wall_downleft","path":"sprites/spr_wall_downleft/spr_wall_downleft.yy",},"order":2,},
     {"id":{"name":"turn_controll","path":"scripts/turn_controll/turn_controll.yy",},"order":2,},
+    {"id":{"name":"debug","path":"scripts/debug/debug.yy",},"order":3,},
     {"id":{"name":"spr_wall_top","path":"sprites/spr_wall_top/spr_wall_top.yy",},"order":4,},
     {"id":{"name":"spr_wall_down","path":"sprites/spr_wall_down/spr_wall_down.yy",},"order":1,},
     {"id":{"name":"spr_tiles","path":"sprites/spr_tiles/spr_tiles.yy",},"order":8,},
