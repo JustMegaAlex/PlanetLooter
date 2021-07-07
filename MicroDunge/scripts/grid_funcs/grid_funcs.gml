@@ -6,10 +6,10 @@ global.grid_w = 5
 global.grid_h = 5
 global.grid = noone
 
-function create_grid(w, h) {
-	global.grid = array_create(w)
-	for (var i = 0; i < w; ++i) {
-	    global.grid = array_create(h, noone)
+function create_grid() {
+	global.grid = array_create(global.grid_w)
+	for (var i = 0; i < global.grid_w; ++i) {
+	    global.grid[i] = array_create(global.grid_h, noone)
 	}
 }
 
@@ -40,6 +40,11 @@ function grid_at(i, j) {
 	return global.grid[i, j]
 }
 
+function grid_move_to(i, j, inst) {
+	global.grid[inst.i][inst.j] = noone
+	global.grid[i][j] = inst
+}
+
 function snap_to_grid(inst) {
 	var i = gridi(inst.x)
 	var j = gridi(inst.y)
@@ -48,3 +53,5 @@ function snap_to_grid(inst) {
 	inst.x = gridx(i)
 	inst.y = gridy(j)
 }
+
+create_grid()

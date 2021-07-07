@@ -6,7 +6,7 @@
     "path": "folders/Scripts.yy",
   },
   "resourceVersion": "1.0",
-  "name": "Grid",
+  "name": "turn_controll",
   "tags": [],
   "resourceType": "GMScript",
 }
