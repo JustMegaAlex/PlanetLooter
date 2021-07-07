@@ -1,4 +1,6 @@
 
+global.GRIDOUT = {}
+
 global.grid_x = 24
 global.grid_y = 40
 global.grid_size = 16
@@ -36,7 +38,7 @@ function in_grid_bounds(i, j) {
 
 function grid_at(i, j) {
 	if not in_grid_bounds(i, j)
-		return noone
+		return global.GRIDOUT
 	return global.grid[i, j]
 }
 
@@ -52,6 +54,14 @@ function snap_to_grid(inst) {
 		throw (" :snap_to_grid: Instance is not in grid bounds")
 	inst.x = gridx(i)
 	inst.y = gridy(j)
+}
+
+function grid_place_instance(inst, ii, jj) {
+	if not in_grid_bounds(ii, jj)
+		throw (" :grid_place_instance: point is not in grid bounds")
+	if grid_at(ii, jj) != noone
+		throw(" :grid_place_instance: grid cell is already busy")
+	global.grid[ii][jj] = inst
 }
 
 create_grid()

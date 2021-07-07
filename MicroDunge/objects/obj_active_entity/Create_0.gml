@@ -25,5 +25,6 @@ function move_to(ii, jj) {
 snap_to_grid(self)
 i = gridi(x)
 j = gridj(y)
+grid_place_instance(self, i, j)
 my_turn = false
 move_finished = false
