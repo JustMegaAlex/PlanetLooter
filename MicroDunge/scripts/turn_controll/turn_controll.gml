@@ -60,11 +60,11 @@ global.turn_controller = {
 	active_qeue_empty: function() {
 		return array_length(active_qeue) == 0
 	},
-	
+
 	remove_from_active_entities: function(inst) {
 		array_remove(active_entities, inst)
 	},
-	
+
 	clear_data: function() {
 		active_entities = []
 		active_qeue = []
