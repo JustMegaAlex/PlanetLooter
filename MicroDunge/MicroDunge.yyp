@@ -6,6 +6,7 @@
     {"id":{"name":"spr_wall_right","path":"sprites/spr_wall_right/spr_wall_right.yy",},"order":6,},
     {"id":{"name":"spr_wall_downright","path":"sprites/spr_wall_downright/spr_wall_downright.yy",},"order":0,},
     {"id":{"name":"spr_wall_topleft","path":"sprites/spr_wall_topleft/spr_wall_topleft.yy",},"order":3,},
+    {"id":{"name":"camera","path":"scripts/camera/camera.yy",},"order":5,},
     {"id":{"name":"spr_stone","path":"sprites/spr_stone/spr_stone.yy",},"order":11,},
     {"id":{"name":"spr_wall_downleft","path":"sprites/spr_wall_downleft/spr_wall_downleft.yy",},"order":2,},
     {"id":{"name":"obj_active_entity","path":"objects/obj_active_entity/obj_active_entity.yy",},"order":6,},

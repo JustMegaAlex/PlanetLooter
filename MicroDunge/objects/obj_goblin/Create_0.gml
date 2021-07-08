@@ -7,7 +7,8 @@ function step_event() {
 	move_h = 0
 	var di = obj_knight.i - i
 	var dj = obj_knight.j - j
-	if dist_to_player == 0 {
+	if dist_to_player == 1 {
+		attack(obj_knight)
 		pass_turn()
 		return 0
 	}

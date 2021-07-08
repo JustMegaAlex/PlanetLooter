@@ -15,22 +15,24 @@ global.turn_controller = {
 
 	next_move: function() {
 		// find not moved entities
-		while true {
-			current_entity++
-			if current_entity >= array_length(active_entities) {
-				if all_moves_finished {
-					next_turn()
+		if !global.game_over {
+			while true {
+				current_entity++
+				if current_entity >= array_length(active_entities) {
+					if all_moves_finished {
+						next_turn()
+						return 0
+					}
+					current_entity = 0
+					all_moves_finished = true
+				}
+				var inst = active_entities[current_entity]
+				if !inst.inactive and !inst.move_finished {
+					// set false as entity may skip its current move
+					all_moves_finished = false
+					inst.start_turn_move()
 					return 0
 				}
-				current_entity = 0
-				all_moves_finished = true
-			}
-			var inst = active_entities[current_entity]
-			if !inst.inactive and !inst.move_finished {
-				// set false as entity may skip its current move
-				all_moves_finished = false
-				inst.start_turn_move()
-				return 0
 			}
 		}
 	},
@@ -61,5 +63,10 @@ global.turn_controller = {
 	
 	remove_from_active_entities: function(inst) {
 		array_remove(active_entities, inst)
+	},
+	
+	clear_data: function() {
+		active_entities = []
+		active_qeue = []
 	}
 }

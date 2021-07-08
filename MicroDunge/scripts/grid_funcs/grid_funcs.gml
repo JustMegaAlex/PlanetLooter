@@ -68,5 +68,3 @@ function grid_place_instance(inst, ii, jj) {
 function grid_free_cell(i, j) {
 	global.grid[i][j] = noone
 }
-
-create_grid()
