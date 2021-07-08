@@ -14,3 +14,18 @@ function approach(val, to, ammount) {
 function chance(p) {
 	return random(1) < p
 }
+
+function array_find(arr, val) {
+	for (var i = 0; i < array_length(arr); ++i) {
+	    if arr[i] == val
+			return i
+	}
+	return -1
+}
+
+function array_remove(arr, val) {
+	var i = array_find(arr, val)
+	if i == -1
+		throw (" :array_remove: value is not in array")
+	array_delete(arr, i, 1)
+}

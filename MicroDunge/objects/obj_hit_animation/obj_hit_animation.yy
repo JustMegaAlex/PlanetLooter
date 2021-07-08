@@ -1,15 +1,15 @@
 {
   "spriteId": {
-    "name": "spr_knight",
-    "path": "sprites/spr_knight/spr_knight.yy",
+    "name": "spr_hit_animation",
+    "path": "sprites/spr_hit_animation/spr_hit_animation.yy",
   },
   "solid": false,
   "visible": true,
   "spriteMaskId": null,
   "persistent": false,
   "parentObjectId": {
-    "name": "obj_grid_entity",
-    "path": "objects/obj_grid_entity/obj_grid_entity.yy",
+    "name": "obj_active_entity",
+    "path": "objects/obj_active_entity/obj_active_entity.yy",
   },
   "physicsObject": false,
   "physicsSensor": false,
@@ -24,7 +24,7 @@
   "physicsKinematic": false,
   "physicsShapePoints": [],
   "eventList": [
-    {"isDnD":false,"eventNum":0,"eventType":0,"collisionObjectId":null,"parent":{"name":"obj_knight","path":"objects/obj_knight/obj_knight.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
+    {"isDnD":false,"eventNum":0,"eventType":0,"collisionObjectId":null,"parent":{"name":"obj_hit_animation","path":"objects/obj_hit_animation/obj_hit_animation.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
   ],
   "properties": [],
   "overriddenProperties": [],
@@ -33,7 +33,7 @@
     "path": "folders/Objects.yy",
   },
   "resourceVersion": "1.0",
-  "name": "obj_knight",
+  "name": "obj_hit_animation",
   "tags": [],
   "resourceType": "GMObject",
 }
