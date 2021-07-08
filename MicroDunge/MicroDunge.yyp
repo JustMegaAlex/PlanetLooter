@@ -22,7 +22,7 @@
     {"id":{"name":"grid_funcs","path":"scripts/grid_funcs/grid_funcs.yy",},"order":0,},
     {"id":{"name":"obj_stone","path":"objects/obj_stone/obj_stone.yy",},"order":3,},
     {"id":{"name":"spr_hit_animation","path":"sprites/spr_hit_animation/spr_hit_animation.yy",},"order":14,},
-    {"id":{"name":"Object8","path":"objects/Object8/Object8.yy",},"order":8,},
+    {"id":{"name":"obj_event_entity","path":"objects/obj_event_entity/obj_event_entity.yy",},"order":8,},
     {"id":{"name":"misc","path":"scripts/misc/misc.yy",},"order":1,},
     {"id":{"name":"tset_dunge","path":"tilesets/tset_dunge/tset_dunge.yy",},"order":0,},
     {"id":{"name":"grid_utils","path":"scripts/grid_utils/grid_utils.yy",},"order":4,},

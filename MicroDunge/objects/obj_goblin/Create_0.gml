@@ -22,3 +22,5 @@ function step_event() {
 dist_to_player = -1
 move_h = 0
 move_v = 0
+
+hp = 2

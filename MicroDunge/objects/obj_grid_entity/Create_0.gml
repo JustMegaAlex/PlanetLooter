@@ -54,9 +54,9 @@ function try_move() {
 
 function attack(inst) {
 	inst.hp--
+	inst.set_attacked()
 	if inst.hp == 0
 		instance_destroy(inst)
-	inst.set_attacked()
 }
 
 function set_attacked() {

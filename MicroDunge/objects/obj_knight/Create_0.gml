@@ -14,3 +14,5 @@ function step_event() {
 	if try_move()
 		pass_turn()
 }
+
+hp = 4
