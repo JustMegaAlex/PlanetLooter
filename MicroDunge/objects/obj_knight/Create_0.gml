@@ -20,7 +20,7 @@ function step_event() {
 		var ii = i + move_h
 		var jj = j + move_v
 		var inst = grid_at(ii, jj)
-		if instance_exists(inst) {
+		if is_real(inst) {
 			self.attack(inst)
 			pass_turn()
 			return 0

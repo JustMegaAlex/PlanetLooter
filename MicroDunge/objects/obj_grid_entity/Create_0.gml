@@ -29,7 +29,7 @@ function start_turn_move() {
 }
 
 function move_to(ii, jj) {
-	grid_move_to(ii, jj, self)
+	grid_move_to(ii, jj, id)
 	i = ii
 	j = jj
 	x = gridx(i)
@@ -68,7 +68,7 @@ function set_attacked() {
 snap_to_grid(self)
 i = gridi(x)
 j = gridj(y)
-grid_place_instance(self, i, j)
+grid_place_instance(id, i, j)
 my_turn = false
 move_finished = false
 
