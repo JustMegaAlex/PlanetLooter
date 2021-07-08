@@ -46,3 +46,4 @@ j = gridj(y)
 grid_place_instance(self, i, j)
 my_turn = false
 move_finished = false
+inactive = false
