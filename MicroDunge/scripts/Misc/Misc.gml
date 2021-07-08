@@ -26,6 +26,6 @@ function array_find(arr, val) {
 function array_remove(arr, val) {
 	var i = array_find(arr, val)
 	if i == -1
-		throw (" :array_remove: value is not in array")
+		throw " :array_remove: value is not in array"
 	array_delete(arr, i, 1)
 }
