@@ -22,8 +22,10 @@ function step_event() {
 		move_v = sign(dj)
 	}
 	// first try move
-	if try_move()
+	if try_move() {
 		pass_turn()
+		return 0
+	}
 	// if blocked try another dir
 	move_h = move_h_temp
 	move_v = move_v_temp
