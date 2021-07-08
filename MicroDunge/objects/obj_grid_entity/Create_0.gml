@@ -23,7 +23,7 @@ function start_turn_move() {
 		move_finished = true
 		return 0
 	}
-	global.turn_controller.active_qeue_push(self)
+	global.turn_controller.active_qeue_push(id)
 	self.init_move()
 	my_turn = true
 }
@@ -53,14 +53,16 @@ function try_move() {
 }
 
 function attack(inst) {
-	inst.hp--
 	inst.set_attacked()
-	if inst.hp == 0
-		instance_destroy(inst)
+	if inst.destroyable {
+		inst.hp--
+		if inst.hp == 0
+			instance_destroy(inst)
+	}
 }
 
 function set_attacked() {
-	instance_create_layer(x, y, layer, obj_hit_animation)
+	instance_create_layer(gridx(i), gridy(j), layer, obj_hit_animation)
 }
 
 snap_to_grid(self)
@@ -69,7 +71,10 @@ j = gridj(y)
 grid_place_instance(self, i, j)
 my_turn = false
 move_finished = false
+
+// entity properties
 inactive = false
+destroyable = true
 
 // stats
 hp = 0

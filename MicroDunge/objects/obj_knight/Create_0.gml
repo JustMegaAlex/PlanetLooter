@@ -10,9 +10,19 @@ function step_event() {
 	move_h = key_right - key_left
 	move_v = key_down - key_up
 	move_v = move_v * !move_h
-
-	if try_move()
-		pass_turn()
+	var input = abs(move_h) or abs(move_v)
+	
+	if input {
+		if try_move() {
+			pass_turn()
+			return 0
+		}
+		var ii = i + move_h
+		var jj = j + move_v
+		var inst = grid_at(ii, jj)
+		if instance_exists(inst)
+			self.attack(inst)
+	}
 }
 
 hp = 4
