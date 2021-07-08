@@ -26,7 +26,7 @@ global.turn_controller = {
 				all_moves_finished = true
 			}
 			var inst = active_entities[current_entity]
-			if not inst.move_finished {
+			if !inst.inactive and !inst.move_finished {
 				// set false as entity may skip its current move
 				all_moves_finished = false
 				inst.start_turn_move()

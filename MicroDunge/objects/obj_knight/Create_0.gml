@@ -11,7 +11,7 @@ function step_event() {
 	move_v = key_down - key_up
 	move_v = move_v * !move_h
 	var input = abs(move_h) or abs(move_v)
-	
+
 	if input {
 		if try_move() {
 			pass_turn()
@@ -20,8 +20,11 @@ function step_event() {
 		var ii = i + move_h
 		var jj = j + move_v
 		var inst = grid_at(ii, jj)
-		if instance_exists(inst)
+		if instance_exists(inst) {
 			self.attack(inst)
+			pass_turn()
+			return 0
+		}
 	}
 }
 

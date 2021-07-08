@@ -18,11 +18,11 @@ function pass_turn() {
 }
 
 function start_turn_move() {
-	if inactive {
-		global.turn_controller.next_move()
-		move_finished = true
-		return 0
-	}
+	//if inactive {
+	//	global.turn_controller.next_move()
+	//	move_finished = true
+	//	return 0
+	//}
 	global.turn_controller.active_qeue_push(id)
 	self.init_move()
 	my_turn = true
