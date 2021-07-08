@@ -1,4 +1,5 @@
 
+// special constant representing out of grid bounds
 global.GRIDOUT = {}
 
 global.grid_x = 24

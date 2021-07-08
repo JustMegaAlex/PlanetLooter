@@ -10,5 +10,5 @@ function init_move() {
 	timer = timer_time
 }
 
-timer_time = 30
+timer_time = 10
 timer = 0

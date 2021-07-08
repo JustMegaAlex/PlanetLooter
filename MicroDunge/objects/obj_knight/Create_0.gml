@@ -11,12 +11,6 @@ function step_event() {
 	move_v = key_down - key_up
 	move_v = move_v * !move_h
 	
-	if abs(move_h) or abs(move_v) {
-		var ii = i + move_h
-		var jj = j + move_v
-		if grid_at(ii, jj) == noone {
-			move_to(ii, jj)
-			pass_turn()
-		}
-	}
+	if try_move()
+		pass_turn()
 }
