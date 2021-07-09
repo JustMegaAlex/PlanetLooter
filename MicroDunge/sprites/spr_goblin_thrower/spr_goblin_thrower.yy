@@ -7,7 +7,7 @@
   "edgeFiltering": false,
   "collisionTolerance": 0,
   "swfPrecision": 2.525,
-  "bbox_left": 1,
+  "bbox_left": 2,
   "bbox_right": 15,
   "bbox_top": 2,
   "bbox_bottom": 14,
@@ -24,12 +24,12 @@
   "gridX": 0,
   "gridY": 0,
   "frames": [
-    {"compositeImage":{"FrameId":{"name":"c90b8cd2-4b48-4b4c-9bb3-955152d02e22","path":"sprites/spr_goblin/spr_goblin.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
-        {"FrameId":{"name":"c90b8cd2-4b48-4b4c-9bb3-955152d02e22","path":"sprites/spr_goblin/spr_goblin.yy",},"LayerId":{"name":"c7b2c381-d761-4a17-9a5e-d7eaf19f7368","path":"sprites/spr_goblin/spr_goblin.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
-      ],"parent":{"name":"spr_goblin","path":"sprites/spr_goblin/spr_goblin.yy",},"resourceVersion":"1.0","name":"c90b8cd2-4b48-4b4c-9bb3-955152d02e22","tags":[],"resourceType":"GMSpriteFrame",},
+    {"compositeImage":{"FrameId":{"name":"a2bbeb5f-e97a-4478-ad9d-f2d7c1bf6308","path":"sprites/spr_goblin_thrower/spr_goblin_thrower.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
+        {"FrameId":{"name":"a2bbeb5f-e97a-4478-ad9d-f2d7c1bf6308","path":"sprites/spr_goblin_thrower/spr_goblin_thrower.yy",},"LayerId":{"name":"1c81a0fa-db3b-48ed-9753-afddbeb3d59d","path":"sprites/spr_goblin_thrower/spr_goblin_thrower.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
+      ],"parent":{"name":"spr_goblin_thrower","path":"sprites/spr_goblin_thrower/spr_goblin_thrower.yy",},"resourceVersion":"1.0","name":"a2bbeb5f-e97a-4478-ad9d-f2d7c1bf6308","tags":[],"resourceType":"GMSpriteFrame",},
   ],
   "sequence": {
-    "spriteId": {"name":"spr_goblin","path":"sprites/spr_goblin/spr_goblin.yy",},
+    "spriteId": {"name":"spr_goblin_thrower","path":"sprites/spr_goblin_thrower/spr_goblin_thrower.yy",},
     "timeUnits": 1,
     "playback": 1,
     "playbackSpeed": 30.0,
@@ -41,7 +41,7 @@
     "moments": {"Keyframes":[],"resourceVersion":"1.0","resourceType":"KeyframeStore<MomentsEventKeyframe>",},
     "tracks": [
       {"name":"frames","spriteId":null,"keyframes":{"Keyframes":[
-            {"id":"220bd735-a849-4465-a27d-5291010a6338","Key":0.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"c90b8cd2-4b48-4b4c-9bb3-955152d02e22","path":"sprites/spr_goblin/spr_goblin.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
+            {"id":"02d0600c-4a70-4e80-8cea-f968d25b217a","Key":0.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"a2bbeb5f-e97a-4478-ad9d-f2d7c1bf6308","path":"sprites/spr_goblin_thrower/spr_goblin_thrower.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
           ],"resourceVersion":"1.0","resourceType":"KeyframeStore<SpriteFrameKeyframe>",},"trackColour":0,"inheritsTrackColour":true,"builtinName":0,"traits":0,"interpolation":1,"tracks":[],"events":[],"modifiers":[],"isCreationTrack":false,"resourceVersion":"1.0","tags":[],"resourceType":"GMSpriteFramesTrack",},
     ],
     "visibleRange": null,
@@ -54,25 +54,25 @@
     "backdropHeight": 768,
     "backdropXOffset": 0.0,
     "backdropYOffset": 0.0,
-    "xorigin": 8,
+    "xorigin": 9,
     "yorigin": 11,
     "eventToFunction": {},
     "eventStubScript": null,
-    "parent": {"name":"spr_goblin","path":"sprites/spr_goblin/spr_goblin.yy",},
+    "parent": {"name":"spr_goblin_thrower","path":"sprites/spr_goblin_thrower/spr_goblin_thrower.yy",},
     "resourceVersion": "1.3",
-    "name": "spr_goblin",
+    "name": "spr_goblin_thrower",
     "tags": [],
     "resourceType": "GMSequence",
   },
   "layers": [
-    {"visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"default","resourceVersion":"1.0","name":"c7b2c381-d761-4a17-9a5e-d7eaf19f7368","tags":[],"resourceType":"GMImageLayer",},
+    {"visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"default","resourceVersion":"1.0","name":"1c81a0fa-db3b-48ed-9753-afddbeb3d59d","tags":[],"resourceType":"GMImageLayer",},
   ],
   "parent": {
     "name": "creatues",
     "path": "folders/Sprites/creatues.yy",
   },
   "resourceVersion": "1.0",
-  "name": "spr_goblin",
+  "name": "spr_goblin_thrower",
   "tags": [],
   "resourceType": "GMSprite",
 }

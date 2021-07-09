@@ -68,8 +68,8 @@
     {"visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"default","resourceVersion":"1.0","name":"0ec1c7dd-28ad-4f78-b5fa-53c49d211b3c","tags":[],"resourceType":"GMImageLayer",},
   ],
   "parent": {
-    "name": "Sprites",
-    "path": "folders/Sprites.yy",
+    "name": "creatues",
+    "path": "folders/Sprites/creatues.yy",
   },
   "resourceVersion": "1.0",
   "name": "spr_knight",

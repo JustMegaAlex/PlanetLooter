@@ -24,12 +24,12 @@
   "gridX": 0,
   "gridY": 0,
   "frames": [
-    {"compositeImage":{"FrameId":{"name":"c90b8cd2-4b48-4b4c-9bb3-955152d02e22","path":"sprites/spr_goblin/spr_goblin.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
-        {"FrameId":{"name":"c90b8cd2-4b48-4b4c-9bb3-955152d02e22","path":"sprites/spr_goblin/spr_goblin.yy",},"LayerId":{"name":"c7b2c381-d761-4a17-9a5e-d7eaf19f7368","path":"sprites/spr_goblin/spr_goblin.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
-      ],"parent":{"name":"spr_goblin","path":"sprites/spr_goblin/spr_goblin.yy",},"resourceVersion":"1.0","name":"c90b8cd2-4b48-4b4c-9bb3-955152d02e22","tags":[],"resourceType":"GMSpriteFrame",},
+    {"compositeImage":{"FrameId":{"name":"1087a197-8d49-4943-8afc-3e033c271ba4","path":"sprites/spr_goblin_archer/spr_goblin_archer.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
+        {"FrameId":{"name":"1087a197-8d49-4943-8afc-3e033c271ba4","path":"sprites/spr_goblin_archer/spr_goblin_archer.yy",},"LayerId":{"name":"6e84affa-fcf9-470d-a7d1-ef0d72e698e1","path":"sprites/spr_goblin_archer/spr_goblin_archer.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
+      ],"parent":{"name":"spr_goblin_archer","path":"sprites/spr_goblin_archer/spr_goblin_archer.yy",},"resourceVersion":"1.0","name":"1087a197-8d49-4943-8afc-3e033c271ba4","tags":[],"resourceType":"GMSpriteFrame",},
   ],
   "sequence": {
-    "spriteId": {"name":"spr_goblin","path":"sprites/spr_goblin/spr_goblin.yy",},
+    "spriteId": {"name":"spr_goblin_archer","path":"sprites/spr_goblin_archer/spr_goblin_archer.yy",},
     "timeUnits": 1,
     "playback": 1,
     "playbackSpeed": 30.0,
@@ -41,7 +41,7 @@
     "moments": {"Keyframes":[],"resourceVersion":"1.0","resourceType":"KeyframeStore<MomentsEventKeyframe>",},
     "tracks": [
       {"name":"frames","spriteId":null,"keyframes":{"Keyframes":[
-            {"id":"220bd735-a849-4465-a27d-5291010a6338","Key":0.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"c90b8cd2-4b48-4b4c-9bb3-955152d02e22","path":"sprites/spr_goblin/spr_goblin.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
+            {"id":"24f280fe-b91a-4259-b392-fabff623be16","Key":0.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"1087a197-8d49-4943-8afc-3e033c271ba4","path":"sprites/spr_goblin_archer/spr_goblin_archer.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
           ],"resourceVersion":"1.0","resourceType":"KeyframeStore<SpriteFrameKeyframe>",},"trackColour":0,"inheritsTrackColour":true,"builtinName":0,"traits":0,"interpolation":1,"tracks":[],"events":[],"modifiers":[],"isCreationTrack":false,"resourceVersion":"1.0","tags":[],"resourceType":"GMSpriteFramesTrack",},
     ],
     "visibleRange": null,
@@ -58,21 +58,21 @@
     "yorigin": 11,
     "eventToFunction": {},
     "eventStubScript": null,
-    "parent": {"name":"spr_goblin","path":"sprites/spr_goblin/spr_goblin.yy",},
+    "parent": {"name":"spr_goblin_archer","path":"sprites/spr_goblin_archer/spr_goblin_archer.yy",},
     "resourceVersion": "1.3",
-    "name": "spr_goblin",
+    "name": "spr_goblin_archer",
     "tags": [],
     "resourceType": "GMSequence",
   },
   "layers": [
-    {"visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"default","resourceVersion":"1.0","name":"c7b2c381-d761-4a17-9a5e-d7eaf19f7368","tags":[],"resourceType":"GMImageLayer",},
+    {"visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"default","resourceVersion":"1.0","name":"6e84affa-fcf9-470d-a7d1-ef0d72e698e1","tags":[],"resourceType":"GMImageLayer",},
   ],
   "parent": {
     "name": "creatues",
     "path": "folders/Sprites/creatues.yy",
   },
   "resourceVersion": "1.0",
-  "name": "spr_goblin",
+  "name": "spr_goblin_archer",
   "tags": [],
   "resourceType": "GMSprite",
 }

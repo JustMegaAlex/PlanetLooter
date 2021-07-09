@@ -68,8 +68,8 @@
     {"visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"default","resourceVersion":"1.0","name":"edbeece3-0313-4837-94a3-9c9210563b97","tags":[],"resourceType":"GMImageLayer",},
   ],
   "parent": {
-    "name": "MicroDunge",
-    "path": "MicroDunge.yyp",
+    "name": "Sprites",
+    "path": "folders/Sprites.yy",
   },
   "resourceVersion": "1.0",
   "name": "spr_hit_animation",
