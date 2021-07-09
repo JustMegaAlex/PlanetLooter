@@ -1,4 +1,5 @@
 
+global.DEBUG = false
 global.game_over = false
 create_grid()
 global.turn_controller.init_entities_list()
