@@ -1,10 +1,16 @@
 {
-  "spriteId": null,
+  "spriteId": {
+    "name": "spr_shipyard",
+    "path": "sprites/spr_shipyard/spr_shipyard.yy",
+  },
   "solid": false,
   "visible": true,
   "spriteMaskId": null,
   "persistent": false,
-  "parentObjectId": null,
+  "parentObjectId": {
+    "name": "obj_building",
+    "path": "objects/obj_building/obj_building.yy",
+  },
   "physicsObject": false,
   "physicsSensor": false,
   "physicsShape": 1,
@@ -18,7 +24,7 @@
   "physicsKinematic": false,
   "physicsShapePoints": [],
   "eventList": [
-    {"isDnD":false,"eventNum":0,"eventType":0,"collisionObjectId":null,"parent":{"name":"obj_building","path":"objects/obj_building/obj_building.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
+    {"isDnD":false,"eventNum":0,"eventType":0,"collisionObjectId":null,"parent":{"name":"obj_building_shipyard","path":"objects/obj_building_shipyard/obj_building_shipyard.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
   ],
   "properties": [],
   "overriddenProperties": [],
@@ -27,7 +33,7 @@
     "path": "folders/Objects/buidlings.yy",
   },
   "resourceVersion": "1.0",
-  "name": "obj_building",
+  "name": "obj_building_shipyard",
   "tags": [],
   "resourceType": "GMObject",
 }

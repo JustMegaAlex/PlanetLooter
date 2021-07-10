@@ -26,6 +26,34 @@ function ore_to_metall() {
 	return "need more\n   ore"
 }
 
+function organic_to_fuel() {
+	if resources[Resource.organic] >= organic_to_fuel_cost {
+		resources[Resource.fuel] += 1
+		resources[Resource.organic] -= organic_to_fuel_cost
+		return "ok"
+	}
+	return "need more\norganic"
+}
+
+function produce_part() {
+	if resources[Resource.metall] >= metall_to_part_cost {
+		resources[Resource.part] += 1
+		resources[Resource.organic] -= metall_to_part_cost
+		return "ok"
+	}
+	return "need more\nmetall"
+}
+
+function upgrade_weapon() {
+	if resources[Resource.part] >= weapon_upgr_part_cost {
+		damage += 1
+		resources[Resource.part] -= weapon_upgr_part_cost
+		return "ok"
+	}
+	return "need more\nmetall"
+}
+
+
 sp = 5
 hsp = 0
 vsp = 0
@@ -46,6 +74,7 @@ shoot_v = 0
 shoot_dir = 0
 reload_time = 5
 reloading = 0
+damage = 1
 
 grav = 0.05
 gravx = 0
@@ -61,3 +90,6 @@ current_planet = noone
 
 //// production
 ore_to_metall_cost = 3
+organic_to_fuel_cost = 2
+metall_to_part_cost = 2
+weapon_upgr_part_cost = 1

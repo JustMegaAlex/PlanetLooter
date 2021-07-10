@@ -1,6 +1,6 @@
 
 function set_hit() {
-	hp--
+	hp -= obj_looter.damage
 	if hp <=0 {
 		instance_destroy()
 	}

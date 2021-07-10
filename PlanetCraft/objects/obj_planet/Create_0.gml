@@ -2,7 +2,10 @@
 enum Resource {
 	empty,
 	ore,
+	organic,
 	metall,
+	fuel,
+	part,
 	types_number
 }
 

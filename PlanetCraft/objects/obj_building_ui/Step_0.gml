@@ -8,7 +8,7 @@ if not override_displaying {
 		display_text = mouse_over.text
 }
 
-if mouse_check_button(mb_left) {
+if mouse_check_button_pressed(mb_left) {
 	mouse_pressed = true
 	override_displaying = 0
 	if mouse_over {

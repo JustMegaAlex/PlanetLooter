@@ -23,7 +23,7 @@ function choose_planet() {
 
 function interface() {
 	if ui_object != noone {
-		instance_create_layer(x, y - 50, layer, ui_object)
+		instance_create_layer(x, y - 50, "ui", ui_object)
 		global.ui_interface_on = true
 	}
 }
@@ -33,6 +33,3 @@ planet = choose_planet()
 place_on_planet()
 
 ui_object = noone
-
-// production parameters
-ore_to_metall_consumption = 3

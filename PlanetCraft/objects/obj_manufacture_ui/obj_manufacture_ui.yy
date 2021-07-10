@@ -4,7 +4,10 @@
   "visible": true,
   "spriteMaskId": null,
   "persistent": false,
-  "parentObjectId": null,
+  "parentObjectId": {
+    "name": "obj_building_ui",
+    "path": "objects/obj_building_ui/obj_building_ui.yy",
+  },
   "physicsObject": false,
   "physicsSensor": false,
   "physicsShape": 1,
@@ -18,16 +21,16 @@
   "physicsKinematic": false,
   "physicsShapePoints": [],
   "eventList": [
-    {"isDnD":false,"eventNum":0,"eventType":0,"collisionObjectId":null,"parent":{"name":"obj_building","path":"objects/obj_building/obj_building.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
+    {"isDnD":false,"eventNum":0,"eventType":0,"collisionObjectId":null,"parent":{"name":"obj_manufacture_ui","path":"objects/obj_manufacture_ui/obj_manufacture_ui.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
   ],
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "buidlings",
-    "path": "folders/Objects/buidlings.yy",
+    "name": "ui",
+    "path": "folders/Objects/ui.yy",
   },
   "resourceVersion": "1.0",
-  "name": "obj_building",
+  "name": "obj_manufacture_ui",
   "tags": [],
   "resourceType": "GMObject",
 }
