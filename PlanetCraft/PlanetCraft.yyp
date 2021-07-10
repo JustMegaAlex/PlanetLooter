@@ -7,6 +7,7 @@
     {"id":{"name":"Misc","path":"scripts/Misc/Misc.yy",},"order":5,},
     {"id":{"name":"spr_block","path":"sprites/spr_block/spr_block.yy",},"order":0,},
     {"id":{"name":"grid_funcs","path":"scripts/grid_funcs/grid_funcs.yy",},"order":3,},
+    {"id":{"name":"fnt_gui","path":"fonts/fnt_gui/fnt_gui.yy",},"order":1,},
     {"id":{"name":"camera","path":"scripts/camera/camera.yy",},"order":6,},
     {"id":{"name":"obj_block","path":"objects/obj_block/obj_block.yy",},"order":2,},
     {"id":{"name":"perlin","path":"scripts/perlin/perlin.yy",},"order":0,},

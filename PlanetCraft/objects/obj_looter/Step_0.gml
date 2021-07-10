@@ -14,12 +14,12 @@ if input {
 	vsp_to = lengthdir_y(sp, input_dir)
 	hacc = abs(lengthdir_x(acc, input_dir))
 	vacc = abs(lengthdir_y(acc, input_dir))
-	hsp = approach(hsp, hsp_to, hacc)
-	vsp = approach(vsp, vsp_to, vacc)
+	hsp = approach(hsp, hsp_to, acc)
+	vsp = approach(vsp, vsp_to, acc)
 } else {
 	hsp = approach(hsp, 0, acc)
 	vsp = approach(vsp, 0, acc)
 }
 
-scr_move_coord(hsp, vsp)
+scr_move_coord_contact_obj(hsp, vsp, obj_block)
 scr_camera_set_pos(0, x, y)
