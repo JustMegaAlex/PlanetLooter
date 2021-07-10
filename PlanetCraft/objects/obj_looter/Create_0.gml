@@ -38,7 +38,7 @@ function organic_to_fuel() {
 function produce_part() {
 	if resources[Resource.metall] >= metall_to_part_cost {
 		resources[Resource.part] += 1
-		resources[Resource.organic] -= metall_to_part_cost
+		resources[Resource.metall] -= metall_to_part_cost
 		return "ok"
 	}
 	return "need more\nmetall"
@@ -52,6 +52,12 @@ function upgrade_weapon() {
 	}
 	return "need more\nmetall"
 }
+
+//// production
+ore_to_metall_cost = 3
+organic_to_fuel_cost = 2
+metall_to_part_cost = 2
+weapon_upgr_part_cost = 5
 
 
 sp = 5
@@ -82,14 +88,7 @@ gravy = 0
 gravity_dist = 300
 gravity_min_dist = 8
 
-resources = array_create(Resource.types_number, 0)
+resources = array_create(Resource.types_number, 10)
 resource_max_ammount = 10
 
 current_planet = noone
-
-
-//// production
-ore_to_metall_cost = 3
-organic_to_fuel_cost = 2
-metall_to_part_cost = 2
-weapon_upgr_part_cost = 1

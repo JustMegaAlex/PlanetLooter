@@ -3,7 +3,7 @@ key_left = keyboard_check(ord("A")) or keyboard_check(vk_left)
 key_right = keyboard_check(ord("D")) or keyboard_check(vk_right)
 key_up = keyboard_check(ord("W")) or keyboard_check(vk_up)
 key_down = keyboard_check(ord("S")) or keyboard_check(vk_down)
-key_interact = keyboard_check(ord("E"))
+key_interact = keyboard_check_pressed(ord("E"))
 key_shoot = mouse_check_button(mb_left)
 
 //// planets
@@ -84,9 +84,14 @@ if key_shoot and !reloading and !global.ui_interface_on {
 
 //// interacting
 if key_interact {
-	var building = instance_place(x, y, obj_building)
-	if building
-		building.interface()
+	if global.ui_interface_on {
+		instance_destroy(obj_building_ui)
+		global.ui_interface_on = false
+	} else {
+		var building = instance_place(x, y, obj_building)
+		if building
+			building.interface()
+	}
 }
 
 
