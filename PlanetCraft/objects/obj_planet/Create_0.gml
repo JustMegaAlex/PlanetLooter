@@ -13,7 +13,7 @@ function generate_terrain() {
 }
 
 function get_cell_type(val) {
-	if val >= 0.5
+	if val >= fill_factor
 		return obj_block
 	return noone
 }
@@ -26,4 +26,5 @@ function terrain_add(i, j, inst) {
 
 size = 20
 terrain_mesh = array2d(size, size, noone)
+fill_factor = 0.5
 generate_terrain()

@@ -4,8 +4,15 @@ key_right = keyboard_check(vk_right)
 key_up = keyboard_check(vk_up)
 key_down = keyboard_check(vk_down)
 
-move_h = key_right - key_left
-move_v = key_down - key_up
+up_free = place_empty(x, y - 1, obj_block)
+down_free = place_empty(x, y + 1, obj_block)
+left_free = place_empty(x - 1, y, obj_block)
+right_free = place_empty(x + 1, y, obj_block)
+
+input_h = key_right - key_left
+input_v = key_down - key_up
+move_h = key_right * right_free - key_left * left_free
+move_v = key_down * down_free - key_up * up_free
 var input = abs(move_h) or abs(move_v)
 
 if input {
