@@ -16,6 +16,16 @@ function check_resource_full(type) {
 	return resources[type] >= resource_max_ammount
 }
 
+//// production
+function ore_to_metall() {
+	if resources[Resource.ore] >= ore_to_metall_cost {
+		resources[Resource.metall] += 1
+		resources[Resource.ore] -= ore_to_metall_cost
+		return "ok"
+	}
+	return "need more\n   ore"
+}
+
 sp = 5
 hsp = 0
 vsp = 0
@@ -47,3 +57,7 @@ resources = array_create(Resource.types_number, 0)
 resource_max_ammount = 10
 
 current_planet = noone
+
+
+//// production
+ore_to_metall_cost = 3

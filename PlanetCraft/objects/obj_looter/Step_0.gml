@@ -81,7 +81,7 @@ reloading--
 //shoot_h = key_shoot_right - key_shoot_left
 //shoot_v = key_shoot_down - key_shoot_up
 //if (abs(shoot_h) or abs(shoot_v)) and !reloading {
-if key_shoot and !reloading {
+if key_shoot and !reloading and !global.ui_interface_on {
 	shoot_dir = point_direction(x, y, mouse_x, mouse_y)
 	shoot(shoot_dir)
 }

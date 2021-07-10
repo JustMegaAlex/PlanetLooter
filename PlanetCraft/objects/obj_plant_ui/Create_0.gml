@@ -1,7 +1,15 @@
 
 event_inherited()
 
-function action() {}
+function produce_metal() {
+	var res = obj_looter.ore_to_metall()
+	if res != "ok"
+		ui_parent.set_display_text(res)
+}
 
-self.add_item(-1, "item", self.action)
-self.add_item(-1, "item", self.action)
+function produce_fuel() {
+	
+}
+
+self.add_item(-1, "produce\nmetal", self.produce_metal)
+self.add_item(-1, "produce\nfuel", self.produce_fuel)

@@ -22,8 +22,10 @@ function choose_planet() {
 }
 
 function interface() {
-	if ui_object != noone
+	if ui_object != noone {
 		instance_create_layer(x, y - 50, layer, ui_object)
+		global.ui_interface_on = true
+	}
 }
 
 size = sprite_get_height(sprite_index) / global.grid_size
@@ -31,3 +33,6 @@ planet = choose_planet()
 place_on_planet()
 
 ui_object = noone
+
+// production parameters
+ore_to_metall_consumption = 3

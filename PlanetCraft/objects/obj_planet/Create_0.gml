@@ -2,6 +2,7 @@
 enum Resource {
 	empty,
 	ore,
+	metall,
 	types_number
 }
 
