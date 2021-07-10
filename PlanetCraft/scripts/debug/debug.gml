@@ -45,7 +45,7 @@ function scr_debug_ini() {
 	global.VAR_BAR_LENGTH = 0
 	global.VAR_BAR_X = 0
 	global.VAR_BAR_Y = 0
-	global.VAR_BAR_ROW_DELTA = 60
+	global.VAR_BAR_ROW_DELTA = 20
 	global.DEBUG = true
 }
 

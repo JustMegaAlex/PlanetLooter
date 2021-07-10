@@ -37,5 +37,13 @@ shoot_dir = 0
 reload_time = 5
 reloading = 0
 
+grav = 0.2
+gravx = 0
+gravy = 0
+gravity_dist = 300
+gravity_min_dist = 50
+
 resources = array_create(Resource.types_number, 0)
 resource_max_ammount = 10
+
+current_planet = noone

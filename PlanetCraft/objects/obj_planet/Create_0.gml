@@ -34,12 +34,15 @@ function get_resource_type(val) {
 
 function terrain_add(i, j, inst, rs_type) {
 	terrain_mesh[i][j] = inst
-	inst.x = gridx(i)
-	inst.y = gridy(j)
+	inst.x = gridx(i) + x0
+	inst.y = gridy(j) + y0
 	inst.set_resource_type(rs_type)
 }
 
 size = 20
+var radius = global.grid_size * size * 0.5
+x0 = x - radius
+y0 = y - radius
 terrain_mesh = array2d(size, size, noone)
 fill_factor = 0.5
 generate_terrain()
