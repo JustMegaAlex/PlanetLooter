@@ -1,5 +1,8 @@
 {
-  "spriteId": null,
+  "spriteId": {
+    "name": "spr_planet",
+    "path": "sprites/spr_planet/spr_planet.yy",
+  },
   "solid": false,
   "visible": true,
   "spriteMaskId": null,

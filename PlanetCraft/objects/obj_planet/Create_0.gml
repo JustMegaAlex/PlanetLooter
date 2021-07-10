@@ -39,6 +39,8 @@ function terrain_add(i, j, inst, rs_type) {
 	inst.set_resource_type(rs_type)
 }
 
+
+visible = false
 size = 20
 var radius = global.grid_size * size * 0.5
 x0 = x - radius

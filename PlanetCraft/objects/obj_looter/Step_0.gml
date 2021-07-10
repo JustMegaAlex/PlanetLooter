@@ -27,8 +27,11 @@ if not current_planet {
 		gravy = grav * sign(dy)
 	}
 	var dist = point_distance(x, y, current_planet.x, current_planet.y)
-	if dist > gravity_dist
+	if dist > gravity_dist {
 		current_planet = noone
+		gravx = 0
+		gravy = 0
+	}
 	else if dist <= gravity_min_dist {
 		gravx = 0
 		gravy = 0
