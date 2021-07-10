@@ -1,10 +1,21 @@
 
 event_inherited()
 
+
+function set_hit(dmg) {
+	hp -= dmg
+	if hp <=0 {
+		visible = false
+		global.game_over = true
+		image_index = 1
+	}
+}
+
 function add_resource(type, ammount) {
 	if (resources[type] + ammount) > resource_max_ammount
 		show_error(" :add_resource: resource type ammount > max ammount", false)
 	resources[type] += ammount
+	audio_play_sound(snd_pick, 0, false)
 }
 
 function check_resource_full(type) {
@@ -54,7 +65,6 @@ organic_to_fuel_cost = 2
 metall_to_part_cost = 2
 weapon_upgr_part_cost = 5
 
-
 sp = 5
 hsp = 0
 vsp = 0
@@ -70,10 +80,12 @@ move_h = 0
 move_v = 0
 input_dir = 0
 
+image_speed = 0
+
 shoot_h = 0
 shoot_v = 0
 shoot_dir = 0
-reload_time = 5
+reload_time = 10
 reloading = 0
 
 grav = 0.05
@@ -82,7 +94,7 @@ gravy = 0
 gravity_dist = 300
 gravity_min_dist = 8
 
-resources = array_create(Resource.types_number, 10)
+resources = array_create(Resource.types_number, 0)
 resource_max_ammount = 10
 
 current_planet = noone

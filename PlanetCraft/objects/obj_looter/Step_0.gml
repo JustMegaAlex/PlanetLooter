@@ -1,12 +1,22 @@
 
-key_left = keyboard_check(ord("A")) or keyboard_check(vk_left)
-key_right = keyboard_check(ord("D")) or keyboard_check(vk_right)
-key_up = keyboard_check(ord("W")) or keyboard_check(vk_up)
-key_down = keyboard_check(ord("S")) or keyboard_check(vk_down)
-key_interact = keyboard_check_pressed(ord("E"))
-key_shoot = mouse_check_button(mb_left)
+if not global.game_over {
+	key_left = keyboard_check(ord("A")) or keyboard_check(vk_left)
+	key_right = keyboard_check(ord("D")) or keyboard_check(vk_right)
+	key_up = keyboard_check(ord("W")) or keyboard_check(vk_up)
+	key_down = keyboard_check(ord("S")) or keyboard_check(vk_down)
+	key_interact = keyboard_check_pressed(ord("E"))
+	key_shoot = mouse_check_button(mb_left)
+	image_angle = point_direction(x, y, mouse_x, mouse_y)
+} else {
+	key_left = false
+	key_right = false
+	key_up = false
+	key_down = false
+	key_interact = false
+	key_shoot = false
+}
 
-image_angle = point_direction(x, y, mouse_x, mouse_y)
+
 
 //// planets
 if not current_planet {
@@ -48,6 +58,7 @@ input_v = key_down - key_up
 move_h = key_right * right_free - key_left * left_free
 move_v = key_down * down_free - key_up * up_free
 var input = abs(move_h) or abs(move_v)
+
 
 if input {
 	input_dir = point_direction(0, 0, move_h, move_v)
