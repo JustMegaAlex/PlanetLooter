@@ -1,4 +1,7 @@
 
 scr_move(sp, image_angle)
-if place_meeting(x, y, obj_block)
+var inst = instance_place(x, y, obj_block)
+if inst {
+	inst.set_hit()
 	instance_destroy()
+}
