@@ -6,6 +6,8 @@ key_down = keyboard_check(ord("S")) or keyboard_check(vk_down)
 key_interact = keyboard_check_pressed(ord("E"))
 key_shoot = mouse_check_button(mb_left)
 
+image_angle = point_direction(x, y, mouse_x, mouse_y)
+
 //// planets
 if not current_planet {
 	var planet = instance_nearest(x, y, obj_planet)

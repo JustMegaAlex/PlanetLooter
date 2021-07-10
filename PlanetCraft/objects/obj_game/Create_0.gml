@@ -101,5 +101,6 @@ buildings_progression = [
 ]
 
 instance_create_layer(0, 0, "stars", obj_stars)
+instance_create_layer(0, 0, "Instances", obj_effects)
 
 //generate_star_system()

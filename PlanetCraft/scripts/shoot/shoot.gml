@@ -7,4 +7,6 @@ function shoot(shoot_dir, our_side, dmg) {
 		self.side = our_side
 		self.dmg = dmg
 	}
+	var snd = choose(snd_laser1, snd_laser2, snd_laser3, snd_laser4)
+	audio_play_sound(snd, 0, false)
 }
