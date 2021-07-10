@@ -44,6 +44,8 @@ function generate_star_system() {
 	repeat (plants) instance_create_layer(0, 0, "Instances", obj_building_plant)
 	repeat (manufs) instance_create_layer(0, 0, "Instances", obj_building_manufacture)
 	repeat (yards) instance_create_layer(0, 0, "Instances", obj_building_shipyard)
+	
+	instance_destroy(obj_planet_mask)
 }
 
 function create_planet(r, angle, size) {
@@ -99,8 +101,5 @@ buildings_progression = [
 	[5, 5, 3],
 	[7, 7, 4],
 ]
-
-instance_create_layer(0, 0, "stars", obj_stars)
-instance_create_layer(0, 0, "Instances", obj_effects)
 
 //generate_star_system()

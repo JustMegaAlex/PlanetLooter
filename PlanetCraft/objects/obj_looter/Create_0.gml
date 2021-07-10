@@ -79,6 +79,7 @@ input_v = 0
 move_h = 0
 move_v = 0
 input_dir = 0
+dir = 0
 
 image_speed = 0
 
@@ -103,3 +104,6 @@ side = Sides.ours
 
 hp = 7
 dmg = 1
+
+// warping
+warping = false

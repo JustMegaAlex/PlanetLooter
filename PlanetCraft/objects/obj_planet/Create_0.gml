@@ -31,7 +31,9 @@ function get_cell_type(val) {
 }
 
 function get_resource_type(val) {
-	if val >= 0.5
+	if val >= 0.7
+		return Resource.organic
+	if val >= 0.4
 		return Resource.ore
 	return Resource.empty
 }
@@ -44,7 +46,7 @@ function terrain_add(i, j, inst, rs_type) {
 }
 
 
-visible = true
+visible = false
 size = 20
 radius = global.grid_size * size * 0.5
 x0 = x - radius
