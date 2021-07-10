@@ -1,16 +1,11 @@
 
+event_inherited()
+
 enum Enemy {
 	idle,
 	wander,
 	enclose,
 	distantiate,
-}
-
-function shoot(shoot_dir) {
-	reloading = reload_time
-	with(instance_create_layer(x, y, layer, obj_bullet)) {
-		self.image_angle = shoot_dir
-	}
 }
 
 state = "idle"
@@ -31,3 +26,8 @@ target = noone
 shoot_dir = 0
 reload_time = 30
 reloading = 0
+
+hp = 7
+dmg = 1
+
+side = Sides.theirs

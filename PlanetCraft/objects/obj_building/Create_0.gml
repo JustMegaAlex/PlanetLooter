@@ -15,12 +15,6 @@ function place_on_planet() {
 	// ToDo
 }
 
-function choose_planet() {
-	var num = instance_number(obj_planet)
-	var planet = instance_find(obj_planet, irandom(num - 1))
-	return planet
-}
-
 function interface() {
 	if ui_object != noone {
 		instance_create_layer(x, y - 50, "ui", ui_object)

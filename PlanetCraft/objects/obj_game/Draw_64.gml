@@ -1,2 +1,2 @@
 
-//scr_debug_show_array2d(mesh, 2, 2)
+scr_debug_show_var("planets", instance_number(obj_planet))

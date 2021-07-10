@@ -53,9 +53,10 @@ if input {
 	vsp_to = lengthdir_y(sp, input_dir)
 	hacc = abs(lengthdir_x(acc, input_dir))
 	vacc = abs(lengthdir_y(acc, input_dir))
-	if abs(hsp_to)
+	// input_h = 0 and hsp < 0 and gravx > 0
+	if abs(input_h) or !(sign(hsp) == sign(gravx))
 		hsp = approach(hsp, hsp_to, acc)
-	if abs(vsp_to)
+	if abs(input_v) or !(sign(vsp) == sign(gravy))
 		vsp = approach(vsp, vsp_to, acc)
 } else {
 	if gravx == 0
@@ -74,12 +75,9 @@ if (vsp > 0) and !down_free or (vsp < 0) and !up_free
 
 //// shooting
 reloading--
-//shoot_h = key_shoot_right - key_shoot_left
-//shoot_v = key_shoot_down - key_shoot_up
-//if (abs(shoot_h) or abs(shoot_v)) and !reloading {
 if key_shoot and !reloading and !global.ui_interface_on {
 	shoot_dir = point_direction(x, y, mouse_x, mouse_y)
-	shoot(shoot_dir)
+	shoot(shoot_dir, side, dmg)
 }
 
 //// interacting

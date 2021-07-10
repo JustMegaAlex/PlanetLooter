@@ -1,10 +1,5 @@
 
-function set_hit() {
-	hp -= obj_looter.damage
-	if hp <=0 {
-		instance_destroy()
-	}
-}
+event_inherited()
 
 function set_resource_type(type) {
 	resource_type = type

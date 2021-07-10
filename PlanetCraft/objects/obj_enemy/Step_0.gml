@@ -2,7 +2,7 @@
 reloading--
 
 if target and !reloading
-	shoot(image_angle)
+	shoot(image_angle, side, dmg)
 
 dist_to_player = point_distance(x, y, obj_looter.x, obj_looter.y)
 

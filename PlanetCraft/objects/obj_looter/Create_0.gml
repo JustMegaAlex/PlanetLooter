@@ -1,10 +1,5 @@
 
-function shoot(shoot_dir) {
-	reloading = reload_time
-	with(instance_create_layer(x, y, layer, obj_bullet)) {
-		self.image_angle = shoot_dir
-	}
-}
+event_inherited()
 
 function add_resource(type, ammount) {
 	if (resources[type] + ammount) > resource_max_ammount
@@ -46,7 +41,7 @@ function produce_part() {
 
 function upgrade_weapon() {
 	if resources[Resource.part] >= weapon_upgr_part_cost {
-		damage += 1
+		dmg += 1
 		resources[Resource.part] -= weapon_upgr_part_cost
 		return "ok"
 	}
@@ -80,7 +75,6 @@ shoot_v = 0
 shoot_dir = 0
 reload_time = 5
 reloading = 0
-damage = 1
 
 grav = 0.05
 gravx = 0
@@ -92,3 +86,8 @@ resources = array_create(Resource.types_number, 10)
 resource_max_ammount = 10
 
 current_planet = noone
+
+side = Sides.ours
+
+hp = 7
+dmg = 1
