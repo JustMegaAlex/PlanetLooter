@@ -2,6 +2,7 @@
 enum Resource {
 	empty,
 	ore,
+	types_number
 }
 
 function generate_terrain() {
