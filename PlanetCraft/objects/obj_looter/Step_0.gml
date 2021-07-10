@@ -3,6 +3,7 @@ key_left = keyboard_check(ord("A")) or keyboard_check(vk_left)
 key_right = keyboard_check(ord("D")) or keyboard_check(vk_right)
 key_up = keyboard_check(ord("W")) or keyboard_check(vk_up)
 key_down = keyboard_check(ord("S")) or keyboard_check(vk_down)
+key_interact = keyboard_check(ord("E"))
 //key_shoot_left = keyboard_check(ord("A"))
 //key_shoot_right = keyboard_check(ord("D"))
 //key_shoot_up = keyboard_check(ord("W"))
@@ -83,6 +84,13 @@ reloading--
 if key_shoot and !reloading {
 	shoot_dir = point_direction(x, y, mouse_x, mouse_y)
 	shoot(shoot_dir)
+}
+
+//// interacting
+if key_interact {
+	var building = instance_place(x, y, obj_building)
+	if building
+		building.interface()
 }
 
 

@@ -1,7 +1,7 @@
 
 global.grid_x = 0
 global.grid_y = 0
-global.grid_size = 16
+global.grid_size = 24
 global.grid_w = 5
 global.grid_h = 5
 global.grid = noone
