@@ -40,9 +40,9 @@ function terrain_add(i, j, inst, rs_type) {
 }
 
 
-visible = false
+visible = true
 size = 20
-var radius = global.grid_size * size * 0.5
+radius = global.grid_size * size * 0.5
 x0 = x - radius
 y0 = y - radius
 terrain_mesh = array2d(size, size, noone)
