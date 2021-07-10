@@ -5,7 +5,6 @@ event_inherited()
 function set_hit(dmg) {
 	hp -= dmg
 	if hp <=0 {
-		visible = false
 		global.game_over = true
 		image_index = 1
 	}
@@ -56,7 +55,25 @@ function upgrade_weapon() {
 		resources[Resource.part] -= weapon_upgr_part_cost
 		return "ok"
 	}
-	return "need more\nmetall"
+	return "need more\nparts"
+}
+
+function upgrade_repair() {
+	if resources[Resource.metall] >= repair_cost {
+		hp += 1
+		resources[Resource.metall] -= repair_cost
+		return "ok"
+	}
+	return "need more\nmetal"
+}
+
+function upgrade_speed() {
+	if resources[Resource.part] >= speed_upgr_cost {
+		sp += 2
+		resources[Resource.part] -= speed_upgr_cost
+		return "ok"
+	}
+	return "need more\nparts"
 }
 
 //// production
@@ -64,6 +81,8 @@ ore_to_metall_cost = 3
 organic_to_fuel_cost = 2
 metall_to_part_cost = 2
 weapon_upgr_part_cost = 5
+speed_upgr_cost = 2
+repair_cost = 1
 
 sp = 5
 hsp = 0
@@ -95,7 +114,7 @@ gravy = 0
 gravity_dist = 300
 gravity_min_dist = 8
 
-resources = array_create(Resource.types_number, 0)
+resources = array_create(Resource.types_number, 3)
 resource_max_ammount = 10
 
 current_planet = noone
@@ -107,3 +126,7 @@ dmg = 1
 
 // warping
 warping = false
+
+// drawing compas
+compas_min_dist = 600
+compas_r = 100

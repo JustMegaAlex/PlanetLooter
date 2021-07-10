@@ -86,11 +86,11 @@ rmin = 800
 
 enemies_progression = [
 	// groups, [min_group_size, max_group_size]
-	[5, [2, 3]],
-	[7, [3, 4]],
-	[12, [5, 7]],
-	[16, [5, 12]],
-	[22, [8, 20]],
+	[15, [2, 3]],
+	[17, [3, 4]],
+	[22, [5, 7]],
+	[26, [5, 12]],
+	[32, [8, 20]],
 ]
 
 buildings_progression = [
@@ -102,4 +102,7 @@ buildings_progression = [
 	[7, 7, 4],
 ]
 
-//generate_star_system()
+show_tips = false
+tips_text = "WASD to move\nMouse to shoot\nE to interact with buidlings\nWhen you have 10 fuel hold space to warp\nR to restart"
+tips_text += "compass arrows point to planets"
+tips_header = "Press T to show tips"

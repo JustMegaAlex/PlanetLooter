@@ -17,7 +17,8 @@ function place_on_planet() {
 
 function interface() {
 	if ui_object != noone {
-		instance_create_layer(x, y - 50, "ui", ui_object)
+		var ui = instance_create_layer(x, y - 50, "ui", ui_object)
+		ui.parent = id
 		global.ui_interface_on = true
 	}
 }

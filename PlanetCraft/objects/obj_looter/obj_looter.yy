@@ -1,7 +1,7 @@
 {
   "spriteId": {
-    "name": "spr_looter",
-    "path": "sprites/spr_looter/spr_looter.yy",
+    "name": "icon",
+    "path": "sprites/icon/icon.yy",
   },
   "solid": false,
   "visible": true,

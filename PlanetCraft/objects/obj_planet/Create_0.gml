@@ -31,9 +31,9 @@ function get_cell_type(val) {
 }
 
 function get_resource_type(val) {
-	if val >= 0.7
+	if val >= 0.75
 		return Resource.organic
-	if val >= 0.4
+	if val >= 0.5
 		return Resource.ore
 	return Resource.empty
 }

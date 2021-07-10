@@ -27,13 +27,16 @@ function set_display_text(text) {
 items = []
 items_number = 0
 ui_radius = 64
-ui_angle_step = 30
+ui_angle_step = 60
 sprite_index = spr_building_ui
 display_text = ""
 mouse_over = noone
 mouse_pressed = false
 override_displaying_time = 60
 override_displaying = 0
+parent = noone
+
+disconnect_dist = 200
 
 // late init: setup ui
 alarm[0] = 1

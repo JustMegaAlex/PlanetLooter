@@ -21,12 +21,13 @@ if warping {
 	if !audio_is_playing(snd_warp) {
 		object_set_persistent(object_index, true)
 		resources[Resource.fuel] = 0
+		obj_game.level++
 		room_restart()
 	} else if !key_warp {
 		warping = false
 		audio_stop_sound(snd_warp)
 	}
-} else if key_warp and (resources[Resource.fuel] >= 0) {
+} else if key_warp and (resources[Resource.fuel] >= 10) {
 	warping = true
 	audio_play_sound(snd_warp, 0, false)
 }

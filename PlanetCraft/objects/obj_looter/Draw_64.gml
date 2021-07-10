@@ -1,6 +1,7 @@
 
-scr_debug_show_var("damage", string(dmg))
 scr_debug_show_var("hp", string(hp))
+scr_debug_show_var("damage", string(dmg))
+scr_debug_show_var("speed", string(sp))
 scr_debug_show_var("ore", string(resources[Resource.ore]))
 scr_debug_show_var("organic", string(resources[Resource.organic]))
 scr_debug_show_var("fuel", string(resources[Resource.fuel]))
