@@ -18,18 +18,21 @@ if not global.game_over {
 }
 
 if warping {
-	if !audio_is_playing(snd_warp) {
-		object_set_persistent(object_index, true)
+	
+	if audio_sound_get_track_position(warp_sound) > 1.9 {
 		resources[Resource.fuel] = 0
 		obj_game.level++
-		room_restart()
+		// restart room
+		alarm[1] = 1
+		warping = false
 	} else if !key_warp {
 		warping = false
 		audio_stop_sound(snd_warp)
+		warp_sound = noone
 	}
 } else if key_warp and (resources[Resource.fuel] >= 10) {
 	warping = true
-	audio_play_sound(snd_warp, 0, false)
+	warp_sound = audio_play_sound(snd_warp, 0, false)
 }
 
 //// planets

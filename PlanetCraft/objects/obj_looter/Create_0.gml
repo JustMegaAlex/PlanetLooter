@@ -114,7 +114,7 @@ gravy = 0
 gravity_dist = 300
 gravity_min_dist = 8
 
-resources = array_create(Resource.types_number, 3)
+resources = array_create(Resource.types_number, 10)
 resource_max_ammount = 10
 
 current_planet = noone
@@ -126,6 +126,7 @@ dmg = 1
 
 // warping
 warping = false
+warp_sound = noone
 
 // drawing compas
 compas_min_dist = 600

@@ -1,12 +1,12 @@
 {
   "spriteId": {
-    "name": "icon",
-    "path": "sprites/icon/icon.yy",
+    "name": "spr_looter",
+    "path": "sprites/spr_looter/spr_looter.yy",
   },
   "solid": false,
   "visible": true,
   "spriteMaskId": null,
-  "persistent": false,
+  "persistent": true,
   "parentObjectId": {
     "name": "obj_solid",
     "path": "objects/obj_solid/obj_solid.yy",
@@ -28,6 +28,7 @@
     {"isDnD":false,"eventNum":0,"eventType":3,"collisionObjectId":null,"parent":{"name":"obj_looter","path":"objects/obj_looter/obj_looter.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
     {"isDnD":false,"eventNum":64,"eventType":8,"collisionObjectId":null,"parent":{"name":"obj_looter","path":"objects/obj_looter/obj_looter.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
     {"isDnD":false,"eventNum":0,"eventType":8,"collisionObjectId":null,"parent":{"name":"obj_looter","path":"objects/obj_looter/obj_looter.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
+    {"isDnD":false,"eventNum":1,"eventType":2,"collisionObjectId":null,"parent":{"name":"obj_looter","path":"objects/obj_looter/obj_looter.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
   ],
   "properties": [],
   "overriddenProperties": [],

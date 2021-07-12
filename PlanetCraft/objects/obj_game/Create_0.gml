@@ -77,6 +77,7 @@ enum Sides {
 global.ui_interface_on = false
 global.game_over = false
 scr_debug_ini()
+global.DEBUG = true
 draw_set_font(fnt)
 level = 0
 blocks_max_num = 2500
