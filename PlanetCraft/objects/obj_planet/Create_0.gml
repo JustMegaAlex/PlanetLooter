@@ -9,19 +9,20 @@ enum Resource {
 	types_number
 }
 
-function generate_terrain() {
-	var mesh = perlin_mesh(size, size)
+function generate_terrain(tmesh) {
+	var size = array_length(tmesh)
+	var pmesh = perlin_mesh(size, size)
 	var resources = perlin_mesh(size, size)
-	for (var i = 1; i < size; ++i) {
-	    for (var j = 1; j < size; ++j) {
-			var terrain_cell_type = get_cell_type(mesh[i][j])
-			if terrain_cell_type == noone
+	for (var i = 1; i < size - 1; ++i) {
+	    for (var j = 1; j < size - 1; ++j) {
+			var terrain_type = get_cell_type(pmesh[i][j])
+			if terrain_type == noone
 				continue
-			var cell = instance_create_layer(0, 0, layer, terrain_cell_type)
 			var resource_type = get_resource_type(resources[i][j])
-			terrain_add(i, j, cell, resource_type)
+			tmesh[@ i][@ j] = terrain_add(i, j, terrain_type, resource_type)
 		}
 	}
+	return tmesh
 }
 
 function get_cell_type(val) {
@@ -38,14 +39,15 @@ function get_resource_type(val) {
 	return Resource.empty
 }
 
-function terrain_add(i, j, inst, rs_type) {
-	terrain_mesh[i][j] = inst
-	inst.x = gridx(i) + x0
-	inst.y = gridy(j) + y0
+function terrain_add(i, j, terrain_type, resource_type) {
+	var inst = instance_create_layer(0, 0, layer, terrain_type)
+	inst.x = gridx(i-1) + x0
+	inst.y = gridy(j-1) + y0
 	inst.i = i
 	inst.j = j
 	inst.planet_inst = id
-	inst.set_resource_type(rs_type)
+	inst.set_resource_type(resource_type)
+	return inst
 }
 
 function terrain_remove(i, j) {
@@ -70,8 +72,8 @@ function right_coord() {
 }
 
 function draw_tiles() {
-	for (var i = 0; i < size; ++i) {
-	    for (var j = 0; j < size; ++j) {
+	for (var i = 0; i < tm_size; ++i) {
+	    for (var j = 0; j < tm_size; ++j) {
 			self._draw_tile(i, j, false)
 		}
 	}
@@ -102,16 +104,25 @@ function mesh_tile_value(i, j) {
 	return terrain_mesh[i][j] != noone
 }
 
+function collapse_mesh_cells(mesh, bound_value) {
+	var size = array_length(mesh)
+	for (var i = 1; i < size; ++i) {
+	    for (var j = 1; j < size; ++j) {
+			mesh[@i][@j] = (mesh[i][j] > bound_value) ? 1 : 0
+		}
+	}
+	return mesh
+}
+
 
 visible = false
 size = 20
-mesh_size = size + 2
 radius = global.grid_size * size * 0.5
 x0 = x - radius
 y0 = y - radius
-terrain_mesh = array2d(mesh_size, mesh_size, noone)
+terrain_mesh = array2d(size+2, size+2, noone)
 fill_factor = 0.5
-generate_terrain()
+terrain_mesh = generate_terrain(terrain_mesh)
 
 //terrain_mesh = [
 //	[0, 0, 0, 0, 0],
@@ -122,12 +133,48 @@ generate_terrain()
 //]
 
 //// tiles
-//var layer_id = layer_get_id()
-var tm_size = size
+tm_size = size + 1
 tile_map_id = layer_tilemap_create("tiles",
-								left_coord() + global.grid_size * 0.5,
-								top_coord() + global.grid_size * 0.5,
+								left_coord() - global.grid_size * 0.5,
+								top_coord() - global.grid_size * 0.5,
 								ts_planet_ground,
 								tm_size,
 								tm_size)
+// bgr tiles
+var bgr_tile_size = 16
+var bgr_size = global.grid_size / bgr_tile_size * tm_size
+bgr_size = floor(bgr_size)
+var bgr_mesh = perlin_mesh(bgr_size, bgr_size)
+var farbgr_size = bgr_size - 1
+var farbgr_mesh = array2d(farbgr_size, farbgr_size, 1)
+// zero edges
+for (var i = 0; i < bgr_size; ++i) {
+    bgr_mesh[i][bgr_size-1] = 0
+	bgr_mesh[bgr_size-1][i] = 0
+	bgr_mesh[i][0] = 0
+	bgr_mesh[0][i] = 0
+	farbgr_mesh[i][farbgr_size-1] = 0
+	farbgr_mesh[farbgr_size-1][i] = 0
+	farbgr_mesh[i][0] = 0
+	farbgr_mesh[0][i] = 0
+}
+bgr_mesh = collapse_mesh_cells(bgr_mesh, 0.35)
+autotiler_bgr = new Autotiling("tiles_bgr",
+								left_coord(),
+								top_coord(),
+								ts_planet_ground_bgr,
+								bgr_size-1,
+								bgr_size-1,
+								bgr_mesh,
+								0)
+autotiler_farbgr = new Autotiling("tiles_farbgr",
+								left_coord() + bgr_tile_size * 0.5,
+								top_coord() + bgr_tile_size * 0.5,
+								ts_planet_ground_farbgr,
+								farbgr_size-1,
+								farbgr_size-1,
+								farbgr_mesh,
+								0)
 draw_tiles()
+autotiler_bgr.draw_region(0, 0, bgr_size - 1, bgr_size - 1)
+autotiler_farbgr.draw_region(0, 0, farbgr_size - 1, farbgr_size - 1)
