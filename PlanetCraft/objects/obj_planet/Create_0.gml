@@ -42,7 +42,15 @@ function terrain_add(i, j, inst, rs_type) {
 	terrain_mesh[i][j] = inst
 	inst.x = gridx(i) + x0
 	inst.y = gridy(j) + y0
+	inst.i = i
+	inst.j = j
+	inst.planet_inst = id
 	inst.set_resource_type(rs_type)
+}
+
+function terrain_remove(i, j) {
+	terrain_mesh[i][j] = noone
+	self.tiles_redraw_region(i - 1, j - 1, 2, 2)
 }
 
 function bottom_coord() {
@@ -64,13 +72,21 @@ function right_coord() {
 function draw_tiles() {
 	for (var i = 0; i < size; ++i) {
 	    for (var j = 0; j < size; ++j) {
-			self._draw_tile(i, j)
+			self._draw_tile(i, j, false)
 		}
 	}
 }
 
-function _draw_tile(i, j) {
-	var tile_index = self.compute_tile_index(i, j)
+function tiles_redraw_region(i, j, ni, nj) {
+	for (var ii = i; ii< i + ni; ++ii) {
+	    for (var jj = j; jj < j + nj; ++jj) {
+			self._draw_tile(ii, jj, true)
+		}
+	}
+}
+
+function _draw_tile(i, j, burned) {
+	var tile_index = self.compute_tile_index(i, j) + burned * 16
 	var tdata = tile_index | 0 | 0
 	tilemap_set(tile_map_id, tdata, i, j)
 }
@@ -96,7 +112,6 @@ y0 = y - radius
 terrain_mesh = array2d(mesh_size, mesh_size, noone)
 fill_factor = 0.5
 generate_terrain()
-with obj_block image_index = 0
 
 //terrain_mesh = [
 //	[0, 0, 0, 0, 0],

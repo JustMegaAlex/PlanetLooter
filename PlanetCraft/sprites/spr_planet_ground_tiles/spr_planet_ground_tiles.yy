@@ -10,19 +10,19 @@
   "bbox_left": 0,
   "bbox_right": 95,
   "bbox_top": 0,
-  "bbox_bottom": 95,
+  "bbox_bottom": 191,
   "HTile": false,
   "VTile": false,
   "For3D": false,
   "width": 96,
-  "height": 96,
+  "height": 192,
   "textureGroupId": {
     "name": "Default",
     "path": "texturegroups/Default",
   },
   "swatchColours": null,
-  "gridX": 0,
-  "gridY": 0,
+  "gridX": 24,
+  "gridY": 24,
   "frames": [
     {"compositeImage":{"FrameId":{"name":"3fa8cf88-33ac-4348-aa57-0ff99e5de270","path":"sprites/spr_planet_ground_tiles/spr_planet_ground_tiles.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
         {"FrameId":{"name":"3fa8cf88-33ac-4348-aa57-0ff99e5de270","path":"sprites/spr_planet_ground_tiles/spr_planet_ground_tiles.yy",},"LayerId":{"name":"efd95043-a8fb-4049-8d84-90d003bcaffd","path":"sprites/spr_planet_ground_tiles/spr_planet_ground_tiles.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},

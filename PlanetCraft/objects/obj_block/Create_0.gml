@@ -11,3 +11,6 @@ vsp = 0
 hp = 4
 image_speed = 0
 resource_type = Resource.empty
+i = -1
+j = -1
+planet_obj = noone
