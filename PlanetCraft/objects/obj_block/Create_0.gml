@@ -14,3 +14,4 @@ resource_type = Resource.empty
 i = -1
 j = -1
 planet_obj = noone
+is_moving_object = false

@@ -84,6 +84,7 @@ weapon_upgr_part_cost = 5
 speed_upgr_cost = 2
 repair_cost = 1
 
+is_moving_object = true
 sp = 5
 hsp = 0
 vsp = 0
@@ -99,6 +100,7 @@ move_h = 0
 move_v = 0
 input_dir = 0
 dir = 0
+knock_back_force = 4.5
 
 image_speed = 0
 

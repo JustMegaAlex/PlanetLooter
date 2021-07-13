@@ -106,7 +106,7 @@ if (vsp > 0) and !down_free or (vsp < 0) and !up_free
 reloading--
 if key_shoot and !reloading and !global.ui_interface_on {
 	shoot_dir = point_direction(x, y, mouse_x, mouse_y)
-	shoot(shoot_dir, side, dmg)
+	shoot(shoot_dir, id)
 }
 
 //// interacting

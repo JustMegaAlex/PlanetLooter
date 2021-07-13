@@ -7,4 +7,9 @@ if inst and inst.side != side {
 							x, y,
 							obj_effects.part_projectile_explosion, 1)
 	instance_destroy()
+	// knockback
+	if inst.is_moving_object {
+		inst.hsp += lengthdir_x(knock_back_force, image_angle)
+		inst.vsp += lengthdir_y(knock_back_force, image_angle)
+	}
 }

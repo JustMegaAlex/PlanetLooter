@@ -2,7 +2,7 @@
 reloading--
 
 if target and !reloading
-	shoot(image_angle, side, dmg)
+	shoot(dir, id)
 
 dist_to_player = point_distance(x, y, obj_looter.x, obj_looter.y)
 
@@ -24,9 +24,9 @@ switch state {
 	}
 
 	case "enclose": {
-		image_angle = point_direction(x, y, obj_looter.x, obj_looter.y)
-		hsp_to = lengthdir_x(sp, image_angle)
-		vsp_to = lengthdir_y(sp, image_angle)
+		dir = point_direction(x, y, obj_looter.x, obj_looter.y)
+		hsp_to = lengthdir_x(sp, dir)
+		vsp_to = lengthdir_y(sp, dir)
 		if dist_to_player < close_dist
 			state = "distantiate"
 		else if dist_to_player > loose_dist {
@@ -39,9 +39,9 @@ switch state {
 	}
 
 	case "distantiate": {
-		image_angle = point_direction(x, y, obj_looter.x, obj_looter.y)
-		hsp_to = -lengthdir_x(sp, image_angle)
-		vsp_to = -lengthdir_y(sp, image_angle)
+		dir = point_direction(x, y, obj_looter.x, obj_looter.y)
+		hsp_to = -lengthdir_x(sp, dir)
+		vsp_to = -lengthdir_y(sp, dir)
 		if dist_to_player > close_dist
 			state = "enclose"
 		break
