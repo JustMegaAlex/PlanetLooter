@@ -1,5 +1,4 @@
-// Script assets have changed for v2.3.0 see
-// https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
+
 function Autotiling(layer, x_, y_, tileset, w, h, tile_grid, empty_tile_val) constructor {
 	self.x_ = x_
 	self.y_ = y_
@@ -41,4 +40,26 @@ function Autotiling(layer, x_, y_, tileset, w, h, tile_grid, empty_tile_val) con
 			}
 		}
 	}
+}
+
+function autotiling_example() {
+	//// just call me somwhere
+	// set this parameters as you like
+	var layer_name = "Instances"
+	var tileset_id = generic_ground_tileset
+	var xx = 0
+	var yy = 0
+	// create our terrain grid
+	var size = 40
+	var terrain = array_create(size)
+	for (var i = 0; i < size; ++i) {
+	   terrain[i] = array_create(size, 0)
+	   for (var j = 0; j < size; ++j) {
+		   terrain[i][j] = choose(0, 1)
+	   }
+	}
+	// let's create our tile map now
+	var tilemap_size = size - 1
+	var autotiler = new Autotiling(layer_name, xx, yy, tileset_id, tilemap_size, tilemap_size, terrain, 0)
+	autotiler.draw()
 }

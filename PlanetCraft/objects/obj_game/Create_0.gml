@@ -1,3 +1,5 @@
+scr_debug_ini()
+global.DEBUG = false
 
 function generate_star_system() {
 	var blocks_num = random_range(0.5, 1) * blocks_max_num
@@ -76,8 +78,6 @@ enum Sides {
 
 global.ui_interface_on = false
 global.game_over = false
-scr_debug_ini()
-global.DEBUG = true
 draw_set_font(fnt)
 level = 0
 blocks_max_num = 2500
