@@ -4,6 +4,7 @@ mouse_pressed = false
 override_displaying--
 if not override_displaying {
 	display_text = ""
+	image_index = 0
 	if mouse_over
 		display_text = mouse_over.text
 }

@@ -4,19 +4,19 @@ event_inherited()
 function upgrade_weapon() {
 	var res = obj_looter.upgrade_weapon()
 	if res != "ok"
-		ui_parent.set_display_text(res)
+		ui_parent.ui_message(res, true)
 }
 
 function upgrade_repair() {
 	var res = obj_looter.upgrade_repair()
 	if res != "ok"
-		ui_parent.set_display_text(res)
+		ui_parent.ui_message(res, true)
 }
 
 function upgrade_speed() {
 	var res = obj_looter.upgrade_speed()
 	if res != "ok"
-		ui_parent.set_display_text(res)
+		ui_parent.ui_message(res, true)
 }
 
 

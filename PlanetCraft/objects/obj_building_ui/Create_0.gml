@@ -19,16 +19,19 @@ function setup_ui() {
 	}
 }
 
-function set_display_text(text) {
+function ui_message(text, warning) {
 	override_displaying = override_displaying_time
 	display_text = text
+	if warning
+		image_index = 1
 }
 
 items = []
 items_number = 0
-ui_radius = 64
+ui_radius = 128
 ui_angle_step = 60
 sprite_index = spr_building_ui
+image_speed = 0
 display_text = ""
 mouse_over = noone
 mouse_pressed = false
