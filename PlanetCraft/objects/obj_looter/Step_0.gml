@@ -123,4 +123,3 @@ if key_interact {
 
 
 scr_move_coord_contact_obj(hsp, vsp, obj_block)
-scr_camera_set_pos(0, x, y)

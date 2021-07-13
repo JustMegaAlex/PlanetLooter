@@ -131,3 +131,7 @@ warp_sound = noone
 // drawing compas
 compas_min_dist = 600
 compas_r = 100
+
+with instance_create_layer(x, y, layer, obj_camera) {
+	target = other.id
+}

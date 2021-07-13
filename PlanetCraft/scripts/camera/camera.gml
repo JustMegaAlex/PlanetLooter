@@ -21,3 +21,11 @@ function scr_camx(ind) {
 function scr_camy(ind) {
 	return camera_get_view_y(view_camera[ind])
 }
+
+function scr_camx_cent(ind) {
+	return camera_get_view_x(view_camera[ind]) + scr_camw(ind) * 0.5
+}
+
+function scr_camy_cent(ind) {
+	return camera_get_view_y(view_camera[ind]) + scr_camh(ind) * 0.5
+}

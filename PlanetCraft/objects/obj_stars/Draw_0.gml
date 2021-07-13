@@ -1,6 +1,6 @@
 
-x_draw_stars = x_draw_stars_start + (obj_looter.x - x_ship_st) * stars_parallax
-y_draw_stars = y_draw_stars_start + (obj_looter.y - y_ship_st) * stars_parallax
+x_draw_stars = x_draw_stars_start + (scr_camx_cent(0) - x_ship_st) * stars_parallax
+y_draw_stars = y_draw_stars_start + (scr_camy_cent(0) - y_ship_st) * stars_parallax
 
 
 //draw

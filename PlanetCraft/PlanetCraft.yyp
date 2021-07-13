@@ -1,5 +1,6 @@
 {
   "resources": [
+    {"id":{"name":"obj_camera","path":"objects/obj_camera/obj_camera.yy",},"order":14,},
     {"id":{"name":"fnt","path":"fonts/fnt/fnt.yy",},"order":0,},
     {"id":{"name":"obj_planet_mask","path":"objects/obj_planet_mask/obj_planet_mask.yy",},"order":10,},
     {"id":{"name":"obj_planet","path":"objects/obj_planet/obj_planet.yy",},"order":0,},
