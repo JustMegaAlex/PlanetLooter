@@ -134,6 +134,8 @@ warp_sound = noone
 compas_min_dist = 600
 compas_r = 100
 
-with instance_create_layer(x, y, layer, obj_camera) {
-	target = other.id
+if not instance_exists(obj_camera) {
+	with instance_create_layer(x, y, layer, obj_camera)
+		obj_camera.target = id
 }
+
