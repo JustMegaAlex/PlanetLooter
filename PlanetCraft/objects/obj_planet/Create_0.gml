@@ -13,6 +13,7 @@ function generate_terrain(tmesh) {
 	var size = array_length(tmesh)
 	var gradsize = perlin_grads_cell_size
 	var pmesh = perlin_mesh(size, size, gradsize, gradsize)
+	temp_mesh = pmesh
 	var resources = perlin_mesh(size, size, gradsize, gradsize)
 	for (var i = 1; i < size - 1; ++i) {
 	    for (var j = 1; j < size - 1; ++j) {
@@ -37,8 +38,6 @@ function modify_cell_value(val, i, j) {
 	if r == 0
 		return 1
 	var add = power(1/r, 2)
-	if add > 0.5
-		test = true
 	return val + add
 }
 
@@ -134,13 +133,13 @@ function collapse_mesh_cells(mesh, bound_value) {
 
 visible = true
 size = 20
-core_size = 8
-perlin_grads_cell_size = 3
+core_size = 4
+perlin_grads_cell_size = 4
 radius = global.grid_size * size * 0.5
 x0 = x - radius
 y0 = y - radius
 terrain_mesh = array2d(size+2, size+2, noone)
-fill_factor = 0.5
+fill_factor = 0.45
 terrain_mesh = generate_terrain(terrain_mesh)
 
 //terrain_mesh = [

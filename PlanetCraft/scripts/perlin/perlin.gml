@@ -11,7 +11,10 @@ function perlin_mesh(w, h, grad_cell_w, grad_cell_h){
 	for (var i = 0; i < grads_w; ++i) {
 	    for (var j = 0; j < grads_h; ++j) {
 			// (-1, 1)
-		    grads[i][j] = new Point(random(1) - 1, random(1) - 1)
+			//var dir = random(360)
+			//grads[i][j] = new Point(lengthdir_x(1, dir), lengthdir_y(1, dir))
+		    grads[i][j] = new Point(random(1) - 0.5, random(1) - 0.5)
+			//grads[i][j] = new Point(1, 1)
 		}
 	}
 
@@ -26,7 +29,7 @@ function perlin_mesh(w, h, grad_cell_w, grad_cell_h){
 			var g11 = grads[gradi + 1][gradj + 1]
 			var ifract = (i mod grad_cell_w) / grad_cell_w
 			var jfract = (j mod grad_cell_h) / grad_cell_h
-		    mesh[i][j] = compute_influence(ifract, jfract, g00, g01, g10, g11)
+		    mesh[i][j] = compute_influence_ease(ifract, jfract, g00, g01, g10, g11)
 		}
 	}
 	mesh = normalize_mesh(mesh, 1)
@@ -35,11 +38,27 @@ function perlin_mesh(w, h, grad_cell_w, grad_cell_h){
 
 function compute_influence(ifract, jfract, g00, g01, g10, g11) {
 	// actually computes the value for a cell
-	var f00 = g00.x_ * ease(ifract) + g00.y_ * ease(jfract)
-	var f01 = g01.x_ * ease(1-ifract) - g01.y_ * ease(jfract)
-	var f10 = g10.x_ * ifract + g10.y_ * ease(1-jfract)
-	var f11 = g11.x_ * ease(1-ifract) - g11.y_ * ease(1-jfract)
-	var res = (f00 + f10 + f01 + f11) * 0.25
+	// (0.05, 0.05)
+	var f00 = g00.x_ * (ifract) + g00.y_ * (jfract) // -0.05
+	var f01 = g01.x_ * (ifract) + g01.y_ * (jfract-1) // 0.95
+	var f10 = g10.x_ * (ifract-1) + g10.y_ * (jfract) // -0.95
+	var f11 = g11.x_ * (ifract-1) + g11.y_ * (jfract-1) // 0/95
+	var xavrg0 = f00 * (1 - ifract) + f10 * ifract
+	var xavrg1 = f01 * (1 - ifract) + f11 * ifract // 1 + 0.95 + 1 * 0.05 = 1
+	var res = xavrg0 * (1 - jfract) + xavrg1 * jfract // 0 * 1 + 1 * 0
+	return res
+}
+
+function compute_influence_ease(ifract, jfract, g00, g01, g10, g11) {
+	// actually computes the value for a cell
+	// (0, 0)
+	var f00 = g00.x_ * (ifract) + g00.y_ * (jfract)
+	var f01 = g01.x_ * (ifract) + g01.y_ * (jfract-1)
+	var f10 = g10.x_ * (ifract-1) + g10.y_ * (jfract)
+	var f11 = g11.x_ * (ifract-1) + g11.y_ * (jfract-1)
+	var xavrg0 = f00 * ease(1 - ifract) + f10 * ease(ifract)
+	var xavrg1 = f01 * ease(1 - ifract) + f11 * ease(ifract)
+	var res = xavrg0 * ease(1 - jfract) + xavrg1 * ease(jfract)
 	return res
 }
 
