@@ -9,6 +9,12 @@ enum Resource {
 	types_number
 }
 
+function ResourceData(type, ammount, tile_index) constructor {
+	self.type = type
+	self.ammount = ammount
+	self.tile_index = tile_index
+}
+
 function generate_terrain(tmesh) {
 	var size = array_length(tmesh)
 	var gradsize = perlin_grads_cell_size
@@ -21,8 +27,8 @@ function generate_terrain(tmesh) {
 			var terrain_type = get_cell_type(modified_val)
 			if terrain_type == noone
 				continue
-			var resource_type = get_resource_type(resources[i][j])
-			tmesh[@ i][@ j] = terrain_add(i, j, terrain_type, resource_type)
+			var rdata = get_resource_data_by_mesh(resources[i][j])
+			tmesh[@ i][@ j] = terrain_add(i, j, terrain_type, rdata)
 		}
 	}
 	return tmesh
@@ -47,27 +53,54 @@ function get_cell_type(val) {
 	return noone
 }
 
-function get_resource_type(val) {
-	if val >= 0.75
-		return Resource.organic
-	if val >= 0.5
-		return Resource.ore
-	return Resource.empty
+_resource_data = [
+	[0.2, Resource.empty, 0, 0],
+	[0.4, Resource.ore, 2, 1],
+	[0.6, Resource.ore, 6, 2],
+	[1, Resource.ore, 15, 3],
+]
+
+function get_resource_data_by_mesh(val) {
+	for (var i = 0; i < array_length(_resource_data); ++i) {
+		var data = _resource_data[i]
+		var min_mesh_val = data[0]
+		var type = data[1]
+		var max_ammount = data[2]
+		var tile_index = data[3]
+	    if val <= min_mesh_val {
+			var ammount = round(val/min_mesh_val * max_ammount)
+			return new ResourceData(type, ammount, tile_index)
+		}
+	}
+	throw " :get_resource_data_by_mesh: input error val = " + string(val)
+
 }
 
-function terrain_add(i, j, terrain_type, resource_type) {
+function get_resource_tile_index_by_ammount(ammount) {
+	for (var i = 0; i < array_length(_resource_data); ++i) {
+		var data = _resource_data[i]
+		var max_ammount = data[2]
+	    if ammount <= max_ammount {
+			var tile_index = data[3]
+			return tile_index
+		}
+	}
+}
+
+function terrain_add(i, j, terrain_type, resdata) {
 	var inst = instance_create_layer(0, 0, layer, terrain_type)
 	inst.x = gridx(i-1) + x0
 	inst.y = gridy(j-1) + y0
 	inst.i = i
 	inst.j = j
 	inst.planet_inst = id
-	inst.set_resource_type(resource_type)
+	inst.resource_data = resdata
 	return inst
 }
 
 function terrain_remove(i, j) {
 	terrain_mesh[i][j] = noone
+	tilemap_set(tile_map_resources_id, 0, i, j)
 	self.tiles_redraw_region(i - 1, j - 1, 2, 2)
 }
 
@@ -103,10 +136,23 @@ function tiles_redraw_region(i, j, ni, nj) {
 	}
 }
 
+function tiles_redraw_resource_tile(i, j) {
+	var ammount = terrain_mesh[i][j].resource_data.ammount
+	var rdata = get_resource_tile_index_by_ammount(ammount)
+	tilemap_set(tile_map_resources_id, rdata, i, j)
+}
+
 function _draw_tile(i, j, burned) {
+	// terrain
 	var tile_index = self.compute_tile_index(i, j) + burned * 16
 	var tdata = tile_index | 0 | 0
 	tilemap_set(tile_map_id, tdata, i, j)
+	// resources
+	if terrain_mesh[i][j] {
+		var r_tile_index = terrain_mesh[i][j].resource_data.tile_index
+		var r_tdata = r_tile_index | 0 | 0
+		tilemap_set(tile_map_resources_id, r_tdata, i, j)
+	}
 }
 
 function compute_tile_index(i, j) {
@@ -133,13 +179,16 @@ function collapse_mesh_cells(mesh, bound_value) {
 
 visible = true
 size = 20
-core_size = 4
-perlin_grads_cell_size = 4
 radius = global.grid_size * size * 0.5
 x0 = x - radius
 y0 = y - radius
-terrain_mesh = array2d(size+2, size+2, noone)
+
+// gen terrain
 fill_factor = 0.45
+core_size = 4
+perlin_grads_cell_size = 4
+terrain_mesh = array2d(size+2, size+2, noone)
+resource_mesh = array2d(size+2, size+2, noone)
 terrain_mesh = generate_terrain(terrain_mesh)
 
 //terrain_mesh = [
@@ -153,11 +202,17 @@ terrain_mesh = generate_terrain(terrain_mesh)
 //// tiles
 tm_size = size + 1
 tile_map_id = layer_tilemap_create("tiles",
-								left_coord() - global.grid_size * 0.5,
-								top_coord() - global.grid_size * 0.5,
-								ts_planet_ground,
-								tm_size,
-								tm_size)
+									left_coord() - global.grid_size * 0.5,
+									top_coord() - global.grid_size * 0.5,
+									ts_planet_ground,
+									tm_size,
+									tm_size)
+tile_map_resources_id = layer_tilemap_create("tiles_resources",
+											left_coord() - global.grid_size,
+											top_coord() - global.grid_size,
+											ts_planet_resources,
+											tm_size,
+											tm_size)
 // bgr tiles
 var bgr_tile_size = 16
 var bgr_size = global.grid_size / bgr_tile_size * tm_size
@@ -176,6 +231,7 @@ for (var i = 0; i < bgr_size; ++i) {
 	farbgr_mesh[i][0] = 0
 	farbgr_mesh[0][i] = 0
 }
+
 bgr_mesh = collapse_mesh_cells(bgr_mesh, 0.35)
 autotiler_bgr = new Autotiling("tiles_bgr",
 								left_coord(),

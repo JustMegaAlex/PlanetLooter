@@ -67,9 +67,10 @@
   "layers": [
     {"visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"default","resourceVersion":"1.0","name":"efd95043-a8fb-4049-8d84-90d003bcaffd","tags":[],"resourceType":"GMImageLayer",},
   ],
+  "nineSlice": null,
   "parent": {
-    "name": "Sprites",
-    "path": "folders/Sprites.yy",
+    "name": "tiles",
+    "path": "folders/Sprites/tiles.yy",
   },
   "resourceVersion": "1.0",
   "name": "spr_planet_ground_tiles",
