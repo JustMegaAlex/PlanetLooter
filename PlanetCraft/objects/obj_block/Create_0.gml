@@ -11,6 +11,8 @@ function set_hit(dmg) {
 	if resource_data.ammount {
 		var collectable = instance_create_layer(x, y, layer, obj_collectable)
 		collectable.set_resource_type(resource_data.type)
+		collectable.dir = point_direction(x, y, obj_looter.x, obj_looter.y) + random_range(-30, 30)
+		collectable.sp = 0.5
 		resource_data.ammount--
 		planet_inst.tiles_redraw_resource_tile(i, j)
 	}

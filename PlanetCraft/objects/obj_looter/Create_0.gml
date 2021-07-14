@@ -85,7 +85,7 @@ speed_upgr_cost = 2
 repair_cost = 1
 
 is_moving_object = true
-sp = 20
+sp = 5
 hsp = 0
 vsp = 0
 hsp_to = 0
@@ -104,8 +104,6 @@ knock_back_force = 4.5
 
 image_speed = 0
 
-shoot_h = 0
-shoot_v = 0
 shoot_dir = 0
 reload_time = 10
 reloading = 0
@@ -117,7 +115,7 @@ gravity_dist = 300
 gravity_min_dist = 8
 
 resources = array_create(Resource.types_number, 10)
-resource_max_ammount = 10
+resource_max_ammount = 100
 
 current_planet = noone
 

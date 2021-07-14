@@ -87,7 +87,7 @@ rmin = 800
 
 enemies_progression = [
 	// groups, [min_group_size, max_group_size]
-	[0, [2, 3]],
+	[15, [2, 3]],
 	[17, [3, 4]],
 	[22, [5, 7]],
 	[26, [5, 12]],

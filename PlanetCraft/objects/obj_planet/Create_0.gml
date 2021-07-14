@@ -54,9 +54,9 @@ function get_cell_type(val) {
 }
 
 _resource_data = [
-	[0.2, Resource.empty, 0, 0],
-	[0.4, Resource.ore, 2, 1],
-	[0.6, Resource.ore, 6, 2],
+	[0.4, Resource.empty, 0, 0],
+	[0.6, Resource.ore, 2, 1],
+	[0.8, Resource.ore, 6, 2],
 	[1, Resource.ore, 15, 3],
 ]
 
