@@ -50,6 +50,7 @@
     {"id":{"name":"spr_building_ui_item","path":"sprites/spr_building_ui_item/spr_building_ui_item.yy",},"order":0,},
     {"id":{"name":"obj_collectable","path":"objects/obj_collectable/obj_collectable.yy",},"order":5,},
     {"id":{"name":"snd_hit","path":"sounds/snd_hit/snd_hit.yy",},"order":10,},
+    {"id":{"name":"obj_debug","path":"objects/obj_debug/obj_debug.yy",},"order":17,},
     {"id":{"name":"camera","path":"scripts/camera/camera.yy",},"order":6,},
     {"id":{"name":"obj_block","path":"objects/obj_block/obj_block.yy",},"order":2,},
     {"id":{"name":"spr_looter","path":"sprites/spr_looter/spr_looter.yy",},"order":17,},

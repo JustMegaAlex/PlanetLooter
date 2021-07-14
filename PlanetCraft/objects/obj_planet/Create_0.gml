@@ -11,11 +11,13 @@ enum Resource {
 
 function generate_terrain(tmesh) {
 	var size = array_length(tmesh)
-	var pmesh = perlin_mesh(size, size)
-	var resources = perlin_mesh(size, size)
+	var gradsize = perlin_grads_cell_size
+	var pmesh = perlin_mesh(size, size, gradsize, gradsize)
+	var resources = perlin_mesh(size, size, gradsize, gradsize)
 	for (var i = 1; i < size - 1; ++i) {
 	    for (var j = 1; j < size - 1; ++j) {
-			var terrain_type = get_cell_type(pmesh[i][j])
+			var modified_val = modify_cell_value(pmesh[i][j], i, j)
+			var terrain_type = get_cell_type(modified_val)
 			if terrain_type == noone
 				continue
 			var resource_type = get_resource_type(resources[i][j])
@@ -23,6 +25,21 @@ function generate_terrain(tmesh) {
 		}
 	}
 	return tmesh
+}
+
+function modify_cell_value(val, i, j) {
+	var rad = size / 2
+	var ri = abs(rad - i)
+	var rj = abs(rad - j)
+	var r = max(ri, rj)
+	if r > core_size
+		return val
+	if r == 0
+		return 1
+	var add = power(1/r, 2)
+	if add > 0.5
+		test = true
+	return val + add
 }
 
 function get_cell_type(val) {
@@ -115,8 +132,10 @@ function collapse_mesh_cells(mesh, bound_value) {
 }
 
 
-visible = false
+visible = true
 size = 20
+core_size = 8
+perlin_grads_cell_size = 3
 radius = global.grid_size * size * 0.5
 x0 = x - radius
 y0 = y - radius
@@ -144,7 +163,7 @@ tile_map_id = layer_tilemap_create("tiles",
 var bgr_tile_size = 16
 var bgr_size = global.grid_size / bgr_tile_size * tm_size
 bgr_size = floor(bgr_size)
-var bgr_mesh = perlin_mesh(bgr_size, bgr_size)
+var bgr_mesh = perlin_mesh(bgr_size, bgr_size, perlin_grads_cell_size, perlin_grads_cell_size)
 var farbgr_size = bgr_size - 1
 var farbgr_mesh = array2d(farbgr_size, farbgr_size, 1)
 // zero edges

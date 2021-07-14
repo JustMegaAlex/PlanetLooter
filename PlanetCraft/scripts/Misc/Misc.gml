@@ -11,6 +11,18 @@ function approach(val, to, ammount) {
 	return val + sp
 }
 
+function cycle_decrease(val, min_, max_) {
+	val--
+	var inboudns = val >= min_
+	return val * inboudns + max_ * !inboudns
+}
+
+function cycle_increase(val, min_, max_) {
+	val++
+	var inboudns = val < max_
+	return val * inboudns + min_ * !inboudns
+}
+
 function chance(p) {
 	return random(1) < p
 }

@@ -85,7 +85,7 @@ speed_upgr_cost = 2
 repair_cost = 1
 
 is_moving_object = true
-sp = 5
+sp = 20
 hsp = 0
 vsp = 0
 hsp_to = 0
