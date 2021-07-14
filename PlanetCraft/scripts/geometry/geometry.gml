@@ -9,42 +9,46 @@ function Point(_x, _y) constructor {
 }
 
 
-function Line(_xst, _yst, _xend, _yend) constructor  {
+function Line(_xst, _yst, _xend, _yend) constructor {
 	xst = _xst
 	yst = _yst
 	xend = _xend
 	yend = _yend
-	
+
 	static mult = function(m) {
 		xend = xst + (xend - xst) * m
 		yend = yst + (yend - yst) * m
 	}
-	
+
 	static set = function(_xst, _yst, _xend, _yend) {
 		xst = _xst
 		yst = _yst
 		xend = _xend
 		yend = _yend
 	}
-	
+
 	static setst = function(_xst, _yst) {
 		xst = _xst
 		yst = _yst
 	}
-	
+
 	static setend = function(_xend, _yend) {
 		xend = _xend
 		yend = _yend
 	}
-	
+
 	static draw = function() {
 		draw_line(xst, yst, xend, yend)
 	}
+
+	static get_point_on = function(m) {
+		var xx = xst + (xend - xst) * m
+		var yy = yst + (yend - yst) * m
+		return new Point(xx, yy)
+	}
 }
 
-global.INF = 1000000
-
-function line_intersection(l1, l2, segment){
+function line_intersection(l1, l2, segment) {
 	var x0, y0, x1, y1, x2, y2, x3, y3
 	x0 = l1.xst
 	y0 = l1.yst
@@ -64,21 +68,51 @@ function line_intersection(l1, l2, segment){
 	// ensure lines are not parallel
 	if vy == 0
 		if uy == 0
-			return global.INF
+			return infinity
 	if ux / uy == vx / vy
-		return global.INF
+		return infinity
 
     wx = x0 - x2
     wy = y0 - y2
     ud = vy * ux - vx * uy
-    if (ud != 0) 
-    {
+    if (ud != 0) {
         ua = (vx * wy - vy * wx) / ud
-        if (segment) 
-        {
+        if (segment) {
             ub = (ux * wy - uy * wx) / ud
             if (ua <= 0 || ua >= 1 || ub <= 0 || ub >= 1) ua = 0
         }
     }
     return ua
+}
+
+function instance_line_collision_point(x0, y0, x1, y1, inst) {
+
+	var line = new Line(x0, y0, x1, y1)
+	var btm = inst.bbox_bottom
+	var top = inst.bbox_top
+	var left = inst.bbox_left
+	var right = inst.bbox_right
+
+	// left bound
+	var bound = new Line(left, btm, left, top)
+	var m1 = line_intersection(line, bound, false)
+	// right
+	bound.set(right, btm, right, top)
+	var m2 = line_intersection(line, bound, false)
+	// bottom
+	bound.set(left, btm, right, btm)
+	var m3 = line_intersection(line, bound, false)
+	// top
+	bound.set(left, top, right, top)
+	var m4 = line_intersection(line, bound, false)
+	// ban wrong values
+	if (m1 < 0) m1 = infinity
+	if (m2 < 0) m2 = infinity
+	if (m3 < 0) m3 = infinity
+	if (m4 < 0) m4 = infinity
+	// the closest point
+	var m = min(m1, m2, m3, m4)
+	return line.get_point_on(m)
+
+	throw " :instance_line_collision_point: there is no line collision with specified instance"
 }
