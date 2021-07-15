@@ -1,17 +1,29 @@
 
 event_inherited()
 
-function produce_metal() {
-	var res = obj_looter.ore_to_metall()
-	if res != "ok"
-		ui_parent.ui_message(res, true)
+
+function Productor(resource, ui_parent) constructor {
+	self.type = resource
+	self.type_name = global.resource_names[resource]
+	self.ui_parent = ui_parent
+	action = function() {
+		var cost = variable_struct_get(global.ResourceCost, self.type_name)
+		if obj_looter.resources[cost.type] < cost.ammount {
+			var msg = "need more\n" + global.resource_names[cost.type]
+			self.ui_parent.ui_message(msg, true)
+			return 0
+		}
+		// check cargo capacity
+		var cargo_after = (obj_looter.cargo_load + 1 - cost.ammount)
+		if cargo_after > obj_looter.cargo {
+			self.ui_parent.ui_message("cargo full", true)
+			return 0
+		}
+		obj_looter.resources[cost.type] -= cost.ammount
+		obj_looter.resources[self.type]++	
+		obj_looter.cargo_load = cargo_after
+	}
 }
 
-function produce_fuel() {
-	var res = obj_looter.organic_to_fuel()
-	if res != "ok"
-		ui_parent.ui_message(res, true)
-}
-
-self.add_item(-1, "produce\nmetal", self.produce_metal)
-self.add_item(-1, "produce\nfuel", self.produce_fuel)
+self.add_item(-1, "produce\nmetal", new Productor(Resource.metall, id))
+self.add_item(-1, "produce\nfuel", new Productor(Resource.fuel, id))

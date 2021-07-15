@@ -11,14 +11,15 @@ function set_hit(weapon) {
 }
 
 function add_resource(type, ammount) {
-	if (resources[type] + ammount) > resource_max_ammount
-		show_error(" :add_resource: resource type ammount > max ammount", false)
+	if cargo_load >= cargo
+		show_error(" :add_resource: cargo_load > cargo", false)
 	resources[type] += ammount
 	audio_play_sound(snd_pick, 0, false)
 }
 
-function check_resource_full(type) {
-	return resources[type] >= resource_max_ammount
+
+function check_cargo_full(type) {
+	return cargo_load >= cargo
 }
 
 //// production
@@ -133,8 +134,7 @@ gravy = 0
 gravity_dist = 300
 gravity_min_dist = 8
 
-resources = array_create(Resource.types_number, 100)
-resource_max_ammount = 100
+resources = array_create(Resource.types_number, 10)
 
 current_planet = noone
 
@@ -145,8 +145,10 @@ warping = false
 warp_sound = noone
 
 // systems
-hp = 7
+hp_max = 8
+hp = hp_max
 cargo = 100
+cargo_load = array_sum(resources)
 tank = 100
 core_power = 5
 upgrades_count = 0

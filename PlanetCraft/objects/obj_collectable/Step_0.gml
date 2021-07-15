@@ -1,7 +1,7 @@
 
 var dist = point_distance(x, y, obj_looter.x, obj_looter.y)
 if dist < min_dist {
-	if not obj_looter.check_resource_full(resource_type) {
+	if not obj_looter.check_cargo_full(resource_type) {
 		obj_looter.add_resource(resource_type, 1)
 		instance_destroy()	
 	}

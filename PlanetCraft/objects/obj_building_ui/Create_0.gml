@@ -1,9 +1,9 @@
 
-function add_item(spr, text, upgrader) {
+function add_item(spr, text, action_struct) {
 	var item = instance_create_layer(x, y, layer, obj_ui_item)
 	item.ui_sprite = spr
 	item.text = text
-	item.upgrader = upgrader
+	item.action_struct = action_struct
 	array_push(items, item)
 	items_number++
 }

@@ -17,6 +17,14 @@ function cycle_decrease(val, min_, max_) {
 	return val * inboudns + max_ * !inboudns
 }
 
+function array_sum(arr) {
+	var res = 0
+	for (var i = 0; i < array_length(resources); ++i) {
+	    res += resources[i]
+	}
+	return res
+}
+
 function cycle_increase(val, min_, max_) {
 	val++
 	var inboudns = val < max_

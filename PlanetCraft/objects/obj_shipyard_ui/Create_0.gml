@@ -22,7 +22,7 @@ function upgrade_speed() {
 function Upgrader(sys, ui_parent) constructor {
 	self.sys = sys
 	self.ui_parent = ui_parent
-	upgrade = function() {
+	action = function() {
 		var res = obj_looter.upgrade_system(self.sys)
 		if res != "ok"
 			self.ui_parent.ui_message(res, true)

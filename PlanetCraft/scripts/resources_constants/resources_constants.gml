@@ -17,3 +17,9 @@ global.resource_names[Resource.metall] = "metall"
 global.resource_names[Resource.fuel] = "fuel"
 global.resource_names[Resource.part] = "part"
 
+
+global.ResourceCost = {
+	metall: {type: Resource.ore, ammount: 3},
+	fuel: {type: Resource.organic, ammount: 2},
+	part: {type: Resource.metall, ammount: 2},
+}
