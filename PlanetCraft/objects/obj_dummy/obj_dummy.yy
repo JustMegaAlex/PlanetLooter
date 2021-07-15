@@ -29,8 +29,8 @@
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "Objects",
-    "path": "folders/Objects.yy",
+    "name": "ships",
+    "path": "folders/Objects/ships.yy",
   },
   "resourceVersion": "1.0",
   "name": "obj_dummy",

@@ -26,11 +26,9 @@ close_dist = 150
 target = noone
 
 shoot_dir = 0
-reload_time = 30
 reloading = 0
-knock_back_force = 5
+weapon.reload_time = 20
 
 hp = 7
-dmg = 1
 
 side = Sides.theirs

@@ -100,12 +100,10 @@ move_h = 0
 move_v = 0
 input_dir = 0
 dir = 0
-knock_back_force = 4.5
 
 image_speed = 0
 
 shoot_dir = 0
-reload_time = 10
 reloading = 0
 
 grav = 0.05
@@ -121,12 +119,12 @@ current_planet = noone
 
 side = Sides.ours
 
-hp = 7
-dmg = 1
-
 // warping
 warping = false
 warp_sound = noone
+
+// systems
+hp = 7
 
 // drawing compas
 compas_min_dist = 600

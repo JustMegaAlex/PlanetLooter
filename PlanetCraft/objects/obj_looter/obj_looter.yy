@@ -8,8 +8,8 @@
   "spriteMaskId": null,
   "persistent": false,
   "parentObjectId": {
-    "name": "obj_solid",
-    "path": "objects/obj_solid/obj_solid.yy",
+    "name": "obj_ship_entity",
+    "path": "objects/obj_ship_entity/obj_ship_entity.yy",
   },
   "physicsObject": false,
   "physicsSensor": false,
@@ -34,8 +34,8 @@
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "Objects",
-    "path": "folders/Objects.yy",
+    "name": "ships",
+    "path": "folders/Objects/ships.yy",
   },
   "resourceVersion": "1.0",
   "name": "obj_looter",
