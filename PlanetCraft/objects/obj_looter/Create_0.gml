@@ -2,8 +2,8 @@
 event_inherited()
 
 
-function set_hit(dmg) {
-	hp -= dmg
+function set_hit(weapon) {
+	hp -= weapon.dmg
 	if hp <=0 {
 		global.game_over = true
 		image_index = 1
@@ -67,13 +67,34 @@ function upgrade_repair() {
 	return "need more\nmetal"
 }
 
-function upgrade_speed() {
-	if resources[Resource.part] >= speed_upgr_cost {
-		sp += 2
-		resources[Resource.part] -= speed_upgr_cost
-		return "ok"
+function upgrade_system(sys) {
+	if upgrades_count == core_power
+		return "core power\n depleted"
+	var cur_level = variable_struct_get(Upgrades, sys)
+	var available = variable_struct_get(AvailableUpgrades, sys)
+	if cur_level == array_length(available) - 1
+		return "  system\nfully upgraded"
+	var up_level = cur_level + 1
+	var next = available[up_level]
+	var costarr = next.cost
+	// check resources are enough
+	for (var i = 0; i < array_length(costarr); ++i) {
+		var restype = costarr[i][0]
+		var resammount = costarr[i][1]
+		if resources[restype] < resammount
+			return "need more\n" + global.resource_names[type]
 	}
-	return "need more\nparts"
+	// spend resoures
+	for (var i = 0; i < array_length(costarr); ++i) {
+		var restype = costarr[i][0]
+		var resammount = costarr[i][1]
+		resources[restype] -= resammount
+	}
+	var val = available[up_level].value
+	upgrades_count++
+	variable_struct_set(Upgrades, sys, up_level)
+	variable_instance_set(id, sys, val)
+	return "ok"
 }
 
 //// production
@@ -112,7 +133,7 @@ gravy = 0
 gravity_dist = 300
 gravity_min_dist = 8
 
-resources = array_create(Resource.types_number, 10)
+resources = array_create(Resource.types_number, 100)
 resource_max_ammount = 100
 
 current_planet = noone
@@ -125,6 +146,35 @@ warp_sound = noone
 
 // systems
 hp = 7
+cargo = 100
+tank = 100
+core_power = 5
+upgrades_count = 0
+AvailableUpgrades = {
+	weapon: [
+		{cost: [[Resource.part, 10]], value: {dmg: 1.5, mining: 1.15, reload_time: 8, consumption: 0.2, knock_back_force: 4.5}},
+		{cost: [[Resource.part, 10]], value: {dmg: 2, mining: 1.3, reload_time: 7.5, consumption: 0.3, knock_back_force: 4.5}},
+		{cost: [[Resource.part, 10]], value: {dmg: 2.5, mining: 1.35, reload_time: 7.5, consumption: 0.4, knock_back_force: 4.5}},
+		{cost: [[Resource.part, 10]], value: {dmg: 3.5, mining: 1.35, reload_time: 7, consumption: 0.5, knock_back_force: 4.5}},
+	],
+	cargo: [{cost:[[Resource.part, 10]], value: 130},
+			{cost:[[Resource.part, 10]], value: 155},
+			{cost:[[Resource.part, 10]], value: 175}, ],
+	tank: [{cost:[[Resource.part, 10]], value: 140},
+		   {cost:[[Resource.part, 10]], value: 180},
+		   {cost:[[Resource.part, 10]], value: 220}, ],
+	sp: [{cost:[[Resource.part, 10]], value: 6},
+		   {cost:[[Resource.part, 10]], value: 7},
+		   {cost:[[Resource.part, 10]], value: 8},
+		   {cost:[[Resource.part, 10]], value: 9},
+		   {cost:[[Resource.part, 10]], value: 10}, ],
+}
+Upgrades = {
+	weapon: -1,
+	cargo: -1,
+	tank: -1,
+	sp: -1,
+}
 
 // drawing compas
 compas_min_dist = 600

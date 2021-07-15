@@ -19,8 +19,19 @@ function upgrade_speed() {
 		ui_parent.ui_message(res, true)
 }
 
+function Upgrader(sys, ui_parent) constructor {
+	self.sys = sys
+	self.ui_parent = ui_parent
+	upgrade = function() {
+		var res = obj_looter.upgrade_system(self.sys)
+		if res != "ok"
+			self.ui_parent.ui_message(res, true)
+	}
+}
 
 
-self.add_item(-1, "upgrade\nweapon", self.upgrade_weapon)
-self.add_item(-1, "repair", self.upgrade_repair)
-self.add_item(-1, "upgrade\nspeed", self.upgrade_speed)
+
+self.add_item(-1, "upgrade\nweapon", new Upgrader("weapon", id))
+self.add_item(-1, "upgrade\nsp", new Upgrader("sp", id))
+self.add_item(-1, "upgrade\ncargo", new Upgrader("cargo", id))
+self.add_item(-1, "upgrade\ntank", new Upgrader("tank", id))

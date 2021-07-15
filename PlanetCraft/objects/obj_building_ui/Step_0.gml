@@ -13,7 +13,7 @@ if mouse_check_button_pressed(mb_left) {
 	mouse_pressed = true
 	override_displaying = 0
 	if mouse_over {
-		mouse_over.action_method()
+		mouse_over.upgrader.upgrade()
 		audio_play_sound(snd_button, 0, false)
 	} else {
 		instance_destroy()

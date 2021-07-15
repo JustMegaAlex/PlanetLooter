@@ -1,13 +1,4 @@
 
-enum Resource {
-	empty,
-	ore,
-	organic,
-	metall,
-	fuel,
-	part,
-	types_number
-}
 
 function ResourceData(type, ammount, tile_index) constructor {
 	self.type = type

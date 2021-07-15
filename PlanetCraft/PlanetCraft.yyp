@@ -56,6 +56,7 @@
     {"id":{"name":"obj_debug","path":"objects/obj_debug/obj_debug.yy",},"order":17,},
     {"id":{"name":"camera","path":"scripts/camera/camera.yy",},"order":6,},
     {"id":{"name":"obj_block","path":"objects/obj_block/obj_block.yy",},"order":2,},
+    {"id":{"name":"resources_constants","path":"scripts/resources_constants/resources_constants.yy",},"order":10,},
     {"id":{"name":"ts_planet_resources","path":"tilesets/ts_planet_resources/ts_planet_resources.yy",},"order":3,},
     {"id":{"name":"spr_looter","path":"sprites/spr_looter/spr_looter.yy",},"order":17,},
     {"id":{"name":"obj_shipyard_ui","path":"objects/obj_shipyard_ui/obj_shipyard_ui.yy",},"order":4,},
