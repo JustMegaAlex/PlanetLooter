@@ -1,6 +1,6 @@
 
-function set_hit(dmg) {
-	hp -= dmg
+function set_hit(weapon) {
+	hp -= weapon.dmg
 	if hp <=0 {
 		instance_destroy()
 	}

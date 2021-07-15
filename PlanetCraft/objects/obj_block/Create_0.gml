@@ -8,8 +8,8 @@ function set_resource_data(rdata) {
 }
 
 
-function set_hit(dmg) {
-	hp -= dmg
+function set_hit(weapon) {
+	hp -= weapon.mining
 	if resource_data.ammount {
 		resource_fract_ammount = resource_start_ammount * hp / hp_start
 		var _ammount = ceil(resource_fract_ammount)
