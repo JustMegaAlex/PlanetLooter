@@ -15,6 +15,7 @@ if obj_debug.show_planets_data {
 	j0 = max(0, j0)
 	i1 = min(w, i1)
 	j1 = min(h, j1)
+	var s
 	for(i=i0;i<i1; i+=1) {
 		for(j=j0; j<j1; j+=1) {
 			if arr[i][j] == noone
@@ -23,8 +24,9 @@ if obj_debug.show_planets_data {
 				draw_circle_color(x0 + global.grid_size * (i-1),
 							 y0 + global.grid_size * (j-1),
 							 4, c_blue, c_blue, false)
+			s = string(arr[i][j].resource_data.ammount) + " " + string(arr[i][j].hp)
 		    draw_text_custom(x0 + global.grid_size * (i-1),
-							 y0 + global.grid_size * (j-1), string(arr[i][j].resource_data.ammount) + " " + string(arr[i][j].resource_data.tile_index), fnt_small, -1, -1)
+							 y0 + global.grid_size * (j-1), s, fnt_small, -1, -1)
 		}
 	}
 }

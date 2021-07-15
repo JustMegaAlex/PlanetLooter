@@ -131,7 +131,7 @@ function terrain_add(i, j, terrain_type, resdata) {
 	inst.i = i
 	inst.j = j
 	inst.planet_inst = id
-	inst.resource_data = resdata
+	inst.set_resource_data(resdata)
 	return inst
 }
 
