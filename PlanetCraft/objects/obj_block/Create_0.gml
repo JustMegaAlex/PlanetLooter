@@ -14,6 +14,10 @@ function set_hit(dmg) {
 		collectable.dir = point_direction(x, y, obj_looter.x, obj_looter.y) + random_range(-30, 30)
 		collectable.sp = 0.5
 		resource_data.ammount--
+		if !resource_data.ammount {
+			resource_data.type = Resource.empty
+			resource_data.tile_index = 0
+		}
 		planet_inst.tiles_redraw_resource_tile(i, j)
 	}
 	hp -= dmg

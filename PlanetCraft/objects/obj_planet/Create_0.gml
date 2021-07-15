@@ -19,7 +19,6 @@ function generate_terrain(tmesh) {
 	var size = array_length(tmesh)
 	var gradsize = perlin_grads_cell_size
 	var pmesh = perlin_mesh(size, size, gradsize, gradsize)
-	temp_mesh = pmesh
 	var resources = perlin_mesh(size, size, gradsize, gradsize)
 	for (var i = 1; i < size - 1; ++i) {
 	    for (var j = 1; j < size - 1; ++j) {
@@ -27,7 +26,13 @@ function generate_terrain(tmesh) {
 			var terrain_type = get_cell_type(modified_val)
 			if terrain_type == noone
 				continue
+			
 			var rdata = get_resource_data_by_mesh(resources[i][j])
+			// make more organic on planet surface
+			if rdata.type != Resource.empty {
+				var modified_val_r = modify_resource_value(resources[i][j], i, j, rdata.type)
+				rdata = get_resource_data_by_mesh(modified_val_r)
+			}
 			tmesh[@ i][@ j] = terrain_add(i, j, terrain_type, rdata)
 		}
 	}
@@ -47,6 +52,31 @@ function modify_cell_value(val, i, j) {
 	return val + add
 }
 
+function modify_resource_value(val, i, j, type) {
+	// shifts resource mesh val
+	// so on planet surface there will be more organic
+	// -0.3, -0.25, 0.2, 0.2, 0.25, 0.3
+	var add = 0
+	var d = depth_at(i, j)
+	if (d < organic_layer_depth) and (type == Resource.ore)
+		var add = -0.3 + d * (0.05)
+	else if (d >= organic_layer_depth) and (type == Resource.organic)
+		var add = 0.2 + d * (0.05)
+	add = clamp(add, -0.3, 0.3)
+	return val + add
+}
+
+function depth_at(i, j) {
+	// r = 10
+	//( 3, 16) -> 3
+	//( 3, 18) -> 2
+	var rad = size / 2
+	var idepth = (i < rad) ? i : (rad - (i mod rad)) // 3
+	var jdepth = (j < rad) ? j : (rad - (j mod rad)) // 4
+	var d = min(idepth, jdepth)
+	return d
+}
+
 function get_cell_type(val) {
 	if val >= fill_factor
 		return obj_block
@@ -55,10 +85,10 @@ function get_cell_type(val) {
 
 _resource_data = [
 	// [_min_mesh_val, type, max_ammount, tile_index]
-	[0.4, Resource.empty, 0, 0],
-	[0.45, Resource.organic, 2, 4],
-	[0.5, Resource.organic, 4, 5],
-	[0.6, Resource.organic, 8, 6],
+	[0.3, Resource.empty, 0.01, 0],
+	[0.43, Resource.organic, 2, 4],
+	[0.47, Resource.organic, 4, 5],
+	[0.50, Resource.organic, 8, 6],
 	[0.7, Resource.ore, 2, 1],
 	[0.8, Resource.ore, 6, 2],
 	[1, Resource.ore, 15, 3],
@@ -80,9 +110,12 @@ function get_resource_data_by_mesh(val) {
 
 }
 
-function get_resource_tile_index_by_ammount(ammount) {
+function get_resource_tile_index_by_ammount(ammount, type) {
 	for (var i = 0; i < array_length(_resource_data); ++i) {
 		var data = _resource_data[i]
+		var _type = data[1]
+		if type != _type
+			continue
 		var max_ammount = data[2]
 	    if ammount <= max_ammount {
 			var tile_index = data[3]
@@ -142,7 +175,8 @@ function tiles_redraw_region(i, j, ni, nj) {
 
 function tiles_redraw_resource_tile(i, j) {
 	var ammount = terrain_mesh[i][j].resource_data.ammount
-	var rdata = get_resource_tile_index_by_ammount(ammount)
+	var type = terrain_mesh[i][j].resource_data.type
+	var rdata = get_resource_tile_index_by_ammount(ammount, type)
 	tilemap_set(tile_map_resources_id, rdata, i, j)
 }
 
@@ -190,6 +224,7 @@ y0 = y - radius
 // gen terrain
 fill_factor = 0.45
 core_size = 4
+organic_layer_depth = 3
 perlin_grads_cell_size = 4
 terrain_mesh = array2d(size+2, size+2, noone)
 resource_mesh = array2d(size+2, size+2, noone)
