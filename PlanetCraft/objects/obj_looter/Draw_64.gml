@@ -2,11 +2,13 @@
 scr_debug_show_var("hp", string(hp))
 scr_debug_show_var("damage", string(weapon.dmg))
 scr_debug_show_var("speed", string(sp))
+scr_debug_show_var("cargo", string(cargo))
 scr_debug_show_var("ore", string(resources[Resource.ore]))
 scr_debug_show_var("organic", string(resources[Resource.organic]))
 scr_debug_show_var("fuel", string(resources[Resource.fuel]))
 scr_debug_show_var("metal", string(resources[Resource.metall]))
 scr_debug_show_var("parts", string(resources[Resource.part]))
+scr_debug_show_var("cargo_load", string(cargo_load))
 
 
 //scr_debug_show_var("input dir", input_dir)

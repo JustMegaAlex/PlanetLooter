@@ -14,6 +14,7 @@ function add_resource(type, ammount) {
 	if cargo_load >= cargo
 		show_error(" :add_resource: cargo_load > cargo", false)
 	resources[type] += ammount
+	cargo_load++
 	audio_play_sound(snd_pick, 0, false)
 }
 
@@ -22,33 +23,6 @@ function check_cargo_full(type) {
 	return cargo_load >= cargo
 }
 
-//// production
-function ore_to_metall() {
-	if resources[Resource.ore] >= ore_to_metall_cost {
-		resources[Resource.metall] += 1
-		resources[Resource.ore] -= ore_to_metall_cost
-		return "ok"
-	}
-	return "need more\n   ore"
-}
-
-function organic_to_fuel() {
-	if resources[Resource.organic] >= organic_to_fuel_cost {
-		resources[Resource.fuel] += 1
-		resources[Resource.organic] -= organic_to_fuel_cost
-		return "ok"
-	}
-	return "need more\norganic"
-}
-
-function produce_part() {
-	if resources[Resource.metall] >= metall_to_part_cost {
-		resources[Resource.part] += 1
-		resources[Resource.metall] -= metall_to_part_cost
-		return "ok"
-	}
-	return "need more\nmetall"
-}
 
 function upgrade_weapon() {
 	if resources[Resource.part] >= weapon_upgr_part_cost {
@@ -83,7 +57,7 @@ function upgrade_system(sys) {
 		var restype = costarr[i][0]
 		var resammount = costarr[i][1]
 		if resources[restype] < resammount
-			return "need more\n" + global.resource_names[type]
+			return "need more\n" + global.resource_names[restype]
 	}
 	// spend resoures
 	for (var i = 0; i < array_length(costarr); ++i) {
