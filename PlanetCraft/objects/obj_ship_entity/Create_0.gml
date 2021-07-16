@@ -17,3 +17,4 @@ weapon = {
 }
 
 sp = {normal: 5, cruise: 10, consumption: 0.005}
+bullet_sprite = spr_bullet

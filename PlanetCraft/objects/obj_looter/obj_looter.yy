@@ -6,7 +6,7 @@
   "solid": false,
   "visible": true,
   "spriteMaskId": null,
-  "persistent": false,
+  "persistent": true,
   "parentObjectId": {
     "name": "obj_ship_entity",
     "path": "objects/obj_ship_entity/obj_ship_entity.yy",

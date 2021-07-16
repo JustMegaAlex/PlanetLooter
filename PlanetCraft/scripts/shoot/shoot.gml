@@ -10,6 +10,7 @@ function shoot(shoot_dir, spawner) {
 		self.image_angle = shoot_dir
 		self.side = spawner.side
 		self.weapon = spawner.weapon
+		self.sprite_index = spawner.bullet_sprite
 	}
 	var snd = choose(snd_laser1, snd_laser2, snd_laser3, snd_laser4)
 	audio_play_sound(snd, 0, false)

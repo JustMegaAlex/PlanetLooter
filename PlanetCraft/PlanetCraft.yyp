@@ -39,6 +39,7 @@
     {"id":{"name":"obj_plant_ui","path":"objects/obj_plant_ui/obj_plant_ui.yy",},"order":1,},
     {"id":{"name":"obj_ship_entity","path":"objects/obj_ship_entity/obj_ship_entity.yy",},"order":3,},
     {"id":{"name":"spr_arrow","path":"sprites/spr_arrow/spr_arrow.yy",},"order":14,},
+    {"id":{"name":"spr_bullet_yellow","path":"sprites/spr_bullet_yellow/spr_bullet_yellow.yy",},"order":22,},
     {"id":{"name":"obj_ship_debris","path":"objects/obj_ship_debris/obj_ship_debris.yy",},"order":21,},
     {"id":{"name":"snd_hit2","path":"sounds/snd_hit2/snd_hit2.yy",},"order":8,},
     {"id":{"name":"choose_planet","path":"scripts/choose_planet/choose_planet.yy",},"order":8,},

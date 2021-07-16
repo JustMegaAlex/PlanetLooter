@@ -28,6 +28,7 @@ target = noone
 shoot_dir = 0
 reloading = 0
 weapon.reload_time = 20
+bullet_sprite = spr_bullet_yellow
 
 hp = 7
 
