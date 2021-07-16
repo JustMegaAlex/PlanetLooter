@@ -4,15 +4,15 @@ event_inherited()
 
 function set_hit(weapon) {
 	hp -= weapon.dmg
-	if hp <=0 {
+	if hp <= 0 {
 		global.game_over = true
 		image_index = 1
 	}
 }
 
 function add_resource(type, ammount) {
-	if cargo_load >= cargo
-		show_error(" :add_resource: cargo_load > cargo", false)
+	if (cargo_load + ammount) > cargo
+		show_error(" :add_resource: resulting cargo_load greater than cargo", false)
 	resources[type] += ammount
 	cargo_load++
 	audio_play_sound(snd_pick, 0, false)
@@ -21,6 +21,13 @@ function add_resource(type, ammount) {
 
 function check_cargo_full(type) {
 	return cargo_load >= cargo
+}
+
+function spend_resource(type, ammount) {
+	if resources[type] < ammount
+		return false
+	resources[type] -= ammount
+	return true
 }
 
 
@@ -109,6 +116,7 @@ gravity_dist = 300
 gravity_min_dist = 8
 
 resources = array_create(Resource.types_number, 10)
+resources[0] = 0
 
 current_planet = noone
 

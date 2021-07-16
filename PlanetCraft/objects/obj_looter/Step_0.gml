@@ -18,7 +18,7 @@ if not global.game_over {
 }
 
 if warping {
-	
+
 	if audio_sound_get_track_position(warp_sound) > 1.9 {
 		resources[Resource.fuel] = 0
 		obj_game.level++

@@ -2,6 +2,10 @@
 function shoot(shoot_dir, spawner) {
 	var weapon = spawner.weapon
 	reloading = weapon.reload_time
+	// spend fuel
+	if spawner.object_index == obj_looter
+		if not spawner.spend_resource(Resource.fuel, weapon.consumption)
+			return 0
 	with(instance_create_layer(x, y, layer, obj_bullet)) {
 		self.image_angle = shoot_dir
 		self.side = spawner.side
