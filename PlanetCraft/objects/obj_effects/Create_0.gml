@@ -6,13 +6,40 @@ part_sys_effects_deep = part_system_create_layer("effects_deep", false)
 
 //// projectiles
 part_projectile_explosion = part_type_create()
+part_projectile_explosion_small = part_type_create()
 var life_time = sprite_get_number(spr_projectile_explosion) * 2
-part_type_life(part_projectile_explosion,
-					life_time,
-					life_time)
-part_type_sprite(part_projectile_explosion, 
-					spr_projectile_explosion, 
-					true, true, false)
+var life_time = sprite_get_number(spr_projectile_explosion) * 2
+part_type_life(part_projectile_explosion, life_time, life_time)
+part_type_life(part_projectile_explosion_small, life_time, life_time)
+part_type_sprite(part_projectile_explosion, spr_projectile_explosion,  true, true, false)
+part_type_sprite(part_projectile_explosion_small, spr_projectile_explosion,  true, true, false)
+part_type_size(part_projectile_explosion_small, 0.5, 0.5, 0, 0)
+function explosion(xx, yy) {
+	part_particles_create(part_sys_effects,
+						xx, yy,
+						part_projectile_explosion, 1)
+}
+
+function explosion_small(xx, yy) {
+	part_particles_create(part_sys_effects,
+						xx, yy,
+						part_projectile_explosion_small, 1)
+}
+
+function create_ship_explosion(inst) {
+	with instance_create_layer(inst.x, inst.y, "Instances", obj_ship_explosion) {
+		dir = inst.dir
+		hsp = inst.hsp
+		vsp = inst.vsp
+		sprite_index = inst.sprite_index
+	}
+}
+
+
+function create_debris(xx, yy, num) {
+	repeat num
+		instance_create_layer(xx, yy, "Instances", obj_ship_debris)
+}
 
 part_hit_sparks = part_type_create()
 life_time = 15

@@ -1,5 +1,5 @@
 scr_debug_ini()
-global.DEBUG = true
+global.DEBUG = false
 
 function generate_star_system() {
 	var blocks_num = random_range(0.5, 1) * blocks_max_num
