@@ -2,6 +2,7 @@
 
 //// particle systems
 part_sys_effects = part_system_create_layer("effects", false)
+part_sys_effects_deep = part_system_create_layer("effects_deep", false)
 
 //// projectiles
 part_projectile_explosion = part_type_create()
@@ -27,4 +28,32 @@ function spark(xx, yy, dir, num) {
 	part_type_direction(part_hit_sparks, dir-30, dir+30, 0, 0)
 	part_type_orientation(part_hit_sparks, 0, 0, 0, 0, true)
 	part_particles_create(part_sys_effects, xx, yy, part_hit_sparks, num)
+}
+
+//// engine thrust
+// particles
+part_jet_long = part_type_create()
+part_jet = part_type_create()
+var life_seconds = 0.16
+var life_seconds_long = 0.25
+var life_frames = life_seconds * room_speed
+var life_frames_long = life_seconds_long * room_speed
+var size_incr = -1 / life_frames
+var size_incr_long = -1 / life_frames_long
+part_jet_step_size = sprite_get_width(spr_particle_jet) * 0.15
+
+part_type_life(part_jet, life_frames, life_frames)
+part_type_sprite(part_jet, spr_particle_jet, true, true, false)
+part_type_size(part_jet, 1, 1, size_incr, 0)
+
+part_type_life(part_jet_long, life_frames_long, life_frames_long)
+part_type_sprite(part_jet_long, spr_particle_jet, true, true, false)
+part_type_size(part_jet_long, 1, 1, size_incr_long, 0)
+
+function jet_long(xx, yy) {
+	part_particles_create(part_sys_effects_deep, xx, yy, part_jet_long, 1)
+}
+
+function jet(xx, yy) {
+	part_particles_create(part_sys_effects_deep, xx, yy, part_jet, 1)
 }

@@ -95,6 +95,17 @@ if in_cruise_mode >= 1 {
 	if !spend_resource(Resource.fuel, sp.consumption) or key_cruise_off
 		in_cruise_mode = 0
 
+	// jet effect
+	var dist = point_distance(xprev, yprev, x, y)
+	var xx, yy
+	var step = obj_effects.part_jet_step_size
+	var partnum = max(1, dist div step)
+	for (var i = 0; i < partnum; ++i) {
+	    xx = lerp(xprev, x, step * i / dist)
+		yy = lerp(yprev, y, step * i / dist)
+		obj_effects.jet_long(xx, yy)
+	}
+
 } else {
 	
 	in_cruise_mode = (in_cruise_mode + cruise_switch_sp) * key_cruise
@@ -144,6 +155,8 @@ if key_interact {
 	}
 }
 
+xprev = x
+yprev = y
 
 if scr_move_coord_contact_obj(hsp, vsp, obj_block)
 	in_cruise_mode = 0

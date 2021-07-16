@@ -30,25 +30,6 @@ function spend_resource(type, ammount) {
 	return true
 }
 
-
-function upgrade_weapon() {
-	if resources[Resource.part] >= weapon_upgr_part_cost {
-		dmg += 1
-		resources[Resource.part] -= weapon_upgr_part_cost
-		return "ok"
-	}
-	return "need more\nparts"
-}
-
-function upgrade_repair() {
-	if resources[Resource.metall] >= repair_cost {
-		hp += 1
-		resources[Resource.metall] -= repair_cost
-		return "ok"
-	}
-	return "need more\nmetal"
-}
-
 function upgrade_system(sys) {
 	if upgrades_count == core_power
 		return "core power\n depleted"
@@ -78,14 +59,6 @@ function upgrade_system(sys) {
 	variable_instance_set(id, sys, val)
 	return "ok"
 }
-
-//// production
-ore_to_metall_cost = 3
-organic_to_fuel_cost = 2
-metall_to_part_cost = 2
-weapon_upgr_part_cost = 5
-speed_upgr_cost = 2
-repair_cost = 1
 
 is_moving_object = true
 sp = {normal: 5, cruise: 10, consumption: 0.005}
