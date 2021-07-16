@@ -53,3 +53,7 @@ function draw_text_custom(xx, yy, text, font, halign, valign) {
 	draw_set_halign(prev_halign)
 	draw_set_valign(prev_valign)
 }
+
+function inst_mouse_dir(inst) {
+	return point_direction(inst.x, inst.y, mouse_x, mouse_y)
+}

@@ -7,7 +7,10 @@ if not global.game_over {
 	key_interact = keyboard_check_pressed(ord("E"))
 	key_shoot = mouse_check_button(mb_left)
 	key_warp = keyboard_check(vk_space)
-	dir = point_direction(x, y, mouse_x, mouse_y)
+	key_cruise = keyboard_check(ord("F"))
+	key_cruise_off = keyboard_check_pressed(ord("F"))
+	if in_cruise_mode < 1
+		dir = point_direction(x, y, mouse_x, mouse_y)
 } else {
 	key_left = false
 	key_right = false
@@ -34,6 +37,7 @@ if warping {
 	warping = true
 	warp_sound = audio_play_sound(snd_warp, 0, false)
 }
+
 
 //// planets
 if not current_planet {
@@ -76,21 +80,41 @@ move_h = key_right * right_free - key_left * left_free
 move_v = key_down * down_free - key_up * up_free
 var input = abs(move_h) or abs(move_v)
 
-if input {
-	input_dir = point_direction(0, 0, move_h, move_v)
-	self.set_sp_to(sp.normal, input_dir)
-	hacc = abs(lengthdir_x(acc, input_dir))
-	vacc = abs(lengthdir_y(acc, input_dir))
+
+if in_cruise_mode >= 1 {
+	cruise_dir_to = inst_mouse_dir(id)
+	var angle = angle_difference(cruise_dir_to, dir)
+	if abs(angle) <= cruise_rot_sp
+		dir = cruise_dir_to
+	else
+		dir += cruise_rot_sp * sign(angle)	
+	cruise_sp = approach(cruise_sp, sp.cruise, cruise_acc)
 	// input_h = 0 and hsp < 0 and gravx > 0
-	if abs(input_h) or !(sign(hsp) == sign(gravx))
-		hsp = approach(hsp, hsp_to, acc)
-	if abs(input_v) or !(sign(vsp) == sign(gravy))
-		vsp = approach(vsp, vsp_to, acc)
+	hsp = lengthdir_x(cruise_sp, dir)
+	vsp = lengthdir_y(cruise_sp, dir)
+	if !spend_resource(Resource.fuel, sp.consumption) or key_cruise_off
+		in_cruise_mode = 0
+
 } else {
-	if gravx == 0
-		hsp = approach(hsp, 0, decel)
-	if gravy == 0
-		vsp = approach(vsp, 0, decel)
+	
+	in_cruise_mode = (in_cruise_mode + cruise_switch_sp) * key_cruise
+		
+	if input {
+		input_dir = point_direction(0, 0, move_h, move_v)
+		self.set_sp_to(sp.normal, input_dir)
+		hacc = abs(lengthdir_x(acc, input_dir))
+		vacc = abs(lengthdir_y(acc, input_dir))
+		// input_h = 0 and hsp < 0 and gravx > 0
+		if abs(input_h) or !(sign(hsp) == sign(gravx))
+			hsp = approach(hsp, hsp_to, acc)
+		if abs(input_v) or !(sign(vsp) == sign(gravy))
+			vsp = approach(vsp, vsp_to, acc)
+	} else {
+		if gravx == 0
+			hsp = approach(hsp, 0, decel)
+		if gravy == 0
+			vsp = approach(vsp, 0, decel)
+	}
 }
 
 hsp += gravx
@@ -103,7 +127,7 @@ if (vsp > 0) and !down_free or (vsp < 0) and !up_free
 
 //// shooting
 reloading--
-if key_shoot and !reloading and !global.ui_interface_on {
+if key_shoot and !reloading and !global.ui_interface_on and (in_cruise_mode < 1) {
 	shoot_dir = point_direction(x, y, mouse_x, mouse_y)
 	shoot(shoot_dir, id)
 }
@@ -121,4 +145,5 @@ if key_interact {
 }
 
 
-scr_move_coord_contact_obj(hsp, vsp, obj_block)
+if scr_move_coord_contact_obj(hsp, vsp, obj_block)
+	in_cruise_mode = 0

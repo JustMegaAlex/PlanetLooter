@@ -24,7 +24,9 @@ function scr_move_coord_contact_obj(hsp, vsp, obj) {
 	        x -= lengthdir_x(1, reldir)
 	        y -= lengthdir_y(1, reldir)
 		}
+		return contact
 	}
+	return noone
 }
 
 function scr_move_contact_obj(sp, dir, obj) {
