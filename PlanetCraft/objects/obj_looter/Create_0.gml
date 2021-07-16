@@ -108,7 +108,7 @@ cruise_rot_sp = 0.5
 cruise_sp = 0
 
 // systems
-hp_max = 8
+hp_max = 10
 hp = hp_max
 cargo = 100
 cargo_load = array_sum(resources)

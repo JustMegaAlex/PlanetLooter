@@ -5,8 +5,8 @@
   "spriteMaskId": null,
   "persistent": false,
   "parentObjectId": {
-    "name": "obj_plant_ui",
-    "path": "objects/obj_plant_ui/obj_plant_ui.yy",
+    "name": "obj_building_ui",
+    "path": "objects/obj_building_ui/obj_building_ui.yy",
   },
   "physicsObject": false,
   "physicsSensor": false,
@@ -21,7 +21,7 @@
   "physicsKinematic": false,
   "physicsShapePoints": [],
   "eventList": [
-    {"isDnD":false,"eventNum":0,"eventType":0,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
+    {"isDnD":false,"eventNum":0,"eventType":0,"collisionObjectId":null,"parent":{"name":"obj_manufacture_ui","path":"objects/obj_manufacture_ui/obj_manufacture_ui.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
   ],
   "properties": [],
   "overriddenProperties": [],

@@ -1,24 +1,6 @@
 
 event_inherited()
 
-function upgrade_weapon() {
-	var res = obj_looter.upgrade_weapon()
-	if res != "ok"
-		ui_parent.ui_message(res, true)
-}
-
-function upgrade_repair() {
-	var res = obj_looter.upgrade_repair()
-	if res != "ok"
-		ui_parent.ui_message(res, true)
-}
-
-function upgrade_speed() {
-	var res = obj_looter.upgrade_speed()
-	if res != "ok"
-		ui_parent.ui_message(res, true)
-}
-
 function Upgrader(sys, ui_parent) constructor {
 	self.sys = sys
 	self.ui_parent = ui_parent
@@ -29,9 +11,25 @@ function Upgrader(sys, ui_parent) constructor {
 	}
 }
 
+Repairer = {
+	ui_parent: id,
+	action: function() {
+		if obj_looter.hp >= obj_looter.hp_max {
+			self.ui_parent.ui_message("hp full", true)
+			return 0
+		}
+		if obj_looter.spend_resource(Resource.part, 1) {
+			obj_looter.hp++
+			return 0	
+		}
+		self.ui_parent.ui_message("need more\n parts")
+	}
+}
+
 
 
 self.add_item(-1, "upgrade\nweapon", new Upgrader("weapon", id))
 self.add_item(-1, "upgrade\nsp", new Upgrader("sp", id))
 self.add_item(-1, "upgrade\ncargo", new Upgrader("cargo", id))
 self.add_item(-1, "upgrade\ntank", new Upgrader("tank", id))
+self.add_item(-1, "repair", Repairer)
