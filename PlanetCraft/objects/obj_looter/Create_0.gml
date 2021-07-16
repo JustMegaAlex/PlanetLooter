@@ -88,7 +88,7 @@ speed_upgr_cost = 2
 repair_cost = 1
 
 is_moving_object = true
-sp = 5
+sp = {normal: 5, cruise: 10, consumption: 0.005}
 hsp = 0
 vsp = 0
 hsp_to = 0
@@ -126,6 +126,11 @@ side = Sides.ours
 warping = false
 warp_sound = noone
 
+// cruise mode
+in_cruise_mode = 0
+cruise_switch_sp = 0.01
+cruise_acc = 1
+
 // systems
 hp_max = 8
 hp = hp_max
@@ -147,11 +152,11 @@ AvailableUpgrades = {
 	tank: [{cost:[[Resource.part, 10]], value: 140},
 		   {cost:[[Resource.part, 10]], value: 180},
 		   {cost:[[Resource.part, 10]], value: 220}, ],
-	sp: [{cost:[[Resource.part, 10]], value: 6},
-		   {cost:[[Resource.part, 10]], value: 7},
-		   {cost:[[Resource.part, 10]], value: 8},
-		   {cost:[[Resource.part, 10]], value: 9},
-		   {cost:[[Resource.part, 10]], value: 10}, ],
+	sp: [{cost:[[Resource.part, 10]], value: {normal: 6, cruise: 12, consumption: 0.005}},
+		   {cost:[[Resource.part, 10]], value: {normal: 7, cruise: 15, consumption: 0.005}},
+		   {cost:[[Resource.part, 10]], value: {normal: 8, cruise: 17.5, consumption: 0.005}},
+		   {cost:[[Resource.part, 10]], value: {normal: 9, cruise: 20, consumption: 0.005}},
+		   {cost:[[Resource.part, 10]], value: {normal: 10, cruise: 22.5, consumption: 0.005}}, ],
 }
 Upgrades = {
 	weapon: -1,

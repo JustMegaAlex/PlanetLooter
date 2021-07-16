@@ -25,8 +25,7 @@ switch state {
 
 	case "enclose": {
 		dir = point_direction(x, y, obj_looter.x, obj_looter.y)
-		hsp_to = lengthdir_x(sp, dir)
-		vsp_to = lengthdir_y(sp, dir)
+		self.set_sp_to(sp.normal, dir)
 		if dist_to_player < close_dist
 			state = "distantiate"
 		else if dist_to_player > loose_dist {

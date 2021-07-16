@@ -78,8 +78,7 @@ var input = abs(move_h) or abs(move_v)
 
 if input {
 	input_dir = point_direction(0, 0, move_h, move_v)
-	hsp_to = lengthdir_x(sp, input_dir)
-	vsp_to = lengthdir_y(sp, input_dir)
+	self.set_sp_to(sp.normal, input_dir)
 	hacc = abs(lengthdir_x(acc, input_dir))
 	vacc = abs(lengthdir_y(acc, input_dir))
 	// input_h = 0 and hsp < 0 and gravx > 0

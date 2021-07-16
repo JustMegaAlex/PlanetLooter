@@ -11,7 +11,7 @@ enum Enemy {
 state = "idle"
 
 is_moving_object = true
-sp = 2.5
+sp.normal = 2.5
 hsp = 0
 vsp = 0
 hsp_to = 0
