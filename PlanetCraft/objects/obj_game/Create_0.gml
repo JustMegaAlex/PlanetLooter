@@ -1,5 +1,7 @@
 scr_debug_ini()
 global.DEBUG = true
+window_set_cursor(cr_none)
+cursor_sprite = spr_aim
 
 function generate_star_system() {
 	var blocks_num = random_range(0.5, 1) * blocks_max_num

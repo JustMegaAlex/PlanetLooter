@@ -33,6 +33,7 @@
     {"id":{"name":"snd_laser2","path":"sounds/snd_laser2/snd_laser2.yy",},"order":3,},
     {"id":{"name":"fnt_gameover","path":"fonts/fnt_gameover/fnt_gameover.yy",},"order":2,},
     {"id":{"name":"spr_foundation","path":"sprites/spr_foundation/spr_foundation.yy",},"order":7,},
+    {"id":{"name":"spr_aim","path":"sprites/spr_aim/spr_aim.yy",},"order":23,},
     {"id":{"name":"ts_planet_ground_farbgr","path":"tilesets/ts_planet_ground_farbgr/ts_planet_ground_farbgr.yy",},"order":2,},
     {"id":{"name":"autotiling","path":"scripts/autotiling/autotiling.yy",},"order":9,},
     {"id":{"name":"snd_laser3","path":"sounds/snd_laser3/snd_laser3.yy",},"order":0,},
