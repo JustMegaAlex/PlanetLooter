@@ -87,7 +87,7 @@ function upgrade_system(sys) {
 	for (var i = 0; i < array_length(costarr); ++i) {
 		var restype = costarr[i][0]
 		var resammount = costarr[i][1]
-		resources[restype] -= resammount
+		spend_resource(restype, resammount)
 	}
 	var val = available[up_level].value
 	upgrades_count++
@@ -125,6 +125,8 @@ gravity_dist = 300
 gravity_min_dist = 8
 
 resources = array_create(Resource.types_number, 20)
+resources = array_create(Resource.types_number, 100)
+resources[Resource.fuel] = 1000
 resources[0] = 0
 
 current_planet = noone
@@ -145,13 +147,16 @@ cruise_sp = 0
 
 // systems
 hp_max = 10
+hp_max = 100000
 hp = hp_max
 cargo = 100
+cargo = 1000
 tank = 100
 tank_load = resources[Resource.fuel]
 cargo_load = array_sum(resources) - resources[Resource.fuel]
 core_power = 5
 upgrades_count = 0
+warp_fuel_cost = 10
 AvailableUpgrades = {
 	weapon: [
 		{cost: [[Resource.part, 10]], value: {dmg: 1.5, mining: 1.15, reload_time: 8, consumption: 0.2, knock_back_force: 4.5}},

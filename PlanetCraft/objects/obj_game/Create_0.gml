@@ -1,5 +1,5 @@
 scr_debug_ini()
-global.DEBUG = true
+global.DEBUG = false
 window_set_cursor(cr_none)
 cursor_sprite = spr_aim
 
@@ -83,13 +83,12 @@ global.game_over = false
 draw_set_font(fnt)
 level = 0
 blocks_max_num = 2500
-planet_min_blocks = 16
 rmax = 10000
 rmin = 800
 
 enemies_progression = [
 	// groups, [min_group_size, max_group_size]
-	[8, [2, 3]],
+	[0, [2, 3]],
 	[12, [3, 4]],
 	[22, [5, 7]],
 	[26, [5, 12]],

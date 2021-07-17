@@ -23,7 +23,7 @@ if not global.game_over {
 if warping {
 
 	if audio_sound_get_track_position(warp_sound) > 1.9 {
-		resources[Resource.fuel] = 0
+		resources[Resource.fuel] -= warp_fuel_cost
 		obj_game.level++
 		// restart room
 		alarm[1] = 1

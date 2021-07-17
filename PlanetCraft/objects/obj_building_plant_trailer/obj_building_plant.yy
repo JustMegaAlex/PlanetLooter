@@ -1,15 +1,15 @@
 {
   "spriteId": {
-    "name": "spr_enemy",
-    "path": "sprites/spr_enemy/spr_enemy.yy",
+    "name": "spr_plant",
+    "path": "sprites/spr_plant/spr_plant.yy",
   },
   "solid": false,
   "visible": true,
   "spriteMaskId": null,
   "persistent": false,
   "parentObjectId": {
-    "name": "obj_enemy",
-    "path": "objects/obj_enemy/obj_enemy.yy",
+    "name": "obj_building",
+    "path": "objects/obj_building/obj_building.yy",
   },
   "physicsObject": false,
   "physicsSensor": false,
@@ -24,16 +24,16 @@
   "physicsKinematic": false,
   "physicsShapePoints": [],
   "eventList": [
-    {"isDnD":false,"eventNum":0,"eventType":3,"collisionObjectId":null,"parent":{"name":"obj_dummy","path":"objects/obj_dummy/obj_dummy.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
+    {"isDnD":false,"eventNum":0,"eventType":0,"collisionObjectId":null,"parent":{"name":"obj_building_plant","path":"objects/obj_building_plant/obj_building_plant.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
   ],
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "ships",
-    "path": "folders/Objects/ships.yy",
+    "name": "buidlings",
+    "path": "folders/Objects/buidlings.yy",
   },
   "resourceVersion": "1.0",
-  "name": "obj_dummy",
+  "name": "obj_building_plant",
   "tags": [],
   "resourceType": "GMObject",
 }
