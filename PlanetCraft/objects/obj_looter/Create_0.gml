@@ -11,23 +11,59 @@ function set_hit(weapon) {
 }
 
 function add_resource(type, ammount) {
-	if (cargo_load + ammount) > cargo
+	var cur_load = cargo_load
+	var max_load = cargo
+	if type == Resource.fuel {
+		cur_load = tank_load
+		max_load = tank
+	}
+	if (cur_load + ammount) > max_load
 		show_error(" :add_resource: resulting cargo_load greater than cargo", false)
 	resources[type] += ammount
-	cargo_load++
+	if type == Resource.fuel 
+		tank_load += ammount
+	else
+		cargo_load += ammount
 	audio_play_sound(snd_pick, 0, false)
-}
-
-
-function check_cargo_full(type) {
-	return cargo_load >= cargo
 }
 
 function spend_resource(type, ammount) {
 	if resources[type] < ammount
 		return false
 	resources[type] -= ammount
+	if type == Resource.fuel
+		tank_load -= ammount
+	else
+		cargo_load -= ammount
 	return true
+}
+
+function exchange_resources(in, in_ammount, out, out_ammount) {
+	// metall 1, ore 3
+	// check resource
+	if resources[out] < out_ammount
+		return "need more\n" + global.resource_names[out]
+	// check loads
+	var crg = cargo_load
+	var tnk = tank_load
+	var in_fuel = in == Resource.fuel
+	var out_fuel = out == Resource.fuel
+	crg += in_ammount * !in_fuel - out_ammount * !out_fuel
+	tnk += in_ammount * in_fuel - out_ammount * out_fuel
+	if crg > cargo
+		return "cargo full"
+	if tnk > tank
+		return "tank full"
+	// exchange
+	resources[in] += in_ammount
+	resources[out] -= out_ammount
+	cargo_load = crg
+	tank_load = tnk
+	return "ok"
+}
+
+function check_cargo_full(ammount) {
+	return (cargo_load + ammount) > cargo
 }
 
 function upgrade_system(sys) {
@@ -88,7 +124,7 @@ gravy = 0
 gravity_dist = 300
 gravity_min_dist = 8
 
-resources = array_create(Resource.types_number, 10)
+resources = array_create(Resource.types_number, 20)
 resources[0] = 0
 
 current_planet = noone
@@ -111,8 +147,9 @@ cruise_sp = 0
 hp_max = 10
 hp = hp_max
 cargo = 100
-cargo_load = array_sum(resources)
 tank = 100
+tank_load = resources[Resource.fuel]
+cargo_load = array_sum(resources) - resources[Resource.fuel]
 core_power = 5
 upgrades_count = 0
 AvailableUpgrades = {
