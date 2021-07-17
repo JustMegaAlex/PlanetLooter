@@ -45,8 +45,8 @@ if not --spawn_timer {
 		repeat 8
 			obj_effects.explosion(x + random_range(-18, 18), y + random_range(-18, 18))
 		obj_effects.create_debris(x, y, choose(2, 3))
+		obj_effects.explosion_big(x, y)
 		instance_destroy()
-		
 	}
 }
 
