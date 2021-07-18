@@ -1,5 +1,5 @@
 scr_debug_ini()
-global.DEBUG = false
+global.DEBUG = true
 window_set_cursor(cr_none)
 cursor_sprite = spr_aim
 
@@ -88,7 +88,7 @@ rmin = 800
 
 enemies_progression = [
 	// groups, [min_group_size, max_group_size]
-	[0, [2, 3]],
+	[8, [2, 3]],
 	[12, [3, 4]],
 	[22, [5, 7]],
 	[26, [5, 12]],

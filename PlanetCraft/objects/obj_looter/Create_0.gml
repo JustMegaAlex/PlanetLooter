@@ -125,8 +125,6 @@ gravity_dist = 300
 gravity_min_dist = 8
 
 resources = array_create(Resource.types_number, 20)
-resources = array_create(Resource.types_number, 100)
-resources[Resource.fuel] = 1000
 resources[0] = 0
 
 current_planet = noone
@@ -147,10 +145,8 @@ cruise_sp = 0
 
 // systems
 hp_max = 10
-hp_max = 100000
 hp = hp_max
 cargo = 100
-cargo = 1000
 tank = 100
 tank_load = resources[Resource.fuel]
 cargo_load = array_sum(resources) - resources[Resource.fuel]
@@ -189,6 +185,6 @@ compas_r = 100
 
 if not instance_exists(obj_camera) {
 	with instance_create_layer(x, y, layer, obj_camera)
-		obj_camera.target = id
+		obj_camera.target = other.id
 }
 
