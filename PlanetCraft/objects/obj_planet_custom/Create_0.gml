@@ -207,8 +207,8 @@ function collapse_mesh_cells(mesh, bound_value) {
 }
 
 function init_terrain() {
-	for (var i = 0; i < instance_number(obj_block_custom); ++i) {
-	    var inst = instance_find(obj_block_custom, i)
+	for (var i = 0; i < ds_list_size(blocks); ++i) {
+	    var inst = blocks[| i]
 		x0 = min(inst.x, x0)
 		y0 = min(inst.y, y0)
 		xmax = max(inst.x, xmax)
@@ -221,8 +221,8 @@ function init_terrain() {
 	terrain_mesh = array2d(w, h, noone)
 	resource_mesh = perlin_mesh(w, h, 3, 3)
 
-	for (var i = 0; i < instance_number(obj_block_custom); ++i) {
-	    var inst = instance_find(obj_block_custom, i)
+	for (var i = 0; i < ds_list_size(blocks); ++i) {
+	    var inst = blocks[| i]
 		var ii = (inst.x - x0) div global.grid_size + 1
 		var jj = (inst.y - y0) div global.grid_size + 1
 		var rdata = get_resource_data_by_mesh(resource_mesh[ii][jj])
@@ -246,6 +246,8 @@ x0 = x
 y0 = y
 xmax = x
 ymax = y
+blocks = ds_list_create()
+instance_place_list(x, y, obj_block_custom, blocks, false)
 init_terrain()
 radius = max(width, height)
 

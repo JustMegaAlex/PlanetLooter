@@ -1,5 +1,5 @@
 scr_debug_ini()
-global.DEBUG = false
+global.DEBUG = true
 window_set_cursor(cr_none)
 cursor_sprite = spr_aim
 
@@ -105,7 +105,9 @@ buildings_progression = [
 ]
 
 show_tips = false
-tips_text = "WASD to move\nMouse to shoot\nE to interact with buidlings\nWhen you have 10 fuel hold space to warp\nR to restart"
+tips_text = "WASD to move\nMouse to shoot\nE to interact with buidlings\nR to restart\n"
+tips_text += "hold F to activate cruise mode\n"
+tips_text += "F11 toggle fullscreen (and make those shiny stars disappear)\n"
 tips_text += "compass arrows point to planets\n"
-tips_text += "toggle fullscreen F11\n"
+tips_text += "When you have 10 fuel hold space to warp\n"
 tips_header = "Press T to show tips"

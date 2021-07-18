@@ -1,8 +1,8 @@
 //// background
-var surf_size = 2
+var surf_size = 4
 var surf_w = scr_camw(0)*surf_size
 var surf_h = scr_camh(0)*surf_size
-var stars_num = 80
+var stars_num = 300
 surf_stars = surface_create(surf_w, surf_h)
 surface_set_target(surf_stars)
 // draw stars
