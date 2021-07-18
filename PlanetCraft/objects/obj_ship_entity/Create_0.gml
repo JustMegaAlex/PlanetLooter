@@ -12,7 +12,7 @@ weapon = {
 	dmg: 1,
 	mining: 1,
 	reload_time: 10,
-	consumption: 0.1,
+	consumption: 0.03,
 	knock_back_force: 4.5
 }
 
