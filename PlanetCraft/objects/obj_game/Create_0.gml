@@ -106,5 +106,9 @@ buildings_progression = [
 
 show_tips = false
 tips_text = "WASD to move\nMouse to shoot\nE to interact with buidlings\nWhen you have 10 fuel hold space to warp\nR to restart"
-tips_text += "compass arrows point to planets"
+tips_text += "compass arrows point to planets\n"
+tips_text += "toggle fullscreen F11\n"
 tips_header = "Press T to show tips"
+
+// late init
+alarm[0] = 1
