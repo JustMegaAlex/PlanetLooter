@@ -29,8 +29,8 @@
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "buidlings",
-    "path": "folders/Objects/buidlings.yy",
+    "name": "custom",
+    "path": "folders/Objects/custom.yy",
   },
   "resourceVersion": "1.0",
   "name": "obj_building_shipyard_trailer",

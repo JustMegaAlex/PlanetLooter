@@ -9,4 +9,4 @@ function move_to_planet(num) {
 
 current_planet = 0
 
-show_planets_data = false
+show_planets_data = true

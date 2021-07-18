@@ -1,5 +1,5 @@
 scr_debug_ini()
-global.DEBUG = true
+global.DEBUG = false
 window_set_cursor(cr_none)
 cursor_sprite = spr_aim
 
