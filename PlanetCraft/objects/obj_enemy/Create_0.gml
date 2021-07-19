@@ -6,6 +6,17 @@ enum Enemy {
 	wander,
 	enclose,
 	distantiate,
+	search,
+}
+
+function set_hit(weapon) {
+	hp -= weapon.dmg
+	if hp <= 0 {
+		instance_destroy()
+	}
+	state = "search"
+	searching = search_time
+	dir = point_direction(x, y, obj_looter.x, obj_looter.y)
 }
 
 state = "idle"
@@ -22,8 +33,11 @@ dir = 0
 
 detection_dist = 300
 loose_dist = 500
-close_dist = 150
+close_dist = 200
+detection_dist_search = 400
 target = noone
+search_time = 300
+searching = 0
 
 shoot_dir = 0
 reloading = 0

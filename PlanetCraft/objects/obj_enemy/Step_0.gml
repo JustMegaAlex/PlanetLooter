@@ -30,8 +30,7 @@ switch state {
 			state = "distantiate"
 		else if dist_to_player > loose_dist {
 			state = "idle"
-			hsp_to = 0
-			vsp_to = 0
+			self.set_sp_to(0, dir)
 			target = noone
 		}
 		break
@@ -42,6 +41,19 @@ switch state {
 		self.set_sp_to(sp.normal, dir)
 		if dist_to_player > close_dist
 			state = "enclose"
+		break
+	}
+
+	case "search": {
+		self.set_sp_to(sp.normal, dir)
+		if dist_to_player < detection_dist_search {
+			target = obj_looter
+			state = "enclose"
+		}
+		if not --searching {
+			state = "idle"
+			self.set_sp_to(0, dir)
+		}
 		break
 	}
 }
