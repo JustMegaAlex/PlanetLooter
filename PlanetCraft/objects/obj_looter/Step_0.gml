@@ -21,10 +21,9 @@ if not global.game_over {
 }
 
 if warping {
-
 	if audio_sound_get_track_position(warp_sound) > 1.9 {
 		resources[Resource.fuel] -= warp_fuel_cost
-		obj_game.level++
+		global.level++
 		// restart room
 		alarm[1] = 1
 		warping = false
@@ -33,6 +32,7 @@ if warping {
 		audio_stop_sound(snd_warp)
 		warp_sound = noone
 	}
+
 } else if key_warp and (resources[Resource.fuel] >= 10) {
 	warping = true
 	warp_sound = audio_play_sound(snd_warp, 0, false)

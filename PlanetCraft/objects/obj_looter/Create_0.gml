@@ -155,7 +155,7 @@ upgrades_count = 0
 warp_fuel_cost = 10
 AvailableUpgrades = {
 	weapon: [
-		{cost: [[Resource.part, 10]], value: {dmg: 1.5, mining: 1.15, reload_time: 8, consumption: 0.05, knock_back_force: 4.5}},
+		{cost: [[Resource.part, 10]], value: {dmg: 1.5, mining: 1.15, reload_time: 8, consumption: 0.05, knock_back_force: 3.5}},
 		{cost: [[Resource.part, 10]], value: {dmg: 2, mining: 1.3, reload_time: 7.5, consumption: 0.07, knock_back_force: 4.5}},
 		{cost: [[Resource.part, 10]], value: {dmg: 2.5, mining: 1.35, reload_time: 7.5, consumption: 0.08, knock_back_force: 4.5}},
 		{cost: [[Resource.part, 10]], value: {dmg: 3.5, mining: 1.35, reload_time: 7, consumption: 0.1, knock_back_force: 4.5}},
