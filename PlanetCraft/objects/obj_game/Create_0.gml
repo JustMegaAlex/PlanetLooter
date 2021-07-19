@@ -13,6 +13,7 @@ enum Sides {
 global.ui_interface_on = false
 global.game_over = false
 global.level = 0
+global._level_gen_planet_size = -1 // pass size parameter to obj_planet inst on its creation
 draw_set_font(fnt)
 
 show_tips = false

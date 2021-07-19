@@ -207,7 +207,20 @@ function collapse_mesh_cells(mesh, bound_value) {
 
 
 visible = true
-size = 20
+size = global._level_gen_planet_size
+
+
+radius = global.grid_size * size * 0.5
+x0 = x - radius
+y0 = y - radius
+
+// gen terrain
+fill_factor = 0.45
+core_size = 4
+organic_layer_depth = 3
+perlin_grads_cell_size = 4
+
+
 radius = global.grid_size * size * 0.5
 x0 = x - radius
 y0 = y - radius
@@ -220,14 +233,6 @@ perlin_grads_cell_size = 4
 terrain_mesh = array2d(size+2, size+2, noone)
 resource_mesh = array2d(size+2, size+2, noone)
 terrain_mesh = generate_terrain(terrain_mesh)
-
-//terrain_mesh = [
-//	[0, 0, 0, 0, 0],
-//	[0, 0, 1, 0, 0],
-//	[0, 0, 1, 1, 0],
-//	[0, 0, 1, 0, 0],
-//	[0, 0, 0, 0, 0],
-//]
 
 //// tiles
 tm_size = size + 1
@@ -282,3 +287,11 @@ autotiler_farbgr = new Autotiling("tiles_farbgr",
 draw_tiles()
 autotiler_bgr.draw_region(0, 0, bgr_size - 1, bgr_size - 1)
 autotiler_farbgr.draw_region(0, 0, farbgr_size - 1, farbgr_size - 1)
+
+//terrain_mesh = [
+//	[0, 0, 0, 0, 0],
+//	[0, 0, 1, 0, 0],
+//	[0, 0, 1, 1, 0],
+//	[0, 0, 1, 0, 0],
+//	[0, 0, 0, 0, 0],
+//]
