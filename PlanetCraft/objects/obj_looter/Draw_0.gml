@@ -10,7 +10,7 @@ for (var i = 0; i < instance_number(obj_planet); ++i) {
 	var _dir = point_direction(x, y, p.x, p.y)
 	var x0 = x + lengthdir_x(compas_r, _dir)
 	var y0 = y + lengthdir_y(compas_r, _dir)
-	var scale = (12000 - dist) / 1400 //1 + 3600/dist
+	var scale = (12000 - dist) / 2000  + 2000/dist
 	scale = max(scale, 0.5)
 	draw_sprite_ext(spr_arrow, 0, x0, y0, scale, 1, _dir, c_white, 0.25)
 }

@@ -54,6 +54,8 @@ function modify_resource_value(val, i, j, type) {
 	else if (d >= organic_layer_depth) and (type == Resource.organic)
 		var add = 0.2 + d * (0.05)
 	add = clamp(add, -0.3, 0.3)
+	if (val + add) > 1
+		test = true
 	return val + add
 }
 
@@ -76,28 +78,48 @@ function get_cell_type(val) {
 
 _resource_data = [
 	// [_min_mesh_val, type, max_ammount, tile_index]
-	[0.3, Resource.empty, 0.01, 0],
-	[0.43, Resource.organic, 2, 4],
-	[0.47, Resource.organic, 4, 5],
-	[0.50, Resource.organic, 8, 6],
-	[0.7, Resource.ore, 2, 1],
-	[0.8, Resource.ore, 6, 2],
+	[0.6, Resource.empty, 0.01, 0],
+	[0.7, Resource.organic, 2, 4],
+	[0.77, Resource.organic, 4, 5],
+	[0.8, Resource.organic, 8, 6],
+	[0.9, Resource.ore, 2, 1],
+	[0.98, Resource.ore, 6, 2],
 	[1, Resource.ore, 15, 3],
+	//[0.3, Resource.empty, 0.01, 0],
+	//[0.43, Resource.organic, 2, 4],
+	//[0.47, Resource.organic, 4, 5],
+	//[0.50, Resource.organic, 8, 6],
+	//[0.7, Resource.ore, 2, 1],
+	//[0.8, Resource.ore, 6, 2],
+	//[1, Resource.ore, 15, 3],
 ]
 
+function reset_resource_data(gain) {
+	var total_delta = _resource_data[0][0] * gain
+	var delta_per_resource = total_delta / (array_length(_resource_data) - 1)
+	_resource_data[0][0] -= total_delta
+	for (var i = 1; i < array_length(_resource_data) - 1; ++i) {
+		_resource_data[i][0] -= delta_per_resource
+	}
+}
+
 function get_resource_data_by_mesh(val) {
+	if val > 1
+		test = true
+	var type, ammount, tile_index, max_ammount
 	for (var i = 0; i < array_length(_resource_data); ++i) {
 		var data = _resource_data[i]
 		var min_mesh_val = data[0]
-		var type = data[1]
-		var max_ammount = data[2]
-		var tile_index = data[3]
+		type = data[1]
+		max_ammount = data[2]
+		tile_index = data[3]
 	    if val <= min_mesh_val {
-			var ammount = round(val/min_mesh_val * max_ammount)
+			ammount = round(val/min_mesh_val * max_ammount)
 			return new ResourceData(type, ammount, tile_index)
 		}
 	}
-	throw " :get_resource_data_by_mesh: input error val = " + string(val)
+	return new ResourceData(type, max_ammount, tile_index)
+	//throw " :get_resource_data_by_mesh: input error val = " + string(val)
 
 }
 
@@ -227,6 +249,9 @@ y0 = y - radius
 
 // gen terrain
 fill_factor = 0.45
+resource_ammount_gain = random(0.25)
+reset_resource_data(resource_ammount_gain)
+
 core_size = 4
 organic_layer_depth = 3
 perlin_grads_cell_size = 4

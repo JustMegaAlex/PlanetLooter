@@ -16,5 +16,5 @@ weapon = {
 	knock_back_force: 3.5
 }
 
-sp = {normal: 5, cruise: 10, consumption: 0.005}
+sp = {normal: 5, cruise: 15, consumption: 0.007}
 bullet_sprite = spr_bullet
