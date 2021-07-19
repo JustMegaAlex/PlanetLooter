@@ -4,13 +4,17 @@ reloading--
 if target and !reloading
 	shoot(dir, id)
 
-dist_to_player = point_distance(x, y, obj_looter.x, obj_looter.y)
+dist_to_player = inst_dist(obj_looter)
 
 switch state {
 	case "idle": {
 		if dist_to_player < detection_dist {
 			target = obj_looter
 			state = "enclose"
+			break
+		}
+		if point_dist(xst, yst) > start_area_radius {
+			state = "return"
 		}
 		break
 	}
@@ -24,7 +28,7 @@ switch state {
 	}
 
 	case "enclose": {
-		dir = point_direction(x, y, obj_looter.x, obj_looter.y)
+		dir = inst_dir(obj_looter)
 		self.set_sp_to(sp.normal, dir)
 		if dist_to_player < close_dist
 			state = "distantiate"
@@ -37,7 +41,7 @@ switch state {
 	}
 
 	case "distantiate": {
-		dir = point_direction(x, y, obj_looter.x, obj_looter.y)
+		dir = inst_dir(obj_looter)
 		self.set_sp_to(sp.normal, dir)
 		if dist_to_player > close_dist
 			state = "enclose"
@@ -51,6 +55,15 @@ switch state {
 			state = "enclose"
 		}
 		if not --searching {
+			state = "return"
+		}
+		break
+	}
+	
+	case "return": {
+		dir = point_dir(xst, yst)
+		self.set_sp_to(sp.normal, dir)
+		if point_dist(xst, yst) < start_area_radius {
 			state = "idle"
 			self.set_sp_to(0, dir)
 		}

@@ -38,6 +38,9 @@ detection_dist_search = 400
 target = noone
 search_time = 300
 searching = 0
+xst = x
+yst = y
+start_area_radius = 100
 
 shoot_dir = 0
 reloading = 0

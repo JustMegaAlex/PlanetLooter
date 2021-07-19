@@ -57,3 +57,31 @@ function draw_text_custom(xx, yy, text, font, halign, valign) {
 function inst_mouse_dir(inst) {
 	return point_direction(inst.x, inst.y, mouse_x, mouse_y)
 }
+
+function inst_inst_dir(inst, inst_to) {
+	return point_direction(inst.x, inst.y, inst_to.x, inst_to.y)
+}
+
+function inst_inst_dist(inst, inst_to) {
+	return point_distance(inst.x, inst.y, inst_to.x, inst_to.y)
+}
+
+function mouse_dir() {
+	return point_direction(id.x, id.y, mouse_x, mouse_y)
+}
+
+function inst_dir(inst_to) {
+	return point_direction(id.x, id.y, inst_to.x, inst_to.y)
+}
+
+function inst_dist(inst_to) {
+	return point_distance(id.x, id.y, inst_to.x, inst_to.y)
+}
+
+function point_dist(xx, yy) {
+	return point_distance(id.x, id.y, xx, yy)
+}
+
+function point_dir(xx, yy) {
+	return point_direction(id.x, id.y, xx, yy)
+}
