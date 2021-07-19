@@ -1,5 +1,4 @@
 
-obj_level_gen.generate_star_system()
 global.game_over = false
 global.ui_interface_on = false
 instance_create_layer(0, 0, "stars", obj_stars)

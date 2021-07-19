@@ -15,3 +15,5 @@ if keyboard_check_pressed(vk_f11)
 
 if keyboard_check_pressed(ord("T"))
 	show_tips = !show_tips
+
+global.time += delta_time

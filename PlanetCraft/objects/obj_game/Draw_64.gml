@@ -2,6 +2,7 @@
 scr_debug_show_var("planets", instance_number(obj_planet))
 scr_debug_show_var("enemies", instance_number(obj_enemy))
 scr_debug_show_var("level", global.level)
+scr_debug_show_var("time", global.time)
 var w = scr_camw(0)
 var t = tips_text
 if !show_tips

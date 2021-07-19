@@ -1,4 +1,21 @@
 
+function Node(xx, yy, nodes) constructor {
+	self.X = xx
+	self.Y = yy
+	self.nodes = []
+	if nodes != undefined
+		self.nodes = nodes
+	
+	dist = function(node) {
+		return point_distance(self.X, self.Y, node.X, node.Y)	
+	}
+	
+	dir = function(node) {
+		return point_direction(self.X, self.Y, node.X, node.Y)	
+	}
+}
+
+
 function generate_star_system() {
 	var blocks_num = random_range(0.5, 1) * blocks_max_num
 	while instance_number(obj_block) < blocks_num {
@@ -14,6 +31,77 @@ function generate_star_system() {
 	create_buildings(buildings_set)
 	
 	instance_destroy(obj_planet_mask)
+}
+
+function generate_star_system_1 () {
+	generate_star_system_graph()
+	for (var i = 0; i < array_length(nodes); ++i) {
+		var n = nodes[i]
+	    var size = irandom_range(5, 30)
+		create_planet_coord(n.X, n.Y, size)
+	}
+	var level = min(global.level, array_length(enemies_progression) - 1)
+	var enemies_set = enemies_progression[level]
+	create_enemies(enemies_set)
+
+	level = min(global.level, array_length(buildings_progression) - 1)
+	var buildings_set = buildings_progression[level]
+	create_buildings(buildings_set)
+	
+	instance_destroy(obj_planet_mask)
+}
+
+function generate_star_system_graph() {
+	var axis_dir = random(360)
+	var planet_number = irandom_range(min_planet_number, max_planet_number)
+	var axis_num = floor(planet_number * 0.65)
+	var leafs_num = planet_number - axis_num
+
+	var first = new Node(0, 0)
+	var dir = random(360)
+	var dist = max_planet_dist * random_range(0.7, 1)
+	var xx = first.X + lengthdir_x(dist, dir)
+	var yy = first.Y + lengthdir_y(dist, dir)
+	var second = new Node(xx, yy, [first])
+	first.nodes = [first]
+	nodes = [first, second]
+	leafs = []
+	var prev = nodes[0]
+	for (var i = 1; i < planet_number; i++) {
+		if array_has(nodes, 0)
+			test = true
+		var added = true
+		repeat 100 {
+			var root = array_choose(nodes)
+			var steps = array_length(nodes)
+			for (var step = 0; step < steps; ++step) {
+				root = array_choose(root.nodes)
+			}
+			repeat 100 {
+				var dir = random(360)
+				var dist = max_planet_dist * random_range(0.7, 1)
+				var xx = root.X + lengthdir_x(dist, dir)
+				var yy = root.Y + lengthdir_y(dist, dir)
+				for (var ii = 0; ii < array_length(nodes); ++ii) {
+					if array_has(nodes, 0)
+						test = true
+				    var check = nodes[ii]
+					if point_distance(check.X, check.Y, xx, yy) < (dist - 1) {
+						added = false
+						break
+					}
+				}
+				if added {
+					var n = new Node(xx, yy, [root])
+					array_push(nodes, n)
+					array_push(root.nodes, n)
+					break
+				}
+			}
+			if added { break }
+		}
+	}
+	return nodes
 }
 
 function create_planet_at_random_pos(size) {
@@ -33,6 +121,11 @@ function create_planet(r, angle, size) {
 	global._level_gen_planet_size = size
 	var xx = lengthdir_x(r, angle)
 	var yy = lengthdir_y(r, angle)
+	instance_create_layer(xx, yy, "Instances", obj_planet)
+}
+
+function create_planet_coord(xx, yy, size) {
+	global._level_gen_planet_size = size
 	instance_create_layer(xx, yy, "Instances", obj_planet)
 }
 
@@ -77,6 +170,11 @@ function create_buildings(set) {
 blocks_max_num = 2500
 rmax = 10000
 rmin = 800
+
+max_planet_dist = 9000
+min_planet_number = 5
+max_planet_number = 12
+
 
 enemies_progression = [
 	// groups, [min_group_size, max_group_size]

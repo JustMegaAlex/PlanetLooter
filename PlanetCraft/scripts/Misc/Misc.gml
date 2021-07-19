@@ -25,6 +25,28 @@ function array_sum(arr) {
 	return res
 }
 
+function array_has(arr, val) {
+	for (var i = 0; i < array_length(arr); ++i) {
+	    if val == arr[i]
+			return true
+	}
+	return false
+}
+
+function array_count(arr, val) {
+	var count = 0
+	for (var i = 0; i < array_length(arr); ++i) {
+	    if val == arr[i]
+			count++
+	}
+	return count
+}
+
+function array_choose(arr) {
+	var ind = irandom(array_length(arr) - 1)
+	return arr[irandom(array_length(arr) - 1)]
+}
+
 function cycle_increase(val, min_, max_) {
 	val++
 	var inboudns = val < max_
