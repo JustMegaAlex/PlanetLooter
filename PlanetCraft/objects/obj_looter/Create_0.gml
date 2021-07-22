@@ -31,8 +31,10 @@ function spend_resource(type, ammount) {
 	if resources[type] < ammount
 		return false
 	resources[type] -= ammount
-	if type == Resource.fuel
+	if type == Resource.fuel {
 		tank_load -= ammount
+		fuel_producer_pause = fuel_producer_pause_time
+	}
 	else
 		cargo_load -= ammount
 	return true
@@ -143,12 +145,18 @@ cruise_acc = 1
 cruise_rot_sp = 0.5
 cruise_sp = 0
 
+// devices
+fuel_producer_ratio = 0.001
+fuel_producer_pause_time = 120
+fuel_producer_pause = 0
+
 // systems
 hp_max = 10
 hp = hp_max
 cargo = 100
-tank = 100
-tank_load = resources[Resource.fuel]
+tank = 15
+tank_load = tank
+resources[Resource.fuel] = tank
 cargo_load = array_sum(resources) - resources[Resource.fuel]
 core_power = 5
 upgrades_count = 0
@@ -165,7 +173,7 @@ AvailableUpgrades = {
 			{cost:[[Resource.part, 20]], value: 175}, ],
 	tank: [{cost:[[Resource.part, 5]], value: 20},
 		   {cost:[[Resource.part, 12]], value: 30},
-		   {cost:[[Resource.part, 24]], value: 50}, ],
+		   {cost:[[Resource.part, 24]], value: 40}, ],
 	sp: [{cost:[[Resource.part, 10]], value: {normal: 6, cruise: 18, consumption: 0.0085}},
 		   {cost:[[Resource.part, 20]], value: {normal: 7, cruise: 21, consumption: 0.009}},
 		   {cost:[[Resource.part, 30]], value: {normal: 8, cruise: 24, consumption: 0.0105}},

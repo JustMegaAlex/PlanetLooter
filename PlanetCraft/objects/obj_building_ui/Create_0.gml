@@ -26,7 +26,7 @@ function ui_message(text, warning) {
 		image_index = 1
 }
 
-function Productor(resource, ui_parent) constructor {
+function Producer(resource, ui_parent) constructor {
 	self.type = resource
 	self.type_name = global.resource_names[resource]
 	self.ui_parent = ui_parent

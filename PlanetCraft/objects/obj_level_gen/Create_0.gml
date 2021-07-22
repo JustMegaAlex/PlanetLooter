@@ -171,7 +171,7 @@ blocks_max_num = 2500
 rmax = 10000
 rmin = 800
 
-max_planet_dist = 9000
+max_planet_dist = 5000
 min_planet_number = 5
 max_planet_number = 12
 

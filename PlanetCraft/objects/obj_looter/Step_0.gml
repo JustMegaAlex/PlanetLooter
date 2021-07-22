@@ -38,6 +38,11 @@ if warping {
 	warp_sound = audio_play_sound(snd_warp, 0, false)
 }
 
+if not --fuel_producer_pause {
+	var cost = global.ResourceCost.fuel.ammount * fuel_producer_ratio
+	self.exchange_resources(Resource.fuel, fuel_producer_ratio, Resource.organic, cost)
+}
+
 
 //// planets
 if not current_planet {

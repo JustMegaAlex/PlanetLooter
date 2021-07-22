@@ -9,9 +9,11 @@ function move_to_planet(num) {
 
 current_planet = 0
 show_planets_data = false
+enable_instant_planet_move = false
 
 state = "none"
 editor_objects_list = [obj_enemy, obj_dummy, obj_planet]
+editor_objects_list = []
 editor_buttons_delta_y = 32
 editor_current_object = noone
 editor_x = 10
