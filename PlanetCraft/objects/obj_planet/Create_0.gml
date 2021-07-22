@@ -230,6 +230,7 @@ function collapse_mesh_cells(mesh, bound_value) {
 
 visible = true
 size = global._level_gen_planet_size
+background_is_drawn = global._level_gen_planet_background
 
 
 radius = global.grid_size * size * 0.5
@@ -273,50 +274,53 @@ tile_map_resources_id = layer_tilemap_create("tiles_resources",
 											ts_planet_resources,
 											tm_size,
 											tm_size)
-// bgr tiles
-var bgr_tile_size = 16
-var bgr_size = global.grid_size / bgr_tile_size * tm_size
-bgr_size = floor(bgr_size)
-var bgr_mesh = perlin_mesh(bgr_size, bgr_size, perlin_grads_cell_size, perlin_grads_cell_size)
-var farbgr_size = bgr_size - 1
-var farbgr_mesh = array2d(farbgr_size, farbgr_size, 1)
-// zero edges
-for (var i = 0; i < bgr_size; ++i) {
-    bgr_mesh[i][bgr_size-1] = 0
-	bgr_mesh[bgr_size-1][i] = 0
-	bgr_mesh[i][0] = 0
-	bgr_mesh[0][i] = 0
-	farbgr_mesh[i][farbgr_size-1] = 0
-	farbgr_mesh[farbgr_size-1][i] = 0
-	farbgr_mesh[i][0] = 0
-	farbgr_mesh[0][i] = 0
-}
-
-bgr_mesh = collapse_mesh_cells(bgr_mesh, 0.35)
-autotiler_bgr = new Autotiling("tiles_bgr",
-								left_coord(),
-								top_coord(),
-								ts_planet_ground_bgr,
-								bgr_size-1,
-								bgr_size-1,
-								bgr_mesh,
-								0)
-autotiler_farbgr = new Autotiling("tiles_farbgr",
-								left_coord() + bgr_tile_size * 0.5,
-								top_coord() + bgr_tile_size * 0.5,
-								ts_planet_ground_farbgr,
-								farbgr_size-1,
-								farbgr_size-1,
-								farbgr_mesh,
-								0)
 draw_tiles()
-autotiler_bgr.draw_region(0, 0, bgr_size - 1, bgr_size - 1)
-autotiler_farbgr.draw_region(0, 0, farbgr_size - 1, farbgr_size - 1)
 
-//terrain_mesh = [
-//	[0, 0, 0, 0, 0],
-//	[0, 0, 1, 0, 0],
-//	[0, 0, 1, 1, 0],
-//	[0, 0, 1, 0, 0],
-//	[0, 0, 0, 0, 0],
-//]
+if background_is_drawn {
+	// bgr tiles
+	var bgr_tile_size = 16
+	var bgr_size = global.grid_size / bgr_tile_size * tm_size
+	bgr_size = floor(bgr_size)
+	var bgr_mesh = perlin_mesh(bgr_size, bgr_size, perlin_grads_cell_size, perlin_grads_cell_size)
+	var farbgr_size = bgr_size - 1
+	var farbgr_mesh = array2d(farbgr_size, farbgr_size, 1)
+	// zero edges
+	for (var i = 0; i < bgr_size; ++i) {
+	    bgr_mesh[i][bgr_size-1] = 0
+		bgr_mesh[bgr_size-1][i] = 0
+		bgr_mesh[i][0] = 0
+		bgr_mesh[0][i] = 0
+		farbgr_mesh[i][farbgr_size-1] = 0
+		farbgr_mesh[farbgr_size-1][i] = 0
+		farbgr_mesh[i][0] = 0
+		farbgr_mesh[0][i] = 0
+	}
+
+	bgr_mesh = collapse_mesh_cells(bgr_mesh, 0.35)
+	autotiler_bgr = new Autotiling("tiles_bgr",
+									left_coord(),
+									top_coord(),
+									ts_planet_ground_bgr,
+									bgr_size-1,
+									bgr_size-1,
+									bgr_mesh,
+									0)
+	autotiler_farbgr = new Autotiling("tiles_farbgr",
+									left_coord() + bgr_tile_size * 0.5,
+									top_coord() + bgr_tile_size * 0.5,
+									ts_planet_ground_farbgr,
+									farbgr_size-1,
+									farbgr_size-1,
+									farbgr_mesh,
+									0)
+	autotiler_bgr.draw_region(0, 0, bgr_size - 1, bgr_size - 1)
+	autotiler_farbgr.draw_region(0, 0, farbgr_size - 1, farbgr_size - 1)
+
+	//terrain_mesh = [
+	//	[0, 0, 0, 0, 0],
+	//	[0, 0, 1, 0, 0],
+	//	[0, 0, 1, 1, 0],
+	//	[0, 0, 1, 0, 0],
+	//	[0, 0, 0, 0, 0],
+	//]
+}

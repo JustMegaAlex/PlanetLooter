@@ -20,7 +20,7 @@ function generate_star_system() {
 	var blocks_num = random_range(0.5, 1) * blocks_max_num
 	while instance_number(obj_block) < blocks_num {
 		var size = irandom_range(5, 30)
-		create_planet_at_random_pos(size)
+		create_planet_at_random_pos(size, true)
 	}
 	var level = min(global.level, array_length(enemies_progression) - 1)
 	var enemies_set = enemies_progression[level]
@@ -35,11 +35,20 @@ function generate_star_system() {
 
 function generate_star_system_1 () {
 	generate_star_system_graph()
+	var xmin = infinity
+	var ymin = infinity
+	var xmax = -infinity
+	var ymax = -infinity
 	for (var i = 0; i < array_length(nodes); ++i) {
 		var n = nodes[i]
-	    var size = irandom_range(5, 30)
-		create_planet_coord(n.X, n.Y, size)
+	    var size = irandom_range(planet_min_size, planet_max_size)
+		create_planet_coord(n.X, n.Y, size, true)
+		xmin = min(n.X, xmin)
+		xmax = max(n.X, xmax)
+		ymin = min(n.Y, ymin)
+		ymax = max(n.Y, ymax)
 	}
+	generate_asteroids(xmin, ymin, xmax, ymax)
 	var level = min(global.level, array_length(enemies_progression) - 1)
 	var enemies_set = enemies_progression[level]
 	create_enemies(enemies_set)
@@ -104,7 +113,18 @@ function generate_star_system_graph() {
 	return nodes
 }
 
-function create_planet_at_random_pos(size) {
+function generate_asteroids(x0, y0, x1, y1) {
+	repeat(200) {
+		var xx = random_range(x0, x1)
+		var yy = random_range(y0, y1)
+		var size = irandom_range(2, 5)
+		var mask = get_planet_collision_coord(xx, yy, size)
+		if !mask.collided
+			create_planet_coord(xx, yy, size, false)
+	}
+}
+
+function create_planet_at_random_pos(size, bgr) {
 	var r = irandom_range(rmin, rmax)
 	var angle = random(360)
 	var mask = get_planet_collision(r, angle, size)
@@ -114,24 +134,36 @@ function create_planet_at_random_pos(size) {
 		angle = random(360)
 		mask = get_planet_collision(r, angle, size)
 	}
-	create_planet(r, angle, size)
+	create_planet(r, angle, size, bgr)
 }
 
-function create_planet(r, angle, size) {
+function create_planet(r, angle, bgr) {
 	global._level_gen_planet_size = size
+	global._level_gen_planet_background = bgr
 	var xx = lengthdir_x(r, angle)
 	var yy = lengthdir_y(r, angle)
 	instance_create_layer(xx, yy, "Instances", obj_planet)
 }
 
-function create_planet_coord(xx, yy, size) {
+function create_planet_coord(xx, yy, size, bgr) {
 	global._level_gen_planet_size = size
+	global._level_gen_planet_background = bgr
 	instance_create_layer(xx, yy, "Instances", obj_planet)
 }
 
 function get_planet_collision(r, angle, size) {
 	var xx = lengthdir_x(r, angle)
 	var yy = lengthdir_y(r, angle)
+	var mask = instance_create_layer(xx, yy, "Instances", obj_planet_mask)
+	with mask {
+		self.image_xscale = size
+		self.image_yscale = size
+		self.collided = place_meeting(x, y, obj_planet_mask)
+	}
+	return mask
+}
+
+function get_planet_collision_coord(xx, yy, size) {
 	var mask = instance_create_layer(xx, yy, "Instances", obj_planet_mask)
 	with mask {
 		self.image_xscale = size
@@ -171,6 +203,8 @@ blocks_max_num = 2500
 rmax = 10000
 rmin = 800
 
+planet_min_size = 15
+planet_max_size = 30
 max_planet_dist = 5000
 min_planet_number = 5
 max_planet_number = 12
