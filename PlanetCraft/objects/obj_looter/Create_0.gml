@@ -139,7 +139,7 @@ warp_sound = noone
 
 // cruise mode
 in_cruise_mode = 0
-cruise_switch_sp = 0.01
+cruise_switch_sp = 0.02
 cruise_dir_to = 0
 cruise_acc = 1
 cruise_rot_sp = 0.5
