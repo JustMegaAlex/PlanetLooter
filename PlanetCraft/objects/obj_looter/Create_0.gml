@@ -18,13 +18,14 @@ function add_resource(type, ammount) {
 		max_load = tank
 	}
 	if (cur_load + ammount) > max_load
-		show_error(" :add_resource: resulting cargo_load greater than cargo", false)
+		return false
 	resources[type] += ammount
 	if type == Resource.fuel 
 		tank_load += ammount
 	else
 		cargo_load += ammount
 	audio_play_sound(snd_pick, 0, false)
+	return true
 }
 
 function spend_resource(type, ammount) {

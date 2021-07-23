@@ -1,5 +1,5 @@
 
-function shoot(shoot_dir, spawner) {
+function shoot(shoot_dir, spawner, sp) {
 	var weapon = spawner.weapon
 	reloading = weapon.reload_time
 	// spend fuel
@@ -11,6 +11,8 @@ function shoot(shoot_dir, spawner) {
 		self.side = spawner.side
 		self.weapon = spawner.weapon
 		self.sprite_index = spawner.bullet_sprite
+		if sp != undefined
+			self.sp = sp
 	}
 	var snd = choose(snd_laser1, snd_laser2, snd_laser3, snd_laser4)
 	audio_play_sound(snd, 0, false)

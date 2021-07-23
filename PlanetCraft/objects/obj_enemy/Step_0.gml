@@ -1,23 +1,37 @@
 
 reloading--
 
-if target and !reloading
-	shoot(dir, id)
+if target and !reloading and (warmedup >= 1) {
+	var shdir = dir + random(shoot_dir_wiggle) * choose(-1, 1)
+	shoot(shdir, id, bullet_sp)
+}
 
 dist_to_player = inst_dist(obj_looter)
+battle_friendly_angle = compute_friendly_angle()
+
 
 switch state {
 	case "idle": {
 		if dist_to_player < detection_dist {
 			target = obj_looter
-			state = "enclose"
+			state = "warmup"
 			trigger_friendly_units()
-			break
+			break			
 		}
 		if point_dist(xst, yst) > start_area_radius {
 			state = "return"
 		}
 		break
+	}
+
+	case "warmup": {
+		warmedup += warmup_sp
+		if warmedup >= 1 {
+			state = "search"
+			searching = search_time
+			break
+		}
+		break	
 	}
 
 	case "wander": {
@@ -34,7 +48,8 @@ switch state {
 			dir_wiggle = random_range(-dir_wiggle_magnitude, dir_wiggle_magnitude)
 		}
 		dir = inst_dir(obj_looter)
-		self.set_sp_to(sp.normal, dir + dir_wiggle)
+		//self.set_sp_to(sp.normal, dir + dir_wiggle)
+		self.set_sp_to(sp.normal, dir)
 		if dist_to_player < close_dist
 			state = "distantiate"
 		else if dist_to_player > loose_dist {
@@ -51,7 +66,8 @@ switch state {
 			dir_wiggle = random_range(-dir_wiggle_magnitude, dir_wiggle_magnitude)
 		}
 		dir = inst_dir(obj_looter)
-		self.set_sp_to(-sp.normal, dir + dir_wiggle)
+		//self.set_sp_to(-sp.normal, dir + dir_wiggle)
+		self.set_sp_to(-sp.normal, dir)
 		if dist_to_player > close_dist
 			state = "enclose"
 		break
@@ -62,6 +78,7 @@ switch state {
 		if dist_to_player < detection_dist_search {
 			target = obj_looter
 			state = "enclose"
+			break
 		}
 		if not --searching {
 			state = "return"
@@ -87,6 +104,6 @@ switch state {
 	}
 }
 
-hsp = approach(hsp, hsp_to, acc)
-vsp = approach(vsp, vsp_to, acc)
+hsp = approach(hsp, hsp_to + strafe_hsp, acc)
+vsp = approach(vsp, vsp_to + strafe_vsp, acc)
 scr_move_coord_contact_obj(hsp, vsp, obj_block)

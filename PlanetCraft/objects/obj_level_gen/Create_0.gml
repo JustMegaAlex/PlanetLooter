@@ -48,7 +48,7 @@ function generate_star_system_1 () {
 		ymin = min(n.Y, ymin)
 		ymax = max(n.Y, ymax)
 	}
-	generate_asteroids(xmin, ymin, xmax, ymax)
+	//generate_asteroids(xmin, ymin, xmax, ymax)
 	var level = min(global.level, array_length(enemies_progression) - 1)
 	var enemies_set = enemies_progression[level]
 	create_enemies(enemies_set)
@@ -212,7 +212,7 @@ max_planet_number = 12
 
 enemies_progression = [
 	// groups, [min_group_size, max_group_size]
-	[8, [2, 3]],
+	[0, [2, 3]],
 	[12, [3, 4]],
 	[22, [5, 7]],
 	[26, [5, 12]],

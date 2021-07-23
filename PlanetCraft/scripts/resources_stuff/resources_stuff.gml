@@ -23,3 +23,17 @@ global.ResourceCost = {
 	fuel: {type: Resource.organic, ammount: 2},
 	part: {type: Resource.metall, ammount: 2},
 }
+
+function spawn_resource_item(type, xx, yy, sp, dir) { // sp1, sp2, sp_is_coords) {
+	//if sp_is_coords {
+	//	var sp = point_distance(0, 0, sp1, sp2)
+	//	var dir = point_direction(0, 0, sp1, sp2)
+	//} else {
+	//	sp = sp1
+	//	dir = sp2
+	//}
+	var collectable = instance_create_layer(xx, yy, "Instances", obj_collectable)
+	collectable.set_resource_type(type)
+	collectable.sp = sp
+	collectable.dir = dir
+}

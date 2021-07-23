@@ -15,7 +15,8 @@ function set_hit(weapon) {
 		var _ammount = ceil(resource_fract_ammount)
 		if _ammount < resource_data.ammount {
 			var spawn_ammount = resource_data.ammount - _ammount
-			repeat spawn_ammount { spawn_resource_item() }
+			repeat spawn_ammount
+				spawn_resource_item(resource_data.type, x, y, 1, random(360))
 			resource_data.ammount = _ammount
 			if !resource_data.ammount {
 				resource_data.type = Resource.empty
@@ -27,13 +28,6 @@ function set_hit(weapon) {
 	if hp <= 0 {
 		instance_destroy()
 	}
-}
-
-function spawn_resource_item() {
-	var collectable = instance_create_layer(x, y, layer, obj_collectable)
-	collectable.set_resource_type(resource_data.type)
-	collectable.dir = point_direction(x, y, obj_looter.x, obj_looter.y) + random_range(-30, 30)
-	collectable.sp = 0.5
 }
 
 hsp = 0

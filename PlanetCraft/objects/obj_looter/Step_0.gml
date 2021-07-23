@@ -145,7 +145,7 @@ if (vsp > 0) and !down_free or (vsp < 0) and !up_free
 reloading--
 if key_shoot and !reloading and !global.ui_interface_on and (in_cruise_mode < 1) {
 	shoot_dir = point_direction(x, y, mouse_x, mouse_y)
-	shoot(shoot_dir, id)
+	shoot(shoot_dir, id, 24)
 }
 
 //// interacting
