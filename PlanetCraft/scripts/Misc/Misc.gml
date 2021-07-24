@@ -54,7 +54,7 @@ function array_remove(arr, val) {
 	var i = array_find(arr, val)
 	if i == -1
 		throw " :array_remove: no value in array: " + string(val)
-	array_delete(arr, i)
+	array_delete(arr, i, 1)
 }
 
 function array_choose(arr) {

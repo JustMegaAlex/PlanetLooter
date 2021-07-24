@@ -1,4 +1,20 @@
 
+enum Building {
+	hostile,
+	friendly,
+	unhappy, // slave state
+}
+
+function add_defender(inst) {
+	array_push(defenders, inst)
+}
+
+function pop_defender(inst) {
+	array_remove(defenders, inst)
+	if not array_length(defenders)
+		state = Building.unhappy
+}
+
 function place_on_planet() {
 	var side = irandom(4)
 	var r = planet.radius
@@ -32,3 +48,8 @@ planet = choose_planet()
 place_on_planet()
 
 ui_object = noone
+
+hp = 20
+side = Sides.neutral
+state = Building.friendly
+defenders = []

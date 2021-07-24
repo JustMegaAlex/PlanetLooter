@@ -80,6 +80,9 @@ warmup_sp = 0.01
 battle_friendly_dist = 100
 battle_strafe_vec = new Vec2d(0, 0)
 
+// controlled building
+controlled_building = noone
+
 hp = 7
 
 side = Sides.theirs
