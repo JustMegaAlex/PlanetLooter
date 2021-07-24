@@ -8,6 +8,50 @@ function Point(_x, _y) constructor {
 	}
 }
 
+function Vec2d(xx, yy, is_polar) constructor {
+	X = xx
+	Y = yy
+
+	add = function(xx, yy) {
+		return new Point(self.X + xx, self.Y + yy)
+	}
+
+	dir = function() {
+		return point_direction(0, 0, X, Y)
+	}
+
+	len = function() {
+		return point_distance(0, 0, X, Y)	
+	}
+
+	normalize = function() {
+		var l = self.len()
+		if l == 0
+			return self
+		self.X /= l
+		self.Y /= l
+		return self
+	}
+	
+	set = function(xx, yy) {
+		self.X = xx
+		self.Y = yy
+	}
+
+	set_polar = function(l, dir) {
+		self.X = lengthdir_x(l, dir)
+		self.Y = lengthdir_y(l, dir)
+	}
+
+	add_polar = function(l, dir) {
+		self.X += lengthdir_x(l, dir)
+		self.Y += lengthdir_y(l, dir)
+	}
+
+	if is_polar == true
+		self.set_polar(xx, yy)
+}
+
 
 function Line(_xst, _yst, _xend, _yend) constructor {
 	xst = _xst

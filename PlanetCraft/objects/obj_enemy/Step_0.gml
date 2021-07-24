@@ -6,8 +6,11 @@ if target and !reloading and (warmedup >= 1) {
 	shoot(shdir, id, bullet_sp)
 }
 
+battle_strafe_vec.set(0, 0)
+if target
+	compute_strafe_vec()
+
 dist_to_player = inst_dist(obj_looter)
-battle_friendly_angle = compute_friendly_angle()
 
 
 switch state {
@@ -104,6 +107,6 @@ switch state {
 	}
 }
 
-hsp = approach(hsp, hsp_to + strafe_hsp, acc)
-vsp = approach(vsp, vsp_to + strafe_vsp, acc)
+hsp = approach(hsp, hsp_to + battle_strafe_vec.X, acc)
+vsp = approach(vsp, vsp_to + battle_strafe_vec.Y, acc)
 scr_move_coord_contact_obj(hsp, vsp, obj_block)

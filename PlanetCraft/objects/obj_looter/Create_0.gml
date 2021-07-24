@@ -3,7 +3,7 @@ event_inherited()
 
 
 function set_hit(weapon) {
-	hp -= weapon.dmg
+	hp -= weapon.dmg * obj_debug.capture_damage(id)
 	if hp <= 0 {
 		global.game_over = true
 		image_index = 1

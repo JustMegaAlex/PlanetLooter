@@ -1,10 +1,17 @@
 
+player_immortal = false
+no_damage = false
+
 function move_to_planet(num) {
 	if not global.DEBUG
 		return 0
 	var planet = instance_find(obj_planet, num)
 	obj_looter.x = planet.x
 	obj_looter.y = planet.y
+}
+
+function capture_damage(inst) {
+	return (!player_immortal or (inst.object_index != obj_looter)) * !no_damage
 }
 
 current_planet = 0

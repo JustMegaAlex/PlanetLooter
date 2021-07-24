@@ -10,13 +10,13 @@ enum Enemy {
 }
 
 function set_hit(weapon) {
-	hp -= weapon.dmg
-	if hp <= 0 {
-		instance_destroy()
-	}
+	hp -= weapon.dmg * obj_debug.capture_damage(id)
 	state = "warmup"
 	dir = point_direction(x, y, obj_looter.x, obj_looter.y)
 	trigger_friendly_units()
+	if hp <= 0 {
+		instance_destroy()
+	}
 }
 
 function trigger_friendly_units() {
@@ -25,19 +25,16 @@ function trigger_friendly_units() {
 	alarm[1] = trigger_units_delay
 }
 
-function compute_friendly_angle() {
-	var h = 0
-	var v = 0
+function compute_strafe_vec() {
 	for (var i = 0; i < instance_number(obj_enemy); ++i) {
 		var inst = instance_find(obj_enemy, i)
 	    var dist = max(inst_dist(inst), 1)
 		if (dist > battle_friendly_dist) or (inst == id)
 			continue
 		var dir = inst_dir(inst)
-		h += -lengthdir_x(1, dir) / dist
-		v += -lengthdir_y(1, dir) / dist
+		battle_strafe_vec.add_polar(-1 / dist, dir)
 	}
-	return point_direction(0, 0, h, v)
+	battle_strafe_vec.normalize()
 }
 
 state = "idle"
@@ -71,7 +68,7 @@ yst = y
 start_area_radius = 100
 
 shoot_dir = 0
-shoot_dir_wiggle = 12
+shoot_dir_wiggle = 8
 reloading = 0
 weapon.reload_time = 25
 bullet_sp = 24
@@ -80,10 +77,8 @@ warmedup = 0
 warmup_sp = 0.01
 
 // keeping distance with friends
-battle_friendly_dist = 200
-battle_friendly_angle = 0
-strafe_hsp = 0
-strafe_vsp = 0
+battle_friendly_dist = 100
+battle_strafe_vec = new Vec2d(0, 0)
 
 hp = 7
 

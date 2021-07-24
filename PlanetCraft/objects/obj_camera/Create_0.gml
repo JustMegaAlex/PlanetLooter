@@ -7,7 +7,7 @@ function aim_angle() {
 	return point_direction(scr_camx_cent(0), scr_camy_cent(0), mouse_x, mouse_y)
 }
 
-anchor_radius_gain = 8
+anchor_radius_gain = 5
 target = noone
 sp_ratio = 0.125
 rel_xto = x
