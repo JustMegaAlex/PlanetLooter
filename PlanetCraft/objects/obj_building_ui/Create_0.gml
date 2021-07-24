@@ -31,10 +31,10 @@ function Producer(resource, ui_parent) constructor {
 	self.type_name = global.resource_names[resource]
 	self.ui_parent = ui_parent
 	action = function() {
-		var cost = variable_struct_get(global.ResourceCost, self.type_name)
-		var msg = obj_looter.exchange_resources(self.type, 1, cost.type, cost.ammount)
+		var cost_info_arr = global.ResourceCost[$ self.type_name]
+		var msg = obj_looter.exchange_resources(self.type, 1, cost_info_arr)
 		if msg != "ok"
-			self.ui_parent.ui_message(msg, true)
+			self.ui_parent.ui_message(msg, true)		
 	}
 }
 

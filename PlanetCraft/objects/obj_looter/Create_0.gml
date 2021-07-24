@@ -41,25 +41,32 @@ function spend_resource(type, ammount) {
 	return true
 }
 
-function exchange_resources(in, in_ammount, out, out_ammount) {
+function exchange_resources(in, in_ammount, cost_info_arr) {
 	// metall 1, ore 3
 	// check resource
-	if resources[out] < out_ammount
-		return "need more\n" + global.resource_names[out]
-	// check loads
-	var crg = cargo_load
-	var tnk = tank_load
-	var in_fuel = in == Resource.fuel
-	var out_fuel = out == Resource.fuel
-	crg += in_ammount * !in_fuel - out_ammount * !out_fuel
-	tnk += in_ammount * in_fuel - out_ammount * out_fuel
-	if crg > cargo
-		return "cargo full"
-	if tnk > tank
-		return "tank full"
+	var in_fuel = (in == Resource.fuel)
+	var crg = cargo_load + in_ammount * !in_fuel
+	var tnk = tank_load + in_ammount * in_fuel
+	for (var i = 0; i < array_length(cost_info_arr); ++i) {
+	    var cost = cost_info_arr[i]
+		var result_cost_ammount = cost.ammount * in_ammount
+		if resources[cost.type] < result_cost_ammount
+			return "need more\n" + global.resource_names[cost.type]
+		// check loads
+		var out_fuel = (cost.type == Resource.fuel)
+		crg -= result_cost_ammount * !out_fuel
+		tnk -= result_cost_ammount * out_fuel
+		if crg > cargo
+			return "cargo full"
+		if tnk > tank
+			return "tank full"
+	}	
 	// exchange
 	resources[in] += in_ammount
-	resources[out] -= out_ammount
+	for (var i = 0; i < array_length(cost_info_arr); ++i) {
+	    var cost = cost_info_arr[i]
+		resources[cost.type] -= cost.ammount * in_ammount
+	}
 	cargo_load = crg
 	tank_load = tnk
 	return "ok"

@@ -10,11 +10,7 @@ function perlin_mesh(w, h, grad_cell_w, grad_cell_h){
 	// fill gradients
 	for (var i = 0; i < grads_w; ++i) {
 	    for (var j = 0; j < grads_h; ++j) {
-			// (-1, 1)
-			//var dir = random(360)
-			//grads[i][j] = new Point(lengthdir_x(1, dir), lengthdir_y(1, dir))
 		    grads[i][j] = new Point(random(1) - 0.5, random(1) - 0.5)
-			//grads[i][j] = new Point(1, 1)
 		}
 	}
 

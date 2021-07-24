@@ -240,7 +240,7 @@ max_planet_number = 1
 
 enemies_progression = [
 	// groups, [min_group_size, max_group_size]
-	[7, [2, 3]],
+	[0, [2, 3]],
 	[12, [3, 4]],
 	[22, [5, 7]],
 	[26, [5, 12]],

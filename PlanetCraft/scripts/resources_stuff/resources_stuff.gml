@@ -21,9 +21,10 @@ global.resource_names[Resource.junk] = "junk"
 
 
 global.ResourceCost = {
-	metall: {type: Resource.ore, ammount: 3},
-	fuel: {type: Resource.organic, ammount: 2},
-	part: {type: Resource.metall, ammount: 2},
+	metall: [{type: Resource.ore, ammount: 5}],
+	fuel: [{type: Resource.organic, ammount: 5}],
+	part: [{type: Resource.metall, ammount: 4}, 
+		   {type: Resource.junk, ammount: 1}],
 }
 
 function spawn_resource_item(type, xx, yy, sp, dir) { // sp1, sp2, sp_is_coords) {
