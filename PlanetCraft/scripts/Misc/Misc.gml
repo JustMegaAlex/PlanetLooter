@@ -42,6 +42,21 @@ function array_count(arr, val) {
 	return count
 }
 
+function array_find(arr, val) {
+	for (var i = 0; i < array_length(arr); ++i) {
+	    if val == arr[i]
+			return i
+	}
+	return -1
+}
+
+function array_remove(arr, val) {
+	var i = array_find(arr, val)
+	if i == -1
+		throw " :array_remove: no value in array: " + string(val)
+	array_delete(arr, i)
+}
+
 function array_choose(arr) {
 	var ind = irandom(array_length(arr) - 1)
 	return arr[irandom(array_length(arr) - 1)]
