@@ -38,9 +38,20 @@ function Producer(resource, ui_parent) constructor {
 	}
 }
 
+function resource_cost_text(type) {
+	var name = global.resource_names[type]
+	var cost_info_arr = global.ResourceCost[$ name]
+	var text = "produce\n" + name + "\n"
+	for (var i = 0; i < array_length(cost_info_arr); ++i) {
+	    var cost = cost_info_arr[i]
+		text += global.resource_names[cost.type] + ": " + string(cost.ammount) + "\n"
+	}
+	return text
+}
+
 items = []
 items_number = 0
-ui_radius = 128
+ui_radius = 150
 ui_angle_step = 60
 sprite_index = spr_building_ui
 image_speed = 0
@@ -50,6 +61,7 @@ mouse_pressed = false
 override_displaying_time = 60
 override_displaying = 0
 parent = noone
+text_y_delta = 0
 
 disconnect_dist = 200
 

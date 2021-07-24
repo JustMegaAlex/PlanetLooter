@@ -22,7 +22,7 @@ global.resource_names[Resource.junk] = "junk"
 
 global.ResourceCost = {
 	metall: [{type: Resource.ore, ammount: 5}],
-	fuel: [{type: Resource.organic, ammount: 5}],
+	fuel: [{type: Resource.organic, ammount: 3}],
 	part: [{type: Resource.metall, ammount: 4}, 
 		   {type: Resource.junk, ammount: 1}],
 }

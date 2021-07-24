@@ -159,8 +159,8 @@ fuel_producer_pause_time = 120
 fuel_producer_pause = 0
 
 // systems
-hp_max = 10
-hp = hp_max
+hull = 10
+hp = hull
 cargo = 100
 tank = 15
 tank_load = tank
@@ -187,12 +187,16 @@ AvailableUpgrades = {
 		   {cost:[[Resource.part, 30]], value: {normal: 8, cruise: 24, consumption: 0.0105}},
 		   {cost:[[Resource.part, 30]], value: {normal: 9, cruise: 27, consumption: 0.012}},
 		   {cost:[[Resource.part, 30]], value: {normal: 10, cruise: 30, consumption: 0.014}}, ],
+	hull: [{cost:[[Resource.part, 5]], value: 13},
+			{cost:[[Resource.part, 12]], value: 16},
+			{cost:[[Resource.part, 20]], value: 20}, ],
 }
 Upgrades = {
 	weapon: -1,
 	cargo: -1,
 	tank: -1,
 	sp: -1,
+	hull: -1,
 }
 
 // drawing compas

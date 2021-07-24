@@ -14,7 +14,7 @@ function Upgrader(sys, ui_parent) constructor {
 Repairer = {
 	ui_parent: id,
 	action: function() {
-		if obj_looter.hp >= obj_looter.hp_max {
+		if obj_looter.hp >= obj_looter.hull {
 			self.ui_parent.ui_message("hp full", true)
 			return 0
 		}
@@ -32,4 +32,5 @@ self.add_item(-1, "upgrade\nweapon", new Upgrader("weapon", id))
 self.add_item(-1, "upgrade\nsp", new Upgrader("sp", id))
 self.add_item(-1, "upgrade\ncargo", new Upgrader("cargo", id))
 self.add_item(-1, "upgrade\ntank", new Upgrader("tank", id))
+self.add_item(-1, "upgrade\nhull", new Upgrader("hull", id))
 self.add_item(-1, "repair", Repairer)

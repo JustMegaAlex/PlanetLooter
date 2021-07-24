@@ -3,7 +3,7 @@
     "name": "spr_building_ui",
     "path": "sprites/spr_building_ui/spr_building_ui.yy",
   },
-  "solid": false,
+  "solid": true,
   "visible": true,
   "spriteMaskId": null,
   "persistent": false,
