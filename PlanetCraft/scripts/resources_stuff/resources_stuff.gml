@@ -7,6 +7,7 @@ enum Resource {
 	metall,
 	fuel,
 	part,
+	junk,
 	types_number
 }
 
@@ -16,6 +17,7 @@ global.resource_names[Resource.organic] = "organic"
 global.resource_names[Resource.metall] = "metall"
 global.resource_names[Resource.fuel] = "fuel"
 global.resource_names[Resource.part] = "part"
+global.resource_names[Resource.junk] = "junk"
 
 
 global.ResourceCost = {

@@ -6,5 +6,6 @@ function set_hit(weapon) {
 	}
 }
 
+is_moving_object = false
 side = Sides.neutral
 hp = 1
