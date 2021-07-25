@@ -1,4 +1,8 @@
 
+life_dist -= sp
+if not life_dist
+	instance_destroy()
+
 xprev = x
 yprev = y
 scr_move(sp, image_angle)

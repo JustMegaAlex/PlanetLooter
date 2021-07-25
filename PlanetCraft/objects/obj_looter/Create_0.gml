@@ -79,8 +79,8 @@ function check_cargo_full(ammount) {
 function upgrade_system(sys) {
 	if upgrades_count == core_power
 		return "core power\n depleted"
-	var cur_level = variable_struct_get(Upgrades, sys)
-	var available = variable_struct_get(AvailableUpgrades, sys)
+	var cur_level = Upgrades[$ sys]
+	var available = AvailableUpgrades[$ sys]
 	if cur_level == array_length(available) - 1
 		return "  system\nfully upgraded"
 	var up_level = cur_level + 1
@@ -127,6 +127,7 @@ image_speed = 0
 
 shoot_dir = 0
 reloading = 0
+bullet_sp = 14
 
 grav = 0.05
 gravx = 0
@@ -134,7 +135,7 @@ gravy = 0
 gravity_dist = 300
 gravity_min_dist = 8
 
-resources = array_create(Resource.types_number, 20)
+resources = array_create(Resource.types_number, 0)
 resources[0] = 0
 
 current_planet = noone
