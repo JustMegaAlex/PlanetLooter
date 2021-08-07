@@ -3,7 +3,7 @@ event_inherited()
 
 
 function set_hit(weapon) {
-	hp -= weapon.dmg * obj_debug.capture_damage(id)
+	hp -= weapon.damage * obj_debug.capture_damage(id)
 	if hp <= 0 {
 		global.game_over = true
 		image_index = 1
@@ -27,7 +27,7 @@ function add_resource(type, ammount) {
 	}
 	if (cur_load + ammount) > max_load
 		return false
-	resources[type] += ammount
+	resources[$ type] += ammount
 	if type == "fuel"
 		tank_load += ammount
 	else
@@ -39,9 +39,9 @@ function add_resource(type, ammount) {
 function spend_resource(type, ammount) {
 	if type == "empty"
 		return true
-	if resources[type] < ammount
+	if resources[$ type] < ammount
 		return false
-	resources[type] -= ammount
+	resources[$type] -= ammount
 	if type == "fuel" {
 		tank_load -= ammount
 		fuel_producer_pause = fuel_producer_pause_time
@@ -60,8 +60,8 @@ function exchange_resources(in, in_ammount, cost_info_arr) {
 	for (var i = 0; i < array_length(cost_info_arr); ++i) {
 	    var cost = cost_info_arr[i]
 		var result_cost_ammount = cost.ammount * in_ammount
-		if resources[cost.type] < result_cost_ammount
-			return "need more\n" + global.resource_types[in].name
+		if resources[$ cost.type] < result_cost_ammount
+			return "need more\n" + global.resource_types[$ in].name
 		// check loads
 		var out_fuel = (cost.type == "fuel")
 		crg -= result_cost_ammount * !out_fuel
@@ -72,10 +72,10 @@ function exchange_resources(in, in_ammount, cost_info_arr) {
 			return "tank full"
 	}	
 	// exchange
-	resources[in] += in_ammount
+	resources[$in] += in_ammount
 	for (var i = 0; i < array_length(cost_info_arr); ++i) {
 	    var cost = cost_info_arr[i]
-		resources[cost.type] -= cost.ammount * in_ammount
+		resources[$cost.type] -= cost.ammount * in_ammount
 	}
 	cargo_load = crg
 	tank_load = tnk
@@ -104,7 +104,7 @@ function upgrade_system(sys) {
 	for (var i = 0; i < array_length(costarr); ++i) {
 		var restype = costarr[i][0]
 		var resammount = costarr[i][1]
-		if resources[restype] < resammount
+		if resources[$restype] < resammount
 			return "need more\n" + global.resource_names[restype]
 	}
 	// spend resoures
@@ -229,5 +229,5 @@ if not instance_exists(obj_camera) {
 
 
 // weapon system
-carry_weapon_types = ["pulse"]
+carry_weapon_types = ["plazma"]
 use_weapon = carry_weapon_types[0]

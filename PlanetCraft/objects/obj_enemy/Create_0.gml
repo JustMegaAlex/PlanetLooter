@@ -10,7 +10,7 @@ enum Enemy {
 }
 
 function set_hit(weapon) {
-	hp -= weapon.dmg * obj_debug.capture_damage(id)
+	hp -= weapon.damage * obj_debug.capture_damage(id)
 	state = "warmup"
 	dir = point_direction(x, y, obj_looter.x, obj_looter.y)
 	trigger_friendly_units()
@@ -72,7 +72,6 @@ shoot_dir_wiggle = 8
 reloading = 0
 weapon.reload_time = 25
 bullet_sp = 10
-bullet_sprite = spr_bullet_yellow
 warmedup = 0
 warmup_sp = 0.01
 

@@ -2,7 +2,7 @@
 visible = false
 alarm[0] = 1
 sp = 10
-life_dist = 300
+life_distance = 300
 side = -1
 
 xprev = x

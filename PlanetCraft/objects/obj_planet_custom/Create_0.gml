@@ -18,10 +18,10 @@ function generate_terrain(tmesh) {
 			if terrain_type == noone
 				continue
 			
-			var rdata = get_resource_data_by_mesh(resources[i][j])
+			var rdata = get_resource_data_by_mesh(resources[$i][j])
 			// make more organic on planet surface
 			if rdata.type != "empty" {
-				var modified_val_r = modify_resource_value(resources[i][j], i, j, rdata.type)
+				var modified_val_r = modify_resource_value(resources[$i][j], i, j, rdata.type)
 				rdata = get_resource_data_by_mesh(modified_val_r)
 			}
 			tmesh[@ i][@ j] = terrain_add(i, j, terrain_type, rdata)

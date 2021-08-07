@@ -1,7 +1,7 @@
 {
   "spriteId": {
-    "name": "spr_bullet",
-    "path": "sprites/spr_bullet/spr_bullet.yy",
+    "name": "spr_bullet_plazma",
+    "path": "sprites/spr_bullet_plazma/spr_bullet_plazma.yy",
   },
   "solid": false,
   "visible": true,
@@ -28,8 +28,8 @@
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "Objects",
-    "path": "folders/Objects.yy",
+    "name": "projectiles",
+    "path": "folders/Objects/projectiles.yy",
   },
   "resourceVersion": "1.0",
   "name": "obj_bullet",
