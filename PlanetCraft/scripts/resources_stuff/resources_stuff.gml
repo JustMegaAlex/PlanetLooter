@@ -21,11 +21,33 @@ global.resource_names[Resource.junk] = "junk"
 
 
 global.ResourceCost = {
-	metall: [{type: Resource.ore, ammount: 5}],
-	fuel: [{type: Resource.organic, ammount: 3}],
-	part: [{type: Resource.metall, ammount: 4}, 
-		   {type: Resource.junk, ammount: 1}],
+	metall: [{type: "ore", ammount: 5}],
+	fuel: [{type: "organic", ammount: 3}],
+	part: [{type: "metall", ammount: 4}, 
+		   {type: "junk", ammount: 1}],
 }
+
+global.resource_types = {}
+
+function ResourceType(name, is_projectile, img_index, cost) constructor {
+	self.name = name
+	self.is_projectile = is_projectile
+	self.cost = cost
+	self.img_index = img_index
+	if variable_struct_get(global.resource_types, name)
+		throw "\n:ResourceType constructor: resource type with name '" + name + "' already exists"
+	variable_struct_set(global.resource_types, name, self)
+}
+
+var zerocost = {}
+rtype_empty = new ResourceType("empty", false, 0, zerocost)
+rtype_ore = new ResourceType("ore", false, 1, zerocost)
+rtype_organic = new ResourceType("organic", false, 2, zerocost)
+rtype_metall = new ResourceType("metall", true, 3, global.ResourceCost.metall)
+rtype_fuel = new ResourceType("fuel", false, 4, global.ResourceCost.fuel)
+rtype_part = new ResourceType("part", false, 5, global.ResourceCost.part)
+rtype_junk = new ResourceType("junk", false, 6, zerocost)
+
 
 function spawn_resource_item(type, xx, yy, sp, dir) { // sp1, sp2, sp_is_coords) {
 	//if sp_is_coords {

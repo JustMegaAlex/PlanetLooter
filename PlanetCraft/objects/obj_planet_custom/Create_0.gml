@@ -20,7 +20,7 @@ function generate_terrain(tmesh) {
 			
 			var rdata = get_resource_data_by_mesh(resources[i][j])
 			// make more organic on planet surface
-			if rdata.type != Resource.empty {
+			if rdata.type != "empty" {
 				var modified_val_r = modify_resource_value(resources[i][j], i, j, rdata.type)
 				rdata = get_resource_data_by_mesh(modified_val_r)
 			}
@@ -49,9 +49,9 @@ function modify_resource_value(val, i, j, type) {
 	// -0.3, -0.25, 0.2, 0.2, 0.25, 0.3
 	var add = 0
 	var d = depth_at(i, j)
-	if (d < organic_layer_depth) and (type == Resource.ore)
+	if (d < organic_layer_depth) and (type == "ore")
 		var add = -0.3 + d * (0.05)
-	else if (d >= organic_layer_depth) and (type == Resource.organic)
+	else if (d >= organic_layer_depth) and (type == "organic")
 		var add = 0.2 + d * (0.05)
 	add = clamp(add, -0.3, 0.3)
 	return val + add
@@ -76,13 +76,13 @@ function get_cell_type(val) {
 
 _resource_data = [
 	// [_min_mesh_val, type, max_ammount, tile_index]
-	[0.3, Resource.empty, 0.01, 0],
-	[0.43, Resource.organic, 2, 4],
-	[0.47, Resource.organic, 4, 5],
-	[0.50, Resource.organic, 8, 6],
-	[0.7, Resource.ore, 2, 1],
-	[0.8, Resource.ore, 6, 2],
-	[1, Resource.ore, 15, 3],
+	[0.3, "empty", 0.01, 0],
+	[0.43, "organic", 2, 4],
+	[0.47, "organic", 4, 5],
+	[0.50, "organic", 8, 6],
+	[0.7, "ore", 2, 1],
+	[0.8, "ore", 6, 2],
+	[1, "ore", 15, 3],
 ]
 
 function get_resource_data_by_mesh(val) {

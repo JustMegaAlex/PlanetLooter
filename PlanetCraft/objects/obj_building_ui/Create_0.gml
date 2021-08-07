@@ -28,20 +28,18 @@ function ui_message(text, warning) {
 
 function Producer(resource, ui_parent) constructor {
 	self.type = resource
-	self.type_name = global.resource_names[resource]
 	self.ui_parent = ui_parent
 	action = function() {
-		var cost_info_arr = global.ResourceCost[$ self.type_name]
+		var cost_info_arr = global.resource_types[$ self.type]
 		var msg = obj_looter.exchange_resources(self.type, 1, cost_info_arr)
 		if msg != "ok"
-			self.ui_parent.ui_message(msg, true)		
+			self.ui_parent.ui_message(msg, true)
 	}
 }
 
 function resource_cost_text(type) {
-	var name = global.resource_names[type]
-	var cost_info_arr = global.ResourceCost[$ name]
-	var text = "produce\n" + name + "\n"
+	var cost_info_arr = global.resource_types[$ type]
+	var text = "produce\n" + type + "\n"
 	for (var i = 0; i < array_length(cost_info_arr); ++i) {
 	    var cost = cost_info_arr[i]
 		text += global.resource_names[cost.type] + ": " + string(cost.ammount) + "\n"

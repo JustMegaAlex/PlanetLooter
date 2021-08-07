@@ -5,10 +5,12 @@ if not global.game_over {
 	key_up = keyboard_check(ord("W")) or keyboard_check(vk_up)
 	key_down = keyboard_check(ord("S")) or keyboard_check(vk_down)
 	key_interact = keyboard_check_pressed(ord("E"))
-	key_shoot = mouse_check_button(mb_left)
+	key_shoot = mouse_check_button(mb_left) or keyboard_check(vk_lcontrol)
 	key_warp = keyboard_check(vk_space)
 	key_cruise = keyboard_check(ord("F"))
 	key_cruise_off = keyboard_check_pressed(ord("F"))
+	key_switch_forward = keyboard_check_pressed(ord("S"))
+	key_switch_back = keyboard_check_pressed(ord("A"))
 	if in_cruise_mode < 1
 		dir = point_direction(x, y, mouse_x, mouse_y)
 } else {
@@ -22,7 +24,7 @@ if not global.game_over {
 
 if warping {
 	if audio_sound_get_track_position(warp_sound) > 1.9 {
-		resources[Resource.fuel] -= warp_fuel_cost
+		resources[$ "fuel"] -= warp_fuel_cost
 		global.level++
 		// restart room
 		alarm[1] = 1
@@ -33,14 +35,14 @@ if warping {
 		warp_sound = noone
 	}
 
-} else if key_warp and (resources[Resource.fuel] >= 10) {
+} else if key_warp and (resources[$ "fuel"] >= 10) {
 	warping = true
 	warp_sound = audio_play_sound(snd_warp, 0, false)
 }
 
 if not --fuel_producer_pause {
 	var cost_info_arr = global.ResourceCost.fuel
-	self.exchange_resources(Resource.fuel, fuel_producer_ratio, cost_info_arr)
+	self.exchange_resources("fuel", fuel_producer_ratio, cost_info_arr)
 }
 
 
@@ -97,7 +99,7 @@ if in_cruise_mode >= 1 {
 	// input_h = 0 and hsp < 0 and gravx > 0
 	hsp = lengthdir_x(cruise_sp, dir)
 	vsp = lengthdir_y(cruise_sp, dir)
-	if !spend_resource(Resource.fuel, sp.consumption) or key_cruise_off
+	if !spend_resource("fuel", sp.consumption) or key_cruise_off
 		in_cruise_mode = 0
 
 	// jet effect
@@ -145,7 +147,7 @@ if (vsp > 0) and !down_free or (vsp < 0) and !up_free
 reloading--
 if key_shoot and !reloading and !global.ui_interface_on and (in_cruise_mode < 1) {
 	shoot_dir = point_direction(x, y, mouse_x, mouse_y)
-	shoot(shoot_dir, id, bullet_sp)
+	shoot(shoot_dir, id, use_weapon, bullet_sp)
 }
 
 //// interacting

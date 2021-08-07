@@ -19,7 +19,7 @@ function set_hit(weapon) {
 				spawn_resource_item(resource_data.type, x, y, 1, random(360))
 			resource_data.ammount = _ammount
 			if !resource_data.ammount {
-				resource_data.type = Resource.empty
+				resource_data.type = "empty"
 				resource_data.tile_index = 0
 			}
 			planet_inst.tiles_redraw_resource_tile(i, j)

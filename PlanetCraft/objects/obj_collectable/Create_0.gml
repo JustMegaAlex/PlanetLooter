@@ -13,4 +13,4 @@ pull_dist = 50
 min_dist = 8
 image_speed = 0
 inertial_moving = true
-resource_type = Resource.empty
+resource_type = "empty"

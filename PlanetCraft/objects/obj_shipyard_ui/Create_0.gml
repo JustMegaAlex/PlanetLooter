@@ -18,7 +18,7 @@ Repairer = {
 			self.ui_parent.ui_message("hp full", true)
 			return 0
 		}
-		if obj_looter.spend_resource(Resource.metall, 2) {
+		if obj_looter.spend_resource("metall", 2) {
 			obj_looter.hp++
 			return 0	
 		}

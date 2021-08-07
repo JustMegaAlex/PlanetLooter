@@ -122,3 +122,12 @@ function point_dist(xx, yy) {
 function point_dir(xx, yy) {
 	return point_direction(id.x, id.y, xx, yy)
 }
+
+function struct_sum(struct) {
+	var names = variable_struct_get_names(struct)
+	var res = 0
+	for(var i = 0; i < array_length(names); ++i) {
+		res += struct[$ names[i]]	
+	}
+	return res
+}

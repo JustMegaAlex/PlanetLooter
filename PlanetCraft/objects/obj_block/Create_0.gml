@@ -20,7 +20,7 @@ function set_hit(weapon) {
 									inst_dir(obj_looter) + random_range(-45, 45))
 			resource_data.ammount = _ammount
 			if !resource_data.ammount {
-				resource_data.type = Resource.empty
+				resource_data.type = "empty"
 				resource_data.tile_index = 0
 			}
 			planet_inst.tiles_redraw_resource_tile(i, j)
