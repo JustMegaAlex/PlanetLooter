@@ -11,12 +11,6 @@ function approach(val, to, ammount) {
 	return val + sp
 }
 
-function cycle_decrease(val, min_, max_) {
-	val--
-	var inboudns = val >= min_
-	return val * inboudns + max_ * !inboudns
-}
-
 function array_sum(arr) {
 	var res = 0
 	for (var i = 0; i < array_length(resources); ++i) {
@@ -66,6 +60,31 @@ function cycle_increase(val, min_, max_) {
 	val++
 	var inboudns = val < max_
 	return val * inboudns + min_ * !inboudns
+}
+
+function cycle_decrease(val, min_, max_) {
+	val--
+	var inboudns = val >= min_
+	return val * inboudns + (max_ - 1) * !inboudns
+}
+
+// 5 6 4 9 -> 5
+// 5 -7 4 9 -> 7
+// 4 1 0 5 -> 0
+// 6 6 0 6 -> 5
+function cycle_change(val, ammount, min_, max_) {
+	val += ammount // 12
+	var delta = max_ - min_ // 6
+	if val < min_ {
+		val = max_ - abs(min_ - val) mod delta - 1
+		// workaround for case: 6 6 0 6 -> 5
+		if val < min_
+			return max_ - 1
+		return val
+	}
+	if val > max_
+		return min_ + abs(val - max_) mod delta - 1
+	return val
 }
 
 function chance(p) {

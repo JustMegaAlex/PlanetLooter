@@ -229,5 +229,15 @@ if not instance_exists(obj_camera) {
 
 
 // weapon system
-carry_weapon_types = ["plazma"]
-use_weapon = carry_weapon_types[0]
+carry_weapon_types = ["plazma", "pulse"]
+use_weapon_index = 0
+use_weapon = carry_weapon_types[use_weapon_index]
+
+function switch_weapon(swtch) {
+	var num = array_length(carry_weapon_types)
+	if swtch
+		use_weapon_index = cycle_increase(use_weapon_index, 0, num)
+	else
+		use_weapon_index = cycle_decrease(use_weapon_index, 0, num)
+	use_weapon = carry_weapon_types[use_weapon_index]
+}
