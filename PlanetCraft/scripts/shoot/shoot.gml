@@ -25,6 +25,19 @@ function shoot(shoot_dir, spawner, wtype) {
 	//audio_play_sound(snd, 0, false)
 }
 
+function init_resource_bullet_names() {
+	var weapon_names = variable_struct_get_names(global.weapon_types)
+	for (var i = 0; i < array_length(weapon_names); ++i) {
+	    var wname = weapon_names[i]
+		var resource_name = global.weapon_types[$ wname].resource
+		if resource_name != "empty" {
+			var rtype = global.resource_types[$ resource_name]
+			rtype.is_bullet = true
+			rtype.bullet_name = wname
+		}
+	}
+}
+
 global.weapon_types = {
 	pulse: {
 		damage: 1,
@@ -52,7 +65,7 @@ global.weapon_types = {
 		mining: 1,
 		reload_time: 20,
 		sp: 20,
-		resource: "empty",
+		resource: "fuel",
 		knock_back_force: 3,
 		sprite: spr_bullet_plazma,
 		distance: 400
@@ -62,7 +75,7 @@ global.weapon_types = {
 		mining: 1,
 		reload_time: 5,
 		sp: 20,
-		resource: "empty",
+		resource: "metall",
 		knock_back_force: 1,
 		sprite: spr_bullet_metall_orb,
 		distance: 250
@@ -72,10 +85,12 @@ global.weapon_types = {
 		mining: 0.5,
 		reload_time: 13,
 		sp: 20,
-		resource: "empty",
+		resource: "bullet_homing",
 		knock_back_force: 1,
 		sprite: spr_bullet_homing,
 		object: obj_bullet_homing,
 		distance: 1000
 	}
 }
+
+init_resource_bullet_names()

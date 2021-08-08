@@ -18,17 +18,17 @@ function init_resources() {
 	}
 }
 
-function add_resource(type, ammount) {
+function add_resource(rname, ammount) {
 	var cur_load = cargo_load
 	var max_load = cargo
-	if type == "fuel" {
+	if rname == "fuel" {
 		cur_load = tank_load
 		max_load = tank
 	}
 	if (cur_load + ammount) > max_load
 		return false
-	resources[$ type] += ammount
-	if type == "fuel"
+	resources[$ rname] += ammount
+	if rname == "fuel"
 		tank_load += ammount
 	else
 		cargo_load += ammount
@@ -36,18 +36,22 @@ function add_resource(type, ammount) {
 	return true
 }
 
-function spend_resource(type, ammount) {
-	if type == "empty"
+function spend_resource(rname, ammount) {
+	if rname == "empty"
 		return true
-	if resources[$ type] < ammount
+	if resources[$ rname] < ammount
 		return false
-	resources[$type] -= ammount
-	if type == "fuel" {
+	resources[$rname] -= ammount
+	if rname == "fuel" {
 		tank_load -= ammount
 		fuel_producer_pause = fuel_producer_pause_time
 	}
 	else
 		cargo_load -= ammount
+	// affect weapons
+	var rtype = global.resource_types[$ rname]
+	if rtype.is_bullet and (resources[$ rname] < 1)
+		array_remove(use_weapon_arr, rtype.bullet_name)
 	return true
 }
 
@@ -87,7 +91,31 @@ function check_cargo_full(ammount) {
 }
 
 function update_use_weapon_arr() {
-	
+	var wp_names = variable_struct_get_names(global.weapon_types)
+	for (var i = 0; i < array_length(wp_names); ++i) {
+	    var wname = wp_names[i]
+		var wtype = global.weapon_types[$ wname]
+		if resources[$ wtype.resource] >= 1
+			array_push(use_weapon_arr, wname)
+	}
+	// init use_weapon
+	if (use_weapon_index == -1) and array_length(use_weapon_arr)
+		use_weapon_index = 0
+		use_weapon = use_weapon_arr[use_weapon_index]
+}
+
+function switch_weapon(swtch) {
+	var num = array_length(use_weapon_arr)
+	if swtch
+		use_weapon_index = cycle_increase(use_weapon_index, 0, num)
+	else
+		use_weapon_index = cycle_decrease(use_weapon_index, 0, num)
+	use_weapon = use_weapon_arr[use_weapon_index]
+}
+
+function looter_shoot() {
+	if spend_resource(use_weapon.resource, 1)
+		shoot(shoot_dir, id, use_weapon)
 }
 
 function upgrade_system(sys) {
@@ -229,18 +257,11 @@ if not instance_exists(obj_camera) {
 
 
 // weapon system
-use_weapon_arr = ["plazma", "pulse", "metall_orbs", "homing"]
-use_weapon_index = 0
-use_weapon = use_weapon_arr[use_weapon_index]
+use_weapon_arr = []
+use_weapon_index = -1
+use_weapon = noone
+update_use_weapon_arr()
 
-function switch_weapon(swtch) {
-	var num = array_length(use_weapon_arr)
-	if swtch
-		use_weapon_index = cycle_increase(use_weapon_index, 0, num)
-	else
-		use_weapon_index = cycle_decrease(use_weapon_index, 0, num)
-	use_weapon = use_weapon_arr[use_weapon_index]
-}
 
 // create module ui
 create_module_ui_inst = noone
