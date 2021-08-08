@@ -5,8 +5,8 @@
   "spriteMaskId": null,
   "persistent": false,
   "parentObjectId": {
-    "name": "obj_with_ui",
-    "path": "objects/obj_with_ui/obj_with_ui.yy",
+    "name": "obj_building_ui",
+    "path": "objects/obj_building_ui/obj_building_ui.yy",
   },
   "physicsObject": false,
   "physicsSensor": false,
@@ -26,11 +26,11 @@
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "buidlings",
-    "path": "folders/Objects/buidlings.yy",
+    "name": "ui",
+    "path": "folders/Objects/ui.yy",
   },
   "resourceVersion": "1.0",
-  "name": "obj_building",
+  "name": "obj_plant_ui",
   "tags": [],
   "resourceType": "GMObject",
 }

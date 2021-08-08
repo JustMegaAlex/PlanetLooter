@@ -241,3 +241,6 @@ function switch_weapon(swtch) {
 		use_weapon_index = cycle_decrease(use_weapon_index, 0, num)
 	use_weapon = use_weapon_arr[use_weapon_index]
 }
+
+// create module ui
+create_module_ui_inst = noone

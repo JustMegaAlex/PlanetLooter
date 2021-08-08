@@ -5,7 +5,7 @@ if not global.game_over {
 	key_up = keyboard_check(ord("W")) or keyboard_check(vk_up)
 	key_down = keyboard_check(ord("S")) or keyboard_check(vk_down)
 	key_interact = keyboard_check_pressed(ord("E"))
-	key_settle_module = keyboard_check_pressed(ord("Q"))
+	key_create_module = keyboard_check_pressed(ord("Q"))
 	key_shoot = mouse_check_button(mb_left) or keyboard_check(vk_lcontrol)
 	key_warp = keyboard_check(vk_space)
 	key_cruise = keyboard_check(ord("F"))
@@ -21,6 +21,16 @@ if not global.game_over {
 	key_down = false
 	key_interact = false
 	key_shoot = false
+}
+
+// create module ui
+if key_create_module {
+	if create_module_ui_inst
+		instance_destroy(create_module_ui_inst)
+	else {
+		create_module_ui_inst = instance_create_layer(x, y, layer, obj_ui_create_module_menu)
+		create_module_ui_inst.parent = id
+	}
 }
 
 // weapon switch
@@ -93,7 +103,7 @@ input_h = key_right - key_left
 input_v = key_down - key_up
 move_h = key_right * right_free - key_left * left_free
 move_v = key_down * down_free - key_up * up_free
-var input = abs(move_h) or abs(move_v)
+var input = (abs(move_h) or abs(move_v)) * !create_module_ui_inst
 
 
 if in_cruise_mode >= 1 {
@@ -153,7 +163,11 @@ if (vsp > 0) and !down_free or (vsp < 0) and !up_free
 
 //// shooting
 reloading--
-if key_shoot and !reloading and !global.ui_interface_on and (in_cruise_mode < 1) {
+if key_shoot 
+		and !reloading 
+		and !global.ui_interface_on 
+		and (in_cruise_mode < 1) 
+		and !create_module_ui_inst {
 	shoot_dir = point_direction(x, y, mouse_x, mouse_y)
 	shoot(shoot_dir, id, use_weapon)
 }
@@ -164,7 +178,7 @@ if key_interact {
 		instance_destroy(obj_building_ui)
 		global.ui_interface_on = false
 	} else {
-		var building = instance_place(x, y, obj_building)
+		var building = instance_place(x, y, obj_with_ui)
 		if building
 			building.interface()
 	}

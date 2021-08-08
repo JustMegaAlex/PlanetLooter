@@ -1,5 +1,5 @@
 
-mouse_over = instance_place(mouse_x, mouse_y, obj_ui_item)
+mouse_over = collision_point(mouse_x, mouse_y, obj_ui_item, false, true)
 mouse_pressed = false
 override_displaying--
 if not override_displaying {
