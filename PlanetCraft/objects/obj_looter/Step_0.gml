@@ -5,6 +5,7 @@ if not global.game_over {
 	key_up = keyboard_check(ord("W")) or keyboard_check(vk_up)
 	key_down = keyboard_check(ord("S")) or keyboard_check(vk_down)
 	key_interact = keyboard_check_pressed(ord("E"))
+	key_settle_module = keyboard_check_pressed(ord("Q"))
 	key_shoot = mouse_check_button(mb_left) or keyboard_check(vk_lcontrol)
 	key_warp = keyboard_check(vk_space)
 	key_cruise = keyboard_check(ord("F"))
