@@ -73,17 +73,21 @@ function cycle_decrease(val, min_, max_) {
 // 4 1 0 5 -> 0
 // 6 6 0 6 -> 5
 function cycle_change(val, ammount, min_, max_) {
-	val += ammount // 12
-	var delta = max_ - min_ // 6
+	val += ammount // 10
+	var delta = max_ - min_ // 5
 	if val < min_ {
-		val = max_ - abs(min_ - val) mod delta - 1
+		val = max_ - abs(min_ - val) mod delta + 1
 		// workaround for case: 6 6 0 6 -> 5
+		if val > max_
+			return min_ + 1
+		return val
+	}
+	if val > max_ {
+		val = min_ + abs(val - max_) mod delta - 1
 		if val < min_
 			return max_ - 1
 		return val
 	}
-	if val > max_
-		return min_ + abs(val - max_) mod delta - 1
 	return val
 }
 

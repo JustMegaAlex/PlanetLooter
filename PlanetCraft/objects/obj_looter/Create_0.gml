@@ -86,7 +86,7 @@ function check_cargo_full(ammount) {
 	return (cargo_load + ammount) > cargo
 }
 
-function update_carry_weapon_types() {
+function update_use_weapon_arr() {
 	
 }
 
@@ -229,15 +229,15 @@ if not instance_exists(obj_camera) {
 
 
 // weapon system
-carry_weapon_types = ["plazma", "pulse"]
+use_weapon_arr = ["plazma", "pulse", "metall_orbs", "homing"]
 use_weapon_index = 0
-use_weapon = carry_weapon_types[use_weapon_index]
+use_weapon = use_weapon_arr[use_weapon_index]
 
 function switch_weapon(swtch) {
-	var num = array_length(carry_weapon_types)
+	var num = array_length(use_weapon_arr)
 	if swtch
 		use_weapon_index = cycle_increase(use_weapon_index, 0, num)
 	else
 		use_weapon_index = cycle_decrease(use_weapon_index, 0, num)
-	use_weapon = carry_weapon_types[use_weapon_index]
+	use_weapon = use_weapon_arr[use_weapon_index]
 }

@@ -85,4 +85,4 @@ controlled_building = noone
 hp = 7
 
 side = Sides.theirs
-use_weapon = "pulse"
+use_weapon = "pulse_spread"
