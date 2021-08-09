@@ -169,7 +169,7 @@ if key_shoot
 		and (in_cruise_mode < 1) 
 		and !create_module_ui_inst {
 	shoot_dir = point_direction(x, y, mouse_x, mouse_y)
-	shoot(shoot_dir, id, use_weapon)
+	looter_shoot(shoot_dir)
 }
 
 //// interacting

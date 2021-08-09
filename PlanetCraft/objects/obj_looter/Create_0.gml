@@ -50,8 +50,11 @@ function spend_resource(rname, ammount) {
 		cargo_load -= ammount
 	// affect weapons
 	var rtype = global.resource_types[$ rname]
-	if rtype.is_bullet and (resources[$ rname] < 1)
-		array_remove(use_weapon_arr, rtype.bullet_name)
+	if rtype.is_bullet {
+		var wtype = global.weapon_types[$ rtype.bullet_name]
+		if resources[$ rname] < wtype.resource_ammount
+			array_remove(use_weapon_arr, rtype.bullet_name)
+	}
 	return true
 }
 
@@ -113,8 +116,9 @@ function switch_weapon(swtch) {
 	use_weapon = use_weapon_arr[use_weapon_index]
 }
 
-function looter_shoot() {
-	if spend_resource(use_weapon.resource, 1)
+function looter_shoot(shoot_dir) {
+	var weapon = global.weapon_types[$ use_weapon]
+	if spend_resource(weapon.resource, weapon.resource_ammount)
 		shoot(shoot_dir, id, use_weapon)
 }
 

@@ -3,10 +3,6 @@ function shoot(shoot_dir, spawner, wtype) {
 	var weapon = global.weapon_types[$ wtype]
 	if object_is_ancestor(spawner.object_index, obj_ship_entity)
 		spawner.reloading = weapon.reload_time
-	// spend fuel
-	if spawner.object_index == obj_looter
-		if not spawner.spend_resource(weapon.resource, 1)
-			return 0
 
 	var object_bullet = obj_bullet
 	if variable_struct_exists(weapon, "object")
@@ -48,6 +44,7 @@ global.weapon_types = {
 		knock_back_force: 2,
 		sprite: spr_bullet_pulse,
 		distance: 400,
+		resource_ammount: 1,
 	},
 	pulse_spread: {
 		damage: 1,
@@ -58,7 +55,8 @@ global.weapon_types = {
 		knock_back_force: 2,
 		sprite: spr_bullet_pulse,
 		distance: 400,
-		object: obj_bullet_pulse_spread
+		object: obj_bullet_pulse_spread,
+		resource_ammount: 1,
 	},
 	plazma: {
 		damage: 3,
@@ -68,7 +66,8 @@ global.weapon_types = {
 		resource: "fuel",
 		knock_back_force: 3,
 		sprite: spr_bullet_plazma,
-		distance: 400
+		distance: 400,
+		resource_ammount: 0.2,
 	},
 	metall_orbs: {
 		damage: 0.25,
@@ -78,7 +77,8 @@ global.weapon_types = {
 		resource: "metall",
 		knock_back_force: 1,
 		sprite: spr_bullet_metall_orb,
-		distance: 250
+		distance: 250,
+		resource_ammount: 0.05,
 	},
 	homing: {
 		damage: 1,
@@ -89,7 +89,8 @@ global.weapon_types = {
 		knock_back_force: 1,
 		sprite: spr_bullet_homing,
 		object: obj_bullet_homing,
-		distance: 1000
+		distance: 1000,
+		resource_ammount: 1,
 	}
 }
 
