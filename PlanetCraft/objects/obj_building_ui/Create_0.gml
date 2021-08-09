@@ -30,7 +30,7 @@ function Producer(resource, ui_parent) constructor {
 	self.type = resource
 	self.ui_parent = ui_parent
 	action = function() {
-		var cost_info_arr = global.resource_types[$ self.type]
+		var cost_info_arr = global.resource_types[$ self.type].cost
 		var msg = obj_looter.exchange_resources(self.type, 1, cost_info_arr)
 		if msg != "ok"
 			self.ui_parent.ui_message(msg, true)

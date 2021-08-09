@@ -19,6 +19,11 @@ function init_resources() {
 }
 
 function add_resource(rname, ammount) {
+	audio_play_sound(snd_pick, 0, false)
+	return self._add_resource(rname, ammount)
+}
+
+function _add_resource(rname, ammount) {
 	var cur_load = cargo_load
 	var max_load = cargo
 	if rname == "fuel" {
@@ -27,27 +32,40 @@ function add_resource(rname, ammount) {
 	}
 	if (cur_load + ammount) > max_load
 		return false
-	resources[$ rname] += ammount
 	if rname == "fuel"
 		tank_load += ammount
-	else
+	else {
 		cargo_load += ammount
-	audio_play_sound(snd_pick, 0, false)
+		resources[$ rname] += ammount
+	}
+	// affect weapons
+	var rtype = global.resource_types[$ rname]
+	if rtype.is_bullet {
+		if !array_has(use_weapon_arr, rtype.bullet_name) {
+			var wtype = global.weapon_types[$ rtype.bullet_name]
+			if resources[$ rname] > wtype.resource_ammount
+				array_push(use_weapon_arr, rtype.bullet_name)
+		}
+	}
 	return true
 }
 
 function spend_resource(rname, ammount) {
 	if rname == "empty"
 		return true
-	if resources[$ rname] < ammount
-		return false
-	resources[$rname] -= ammount
+
 	if rname == "fuel" {
+		if tank_load < ammount
+			return false
 		tank_load -= ammount
 		fuel_producer_pause = fuel_producer_pause_time
+		return true
 	}
-	else
-		cargo_load -= ammount
+
+	if resources[$ rname] < ammount
+		return false
+	resources[$ rname] -= ammount
+	cargo_load -= ammount
 	// affect weapons
 	var rtype = global.resource_types[$ rname]
 	if rtype.is_bullet {
@@ -62,8 +80,9 @@ function exchange_resources(in, in_ammount, cost_info_arr) {
 	// metall 1, ore 3
 	// check resource
 	var in_fuel = (in == "fuel")
-	var crg = cargo_load + in_ammount * !in_fuel
-	var tnk = tank_load + in_ammount * in_fuel
+	var in_empty = (in == "empty")
+	var crg = cargo_load + in_ammount * !in_fuel * !in_empty
+	var tnk = tank_load + in_ammount * in_fuel * !in_empty
 	for (var i = 0; i < array_length(cost_info_arr); ++i) {
 	    var cost = cost_info_arr[i]
 		var result_cost_ammount = cost.ammount * in_ammount
@@ -73,17 +92,18 @@ function exchange_resources(in, in_ammount, cost_info_arr) {
 		var out_fuel = (cost.type == "fuel")
 		crg -= result_cost_ammount * !out_fuel
 		tnk -= result_cost_ammount * out_fuel
-		if crg > cargo
-			return "cargo full"
-		if tnk > tank
-			return "tank full"
-	}	
+	}
+	// check cargo and tank fullness
+	if crg > cargo
+		return "cargo full"
+	if tnk > tank
+		return "tank full"
 	// exchange
-	resources[$in] += in_ammount
 	for (var i = 0; i < array_length(cost_info_arr); ++i) {
 	    var cost = cost_info_arr[i]
-		resources[$cost.type] -= cost.ammount * in_ammount
+		self.spend_resource(cost.type, cost.ammount * in_ammount)
 	}
+	self._add_resource(in, in_ammount * !in_empty)
 	cargo_load = crg
 	tank_load = tnk
 	return "ok"

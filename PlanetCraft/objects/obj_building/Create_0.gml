@@ -37,9 +37,11 @@ function place_on_planet() {
 	}
 }
 
+visible = false
+alarm[0] = 1
+
 size = sprite_get_height(sprite_index) / global.grid_size
-planet = choose_planet()
-place_on_planet()
+planet = noone
 
 ui_object = noone
 
@@ -47,3 +49,4 @@ hp = 20
 side = Sides.neutral
 state = Building.friendly
 defenders = []
+

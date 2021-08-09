@@ -2,7 +2,7 @@
 var dist = point_distance(x, y, obj_looter.x, obj_looter.y)
 if dist < min_dist {
 	if obj_looter.add_resource(resource_type, 1)
-		instance_destroy()	
+		instance_destroy()
 
 } else if dist < pull_dist {
 	inertial_moving = false

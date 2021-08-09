@@ -1,6 +1,7 @@
 
 function set_resource_type(type) {
 	image_index = global.resource_types[$ type].img_index
+	resource_type = type
 }
 sp_base = 3
 sp_ratio = 10

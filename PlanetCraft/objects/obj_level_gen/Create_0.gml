@@ -15,7 +15,6 @@ function Node(xx, yy, nodes) constructor {
 	}
 }
 
-
 function generate_star_system() {
 	var blocks_num = random_range(0.5, 1) * blocks_max_num
 	while instance_number(obj_block) < blocks_num {
@@ -51,11 +50,10 @@ function generate_star_system_1 () {
 	//generate_asteroids(xmin, ymin, xmax, ymax)
 	level = min(global.level, array_length(buildings_progression) - 1)
 	var buildings_set = buildings_progression[level]
-	var controlled_buildings = create_buildings(buildings_set)
 	// enemies
 	var level = min(global.level, array_length(enemies_progression) - 1)
 	var enemies_set = enemies_progression[level]
-	create_enemies(enemies_set, controlled_buildings)
+	create_enemies(enemies_set)
 	
 	instance_destroy(obj_planet_mask)
 }
@@ -173,30 +171,22 @@ function get_planet_collision_coord(xx, yy, size) {
 	return mask
 }
 
-function create_enemies(set, controlled_buildings) {
-	var groups = set[0]
-	var min_ = set[1][0]
-	var max_= set[1][1]
-
-	repeat (groups) {			
-		var num = irandom_range(min_, max_)
+function create_enemies(set) {
+	var groups_distribution = set[0]
+	var forposts = set[1]
+	for (var i = 0; i < array_length(groups_distribution); ++i) {
+	    var num = i + 1
 		var planet = choose_planet()
 		var dist = planet.radius + 100
 		var angle = random(360)
-		// set a group to a controlled building
-		var bld = noone
-		if array_length(controlled_buildings) {
-			bld = array_pop(controlled_buildings)
-			planet = bld.planet
-			angle = inst_inst_dir(planet, bld)
-		}
 		var xx = planet.x + lengthdir_x(dist, angle)
 		var yy = planet.y + lengthdir_y(dist, angle)
 		repeat (num)
-			with instance_create_layer(xx+random(100), yy+random(100), "Instances", obj_enemy)
-				self.controlled_building = bld
+			instance_create_layer(xx+random(100), yy+random(100), "Instances", obj_enemy)
+		if (num >= forpost_min_group_size) and forposts-- {
+			with instance_create_layer(0, 0, "Instances", obj_production_module) {self.planet = planet}
+		}
 	}
-
 }
 
 function _create_enemy_group(xx, yy, num) {
@@ -218,13 +208,6 @@ function create_buildings(set) {
 		array_push(buildings, instance_create_layer(0, 0, "Instances", obj_building_manufacture))
 	repeat (yards)
 		array_push(buildings, instance_create_layer(0, 0, "Instances", obj_building_shipyard))
-	// set controlled buildings
-	repeat controlled_number {
-		var b = array_choose(buildings)
-		array_push(controlled_buildings, b)
-		array_remove(buildings, b)
-	}
-	return controlled_buildings
 }
 
 blocks_max_num = 2500
@@ -235,16 +218,20 @@ planet_min_size = 10
 planet_max_size = 15
 max_planet_dist = 4000
 min_planet_number = 3
-max_planet_number = 8
+max_planet_number = 6
 
+forpost_min_group_size = 6
 
 enemies_progression = [
-	// groups, [min_group_size, max_group_size]
-	[7, [2, 3]],
-	[12, [3, 4]],
-	[22, [5, 7]],
-	[26, [5, 12]],
-	[32, [8, 20]],
+	// groups, [min_group_size, max_group_size], forposts
+	//[7, [2, 3]], 0,
+	// [[<1-sized groups>, <2-sized groups>, ..., <n-sized groups>], forposts]
+	//1   2   3   4   5   6   7   8   9  10
+	[[3,  2,  2,  2,  0,  1], 1],
+	[[0,  0,  6,  5,  0,  0,  0,  2], 1],
+	[[0,  0, 12,  0,  0,  0,  0,  0,  0,  5],  3],
+	[[0,  0,  0,  0,  0,  0,  0,  0,  0, 10],  6],
+	[[0],  1],
 ]
 
 buildings_progression = [
