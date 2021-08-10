@@ -156,8 +156,8 @@ function upgrade_system(sys) {
 	for (var i = 0; i < array_length(costarr); ++i) {
 		var restype = costarr[i][0]
 		var resammount = costarr[i][1]
-		if resources[$restype] < resammount
-			return "need more\n" + global.resource_names[restype]
+		if resources[$ restype] < resammount
+			return "need more\n" + restype
 	}
 	// spend resoures
 	for (var i = 0; i < array_length(costarr); ++i) {
@@ -200,9 +200,6 @@ gravx = 0
 gravy = 0
 gravity_dist = 300
 gravity_min_dist = 8
-
-resources_arr = array_create(Resource.types_number, 0)
-resources_arr[0] = 0
 
 current_planet = noone
 

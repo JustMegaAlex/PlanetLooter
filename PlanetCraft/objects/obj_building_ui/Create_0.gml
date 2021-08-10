@@ -38,11 +38,11 @@ function Producer(resource, ui_parent) constructor {
 }
 
 function resource_cost_text(type) {
-	var cost_info_arr = global.resource_types[$ type]
+	var cost_info_arr = global.resource_types[$ type].cost
 	var text = "produce\n" + type + "\n"
 	for (var i = 0; i < array_length(cost_info_arr); ++i) {
 	    var cost = cost_info_arr[i]
-		text += global.resource_names[cost.type] + ": " + string(cost.ammount) + "\n"
+		text += cost.type + ": " + string(cost.ammount) + "\n"
 	}
 	return text
 }
