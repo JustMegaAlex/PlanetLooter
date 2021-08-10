@@ -76,20 +76,22 @@ function spend_resource(rname, ammount) {
 	return true
 }
 
-function exchange_resources(in, in_ammount, cost_info_arr) {
+function exchange_resources(in, in_ammount, cost_info) {
 	// metall 1, ore 3
 	// check resource
 	var in_fuel = (in == "fuel")
 	var in_empty = (in == "empty")
 	var crg = cargo_load + in_ammount * !in_fuel * !in_empty
 	var tnk = tank_load + in_ammount * in_fuel * !in_empty
-	for (var i = 0; i < array_length(cost_info_arr); ++i) {
-	    var cost = cost_info_arr[i]
-		var result_cost_ammount = cost.ammount * in_ammount
-		if resources[$ cost.type] < result_cost_ammount
-			return "need more\n" + global.resource_types[$ in].name
+	var cost_info_names = variable_struct_get_names(cost_info)
+	for (var i = 0; i < array_length(cost_info_names); ++i) {
+		var _type = cost_info_names[i]
+		var _ammount = cost_info[$ _type]
+		var result_cost_ammount = _ammount * in_ammount
+		if resources[$ _type] < result_cost_ammount
+			return "need more\n" + _type
 		// check loads
-		var out_fuel = (cost.type == "fuel")
+		var out_fuel = (_type == "fuel")
 		crg -= result_cost_ammount * !out_fuel
 		tnk -= result_cost_ammount * out_fuel
 	}
@@ -99,9 +101,9 @@ function exchange_resources(in, in_ammount, cost_info_arr) {
 	if tnk > tank
 		return "tank full"
 	// exchange
-	for (var i = 0; i < array_length(cost_info_arr); ++i) {
-	    var cost = cost_info_arr[i]
-		self.spend_resource(cost.type, cost.ammount * in_ammount)
+	for (var i = 0; i < array_length(cost_info_names); ++i) {
+	    var _type = cost_info_names[i]
+		self.spend_resource(_type, cost_info[$ _type] * in_ammount)
 	}
 	self._add_resource(in, in_ammount * !in_empty)
 	cargo_load = crg
@@ -151,12 +153,12 @@ function upgrade_system(sys) {
 		return "  system\nfully upgraded"
 	var up_level = cur_level + 1
 	var next = available[up_level]
-	var costarr = next.cost
+	var cost_info = next.cost
 	// check resources are enough
-	for (var i = 0; i < array_length(costarr); ++i) {
-		var restype = costarr[i][0]
-		var resammount = costarr[i][1]
-		if resources[$ restype] < resammount
+	var cost_info_names = variable_struct_get_names(cost_info)
+	for (var i = 0; i < array_length(cost_info_names); ++i) {
+		var _type = cost_info_names[i]
+		if resources[$ _type] < cost_info[$ _type]
 			return "need more\n" + restype
 	}
 	// spend resoures
@@ -239,25 +241,25 @@ upgrades_count = 0
 warp_fuel_cost = 10
 AvailableUpgrades = {
 	weapon: [
-		{cost: [["part", 10]], value: {dmg: 1.5, mining: 1.15, reload_time: 8, consumption: 0.05, knock_back_force: 3.5}},
-		{cost: [["part", 15]], value: {dmg: 2, mining: 1.3, reload_time: 7.5, consumption: 0.07, knock_back_force: 3.5}},
-		{cost: [["part", 25]], value: {dmg: 2.5, mining: 1.35, reload_time: 7.5, consumption: 0.08, knock_back_force: 3.5}},
-		{cost: [["part", 40]], value: {dmg: 3.5, mining: 1.35, reload_time: 7, consumption: 0.1, knock_back_force: 3.5}},
+		{cost: {part: 10}, value: {dmg: 1.5, mining: 1.15, reload_time: 8, consumption: 0.05, knock_back_force: 3.5}},
+		{cost: {part: 15}, value: {dmg: 2, mining: 1.3, reload_time: 7.5, consumption: 0.07, knock_back_force: 3.5}},
+		{cost: {part: 25}, value: {dmg: 2.5, mining: 1.35, reload_time: 7.5, consumption: 0.08, knock_back_force: 3.5}},
+		{cost: {part: 40}, value: {dmg: 3.5, mining: 1.35, reload_time: 7, consumption: 0.1, knock_back_force: 3.5}},
 	],
-	cargo: [{cost:[["part", 10]], value: 130},
-			{cost:[["part", 15]], value: 155},
-			{cost:[["part", 20]], value: 175}, ],
-	tank: [{cost:[["part", 5]], value: 20},
-		   {cost:[["part", 12]], value: 30},
-		   {cost:[["part", 24]], value: 40}, ],
-	sp: [{cost:[["part", 10]], value: {normal: 6, cruise: 18, consumption: 0.0085}},
-		   {cost:[["part", 20]], value: {normal: 7, cruise: 21, consumption: 0.009}},
-		   {cost:[["part", 30]], value: {normal: 8, cruise: 24, consumption: 0.0105}},
-		   {cost:[["part", 30]], value: {normal: 9, cruise: 27, consumption: 0.012}},
-		   {cost:[["part", 30]], value: {normal: 10, cruise: 30, consumption: 0.014}}, ],
-	hull: [{cost:[["part", 5]], value: 13},
-			{cost:[["part", 12]], value: 16},
-			{cost:[["part", 20]], value: 20}, ],
+	cargo: [{cost:{part: 10}, value: 130},
+			{cost:{part: 15}, value: 155},
+			{cost:{part: 20}, value: 175}, ],
+	tank: [{cost:{part: 5}, value: 20},
+		   {cost:{part: 12}, value: 30},
+		   {cost:{part: 24}, value: 40}, ],
+	sp: [{cost:{part: 10}, value: {normal: 6, cruise: 18, consumption: 0.0085}},
+		   {cost:{part: 20}, value: {normal: 7, cruise: 21, consumption: 0.009}},
+		   {cost:{part: 30}, value: {normal: 8, cruise: 24, consumption: 0.0105}},
+		   {cost:{part: 30}, value: {normal: 9, cruise: 27, consumption: 0.012}},
+		   {cost:{part: 30}, value: {normal: 10, cruise: 30, consumption: 0.014}}, ],
+	hull: [{cost:{part: 5}, value: 13},
+			{cost:{part: 12}, value: 16},
+			{cost:{part: 20}, value: 20}, ],
 }
 Upgrades = {
 	weapon: -1,

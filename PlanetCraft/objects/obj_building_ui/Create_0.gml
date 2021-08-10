@@ -30,19 +30,20 @@ function Producer(resource, ui_parent) constructor {
 	self.type = resource
 	self.ui_parent = ui_parent
 	action = function() {
-		var cost_info_arr = global.resource_types[$ self.type].cost
-		var msg = obj_looter.exchange_resources(self.type, 1, cost_info_arr)
+		var cost_info = global.resource_types[$ self.type].cost
+		var msg = obj_looter.exchange_resources(self.type, 1, cost_info)
 		if msg != "ok"
 			self.ui_parent.ui_message(msg, true)
 	}
 }
 
 function resource_cost_text(type) {
-	var cost_info_arr = global.resource_types[$ type].cost
+	var cost_info = global.resource_types[$ type].cost
 	var text = "produce\n" + type + "\n"
-	for (var i = 0; i < array_length(cost_info_arr); ++i) {
-	    var cost = cost_info_arr[i]
-		text += cost.type + ": " + string(cost.ammount) + "\n"
+	var cost_info_names = variable_struct_get_names(cost_info)
+	for (var i = 0; i < array_length(cost_info_names); ++i) {
+		var _type = cost_info_names[i]
+		text += _type + ": " + string(cost_info[$ _type]) + "\n"
 	}
 	return text
 }

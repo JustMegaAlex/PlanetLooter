@@ -1,10 +1,4 @@
 
-global.ResourceCost = {
-	metall: [{type: "ore", ammount: 5}],
-	fuel: [{type: "organic", ammount: 3}],
-	part: [{type: "metall", ammount: 4}, 
-		   {type: "junk", ammount: 1}],
-}
 
 global.resource_types = {}
 
@@ -19,15 +13,22 @@ function ResourceType(name, img_index, cost) constructor {
 	variable_struct_set(global.resource_types, name, self)
 }
 
+function helper_cost_struct() {
+	
+}
+
 var zerocost = {}
 rtype_empty = new ResourceType("empty", 0, zerocost)
 rtype_ore = new ResourceType("ore", 1, zerocost)
 rtype_organic = new ResourceType("organic", 2, zerocost)
-rtype_metall = new ResourceType("metall", 3, global.ResourceCost.metall)
-rtype_fuel = new ResourceType("fuel", 4, global.ResourceCost.fuel)
-rtype_part = new ResourceType("part", 5, global.ResourceCost.part)
+rtype_metall = new ResourceType("metall", 3, {ore: 3})
+rtype_fuel = new ResourceType("fuel", 4, {organic: 3})
+rtype_part = new ResourceType("part", 5, {metall: 2, junk: 2})
 rtype_junk = new ResourceType("junk", 6, zerocost)
-rtype_bullet_homing = new ResourceType("bullet_homing", 0, zerocost)
+rtype_bullet_homing = new ResourceType("bullet_homing", 0, )
+rtype_drives = new ResourceType("drives", 0, {junk: 1, metall: 3})
+rtype_chip = new ResourceType("chip", 0, {part: 2, metall: 5, junk: 1})
+rtype_repairkit = new ResourceType("repair_kit", 0, {junk: 2, metall: 1, drives: 1})
 
 
 function spawn_resource_item(type, xx, yy, sp, dir) { // sp1, sp2, sp_is_coords) {

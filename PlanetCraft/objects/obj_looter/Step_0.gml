@@ -59,8 +59,8 @@ if warping {
 }
 
 if not --fuel_producer_pause {
-	var cost_info_arr = global.ResourceCost.fuel
-	self.exchange_resources("fuel", fuel_producer_ratio, cost_info_arr)
+	var cost_info = global.resource_types.fuel.cost
+	self.exchange_resources("fuel", fuel_producer_ratio, cost_info)
 }
 
 
