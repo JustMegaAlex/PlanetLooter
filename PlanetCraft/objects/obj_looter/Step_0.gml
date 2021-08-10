@@ -25,11 +25,14 @@ if not global.game_over {
 
 // create module ui
 if key_create_module and !global.ui_interface_on {
-	if create_module_ui_inst
+	if create_module_ui_inst {
 		instance_destroy(create_module_ui_inst)
+		global.ui_interface_on = false
+	}
 	else {
 		create_module_ui_inst = instance_create_layer(x, y, layer, obj_ui_create_module_menu)
 		create_module_ui_inst.parent = id
+		global.ui_interface_on = true
 	}
 }
 

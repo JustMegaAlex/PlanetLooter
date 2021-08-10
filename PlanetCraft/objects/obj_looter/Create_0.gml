@@ -19,8 +19,11 @@ function init_resources() {
 }
 
 function add_resource(rname, ammount) {
-	audio_play_sound(snd_pick, 0, false)
-	return self._add_resource(rname, ammount)
+	if self._add_resource(rname, ammount) {
+		audio_play_sound(snd_pick, 0, false)
+		return true
+	}
+	return false
 }
 
 function _add_resource(rname, ammount) {
@@ -71,7 +74,7 @@ function spend_resource(rname, ammount) {
 	if rtype.is_bullet {
 		var wtype = global.weapon_types[$ rtype.bullet_name]
 		if resources[$ rname] < wtype.resource_ammount
-			array_remove(use_weapon_arr, rtype.bullet_name)
+			use_weapon_remove(rtype.bullet_name)
 	}
 	return true
 }
@@ -126,6 +129,13 @@ function update_use_weapon_arr() {
 	// init use_weapon
 	if (use_weapon_index == -1) and array_length(use_weapon_arr)
 		use_weapon_index = 0
+		use_weapon = use_weapon_arr[use_weapon_index]
+}
+
+function use_weapon_remove(wtype) {
+	array_remove(use_weapon_arr, wtype)
+	use_weapon_index = max(use_weapon_index - 1, 0)
+	if array_length(use_weapon_arr)
 		use_weapon = use_weapon_arr[use_weapon_index]
 }
 
