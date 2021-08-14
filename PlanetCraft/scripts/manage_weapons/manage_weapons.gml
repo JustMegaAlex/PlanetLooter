@@ -46,6 +46,17 @@ global.weapon_types = {
 		distance: 400,
 		resource_ammount: 1,
 	},
+	turret_pulse: {
+		damage: 3,
+		mining: 1,
+		reload_time: 20,
+		sp: 20,
+		resource: "empty",
+		knock_back_force: 2,
+		sprite: spr_bullet_pulse,
+		distance: 500,
+		resource_ammount: 1,
+	},
 	pulse_spread: {
 		damage: 1,
 		mining: 1,
