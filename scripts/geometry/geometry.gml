@@ -12,8 +12,34 @@ function Vec2d(xx, yy, is_polar) constructor {
 	X = xx
 	Y = yy
 
-	add = function(xx, yy) {
-		return new Point(self.X + xx, self.Y + yy)
+	add_coords = function(xx, yy) {
+		self.X += xx
+		self.Y += yy
+		return self
+	}
+
+	add_coords_ = function(xx, yy) {
+		return new Vec2d(self.X + xx, self.Y + yy)
+	}
+	
+	add = function(vec) {
+		self.X += vec.X
+		self.Y += vec.Y
+		return self
+	}
+	
+	add_ = function(vec) {
+		return new Vec2d(self.X + vec.X, self.Y + vec.Y)
+	}
+	
+	sub = function(vec) {
+		self.X -= vec.X
+		self.Y -= vec.Y
+		return self
+	}
+	
+	sub_ = function(vec) {
+		return new Vec2d(self.X - vec.X, self.Y - vec.Y)
 	}
 
 	dir = function() {
@@ -24,18 +50,21 @@ function Vec2d(xx, yy, is_polar) constructor {
 		return point_distance(0, 0, X, Y)	
 	}
 
-	normalize = function() {
-		var l = self.len()
+	normalize = function(len) {
+		if len == undefined
+			len = 1
+		var l = self.len() 
 		if l == 0
 			return self
-		self.X /= l
-		self.Y /= l
+		self.X *= len / l
+		self.Y *= len / l
 		return self
 	}
 	
 	set = function(xx, yy) {
 		self.X = xx
 		self.Y = yy
+		return self
 	}
 
 	set_polar = function(l, dir) {
@@ -46,6 +75,26 @@ function Vec2d(xx, yy, is_polar) constructor {
 	add_polar = function(l, dir) {
 		self.X += lengthdir_x(l, dir)
 		self.Y += lengthdir_y(l, dir)
+	}
+
+	rotated = function(angle) {
+		return new Vec2d(self.len(), self.dir() + angle, true)
+	}
+	
+	copy = function() {
+		return new Vec2d(self.X, self.Y)
+	}
+	
+	eq = function(vec) {
+		return (self.X == vec.X) and (self.Y == vec.Y)
+	}
+	
+	move_to_vec = function(vec, sp_mag) {
+		var delta = vec.sub_(self)
+		if delta.len() < sp_mag
+			return self.set(vec.X, vec.Y)
+		var sp = delta.normalize(sp_mag)
+		return self.add(sp)
 	}
 
 	if is_polar == true
