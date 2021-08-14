@@ -1,4 +1,6 @@
 
+event_inherited()
+
 image_speed = 0
 vision_range = 400
 angle = image_angle
