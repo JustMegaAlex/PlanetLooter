@@ -19,10 +19,10 @@ switch phase {
 	case 0: {
 		if !--timer {
 			phase++
+			phase1_time = phase1_dist / phase1_sp_mag
 			timer = phase1_time
 			// (hitpos - relpos).normalize(hit_sp)
-			var hit_sp_mag = phase1_dist / phase1_time
-			relsp = (new Vec2d(phase1_dist, 0)).sub(relpos).normalize(hit_sp_mag)
+			relsp = (new Vec2d(phase1_dist, 0)).sub(relpos).normalize(phase1_sp_mag)
 		}
 		relpos.add(relsp)
 		break

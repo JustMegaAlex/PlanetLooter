@@ -1,21 +1,17 @@
 
 image_speed = 0
-xrel = 0
-yrel = 0
-angle_rel = 0
-dist_rel = 0
-yoffset = 30
+
+var yoffset = 30
 pos = new Vec2d(x, y, false)
 relpos_initial = new Vec2d(yoffset, 90, true)
 relpos = relpos_initial.copy()
 relsp = noone
 
 phase0_sp = new Vec2d(0.5, 120, true)
-phase0_time = 15
+phase0_time = 10
 
 hit_max_dist = 180
-phase1_time = 5
-
+phase1_sp_mag = 24
 phase2_sp_mag = 6
 
 phase = -1
