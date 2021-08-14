@@ -6,8 +6,9 @@ pos = new Vec2d(x, y, false)
 relpos_initial = new Vec2d(yoffset, 90, true)
 relpos = relpos_initial.copy()
 relsp = noone
+posprev = noone
 
-phase0_sp = new Vec2d(0.5, 120, true)
+phase0_sp = new Vec2d(1.5, 120, true)
 phase0_time = 10
 
 hit_max_dist = 180

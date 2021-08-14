@@ -60,6 +60,7 @@
     {"id":{"name":"choose_planet","path":"scripts/choose_planet/choose_planet.yy",},"order":8,},
     {"id":{"name":"fnt_small","path":"fonts/fnt_small/fnt_small.yy",},"order":3,},
     {"id":{"name":"obj_ui_production_module","path":"objects/obj_ui_production_module/obj_ui_production_module.yy",},"order":8,},
+    {"id":{"name":"spr_crusher_blaze_particle","path":"sprites/spr_crusher_blaze_particle/spr_crusher_blaze_particle.yy",},"order":6,},
     {"id":{"name":"spr_organic","path":"sprites/spr_organic/spr_organic.yy",},"order":13,},
     {"id":{"name":"spr_planet_mask","path":"sprites/spr_planet_mask/spr_planet_mask.yy",},"order":10,},
     {"id":{"name":"spr_ui_use_weapon","path":"sprites/spr_ui_use_weapon/spr_ui_use_weapon.yy",},"order":4,},

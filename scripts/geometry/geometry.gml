@@ -81,6 +81,11 @@ function Vec2d(xx, yy, is_polar) constructor {
 		return new Vec2d(self.len(), self.dir() + angle, true)
 	}
 	
+	rotate = function(angle) {
+		self.set_polar(self.len(), self.dir() + angle)
+		return self
+	}
+	
 	copy = function() {
 		return new Vec2d(self.X, self.Y)
 	}

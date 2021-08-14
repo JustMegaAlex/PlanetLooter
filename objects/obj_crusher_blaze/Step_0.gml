@@ -3,6 +3,8 @@ if !instance_exists(obj_looter)
 	instance_destroy()
 
 image_angle = obj_looter.dir
+
+posprev = pos.copy()
 pos.set(obj_looter.x, obj_looter.y)
 
 if (phase == -1) {
@@ -35,7 +37,7 @@ switch phase {
 			if hitted {
 				hitted.set_hit(self.weapon)
 				obj_effects.explosion(x, y)
-			}	
+			}
 		}
 		relpos.add(relsp)
 		break
@@ -44,13 +46,12 @@ switch phase {
 		if !relpos.eq(relpos_initial) {
 			relpos.move_to_vec(relpos_initial, phase2_sp_mag)
 		} else {
-			phase = -1	
+			phase = -1
 		}
 	}
 }
 
 pos.add(relpos.rotated(image_angle))
-
 x = pos.X
 y = pos.Y
 
@@ -58,8 +59,20 @@ with couple_instance {
 	image_angle = obj_looter.dir
 	var vec = other.relpos
 	relpos.set(vec.X, -vec.Y)
+	posprev = pos.copy()
 	pos.set(obj_looter.x, obj_looter.y)
 	pos.add(relpos.rotated(image_angle))
 	x = pos.X
 	y = pos.Y
+}
+
+if phase == 1 {
+	var pos1 = couple_instance.pos
+	var posprev1 = couple_instance.posprev
+	while !posprev.eq(pos) {
+		obj_effects.trace_effect(posprev.X, posprev.Y, spr_crusher_blaze_particle, 30, image_angle, 0.5, 0, -0.03, 1)
+		obj_effects.trace_effect(posprev1.X, posprev1.Y, spr_crusher_blaze_particle, 30, image_angle, 0.5, 0, -0.03, -1)
+		posprev.move_to_vec(pos, 2)
+		posprev1.move_to_vec(pos1, 2)
+	}
 }

@@ -18,6 +18,18 @@ part_type_sprite(part_projectile_explosion_small, spr_projectile_explosion,  tru
 part_type_size(part_projectile_explosion_big, 2, 2, 0, 0)
 part_type_size(part_projectile_explosion_small, 0.5, 0.5, 0, 0)
 
+part_trace_effect = part_type_create()
+
+function trace_effect(xx, yy, spr, lifetime, angle, alpha0, alpha1, size_sp, yscale) {
+	part_type_sprite(part_trace_effect, spr, false, false, false)
+	part_type_life(part_trace_effect, lifetime, lifetime)
+	part_type_orientation(part_trace_effect, angle, angle, 0, 0, false)
+	part_type_alpha2(part_trace_effect, alpha0, alpha1)
+	part_type_size(part_trace_effect, 1, 1, size_sp, 0)
+	part_type_scale(part_trace_effect, 1, yscale)
+	part_particles_create(part_sys_effects, xx, yy, part_trace_effect, 1)
+}
+
 function explosion(xx, yy) {
 	part_particles_create(part_sys_effects,
 						xx, yy,
