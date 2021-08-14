@@ -30,6 +30,9 @@ function place_on_planet() {
 		// angle = 90 --> x = side_pos - r
 		x = planet.x + r * x_factor + (side_pos - r) * y_factor
 		y = planet.y + r * y_factor + (side_pos - r) * x_factor
+		// adjust placement according to image offset
+		x += x_factor * sprite_xoffset
+		y += y_factor * sprite_xoffset
 		if not place_meeting(x, y, obj_building)
 			break
 		// create foundation blocks

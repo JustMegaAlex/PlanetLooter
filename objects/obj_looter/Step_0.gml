@@ -12,6 +12,7 @@ if not global.game_over {
 	key_cruise_off = keyboard_check_pressed(ord("F"))
 	key_switch_forward = keyboard_check_pressed(ord("C")) or mouse_wheel_up()
 	key_switch_back = keyboard_check_pressed(ord("X")) or mouse_wheel_down()
+	key_repair = keyboard_check_pressed(ord("R"))
 	if in_cruise_mode < 1
 		dir = point_direction(x, y, mouse_x, mouse_y)
 } else {
@@ -22,6 +23,10 @@ if not global.game_over {
 	key_interact = false
 	key_shoot = false
 }
+
+// repair
+if key_repair
+	try_repair()
 
 // create module ui
 if key_create_module and !global.ui_interface_on {

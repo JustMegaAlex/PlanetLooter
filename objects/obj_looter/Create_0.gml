@@ -184,6 +184,11 @@ function upgrade_system(sys) {
 	return "ok"
 }
 
+function try_repair() {
+	if spend_resource("repair_kit", 1)
+		hp++
+}
+
 is_moving_object = true
 sp = {normal: 5, cruise: 10, consumption: 0.005}
 hsp = 0
