@@ -182,8 +182,10 @@ function create_enemies(set) {
 		var xx = planet.x + lengthdir_x(dist, angle)
 		var yy = planet.y + lengthdir_y(dist, angle)
 		repeat (num) {
-			var obj = chance(0.25) ? obj_enemy : obj_turret
-			instance_create_layer(xx+random(100), yy+random(100), "Instances", obj_enemy)
+			if chance(0.25)
+				instance_create_args(0, 0, "Instances", obj_turret, {planet: planet})
+			else
+				instance_create_layer(xx+random(100), yy+random(100), "Instances", obj_enemy)
 		}
 		if (num >= forpost_min_group_size) and forposts-- {
 			with instance_create_layer(0, 0, "Instances", obj_production_module) {self.planet = planet}

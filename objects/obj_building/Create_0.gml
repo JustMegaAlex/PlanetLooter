@@ -41,7 +41,6 @@ visible = false
 alarm[0] = 1
 
 size = sprite_get_height(sprite_index) / global.grid_size
-planet = noone
 
 ui_object = noone
 
@@ -50,3 +49,6 @@ side = Sides.neutral
 state = Building.friendly
 defenders = []
 
+// creation arguments
+planet = noone
+assign_creation_arguments()

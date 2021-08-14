@@ -154,3 +154,20 @@ function struct_sum(struct) {
 	}
 	return res
 }
+
+global.creation_arguments_struct = {}
+function assign_creation_arguments() {
+	var argnames = variable_struct_get_names(global.creation_arguments_struct)
+	for (var i = 0; i < array_length(argnames); ++i) {
+	    var name = argnames[i]
+		var val = global.creation_arguments_struct[$ name]
+		variable_instance_set(id, name, val)
+	}
+}
+
+function instance_create_args(xx, yy, layer, obj, args) {
+	global.creation_arguments_struct = args
+	instance_create_layer(xx, yy, layer, obj)
+	global.creation_arguments_struct = noone
+}
+
