@@ -24,7 +24,6 @@
     {"instances":[
         {"properties":[],"isDnd":false,"objectId":{"name":"obj_dummy","path":"objects/obj_dummy/obj_dummy.yy",},"inheritCode":false,"hasCreationCode":false,"colour":4294967295,"rotation":0.0,"scaleX":1.0,"scaleY":1.0,"imageIndex":0,"imageSpeed":1.0,"inheritedItemId":null,"frozen":false,"ignore":false,"inheritItemSettings":false,"x":-600.0,"y":-24.0,"resourceVersion":"1.0","name":"inst_54294BF6","tags":[],"resourceType":"GMRInstance",},
         {"properties":[],"isDnd":false,"objectId":{"name":"obj_dummy","path":"objects/obj_dummy/obj_dummy.yy",},"inheritCode":false,"hasCreationCode":false,"colour":4294967295,"rotation":0.0,"scaleX":1.0,"scaleY":1.0,"imageIndex":0,"imageSpeed":1.0,"inheritedItemId":null,"frozen":false,"ignore":false,"inheritItemSettings":false,"x":-576.0,"y":-168.0,"resourceVersion":"1.0","name":"inst_3BBC390B","tags":[],"resourceType":"GMRInstance",},
-        {"properties":[],"isDnd":false,"objectId":{"name":"obj_crusher","path":"objects/obj_crusher/obj_crusher.yy",},"inheritCode":false,"hasCreationCode":false,"colour":4294967295,"rotation":0.0,"scaleX":1.0,"scaleY":1.0,"imageIndex":0,"imageSpeed":1.0,"inheritedItemId":null,"frozen":false,"ignore":false,"inheritItemSettings":false,"x":144.0,"y":24.0,"resourceVersion":"1.0","name":"inst_7FCE0889","tags":[],"resourceType":"GMRInstance",},
       ],"visible":true,"depth":300,"userdefinedDepth":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"gridX":24,"gridY":24,"layers":[],"hierarchyFrozen":false,"resourceVersion":"1.0","name":"Instances","tags":[],"resourceType":"GMRInstanceLayer",},
     {"instances":[],"visible":true,"depth":400,"userdefinedDepth":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"gridX":32,"gridY":32,"layers":[],"hierarchyFrozen":false,"resourceVersion":"1.0","name":"effects_deep","tags":[],"resourceType":"GMRInstanceLayer",},
     {"instances":[],"visible":true,"depth":500,"userdefinedDepth":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"gridX":32,"gridY":32,"layers":[],"hierarchyFrozen":false,"resourceVersion":"1.0","name":"tiles_resources","tags":[],"resourceType":"GMRInstanceLayer",},
@@ -43,7 +42,6 @@
     {"name":"inst_54294BF6","path":"rooms/Room1/Room1.yy",},
     {"name":"inst_3BBC390B","path":"rooms/Room1/Room1.yy",},
     {"name":"inst_C370FCF","path":"rooms/Room1/Room1.yy",},
-    {"name":"inst_7FCE0889","path":"rooms/Room1/Room1.yy",},
   ],
   "inheritCreationOrder": false,
   "sequenceId": null,

@@ -49,8 +49,8 @@ if key_switch_back
 
 // warping
 if warping {
-	if audio_sound_get_track_position(warp_sound) > 1.9 {
-		resources[$ "fuel"] -= warp_fuel_cost
+	if audio_sound_get_track_position(warp_sound) > 1.9
+			and spend_resource("fuel", warp_fuel_cost) {
 		global.level++
 		// restart room
 		alarm[1] = 1
@@ -61,7 +61,7 @@ if warping {
 		warp_sound = noone
 	}
 
-} else if key_warp and (resources[$ "fuel"] >= 10) {
+} else if key_warp and (tank_load > warp_fuel_cost) {
 	warping = true
 	warp_sound = audio_play_sound(snd_warp, 0, false)
 }
@@ -114,6 +114,7 @@ move_v = key_down * down_free - key_up * up_free
 var input = (abs(move_h) or abs(move_v)) * !create_module_ui_inst
 
 
+// cruise mode
 if in_cruise_mode >= 1 {
 	cruise_dir_to = inst_mouse_dir(id)
 	var angle = angle_difference(cruise_dir_to, dir)

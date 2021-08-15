@@ -8,3 +8,5 @@ reload_time = 60
 reloading = 0
 wtype = "turret_pulse"
 side = Sides.theirs
+hp = 12
+

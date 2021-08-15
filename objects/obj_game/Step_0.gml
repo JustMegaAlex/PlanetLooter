@@ -3,7 +3,7 @@ scr_debug_scripts_update()
 
 if keyboard_check_pressed(vk_f3) {
 	instance_destroy(obj_looter)
-	level = 0
+	global.level = 0
 	room_restart()
 }
 

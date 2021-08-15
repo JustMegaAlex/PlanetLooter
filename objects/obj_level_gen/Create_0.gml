@@ -187,7 +187,7 @@ function create_enemies(set) {
 			else
 				instance_create_layer(xx+random(100), yy+random(100), "Instances", obj_enemy)
 		}
-		if (num >= forpost_min_group_size) and forposts-- {
+		if (num >= (forpost_min_group_size + global.level)) and forposts-- {
 			with instance_create_layer(0, 0, "Instances", obj_production_module) {self.planet = planet}
 		}
 	}
@@ -220,21 +220,21 @@ rmin = 800
 
 planet_min_size = 10
 planet_max_size = 15
-max_planet_dist = 4000
+max_planet_dist = 3000
 min_planet_number = 3
 max_planet_number = 6
 
-forpost_min_group_size = 6
+forpost_min_group_size = 3
 
 enemies_progression = [
 	// groups, [min_group_size, max_group_size], forposts
 	//[7, [2, 3]], 0,
 	// [[<1-sized groups>, <2-sized groups>, ..., <n-sized groups>], forposts]
 	//1   2   3   4   5   6   7   8   9  10
-	[[3,  2,  2,  2,  0,  1], 1],
-	[[0,  0,  6,  5,  0,  0,  0,  2], 1],
-	[[0,  0, 12,  0,  0,  0,  0,  0,  0,  5],  3],
-	[[0,  0,  0,  0,  0,  0,  0,  0,  0, 10],  6],
+	[[3,  2,  2,  0,  0,  0], 1],
+	[[0,  3,  3,  1,  0,  0,  0,  2], 1],
+	[[0,  8, 0,  4,  1,  0,  0,  0,  0,  5],  3],
+	[[0,  0,  0,  0,  5,  4,  2,  0,  0, 10],  6],
 	[[0],  1],
 ]
 

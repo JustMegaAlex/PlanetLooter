@@ -47,7 +47,7 @@ global.weapon_types = {
 		resource_ammount: 1,
 	},
 	turret_pulse: {
-		damage: 3,
+		damage: 2,
 		mining: 1,
 		reload_time: 20,
 		sp: 20,

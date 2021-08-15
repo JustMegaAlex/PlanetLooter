@@ -78,12 +78,12 @@ function get_cell_type(val) {
 
 _resource_data = [
 	// [_min_mesh_val, type, max_ammount, tile_index]
-	[0.6, "empty", 0.01, 0],
-	[0.7, "organic", 2, 4],
-	[0.77, "organic", 4, 5],
-	[0.8, "organic", 8, 6],
-	[0.9, "ore", 2, 1],
-	[0.98, "ore", 6, 2],
+	[0.8, "empty", 0.01, 0],
+	[0.85, "organic", 2, 4],
+	[0.88, "organic", 4, 5],
+	[0.9, "organic", 8, 6],
+	[0.95, "ore", 2, 1],
+	[0.99, "ore", 6, 2],
 	[1, "ore", 15, 3],
 	//[0.3, "empty, 0.01, 0],
 	//[0.43, "organic, 2, 4],

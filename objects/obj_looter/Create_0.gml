@@ -253,7 +253,7 @@ resources[$ "fuel"] = tank
 cargo_load = struct_sum(resources) - resources[$ "fuel"]
 core_power = 5
 upgrades_count = 0
-warp_fuel_cost = 10
+warp_fuel_cost = 7.5
 AvailableUpgrades = {
 	weapon: [
 		{cost: {part: 10}, value: {dmg: 1.5, mining: 1.15, reload_time: 8, consumption: 0.05, knock_back_force: 3.5}},
