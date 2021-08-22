@@ -15,11 +15,13 @@ dist_to_player = inst_dist(obj_looter)
 
 switch state {
 	case "idle": {
+		if is_patrol {
+			state = "patrol"
+			break
+		}
 		if dist_to_player < detection_dist {
-			target = obj_looter
-			state = "warmup"
-			trigger_friendly_units()
-			break			
+			state_set_attacking()
+			break
 		}
 		if point_dist(xst, yst) > start_area_radius {
 			state = "return"
@@ -107,10 +109,14 @@ switch state {
 	}
 	
 	case "patrol": {
+		if dist_to_player < detection_dist {
+			state_set_attacking()
+			break
+		}
 		var p = patrol_point_to
 		dir = point_dir(p.X, p.Y)
 		self.set_sp_to(sp.normal, dir)
-		if point_dist(p.X, p.Y) < sp {
+		if point_dist(p.X, p.Y) < sp.normal {
 			patrol_set_next_point()	
 		}
 		break

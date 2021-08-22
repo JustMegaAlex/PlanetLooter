@@ -22,6 +22,12 @@ function set_hit(weapon) {
 	}
 }
 
+function state_set_attacking() {
+	target = obj_looter
+	state = "warmup"
+	trigger_friendly_units()
+}
+
 function trigger_friendly_units() {
 	ds_list_empty(friendly_units_to_trigger)
 	collision_circle_list(x, y, trigger_radius_on_detection, obj_enemy, false, true, friendly_units_to_trigger, false)
