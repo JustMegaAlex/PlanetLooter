@@ -73,33 +73,33 @@ if not --fuel_producer_pause {
 
 
 //// planets
-if not current_planet {
-	var planet = instance_nearest(x, y, obj_planet)
-	var dist = point_distance(x, y, planet.x, planet.y)
-	if dist <= gravity_dist
-		current_planet = planet
-} else {
-	// define gravity direction
-	var dx = current_planet.x - x
-	var dy = current_planet.y - y
-	gravx = 0
-	gravy = 0
-	if abs(dx) > abs(dy) {
-		gravx = grav * sign(dx)
-	} else {
-		gravy = grav * sign(dy)
-	}
-	var dist = point_distance(x, y, current_planet.x, current_planet.y)
-	if dist > gravity_dist {
-		current_planet = noone
-		gravx = 0
-		gravy = 0
-	}
-	else if dist <= gravity_min_dist {
-		gravx = 0
-		gravy = 0
-	}
-}
+//if not current_planet {
+//	var planet = instance_nearest(x, y, obj_planet)
+//	var dist = point_distance(x, y, planet.x, planet.y)
+//	if dist <= gravity_dist
+//		current_planet = planet
+//} else {
+//	// define gravity direction
+//	var dx = current_planet.x - x
+//	var dy = current_planet.y - y
+//	gravx = 0
+//	gravy = 0
+//	if abs(dx) > abs(dy) {
+//		gravx = grav * sign(dx)
+//	} else {
+//		gravy = grav * sign(dy)
+//	}
+//	var dist = point_distance(x, y, current_planet.x, current_planet.y)
+//	if dist > gravity_dist {
+//		current_planet = noone
+//		gravx = 0
+//		gravy = 0
+//	}
+//	else if dist <= gravity_min_dist {
+//		gravx = 0
+//		gravy = 0
+//	}
+//}
 
 up_free = place_empty(x, y - 1, obj_block)
 down_free = place_empty(x, y + 1, obj_block)
