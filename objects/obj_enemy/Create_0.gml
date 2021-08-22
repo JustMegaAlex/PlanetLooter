@@ -1,3 +1,6 @@
+// args: ai
+is_patrol = false
+patrol_route = []
 
 event_inherited()
 
@@ -37,7 +40,61 @@ function compute_strafe_vec() {
 	battle_strafe_vec.normalize()
 }
 
+function patrol_set_next_point() {
+	patrol_point_to = noone
+	var num = array_length(patrol_route)
+	var next_planet_index = cycle_increase(patrol_planet_index, 0, num)
+	var next_planet = patrol_route[next_planet_index]
+	if patrol_try_set_planet(next_planet) {
+		patrol_planet_index = next_planet_index
+		return true
+	}
+	patrol_set_next_local_point()
+	if patrol_point_to
+		return true
+	return false
+}
+
+function patrol_try_set_planet(planet) {
+	var success = false
+	var min_dist = infinity
+	var planet_points = planet_get_patrol_points(planet)
+	for (var i = 0; i < array_length(planet_points); i++) {
+		var p = planet_points[i]
+		if not collision_line(x, y, p.X, p.Y, obj_block, false, true) {
+			var cur_dist = point_dist(p.X, p.Y)
+			if min_dist > cur_dist {
+				min_dist = cur_dist
+				patrol_point_to = p
+				success = true
+			}
+		}
+	}
+	return success
+}
+
+function patrol_set_next_local_point() {
+	var min_dist = infinity
+	var cur_planet = patrol_route[patrol_planet_index]
+	var planet_points = planet_get_patrol_points(cur_planet)
+	for (var i = 0; i < array_length(planet_points); i++) {
+		var p = planet_points[i]
+		if not collision_line(x, y, p.X, p.Y, obj_block, false, true) {
+			var cur_dist = point_dist(p.X, p.Y)
+			if min_dist > cur_dist {
+				min_dist = cur_dist
+				patrol_point_to = p
+			}
+		}
+	}
+}
+
+//// behavior
 state = "idle"
+patrol_planet_index = 0
+patrol_point_to = noone
+// arg: is_patrol = false
+// arg: patrol_route = []
 
 is_moving_object = true
 sp.normal = 2.5
@@ -86,3 +143,8 @@ hp = 7
 
 side = Sides.theirs
 use_weapon = "pulse_spread"
+
+assign_creation_arguments()
+
+if is_patrol
+	patrol_set_next_point()

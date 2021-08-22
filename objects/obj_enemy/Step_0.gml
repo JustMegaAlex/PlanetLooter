@@ -105,6 +105,16 @@ switch state {
 		}
 		break
 	}
+	
+	case "patrol": {
+		var p = patrol_point_to
+		dir = point_dir(p.X, p.Y)
+		self.set_sp_to(sp.normal, dir)
+		if point_dist(p.X, p.Y) < sp {
+			patrol_set_next_point()	
+		}
+		break
+	}
 }
 
 hsp = approach(hsp, hsp_to + battle_strafe_vec.X, acc)

@@ -177,6 +177,7 @@ function create_enemies(set) {
 	for (var i = 0; i < array_length(groups_distribution); ++i) {
 	    var num = i + 1
 		var planet = choose_planet()
+		var patrol_route = generate_patrol_route(planet)
 		var dist = planet.radius + 100
 		var angle = random(360)
 		var xx = planet.x + lengthdir_x(dist, angle)
@@ -184,8 +185,12 @@ function create_enemies(set) {
 		repeat (num) {
 			if chance(0.25)
 				instance_create_args(0, 0, "Instances", obj_turret, {planet: planet})
-			else
-				instance_create_layer(xx+random(100), yy+random(100), "Instances", obj_enemy)
+			else {
+				var is_patrol = chance(0.3)
+				instance_create_args(xx+random(100), yy+random(100), 
+									 "Instances", obj_enemy, 
+									 {is_patrol: is_patrol, patrol_route: patrol_route})
+			}
 		}
 		if (num >= (forpost_min_group_size + global.level)) and forposts-- {
 			with instance_create_layer(0, 0, "Instances", obj_production_module) {self.planet = planet}
@@ -220,7 +225,7 @@ rmin = 800
 
 planet_min_size = 10
 planet_max_size = 15
-max_planet_dist = 3000
+max_planet_dist = 1600
 min_planet_number = 3
 max_planet_number = 6
 
