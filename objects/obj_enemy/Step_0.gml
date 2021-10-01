@@ -20,6 +20,7 @@ switch state {
 			break
 		}
 		if dist_to_player < detection_dist {
+			warmedup = 1
 			state_set_attacking()
 			break
 		}
@@ -111,6 +112,10 @@ switch state {
 	case "patrol": {
 		if dist_to_player < detection_dist {
 			state_set_attacking()
+			break
+		}
+		if not patrol_point_to {
+			state = "idle"
 			break
 		}
 		var p = patrol_point_to

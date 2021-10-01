@@ -7,7 +7,7 @@ var yy = y + battle_strafe_vec.Y * 100
 //draw_line(x, y, xx, yy)
 //draw_text(x, y - 20, "sp to: " + string(hsp_to) + " " + string(vsp_to))
 
-if is_patrol {
-	var p = patrol_point_to
-	draw_line(x, y, p.X, p.Y)
-}
+//if is_patrol {
+//	var p = patrol_point_to
+//	draw_line(x, y, p.X, p.Y)
+//}
