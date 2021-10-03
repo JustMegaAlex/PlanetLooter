@@ -83,7 +83,6 @@ move_h = key_right * right_free - key_left * left_free
 move_v = key_down * down_free - key_up * up_free
 var input = (abs(move_h) or abs(move_v)) * !create_module_ui_inst
 
-
 // cruise mode
 if in_cruise_mode >= 1 {
 	cruise_dir_to = inst_mouse_dir(id)
@@ -112,21 +111,28 @@ if in_cruise_mode >= 1 {
 	in_cruise_mode = (in_cruise_mode + cruise_switch_sp) * key_cruise
 	if input {
 		input_dir = point_direction(0, 0, move_h, move_v)
-		self.set_sp_to(sp.normal, input_dir)
-		hacc = abs(lengthdir_x(acc, input_dir))
-		vacc = abs(lengthdir_y(acc, input_dir))
-		hsp = approach(hsp, hsp_to, acc)
-		vsp = approach(vsp, vsp_to, acc)
+		acceleration.set_polar(acc, input_dir)
+		acceleration.absolutize()
+		velocity_to.set_polar(sp.normal, input_dir)
+		velocity.approach(velocity_to, acceleration)
+		//self.set_sp_to(sp.normal, input_dir)
+		//hacc = abs(lengthdir_x(acc, input_dir))
+		//vacc = abs(lengthdir_y(acc, input_dir))
+		//hsp = approach(hsp, hsp_to, acc)
+		//vsp = approach(vsp, vsp_to, acc)
 	} else {
-		hsp = approach(hsp, 0, decel)
-		vsp = approach(vsp, 0, decel)
+		velocity.approach(global.zero2d, deceleration)
+		//hsp = approach(hsp, 0, decel)
+		//vsp = approach(vsp, 0, decel)
 	}
 }
 
-if (hsp > 0) and !right_free or (hsp < 0) and !left_free
-	hsp = 0
-if (vsp > 0) and !down_free or (vsp < 0) and !up_free
-	vsp = 0
+if (velocity.X > 0) and !right_free or (velocity.X < 0) and !left_free
+	//hsp = 0
+	velocity.X = 0
+if (velocity.Y > 0) and !down_free or (velocity.Y < 0) and !up_free
+	//vsp = 0
+	velocity.Y = 0
 
 //// shooting
 reloading--
@@ -151,8 +157,9 @@ if key_interact {
 	}
 }
 
+
 xprev = x
 yprev = y
 
-if scr_move_coord_contact_obj(hsp, vsp, obj_block)
+if scr_move_coord_contact_obj(velocity.X, velocity.Y, obj_block)
 	in_cruise_mode = 0

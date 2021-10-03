@@ -107,6 +107,17 @@ function Vec2d(xx, yy, is_polar) constructor {
 		var sp = delta.normalize(sp_mag)
 		return self.add(sp)
 	}
+	
+	approach = function(to, sp) {
+		X = global.approach(X, to.X, sp.X)
+		Y = global.approach(Y, to.Y, sp.Y)
+	}
+	
+	absolutize = function() {
+		X = abs(X)
+		Y = abs(Y)
+	}
+
 
 	if is_polar == true
 		self.set_polar(xx, yy)
@@ -188,6 +199,8 @@ function line_intersection(l1, l2, segment) {
     }
     return ua
 }
+
+zero2d = new Vec2d(0, 0)
 
 function instance_line_collision_point(x0, y0, x1, y1, inst) {
 
