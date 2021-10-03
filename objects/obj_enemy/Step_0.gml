@@ -12,7 +12,6 @@ if target
 
 dist_to_player = inst_dist(obj_looter)
 
-
 switch state {
 	case "idle": {
 		if is_patrol {
@@ -108,9 +107,11 @@ switch state {
 		}
 		break
 	}
-	
+
 	case "patrol": {
 		if dist_to_player < detection_dist {
+			dir = inst_dir(obj_looter)
+			self.set_sp_to(0, dir)
 			state_set_attacking()
 			break
 		}

@@ -25,6 +25,7 @@ function set_hit(weapon) {
 function state_set_attacking() {
 	target = obj_looter
 	state = "warmup"
+	
 	trigger_friendly_units()
 }
 
