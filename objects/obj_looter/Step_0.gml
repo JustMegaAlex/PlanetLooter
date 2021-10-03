@@ -71,36 +71,6 @@ if not --fuel_producer_pause {
 	self.exchange_resources("fuel", fuel_producer_ratio, cost_info)
 }
 
-
-//// planets
-//if not current_planet {
-//	var planet = instance_nearest(x, y, obj_planet)
-//	var dist = point_distance(x, y, planet.x, planet.y)
-//	if dist <= gravity_dist
-//		current_planet = planet
-//} else {
-//	// define gravity direction
-//	var dx = current_planet.x - x
-//	var dy = current_planet.y - y
-//	gravx = 0
-//	gravy = 0
-//	if abs(dx) > abs(dy) {
-//		gravx = grav * sign(dx)
-//	} else {
-//		gravy = grav * sign(dy)
-//	}
-//	var dist = point_distance(x, y, current_planet.x, current_planet.y)
-//	if dist > gravity_dist {
-//		current_planet = noone
-//		gravx = 0
-//		gravy = 0
-//	}
-//	else if dist <= gravity_min_dist {
-//		gravx = 0
-//		gravy = 0
-//	}
-//}
-
 up_free = place_empty(x, y - 1, obj_block)
 down_free = place_empty(x, y + 1, obj_block)
 left_free = place_empty(x - 1, y, obj_block)
@@ -123,7 +93,6 @@ if in_cruise_mode >= 1 {
 	else
 		dir += cruise_rot_sp * sign(angle)	
 	cruise_sp = approach(cruise_sp, sp.cruise, cruise_acc)
-	// input_h = 0 and hsp < 0 and gravx > 0
 	hsp = lengthdir_x(cruise_sp, dir)
 	vsp = lengthdir_y(cruise_sp, dir)
 	if !spend_resource("fuel", sp.consumption) or key_cruise_off
@@ -139,31 +108,20 @@ if in_cruise_mode >= 1 {
 		yy = lerp(yprev, y, step * i / dist)
 		obj_effects.jet_long(xx, yy)
 	}
-
 } else {
-	
 	in_cruise_mode = (in_cruise_mode + cruise_switch_sp) * key_cruise
-		
 	if input {
 		input_dir = point_direction(0, 0, move_h, move_v)
 		self.set_sp_to(sp.normal, input_dir)
 		hacc = abs(lengthdir_x(acc, input_dir))
 		vacc = abs(lengthdir_y(acc, input_dir))
-		// input_h = 0 and hsp < 0 and gravx > 0
-		if abs(input_h) or !(sign(hsp) == sign(gravx))
-			hsp = approach(hsp, hsp_to, acc)
-		if abs(input_v) or !(sign(vsp) == sign(gravy))
-			vsp = approach(vsp, vsp_to, acc)
+		hsp = approach(hsp, hsp_to, acc)
+		vsp = approach(vsp, vsp_to, acc)
 	} else {
-		if gravx == 0
-			hsp = approach(hsp, 0, decel)
-		if gravy == 0
-			vsp = approach(vsp, 0, decel)
+		hsp = approach(hsp, 0, decel)
+		vsp = approach(vsp, 0, decel)
 	}
 }
-
-hsp += gravx
-vsp += gravy
 
 if (hsp > 0) and !right_free or (hsp < 0) and !left_free
 	hsp = 0
