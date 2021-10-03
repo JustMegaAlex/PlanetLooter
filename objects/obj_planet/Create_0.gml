@@ -324,3 +324,6 @@ if background_is_drawn {
 	//	[0, 0, 0, 0, 0],
 	//]
 }
+
+/// debug
+patrol_points = planet_get_patrol_points(id)
