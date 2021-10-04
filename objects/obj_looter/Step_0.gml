@@ -111,19 +111,10 @@ if in_cruise_mode >= 1 {
 	in_cruise_mode = (in_cruise_mode + cruise_switch_sp) * key_cruise
 	if input {
 		input_dir = point_direction(0, 0, move_h, move_v)
-		acceleration.set_polar(acc, input_dir)
-		acceleration.absolutize()
 		velocity_to.set_polar(sp.normal, input_dir)
 		velocity.approach(velocity_to, acceleration)
-		//self.set_sp_to(sp.normal, input_dir)
-		//hacc = abs(lengthdir_x(acc, input_dir))
-		//vacc = abs(lengthdir_y(acc, input_dir))
-		//hsp = approach(hsp, hsp_to, acc)
-		//vsp = approach(vsp, vsp_to, acc)
 	} else {
 		velocity.approach(global.zero2d, deceleration)
-		//hsp = approach(hsp, 0, decel)
-		//vsp = approach(vsp, 0, decel)
 	}
 }
 

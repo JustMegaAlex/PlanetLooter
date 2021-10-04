@@ -193,7 +193,7 @@ function try_repair() {
 position = new Vec2d(x, y)
 velocity = new Vec2d(0, 0)
 velocity_to = new Vec2d(0, 0)
-acceleration = new Vec2d(0, 0)
+acceleration = new Vec2d(0.5, 0.5)
 deceleration = new Vec2d(0.2, 0.2)
 is_moving_object = true
 sp = {normal: 5, cruise: 10, consumption: 0.005}
