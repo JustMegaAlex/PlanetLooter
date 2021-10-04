@@ -92,8 +92,7 @@ if in_cruise_mode >= 1 {
 	else
 		dir += cruise_rot_sp * sign(angle)	
 	cruise_sp = approach(cruise_sp, sp.cruise, cruise_acc)
-	hsp = lengthdir_x(cruise_sp, dir)
-	vsp = lengthdir_y(cruise_sp, dir)
+	velocity.set_polar(cruise_sp, dir)
 	if !spend_resource("fuel", sp.consumption) or key_cruise_off
 		in_cruise_mode = 0
 
