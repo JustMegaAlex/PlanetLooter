@@ -23,12 +23,12 @@ rtype_ore = new ResourceType("ore", 1, zerocost)
 rtype_organic = new ResourceType("organic", 2, zerocost)
 rtype_metall = new ResourceType("metall", 3, {ore: 3})
 rtype_fuel = new ResourceType("fuel", 4, {organic: 3})
-rtype_part = new ResourceType("part", 5, {metall: 2, junk: 2})
+rtype_part = new ResourceType("part", 5, {metall: 4, junk: 1})
 rtype_junk = new ResourceType("junk", 6, zerocost)
 rtype_bullet_homing = new ResourceType("bullet_homing", 0, {metall:1, drives:1, part:1})
 rtype_drives = new ResourceType("drives", 0, {junk: 1, metall: 3})
 rtype_chip = new ResourceType("chip", 0, {part: 2, metall: 5, junk: 1})
-rtype_repairkit = new ResourceType("repair_kit", 0, {junk: 2, metall: 1, drives: 1})
+rtype_repairkit = new ResourceType("repair_kit", 0, {metall: 1, drives: 1})
 
 
 function spawn_resource_item(type, xx, yy, sp, dir) { // sp1, sp2, sp_is_coords) {

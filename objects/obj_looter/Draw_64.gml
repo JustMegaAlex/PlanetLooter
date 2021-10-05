@@ -7,9 +7,8 @@ scr_debug_show_var("cargo", string(cargo_load) + "/" + string(cargo))
 scr_debug_show_var("fuel", string(tank_load) + "/" + string(tank))
 scr_debug_show_var("", "")
 
-var names = variable_struct_get_names(resources)
-for (var i = 0; i < array_length(names); ++i) {
-    var nm = names[i]
+for (var i = 0; i < array_length(resources_display_names); ++i) {
+    var nm = resources_display_names[i]
 	scr_debug_show_var(nm, string(resources[$ nm]))
 }
 scr_debug_show_var("", "")

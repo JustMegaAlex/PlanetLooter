@@ -18,11 +18,14 @@ global._level_gen_planet_size = -1 // pass size parameter to obj_planet inst on 
 draw_set_font(fnt)
 
 show_tips = false
-tips_text = "WASD to move\nMouse to shoot\nE to interact with buidlings\nR to restart\n"
-tips_text += "hold F to activate cruise mode\n"
-tips_text += "F11 toggle fullscreen (and make those shiny stars disappear)\n"
-tips_text += "compass arrows point to planets\n"
-tips_text += "When you have 10 fuel hold space to warp\n"
+show_tips_xoffset = -300
+tips_text = "WASD to move\nMouse to shoot\nE to interact with buidlings\nF3 to restart\n"
+tips_text += "R to repair one hull point (costs 1 repair kit)\n"
+tips_text += "Q to open structure-creation menu\n"
+tips_text += "Hold F to activate cruise mode\n"
+tips_text += "Hold space to warp (costs 5 fuel) \n"
+tips_text += "F11 toggle fullscreen (and make those shiny stars disappear LoL)\n"
+tips_text += "Compass arrows point to planets\n"
 tips_header = "Press T to show tips"
 
 instance_create_layer(0, 0, layer, obj_level_gen)

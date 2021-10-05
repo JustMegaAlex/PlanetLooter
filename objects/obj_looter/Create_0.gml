@@ -247,6 +247,7 @@ fuel_producer_pause = 0
 
 // new resource sys
 resources = {}
+resources_display_names = ["ore", "organic", "junk", "metall", "drives", "part", "bullet_homing", "repair_kit"]
 init_resources()
 
 // systems
@@ -298,7 +299,6 @@ if not instance_exists(obj_camera) {
 	with instance_create_layer(x, y, layer, obj_camera)
 		obj_camera.target = other.id
 }
-
 
 // weapon system
 use_weapon_arr = []

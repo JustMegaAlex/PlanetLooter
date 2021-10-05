@@ -1,12 +1,11 @@
 
-scr_debug_show_var("planets", instance_number(obj_planet))
-scr_debug_show_var("enemies", instance_number(obj_enemy))
 scr_debug_show_var("level", global.level)
+scr_debug_show_var("enemies", instance_number(obj_enemy))
 scr_debug_show_var("turrets", instance_number(obj_turret))
-//scr_debug_show_var("time", global.time)
 var w = scr_camw(0)
 var t = tips_text
 if !show_tips
 	t = tips_header
 
-draw_text_custom(w - 200, 20, t, fnt_gui, -1, -1)
+var xx = w - 200 + show_tips * show_tips_xoffset
+draw_text_custom(xx, 20, t, fnt_gui, -1, -1)

@@ -29,9 +29,9 @@ if obj_debug.show_planets_data {
 							 y0 + global.grid_size * (j-1), s, fnt_small, -1, -1)
 		}
 	}
-}
-
-for (var i = 0; i < array_length(patrol_points); ++i) {
-	var p = patrol_points[i]
-    draw_circle(p.X, p.Y, 3, false)
+	// patrol points
+	for (var i = 0; i < array_length(patrol_points); ++i) {
+		var p = patrol_points[i]
+	    draw_circle(p.X, p.Y, 3, false)
+	}
 }
