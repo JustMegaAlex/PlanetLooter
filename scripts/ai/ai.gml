@@ -1,4 +1,6 @@
 
+global.arr_patrol_routes = []
+
 function generate_patrol_route(first_planet) {
 	var planets = []
 	var planets_num = min(3, instance_number(obj_planet))
@@ -14,6 +16,7 @@ function generate_patrol_route(first_planet) {
 		array_push(planets, pl)
 		n++
 	}
+	array_push(global.arr_patrol_routes, planets)
 	return planets
 }
 

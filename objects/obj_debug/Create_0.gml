@@ -16,6 +16,7 @@ function capture_damage(inst) {
 
 current_planet = 0
 show_planets_data = false
+show_ai_patrol_routes = true
 enable_instant_planet_move = true
 enable_change_fps = true
 
