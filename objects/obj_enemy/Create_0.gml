@@ -14,7 +14,7 @@ enum Enemy {
 
 function set_hit(weapon) {
 	hp -= weapon.damage * obj_debug.capture_damage(id)
-	state = "warmup"
+	state_switch_attack(obj_looter)
 	dir = point_direction(x, y, obj_looter.x, obj_looter.y)
 	trigger_friendly_units()
 	if hp <= 0 {
@@ -22,14 +22,44 @@ function set_hit(weapon) {
 	}
 }
 
-function state_set_attacking() {
-	target = obj_looter
-	state = "warmup"
-	
+#region ai patrol
+function state_switch_idle() {
+	state = "idle"
+	self.set_sp_to(0, dir)
+	target = noone
+}
+
+function state_switch_patrol() {
+	state = "patrol"
+}
+
+function state_switch_attack(trg) {
+	if global.ai_attack_off {
+		return
+	}
+	self.set_sp_to(0, dir)
+	target = trg
+	dir = inst_dir(target)
+	if warmedup < 1
+		state = "warmup"
+	else
+		state = "attack"
 	trigger_friendly_units()
 }
 
+function state_switch_search() {
+	state = "search"
+	searching = search_time
+}
+
+function state_switch_return() {
+	state = "return"
+}
+#endregion
+
 function trigger_friendly_units() {
+	if global.ai_attack_off { return }
+
 	ds_list_empty(friendly_units_to_trigger)
 	collision_circle_list(x, y, trigger_radius_on_detection, obj_enemy, false, true, friendly_units_to_trigger, false)
 	alarm[1] = trigger_units_delay
@@ -100,6 +130,7 @@ function patrol_set_next_local_point() {
 state = "idle"
 patrol_planet_index = 0
 patrol_point_to = noone
+ai_attack_move_sign = 1
 // arg: is_patrol = false
 // arg: patrol_route = []
 

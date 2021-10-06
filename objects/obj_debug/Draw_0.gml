@@ -10,6 +10,7 @@ if show_ai_patrol_routes {
 		var pl0 = _patrol_route[0]
 		var pl1 = _patrol_route[arr_len - 1]
 		draw_line(pl0.x, pl0.y, pl1.x, pl1.y)
+		// draw all other lines
 		for (var i = 0; i < arr_len - 1; ++i) {
 		    pl0 = _patrol_route[i]
 			pl1 = _patrol_route[i + 1]
