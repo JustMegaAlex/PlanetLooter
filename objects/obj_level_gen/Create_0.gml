@@ -174,6 +174,7 @@ function get_planet_collision_coord(xx, yy, size) {
 function create_enemies(set) {
 	var groups_distribution = set[0]
 	var forposts = set[1]
+	var alert_tower_num = 2
 	for (var i = 0; i < array_length(groups_distribution); ++i) {
 	    var num = i + 1
 		var planet = choose_planet()
@@ -188,13 +189,14 @@ function create_enemies(set) {
 				instance_create_args(0, 0, "Instances", obj_turret, {planet: planet})
 			else {
 				var is_patrol = chance(0.3)
-				instance_create_args(xx+random(100), yy+random(100), 
+				var ship = instance_create_args(xx+random(100), yy+random(100),
 									 "Instances", obj_enemy, 
 									 {is_patrol: is_patrol, patrol_route: patrol_route})
+				array_push(ships, ship)
 			}
-			// alert tower
-			
 		}
+		if alert_tower_num--
+			instance_create_args(xx, yy, "Instances", obj_alert_tower, {arr_ships: ships})
 		if (num >= (forpost_min_group_size + global.level)) and forposts-- {
 			with instance_create_layer(0, 0, "Instances", obj_production_module) {self.planet = planet}
 		}

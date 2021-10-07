@@ -126,6 +126,11 @@ function patrol_set_next_local_point() {
 	}
 }
 
+function set_start_point(xx, yy) {
+	xst = xx
+	yst = yy
+}
+
 //// behavior
 state = "idle"
 patrol_planet_index = 0
@@ -181,6 +186,9 @@ hp = 7
 
 side = Sides.theirs
 use_weapon = "pulse_spread"
+
+// alert tower
+alert_tower_inst = noone
 
 assign_creation_arguments()
 
