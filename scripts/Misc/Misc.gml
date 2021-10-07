@@ -179,3 +179,20 @@ function draw_text_above_me(text) {
 	var yy = y - sprite_yoffset - sprite_height * 0.1 - fnt_size
 	draw_text(xx, yy, text)
 }
+
+function foreach(arr, fun) {
+	for (var i = 0; i < array_length(arr); ++i) {
+	    if fun(arr[i])
+			return true
+	}
+	return false
+}
+
+function foreach_instance(obj, fun) {
+	for (var i = 0; i < instance_number(obj); ++i) {
+	    var inst = instance_find(obj, i)
+		if fun(inst)
+			return true
+	}
+	return false
+}
