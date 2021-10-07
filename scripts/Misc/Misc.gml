@@ -171,3 +171,9 @@ function instance_create_args(xx, yy, layer, obj, args) {
 	global.creation_arguments_struct = noone
 }
 
+function draw_text_above_me(text) {
+	var fnt_size = font_get_size(draw_get_font())
+	var xx = x - sprite_xoffset + sprite_width * 0.5
+	var yy = y - sprite_yoffset - sprite_height * 0.1 - fnt_size
+	draw_text(xx, yy, text)
+}

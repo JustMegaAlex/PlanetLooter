@@ -5,7 +5,7 @@ function Node(xx, yy, nodes) constructor {
 	self.nodes = []
 	if nodes != undefined
 		self.nodes = nodes
-	
+
 	dist = function(node) {
 		return point_distance(self.X, self.Y, node.X, node.Y)	
 	}
@@ -24,7 +24,7 @@ function generate_star_system() {
 	var level = min(global.level, array_length(enemies_progression) - 1)
 	var enemies_set = enemies_progression[level]
 	create_enemies(enemies_set)
-	
+
 	level = min(global.level, array_length(buildings_progression) - 1)
 	var buildings_set = buildings_progression[level]
 	create_buildings(buildings_set)
@@ -182,6 +182,7 @@ function create_enemies(set) {
 		var angle = random(360)
 		var xx = planet.x + lengthdir_x(dist, angle)
 		var yy = planet.y + lengthdir_y(dist, angle)
+		var ships = []
 		repeat (num) {
 			if chance(0.25)
 				instance_create_args(0, 0, "Instances", obj_turret, {planet: planet})
@@ -191,6 +192,8 @@ function create_enemies(set) {
 									 "Instances", obj_enemy, 
 									 {is_patrol: is_patrol, patrol_route: patrol_route})
 			}
+			// alert tower
+			
 		}
 		if (num >= (forpost_min_group_size + global.level)) and forposts-- {
 			with instance_create_layer(0, 0, "Instances", obj_production_module) {self.planet = planet}
