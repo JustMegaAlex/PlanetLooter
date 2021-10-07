@@ -7,15 +7,15 @@
   "edgeFiltering": false,
   "collisionTolerance": 0,
   "swfPrecision": 2.525,
-  "bbox_left": 2,
-  "bbox_right": 21,
-  "bbox_top": 3,
-  "bbox_bottom": 22,
+  "bbox_left": 40,
+  "bbox_right": 65,
+  "bbox_top": 41,
+  "bbox_bottom": 66,
   "HTile": false,
   "VTile": false,
   "For3D": false,
-  "width": 120,
-  "height": 120,
+  "width": 107,
+  "height": 108,
   "textureGroupId": {
     "name": "Default",
     "path": "texturegroups/Default",
@@ -24,9 +24,9 @@
   "gridX": 0,
   "gridY": 0,
   "frames": [
-    {"compositeImage":{"FrameId":{"name":"f9ec5e81-c966-4b26-be25-6b6e50386974","path":"sprites/spr_alert_tower/spr_alert_tower.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
-        {"FrameId":{"name":"f9ec5e81-c966-4b26-be25-6b6e50386974","path":"sprites/spr_alert_tower/spr_alert_tower.yy",},"LayerId":{"name":"bbc60ac6-14a8-44fd-838a-d65176f49ade","path":"sprites/spr_alert_tower/spr_alert_tower.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
-      ],"parent":{"name":"spr_alert_tower","path":"sprites/spr_alert_tower/spr_alert_tower.yy",},"resourceVersion":"1.0","name":"f9ec5e81-c966-4b26-be25-6b6e50386974","tags":[],"resourceType":"GMSpriteFrame",},
+    {"compositeImage":{"FrameId":{"name":"89c9ec26-64c0-498e-b8a1-d8785e5ebf28","path":"sprites/spr_alert_tower/spr_alert_tower.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
+        {"FrameId":{"name":"89c9ec26-64c0-498e-b8a1-d8785e5ebf28","path":"sprites/spr_alert_tower/spr_alert_tower.yy",},"LayerId":{"name":"bbc60ac6-14a8-44fd-838a-d65176f49ade","path":"sprites/spr_alert_tower/spr_alert_tower.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
+      ],"parent":{"name":"spr_alert_tower","path":"sprites/spr_alert_tower/spr_alert_tower.yy",},"resourceVersion":"1.0","name":"89c9ec26-64c0-498e-b8a1-d8785e5ebf28","tags":[],"resourceType":"GMSpriteFrame",},
   ],
   "sequence": {
     "spriteId": {"name":"spr_alert_tower","path":"sprites/spr_alert_tower/spr_alert_tower.yy",},
@@ -41,7 +41,7 @@
     "moments": {"Keyframes":[],"resourceVersion":"1.0","resourceType":"KeyframeStore<MomentsEventKeyframe>",},
     "tracks": [
       {"name":"frames","spriteId":null,"keyframes":{"Keyframes":[
-            {"id":"e137d09a-6a9b-43f0-925e-5fde8b47ec66","Key":0.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"f9ec5e81-c966-4b26-be25-6b6e50386974","path":"sprites/spr_alert_tower/spr_alert_tower.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
+            {"id":"c47eb3d1-6d0a-46eb-98e4-2854954d716f","Key":0.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"89c9ec26-64c0-498e-b8a1-d8785e5ebf28","path":"sprites/spr_alert_tower/spr_alert_tower.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
           ],"resourceVersion":"1.0","resourceType":"KeyframeStore<SpriteFrameKeyframe>",},"trackColour":0,"inheritsTrackColour":true,"builtinName":0,"traits":0,"interpolation":1,"tracks":[],"events":[],"modifiers":[],"isCreationTrack":false,"resourceVersion":"1.0","tags":[],"resourceType":"GMSpriteFramesTrack",},
     ],
     "visibleRange": null,
@@ -54,8 +54,8 @@
     "backdropHeight": 768,
     "backdropXOffset": 0.0,
     "backdropYOffset": 0.0,
-    "xorigin": 60,
-    "yorigin": 60,
+    "xorigin": 53,
+    "yorigin": 54,
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_alert_tower","path":"sprites/spr_alert_tower/spr_alert_tower.yy",},
@@ -69,8 +69,8 @@
   ],
   "nineSlice": null,
   "parent": {
-    "name": "Sprites",
-    "path": "folders/Sprites.yy",
+    "name": "buldings",
+    "path": "folders/Sprites/buldings.yy",
   },
   "resourceVersion": "1.0",
   "name": "spr_alert_tower",

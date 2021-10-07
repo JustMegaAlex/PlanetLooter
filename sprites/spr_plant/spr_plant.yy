@@ -67,9 +67,10 @@
   "layers": [
     {"visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"default","resourceVersion":"1.0","name":"0ee98979-e9c5-4026-8cee-fa0d964be0d8","tags":[],"resourceType":"GMImageLayer",},
   ],
+  "nineSlice": null,
   "parent": {
-    "name": "Sprites",
-    "path": "folders/Sprites.yy",
+    "name": "buldings",
+    "path": "folders/Sprites/buldings.yy",
   },
   "resourceVersion": "1.0",
   "name": "spr_plant",
