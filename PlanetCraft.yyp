@@ -48,7 +48,6 @@
     {"id":{"name":"spr_aim","path":"sprites/spr_aim/spr_aim.yy",},"order":23,},
     {"id":{"name":"ts_planet_ground_farbgr","path":"tilesets/ts_planet_ground_farbgr/ts_planet_ground_farbgr.yy",},"order":2,},
     {"id":{"name":"obj_building_shipyard_trailer","path":"objects/obj_building_shipyard_trailer/obj_building_shipyard_trailer.yy",},"order":2,},
-    {"id":{"name":"obj_args","path":"objects/obj_args/obj_args.yy",},"order":25,},
     {"id":{"name":"autotiling","path":"scripts/autotiling/autotiling.yy",},"order":9,},
     {"id":{"name":"snd_laser3","path":"sounds/snd_laser3/snd_laser3.yy",},"order":0,},
     {"id":{"name":"obj_plant_ui","path":"objects/obj_plant_ui/obj_plant_ui.yy",},"order":1,},

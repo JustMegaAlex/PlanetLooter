@@ -165,10 +165,12 @@ function assign_creation_arguments() {
 	}
 }
 
+global.creation_arguments_struct = {}
 function instance_create_args(xx, yy, layer, obj, args) {
 	global.creation_arguments_struct = args
-	instance_create_layer(xx, yy, layer, obj)
+	var inst = instance_create_layer(xx, yy, layer, obj)
 	global.creation_arguments_struct = noone
+	return inst
 }
 
 function draw_text_above_me(text) {
