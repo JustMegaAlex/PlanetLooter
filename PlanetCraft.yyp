@@ -17,7 +17,7 @@
     {"id":{"name":"obj_gui_toggle_button","path":"objects/obj_gui_toggle_button/obj_gui_toggle_button.yy",},"order":5,},
     {"id":{"name":"obj_solid","path":"objects/obj_solid/obj_solid.yy",},"order":8,},
     {"id":{"name":"obj_alert_tower","path":"objects/obj_alert_tower/obj_alert_tower.yy",},"order":5,},
-    {"id":{"name":"misc","path":"scripts/misc/misc.yy",},"order":5,},
+    {"id":{"name":"utils","path":"scripts/utils/utils.yy",},"order":5,},
     {"id":{"name":"spr_particle_jet","path":"sprites/spr_particle_jet/spr_particle_jet.yy",},"order":20,},
     {"id":{"name":"spr_manufacture","path":"sprites/spr_manufacture/spr_manufacture.yy",},"order":4,},
     {"id":{"name":"spr_planet_ground_bgr_tileset","path":"sprites/spr_planet_ground_bgr_tileset/spr_planet_ground_bgr_tileset.yy",},"order":0,},
