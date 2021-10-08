@@ -14,7 +14,7 @@ enum Enemy {
 
 function set_hit(weapon) {
 	if !global.no_damage
-		hp -= weapon.damage * obj_debug.capture_damage(id)
+		hp -= weapon.damage
 	state_switch_attack(obj_looter)
 	dir = point_direction(x, y, obj_looter.x, obj_looter.y)
 	trigger_friendly_units()
@@ -96,7 +96,7 @@ function patrol_set_next_point() {
 function patrol_try_set_planet(planet) {
 	var success = false
 	var min_dist = infinity
-	var planet_points = planet_get_patrol_points(planet)
+	var planet_points = planet_get_route_points(planet)
 	for (var i = 0; i < array_length(planet_points); i++) {
 		var p = planet_points[i]
 		if not collision_line(x, y, p.X, p.Y, obj_block, false, true) {
@@ -114,7 +114,7 @@ function patrol_try_set_planet(planet) {
 function patrol_set_next_local_point() {
 	var min_dist = infinity
 	var cur_planet = patrol_route[patrol_planet_index]
-	var planet_points = planet_get_patrol_points(cur_planet)
+	var planet_points = planet_get_route_points(cur_planet)
 	for (var i = 0; i < array_length(planet_points); i++) {
 		var p = planet_points[i]
 		if not collision_line(x, y, p.X, p.Y, obj_block, false, true) {
