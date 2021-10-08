@@ -165,7 +165,6 @@ function assign_creation_arguments() {
 	}
 }
 
-global.creation_arguments_struct = {}
 function instance_create_args(xx, yy, layer, obj, args) {
 	global.creation_arguments_struct = args
 	var inst = instance_create_layer(xx, yy, layer, obj)
@@ -182,7 +181,7 @@ function draw_text_above_me(text) {
 
 function foreach(arr, fun, args=[], kwargs={}) {
 	for (var i = 0; i < array_length(arr); ++i) {
-	    if fun(arr[i])
+	    if fun(arr[i], args, kwargs)
 			return true
 	}
 	return false

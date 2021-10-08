@@ -55,7 +55,7 @@ function generate_star_system_1 () {
 	var enemies_set = enemies_progression[level]
 	create_enemies(enemies_set)
 	
-	instance_destroy(obj_planet_mask)
+	//instance_destroy(obj_planet_mask)
 }
 
 function generate_star_system_graph() {

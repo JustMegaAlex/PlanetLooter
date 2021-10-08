@@ -327,3 +327,7 @@ if background_is_drawn {
 
 /// debug
 patrol_points = planet_get_route_points(id)
+
+collider_obj = instance_create_args(x, y, layer,
+									obj_planet_mask,
+									{size: size, planet_inst: id})

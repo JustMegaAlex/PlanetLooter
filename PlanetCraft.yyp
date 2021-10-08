@@ -4,6 +4,7 @@
     {"id":{"name":"obj_camera","path":"objects/obj_camera/obj_camera.yy",},"order":11,},
     {"id":{"name":"spr_turret","path":"sprites/spr_turret/spr_turret.yy",},"order":27,},
     {"id":{"name":"fnt","path":"fonts/fnt/fnt.yy",},"order":0,},
+    {"id":{"name":"obj_test","path":"objects/obj_test/obj_test.yy",},"order":25,},
     {"id":{"name":"obj_planet_mask","path":"objects/obj_planet_mask/obj_planet_mask.yy",},"order":7,},
     {"id":{"name":"obj_planet","path":"objects/obj_planet/obj_planet.yy",},"order":0,},
     {"id":{"name":"movement","path":"scripts/movement/movement.yy",},"order":4,},
