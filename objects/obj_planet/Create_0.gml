@@ -326,4 +326,4 @@ if background_is_drawn {
 }
 
 /// debug
-patrol_points = planet_get_patrol_points(id)
+patrol_points = planet_get_route_points(id)
