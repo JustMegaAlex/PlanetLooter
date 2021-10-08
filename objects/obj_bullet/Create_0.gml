@@ -2,9 +2,7 @@
 function bring_damage() {
 	var inst = instance_place(x, y, obj_solid)
 	if inst and inst.side != side {
-		inst.set_hit(weapon)
 		obj_effects.explosion(x, y)
-		instance_destroy()
 		// knockback
 		if inst.is_moving_object {
 			var knock_back_force = weapon.knock_back_force
@@ -19,6 +17,8 @@ function bring_damage() {
 			inst.hsp += lengthdir_x(knock_back_force, image_angle)
 			inst.vsp += lengthdir_y(knock_back_force, image_angle)
 		}
+		inst.set_hit(weapon)
+		instance_destroy()
 	}
 }
 
