@@ -180,7 +180,7 @@ function draw_text_above_me(text) {
 	draw_text(xx, yy, text)
 }
 
-function foreach(arr, fun) {
+function foreach(arr, fun, args=[], kwargs={}) {
 	for (var i = 0; i < array_length(arr); ++i) {
 	    if fun(arr[i])
 			return true
