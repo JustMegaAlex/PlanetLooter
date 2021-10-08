@@ -27,7 +27,7 @@ function generate_patrol_route(first_planet) {
 	return planets
 }
 
-function planet_get_patrol_points(planet) {
+function planet_get_route_points(planet) {
 	var extra_dist = 100
 	var rr = planet.radius + extra_dist
 	var v_center = new Vec2d(planet.x, planet.y)
@@ -38,4 +38,20 @@ function planet_get_patrol_points(planet) {
 	]
 	array_push(arr, v_center.add_coords(-rr, -rr))
 	return arr
+}
+
+function find_route(point_st, point_end, obstacle_obj=obj_planet_mask) {
+	var route = []
+	var obstacles_list = ds_list_create()
+	var obstacle = find_farest_obstacle(point_st, point_end, obstacle_obj)
+	if obstacle != noone {
+		var route_points = planet_get_route_points(obstacle)
+		foreach(route_points,
+				function(p) {
+					
+				}
+		)
+	}
+	ds_list_destroy(obstacles_list)
+	return route
 }
