@@ -1,7 +1,4 @@
 
-player_immortal = false
-no_damage = false
-
 function move_to_planet(num) {
 	if not global.DEBUG
 		return 0
@@ -10,15 +7,7 @@ function move_to_planet(num) {
 	obj_looter.y = planet.y
 }
 
-function capture_damage(inst) {
-	return (!player_immortal or (inst.object_index != obj_looter)) * !no_damage
-}
-
 current_planet = 0
-show_planets_data = false
-show_ai_patrol_routes = true
-enable_instant_planet_move = true
-enable_change_fps = true
 
 state = "none"
 editor_objects_list = [obj_enemy, obj_dummy, obj_planet]

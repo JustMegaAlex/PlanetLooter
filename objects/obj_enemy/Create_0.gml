@@ -13,7 +13,8 @@ enum Enemy {
 }
 
 function set_hit(weapon) {
-	hp -= weapon.damage * obj_debug.capture_damage(id)
+	if !global.no_damage
+		hp -= weapon.damage * obj_debug.capture_damage(id)
 	state_switch_attack(obj_looter)
 	dir = point_direction(x, y, obj_looter.x, obj_looter.y)
 	trigger_friendly_units()
@@ -22,7 +23,7 @@ function set_hit(weapon) {
 	}
 }
 
-#region ai patrol
+#region ai states
 function state_switch_idle() {
 	state = "idle"
 	self.set_sp_to(0, dir)

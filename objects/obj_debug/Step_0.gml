@@ -1,7 +1,7 @@
 
 var num = instance_number(obj_planet)
 
-if enable_instant_planet_move {
+if global.enable_instant_planet_move {
 	if keyboard_check_pressed(ord("O")) {
 		current_planet = cycle_increase(current_planet, 0, num)
 		move_to_planet(current_planet)
@@ -12,7 +12,7 @@ if enable_instant_planet_move {
 	}
 }
 
-if enable_change_fps {
+if global.enable_change_fps {
 	if keyboard_check(vk_rshift) {
 		if keyboard_check_pressed(vk_add)
 			room_speed += 10
@@ -24,7 +24,7 @@ if enable_change_fps {
 
 if keyboard_check_pressed(ord("E"))
 	state = "editor"
-	
+
 switch state {
 	case "editor": {
 		if mouse_check_button_pressed(mb_left) {

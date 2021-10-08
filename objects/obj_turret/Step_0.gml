@@ -1,5 +1,5 @@
 
-if instance_exists(obj_looter) {
+if instance_exists(obj_looter) and !global.ai_attack_off {
 	var dist = inst_dist(obj_looter)
 	if dist < vision_range {
 		if !collision_line(x, y, obj_looter.x, obj_looter.y, obj_block, false, false) {

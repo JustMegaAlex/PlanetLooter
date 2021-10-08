@@ -1,6 +1,6 @@
 
 
-if obj_debug.show_planets_data {
+if global.show_planets_data {
 	draw_circle(x, y, radius, true)
 	draw_line(left_coord(), top_coord(), right_coord(), bottom_coord())
 	var i, j
