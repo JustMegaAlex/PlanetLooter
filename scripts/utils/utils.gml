@@ -1,4 +1,44 @@
 
+function IterStruct(_struct) constructor {
+	struct = _struct
+	current_value = undefined
+	names = variable_struct_get_names(self.struct)
+	len = array_length(names)
+	i = 0
+	
+	next = function() {
+		if i >= len
+			return undefined
+		current_value = variable_struct_get(self.struct, names[i])
+		i++
+		return current_value
+	}
+	
+	get = function() {
+		return current_value
+	}
+}
+
+
+function IterArray(_arr) constructor {
+	arr = _arr
+	current_value = undefined
+	len = array_length(arr)
+	i = 0
+	
+	next = function() {
+		if i >= len
+			return undefined
+		current_value = arr[i]
+		i++
+		return current_value
+	}
+	
+	get = function() {
+		return current_value
+	}
+}
+
 function value_between(val, min_, max_){
 	return (val >= min_) and (val < max_)
 }
@@ -56,10 +96,16 @@ function array_choose(arr) {
 	return arr[irandom(array_length(arr) - 1)]
 }
 
+function array_expand(arr, from) {
+	for (var i = 0; i < array_length(from); ++i) {
+	    array_push(arr, from[i])
+	}
+}
+
 function cycle_increase(val, min_, max_) {
 	val++
-	var inboudns = val < max_
-	return val * inboudns + min_ * !inboudns
+	var inbounds = val < max_
+	return val * inbounds + min_ * !inbounds
 }
 
 function cycle_decrease(val, min_, max_) {
