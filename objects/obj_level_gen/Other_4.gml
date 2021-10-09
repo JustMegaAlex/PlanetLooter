@@ -1,2 +1,2 @@
 
-generate_star_system_1()
+generate_star_system()

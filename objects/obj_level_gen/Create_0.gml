@@ -1,5 +1,5 @@
 
-function Node(xx, yy, nodes) constructor {
+function SectorNode(xx, yy, nodes) constructor {
 	self.X = xx
 	self.Y = yy
 	self.nodes = []
@@ -16,23 +16,6 @@ function Node(xx, yy, nodes) constructor {
 }
 
 function generate_star_system() {
-	var blocks_num = random_range(0.5, 1) * blocks_max_num
-	while instance_number(obj_block) < blocks_num {
-		var size = irandom_range(5, 30)
-		create_planet_at_random_pos(size, true)
-	}
-	var level = min(global.level, array_length(enemies_progression) - 1)
-	var enemies_set = enemies_progression[level]
-	create_enemies(enemies_set)
-
-	level = min(global.level, array_length(buildings_progression) - 1)
-	var buildings_set = buildings_progression[level]
-	create_buildings(buildings_set)
-	
-	instance_destroy(obj_planet_mask)
-}
-
-function generate_star_system_1 () {
 	generate_star_system_graph()
 	var xmin = infinity
 	var ymin = infinity
@@ -63,12 +46,12 @@ function generate_star_system_graph() {
 	var axis_num = floor(planet_number * 0.65)
 	var leafs_num = planet_number - axis_num
 
-	var first = new Node(0, 0)
+	var first = new SectorNode(0, 0)
 	var dir = random(360)
 	var dist = max_planet_dist * random_range(0.7, 1)
 	var xx = first.X + lengthdir_x(dist, dir)
 	var yy = first.Y + lengthdir_y(dist, dir)
-	var second = new Node(xx, yy, [first])
+	var second = new SectorNode(xx, yy, [first])
 	first.nodes = [first]
 	nodes = [first, second]
 	leafs = []
@@ -94,7 +77,7 @@ function generate_star_system_graph() {
 					}
 				}
 				if added {
-					var n = new Node(xx, yy, [root])
+					var n = new SectorNode(xx, yy, [root])
 					array_push(nodes, n)
 					array_push(root.nodes, n)
 					break
