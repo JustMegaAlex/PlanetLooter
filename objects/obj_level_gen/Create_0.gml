@@ -9,7 +9,7 @@ function Node(xx, yy, nodes) constructor {
 	dist = function(node) {
 		return point_distance(self.X, self.Y, node.X, node.Y)	
 	}
-	
+
 	dir = function(node) {
 		return point_direction(self.X, self.Y, node.X, node.Y)	
 	}
@@ -53,9 +53,8 @@ function generate_star_system_1 () {
 	// enemies
 	var level = min(global.level, array_length(enemies_progression) - 1)
 	var enemies_set = enemies_progression[level]
-	create_enemies(enemies_set)
-	
-	//instance_destroy(obj_planet_mask)
+	if global.gen_create_enemies
+		create_enemies(enemies_set)
 }
 
 function generate_star_system_graph() {

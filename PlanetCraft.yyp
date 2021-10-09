@@ -106,6 +106,7 @@
     {"id":{"name":"snd_laser4","path":"sounds/snd_laser4/snd_laser4.yy",},"order":1,},
     {"id":{"name":"obj_dummy","path":"objects/obj_dummy/obj_dummy.yy",},"order":0,},
     {"id":{"name":"icon","path":"sprites/icon/icon.yy",},"order":1,},
+    {"id":{"name":"path_finding","path":"scripts/path_finding/path_finding.yy",},"order":14,},
     {"id":{"name":"manage_weapons","path":"scripts/manage_weapons/manage_weapons.yy",},"order":7,},
     {"id":{"name":"snd_warp","path":"sounds/snd_warp/snd_warp.yy",},"order":6,},
     {"id":{"name":"Room2","path":"rooms/Room2/Room2.yy",},"order":1,},

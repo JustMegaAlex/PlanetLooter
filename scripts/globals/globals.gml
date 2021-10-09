@@ -12,6 +12,7 @@ global.enable_instant_planet_move = true
 global.enable_change_fps = true
 global.show_planets_data = false
 global.show_ai_patrol_routes = true
+global.gen_create_enemies = false
 
 // settings
 global.ai_max_partol_route_length = 4
