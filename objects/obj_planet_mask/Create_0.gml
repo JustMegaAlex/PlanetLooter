@@ -1,6 +1,4 @@
 
-test = true
-
 // args
 size = 0
 planet_inst = noone

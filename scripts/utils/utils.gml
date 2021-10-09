@@ -5,7 +5,7 @@ function IterStruct(_struct) constructor {
 	names = variable_struct_get_names(self.struct)
 	len = array_length(names)
 	i = 0
-	
+
 	next = function() {
 		if i >= len
 			return undefined
@@ -18,7 +18,6 @@ function IterStruct(_struct) constructor {
 		return current_value
 	}
 }
-
 
 function IterArray(_arr) constructor {
 	arr = _arr

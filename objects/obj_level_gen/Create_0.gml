@@ -74,8 +74,6 @@ function generate_star_system_graph() {
 	leafs = []
 	var prev = nodes[0]
 	for (var i = 1; i < planet_number; i++) {
-		if array_has(nodes, 0)
-			test = true
 		var added = true
 		repeat 100 {
 			var root = array_choose(nodes)
@@ -89,8 +87,6 @@ function generate_star_system_graph() {
 				var xx = root.X + lengthdir_x(dist, dir)
 				var yy = root.Y + lengthdir_y(dist, dir)
 				for (var ii = 0; ii < array_length(nodes); ++ii) {
-					if array_has(nodes, 0)
-						test = true
 				    var check = nodes[ii]
 					if point_distance(check.X, check.Y, xx, yy) < (dist - 1) {
 						added = false

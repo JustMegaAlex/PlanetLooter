@@ -1,17 +1,16 @@
 
+function Node(_point) constructor {
+	point = _point
+	links = []
+
+	function add_link(node) {
+		if array_find(self.links, node) { return }
+		array_push(self.links, node)
+	}
+}
+
 function AstarGraph() constructor {
 	graph = {}
-	
-	function Node(_point, _links=[]) constructor {
-		point = _point
-		links = _links
-		
-		function add_link(node) {
-			if array_find(self.links, node)
-				return
-			array_push(self.links, node)
-		}
-	}
 
 	point_to_name = function (point) {
 		return "p" + string(point.X) + "_" + string(point.Y)
@@ -20,7 +19,7 @@ function AstarGraph() constructor {
 	get_or_create = function(node_name, point_to_assign) {
 		if variable_struct_exists(self.graph, node_name)
 			return variable_struct_get(self.graph, node_name)
-		var node = new self.Node(point_to_assign)
+		var node = new Node(point_to_assign)
 		variable_struct_set(self.graph, node_name, node)
 		return node
 	}
@@ -43,14 +42,6 @@ function AstarGraph() constructor {
 		var node2 = self.get_or_create(nm2, p2)
 		node1.add_link(node2)
 		node2.add_link(node1)
-	}
-
-	add_node = function(point, link_points=[]) {
-		
-		var node_name = self.point_to_name(point)
-		if variable_struct_get(self.graph, node_name)
-			throw "\nAstarGraph: trying to add already existing node_name)"
-		variable_struct_set(self.graph, node_name, Node(point, links))
 	}
 
 	draw_graph = function() {

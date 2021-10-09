@@ -54,8 +54,6 @@ function modify_resource_value(val, i, j, type) {
 	else if (d >= organic_layer_depth) and (type == "organic")
 		var add = 0.2 + d * (0.05)
 	add = clamp(add, -0.3, 0.3)
-	if (val + add) > 1
-		test = true
 	return val + add
 }
 
@@ -104,8 +102,6 @@ function reset_resource_data(gain) {
 }
 
 function get_resource_data_by_mesh(val) {
-	if val > 1
-		test = true
 	var type, ammount, tile_index, max_ammount
 	for (var i = 0; i < array_length(_resource_data); ++i) {
 		var data = _resource_data[i]

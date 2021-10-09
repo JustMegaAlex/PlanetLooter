@@ -1,2 +1,3 @@
 
-route = []
+astar = new AstarGraph()
+links = []
