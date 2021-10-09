@@ -1,4 +1,8 @@
 
+// args:
+size = 0
+background_is_drawn = true
+assign_creation_arguments()
 
 function ResourceData(type, ammount, tile_index) constructor {
 	self.type = type
@@ -225,9 +229,6 @@ function collapse_mesh_cells(mesh, bound_value) {
 
 
 visible = true
-size = global._level_gen_planet_size
-background_is_drawn = global._level_gen_planet_background
-
 
 radius = global.grid_size * size * 0.5
 x0 = x - radius

@@ -1,6 +1,5 @@
 
 scr_debug_ini()
-global.DEBUG = true
 window_set_cursor(cr_none)
 cursor_sprite = spr_aim
 global.time = 0
@@ -16,6 +15,9 @@ global.game_over = false
 global.level = 0
 global._level_gen_planet_size = -1 // pass size parameter to obj_planet inst on its creation
 draw_set_font(fnt)
+
+// objects
+global.astar_graph = new AstarGraph()
 
 show_tips = false
 show_tips_xoffset = -300

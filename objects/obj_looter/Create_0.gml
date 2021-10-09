@@ -1,7 +1,6 @@
 
 event_inherited()
 
-
 function set_hit(weapon) {
 	if !global.player_immortal or !global.no_damage
 		hp -= weapon.damage

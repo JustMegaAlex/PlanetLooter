@@ -233,3 +233,7 @@ function instance_line_collision_point(x0, y0, x1, y1, inst) {
 
 	throw " :instance_line_collision_point: there is no line collision with specified instance"
 }
+
+function point_dist2d(p1, p2) {
+	return point_distance(p1.X, p1.Y, p2.X, p2.Y)
+}

@@ -21,15 +21,18 @@ function generate_star_system() {
 	var ymin = infinity
 	var xmax = -infinity
 	var ymax = -infinity
+	var planets = []
 	for (var i = 0; i < array_length(nodes); ++i) {
 		var n = nodes[i]
 	    var size = irandom_range(planet_min_size, planet_max_size)
-		create_planet_coord(n.X, n.Y, size, true)
+		var pl = create_planet_coord(n.X, n.Y, size, true)
+		array_push(planets, pl)
 		xmin = min(n.X, xmin)
 		xmax = max(n.X, xmax)
 		ymin = min(n.Y, ymin)
 		ymax = max(n.Y, ymax)
 	}
+	setup_path_finding_graph(global.astar_graph, planets)
 	//generate_asteroids(xmin, ymin, xmax, ymax)
 	level = min(global.level, array_length(buildings_progression) - 1)
 	var buildings_set = buildings_progression[level]
@@ -100,31 +103,9 @@ function generate_asteroids(x0, y0, x1, y1) {
 	}
 }
 
-function create_planet_at_random_pos(size, bgr) {
-	var r = irandom_range(rmin, rmax)
-	var angle = random(360)
-	var mask = get_planet_collision(r, angle, size)
-	while mask.collided {
-		instance_destroy(mask)
-		r = irandom_range(rmin, rmax)
-		angle = random(360)
-		mask = get_planet_collision(r, angle, size)
-	}
-	create_planet(r, angle, size, bgr)
-}
-
-function create_planet(r, angle, bgr) {
-	global._level_gen_planet_size = size
-	global._level_gen_planet_background = bgr
-	var xx = lengthdir_x(r, angle)
-	var yy = lengthdir_y(r, angle)
-	instance_create_layer(xx, yy, "Instances", obj_planet)
-}
-
 function create_planet_coord(xx, yy, size, bgr) {
-	global._level_gen_planet_size = size
-	global._level_gen_planet_background = bgr
-	instance_create_layer(xx, yy, "Instances", obj_planet)
+	return instance_create_args(xx, yy, "Instances", obj_planet,
+						 {size: size, bgr: bgr})
 }
 
 function get_planet_collision(r, angle, size) {
@@ -181,10 +162,6 @@ function create_enemies(set) {
 	}
 }
 
-function _create_enemy_group(xx, yy, num) {
-	
-}
-
 function create_buildings(set) {
 	var buildings_set = set[0]
 	var controlled_number = set[1]
@@ -200,6 +177,28 @@ function create_buildings(set) {
 		array_push(buildings, instance_create_layer(0, 0, "Instances", obj_building_manufacture))
 	repeat (yards)
 		array_push(buildings, instance_create_layer(0, 0, "Instances", obj_building_shipyard))
+}
+
+function setup_path_finding_graph(graph_struct, planets) {
+	var it = new IterArray(planets)
+	var points = []
+	while it.next() != undefined {
+		array_expand(points, planet_get_route_points(it.get()))
+	}
+	var num = array_length(points)
+	var p, p1
+	for (var i = 0; i < num - 1; ++i) {
+		p = points[i]
+		var link_points = []
+	    for (var j = i + 1; j < num; ++j) {
+		    p1 = points[j]
+			if !collision_line(p.X, p.Y, p1.X, p1.Y,
+							   obj_planet_mask, false, true)
+				array_push(link_points, p1)
+				
+		}
+		graph_struct.add_node_from_point(p, link_points)
+	}
 }
 
 blocks_max_num = 2500
