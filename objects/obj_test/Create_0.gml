@@ -1,3 +1,0 @@
-
-astar = new AstarGraph()
-links = []

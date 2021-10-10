@@ -8,18 +8,24 @@ function AstarGraph() constructor {
 		point = _point
 		links = []
 		_score = infinity
+		_dist_walked = 0
+		_in_boundary = false
 
 		add_link = function(node) {
 			if array_find(self.links, node) { return }
 			array_push(self.links, node)
 		}
-		
+
 		_lowest_score_link = function() {
 			var _score = infinity
 			var chosen = noone
 			for (var i = 0; i < array_length(links); ++i) {
 			    var n = links[i]
-				if n._score < _score {
+				if n._score == infinity
+					continue
+				if (n._score < _score)
+					// choose bigger dist if socores are equal
+				   or ((n._score == _score) and (n._dist_walked > chosen._dist_walked)) {
 					_score = n._score
 					chosen = n
 				}
@@ -27,7 +33,11 @@ function AstarGraph() constructor {
 			return n
 		}
 		
-		_clear_score = function() { self._score = infinity}
+		_clear_score = function() {
+			self._score = infinity
+			_dist_walked = 0
+			_in_boundary = false
+		}
 	}
 
 	point_to_name = function (point) {
@@ -63,29 +73,49 @@ function AstarGraph() constructor {
 	}
 	
 	// path finding
-	
-	_get_score = function(from, n, finish) {
-		return point_dist2d(from.point, n.point) 
-			   + point_dist2d(n.point, finish.point)
+
+	_set_score = function(from, n, finish) {
+		n._dist_walked = from._dist_walked + point_dist2d(from.point, n.point)
+		n._score = n._dist_walked + point_dist2d(n.point, finish.point)
+		return n._score
 	}
 	
-	_find_set_lowest_score = function(boundary, from, finish) {
-		var it = new IterArray(boundary)
+	_find_set_lowest_score = function(node, finish) {
+		var it = new IterArray(node.links)
 		var _min_score = infinity
 		var chosen = noone
 		while it.next() != undefined {
 			var n = it.get()
-			var _score = n._score
-			if _score == infinity {
-				_score = self._get_score(from, n, finish)
-				n._score = _score
-			}
-			if _score < _min_score
+			if n._in_boundary
+				continue
+			if n._score == infinity
+				self._set_score(node, n, finish)
+			if n._score < _min_score {
 				chosen = n
+				_min_score = n._score
+			}
 		}
 		return chosen
 	}
-	
+
+	_find_lowest_adjacent_node = function(boundary, finish) {
+		var it = new IterArray(boundary)
+		var _min_score = infinity
+		var chosen = noone
+		var candidate = noone
+		while it.next() != undefined {
+			var n = it.get()
+			candidate = self._find_set_lowest_score(n, finish)
+			if candidate == noone
+				continue
+			if candidate._score < _min_score {
+				chosen = candidate
+				_min_score = chosen._score
+			}
+		}
+		return chosen
+	}
+
 	_form_path_points = function(start, finish) {
 		path = [finish.point]
 		var n = finish
@@ -95,29 +125,43 @@ function AstarGraph() constructor {
 		}
 		return path
 	}
-	
+
 	clear_scores = function(to_clear) {
 		for (var i = 0; i < array_length(to_clear); ++i) {
 		    to_clear[i]._clear_score()
-		}	
+		}
 	}
 
-	graph_build_path_points = function(start, finish) {
-		boundary = []
-		array_expand(boundary, start.links)
-		var n = noone
+	clear_all_scores = function() {
+		var it = new IterStruct(self.graph)
+		while it.next() {
+			it.get()._clear_score()	
+		}
+	}
+
+	_add_to_boundary = function(boundary, node) {
+		array_push(boundary, node)
+		node._in_boundary = true
+	}
+
+	graph_find_path_points = function(start, finish) {
+		// @arg start, finish - self.Node instances
+		start._dist_walked = 0
+		start._score = 0
+		var boundary = []
 		var to_clear = [start]
+		self._add_to_boundary(boundary, start)
+		var n = start
 		array_expand(to_clear, start.links)
 		// compute scores
 		while n != finish {
-			n = self._find_set_lowest_score(boundary, finish)
-			array_remove(boundary, n)
-			array_expand(boundary, n.links)
+			n = self._find_lowest_adjacent_node(boundary, finish)
+			self._add_to_boundary(boundary, n)
 			array_expand(to_clear, n.links)
 			array_push(to_clear, n)
 		}
 		path_points = self._form_path_points(start, finish)
-		self.clear_scores(to_clear)
+		//self.clear_scores(to_clear)
 		return path_points
 	}
 
@@ -125,8 +169,9 @@ function AstarGraph() constructor {
 		var chosen = noone
 		var min_dist = infinity
 		var _dist = 0
-		var it = new IterArray(self.graph)
-		while it.next() != undefined {
+		var n
+		var it = new IterStruct(self.graph)
+		while it.next() {
 			var n = it.get()
 			_dist = point_dist2d(p, n.point)
 			if _dist < min_dist {
@@ -140,7 +185,7 @@ function AstarGraph() constructor {
 	find_path = function(pst, pend) {
 		start = closest_node_to_point(pst)
 		finish = closest_node_to_point(pend)
-		path = graph_build_path_points(start, finish)
+		path = graph_find_path_points(start, finish)
 		array_push(path, pend)
 		return path
 	}
@@ -151,6 +196,7 @@ function AstarGraph() constructor {
 			var node = iter.get()
 			var p = node.point
 			var _iter = new IterArray(node.links)
+			draw_text(p.X, p.Y - 20, string(node._score))
 			while _iter.next() {
 				var pp = _iter.get().point
 				draw_line(p.X, p.Y, pp.X, pp.Y)
