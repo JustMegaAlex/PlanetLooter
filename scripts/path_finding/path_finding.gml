@@ -25,7 +25,7 @@ function AstarGraph() constructor {
 					continue
 				if (n._score < _score)
 					// choose bigger dist if socores are equal
-				   or ((n._score == _score) and (n._dist_walked > chosen._dist_walked)) {
+				   or ((n._score == _score) and (n._dist_walked < chosen._dist_walked)) {
 					_score = n._score
 					chosen = n
 				}
@@ -330,5 +330,5 @@ TEST_Astar_graph = {
 	}
 }
 
-TEST_Astar_graph.run_tests()
+//TEST_Astar_graph.run_tests()
 
