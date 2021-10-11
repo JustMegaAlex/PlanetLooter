@@ -247,3 +247,12 @@ function assert_eq(a, b) {
 	}
 	throw "\nassert_eq failed\n"
 }
+
+function assert_eq_arr(arr, arr1) {
+	if array_length(arr) != array_length(arr1)
+		throw "\nassert_eq_arr failed: arrays have different sizes"
+	for (var i = 0; i < array_length(arr); ++i) {
+	    if arr[i] != arr1[i]
+			throw "\nassert_eq_arr failed: arrays elements differs at index " + string(i)
+	}
+}

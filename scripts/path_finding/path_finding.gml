@@ -30,7 +30,7 @@ function AstarGraph() constructor {
 					chosen = n
 				}
 			}
-			return n
+			return chosen
 		}
 		
 		_clear_score = function() {
@@ -190,6 +190,7 @@ function AstarGraph() constructor {
 			array_expand(to_clear, n.links)
 			array_push(to_clear, n)
 		}
+		path_points = []
 		path_points = self._form_path_points(start, finish)
 		//self.clear_scores(to_clear)
 		return path_points
@@ -283,7 +284,7 @@ TEST_Astar_graph = {
 		c.links = [a]
 		graph.graph = [a, b]
 		assert_eq(graph._find_set_lowest_score(a, finish), c)
-		
+
 		b = node({X: 50, Y: 50}, infinity, false, 0)
 		c = node({X: 0, Y: 50}, infinity, false, 0)
 		a.links = [b, c]
@@ -291,9 +292,40 @@ TEST_Astar_graph = {
 		c.links = [a]
 		graph.graph = [a, b]
 		assert_eq(graph._find_set_lowest_score(a, finish), c)
+
+		// on one line
+		b = node({X: 0, Y: 50}, infinity, false, 0)
+		c = node({X: 0, Y: 100}, infinity, false, 0)
+		a.links = [b, c]
+		b.links = [a]
+		c.links = [a]
+		graph.graph = [a, b]
+		assert_eq(graph._find_set_lowest_score(a, finish), b)
+
+		b = node({X: 0, Y: 150}, infinity, false, 0)
+		c = node({X: 0, Y: 100}, infinity, false, 0)
+		a.links = [b, c]
+		b.links = [a]
+		c.links = [a]
+		graph.graph = [a, b]
+		assert_eq(graph._find_set_lowest_score(a, finish), b)
+	},
+	test_form_path_points: function() {
+		var a, b, c, d, e, f, finish
+		finish = node({X: 0, Y: 300}, infinity, false, 0)
+		graph.graph = [finish]
+		assert_eq_arr(graph._form_path_points(finish, finish), [finish])
+		
+		a = node({X: 0, Y: 0}, 0, true, 0)
+		b = node({X: 50, Y: 0}, infinity, false, 0)
+		a.links = [b]
+		b.links = [a]
+		graph.graph = [a, b]
+		
 	},
 	run_tests: function() {
 		test_find_set_lower_score()
+		test_form_path_points()
 		show_debug_message("TEST_Astar_graph: all tests OK")
 	}
 }
