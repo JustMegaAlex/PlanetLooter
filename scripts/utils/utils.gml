@@ -240,3 +240,10 @@ function foreach_instance(obj, fun) {
 	}
 	return false
 }
+
+function assert_eq(a, b) {
+	if a == b {
+		return
+	}
+	throw "\nassert_eq failed\n"
+}

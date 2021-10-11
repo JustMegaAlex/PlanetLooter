@@ -81,6 +81,36 @@ function AstarGraph() constructor {
 	}
 	
 	_find_set_lowest_score = function(node, finish) {
+		/*	
+			finish = {
+				_score: 100,
+				_in_boundary: true,
+				_dist: 50,
+				links: [],
+				point: {X: 300, Y: 300}
+			}
+			node = {
+				_score: 100,
+				_in_boundary: true,
+				_dist: 50,
+				links: [a, b],
+				point: {X: 0, Y: 0}
+			}
+			a = {
+				_score: infinity, // --> 50 + 424 = 474
+				_in_boundary: false,
+				_dist: 0,// --> 283 + 50 = 333	
+				links: [node],
+				point: {X: 200, Y: 200}
+			}
+			b = {
+				_score: infinity,// --> 50 + 224 + 224 = 488
+				_in_boundary: false,
+				_dist: 0, // --> 224 + 50 = 274
+				links: [node],
+				point: {X: 100, Y: 200}
+			}
+		*/
 		var it = new IterArray(node.links)
 		var _min_score = infinity
 		var chosen = noone
@@ -98,7 +128,7 @@ function AstarGraph() constructor {
 		return chosen
 	}
 
-	_find_lowest_adjacent_node = function(boundary, finish) {
+	_find_lowest_link_node = function(boundary, finish) {
 		var it = new IterArray(boundary)
 		var _min_score = infinity
 		var chosen = noone
@@ -155,7 +185,7 @@ function AstarGraph() constructor {
 		array_expand(to_clear, start.links)
 		// compute scores
 		while n != finish {
-			n = self._find_lowest_adjacent_node(boundary, finish)
+			n = self._find_lowest_link_node(boundary, finish)
 			self._add_to_boundary(boundary, n)
 			array_expand(to_clear, n.links)
 			array_push(to_clear, n)
@@ -209,4 +239,64 @@ function AstarGraph() constructor {
 	}
 }
 
+//////// Tests
+TEST_Astar_graph = {
+	graph: new AstarGraph(),
+	node: function(point, score, in_boundary, dist) {
+		var n = new graph.Node(point)
+		n._score = score
+		n._in_boundary = in_boundary
+		n._dist_walked = dist
+		//n.links = links
+		return n
+	},
+	test_find_set_lower_score: function() {
+		var a, b, c, d, e, f, finish
+		finish = node({X: 0, Y: 300}, infinity, false, 0)
+		a = node({X: 0, Y: 0}, 0, true, 0)
+		b = node({X: 50, Y: 0}, infinity, false, 0)
+		a.links = [b]
+		b.links = [a]
+		graph.graph = [a, b]
+		assert_eq(graph._find_set_lowest_score(a, finish), b)
+		
+		b = node({X: 50, Y: 0}, infinity, false, 0)
+		c = node({X: 50, Y: 0}, infinity, false, 0)
+		a.links = [b, c]
+		b.links = [a]
+		c.links = [a]
+		graph.graph = [a, b]
+		assert_eq(graph._find_set_lowest_score(a, finish), b)
+		
+		b = node({X: 50, Y: 0}, infinity, true, 0)
+		c = node({X: 50, Y: 0}, infinity, true, 0)
+		a.links = [b, c]
+		b.links = [a]
+		c.links = [a]
+		graph.graph = [a, b]
+		assert_eq(graph._find_set_lowest_score(a, finish), noone)
+		
+		b = node({X: 50, Y: 0}, infinity, true, 0)
+		c = node({X: 50, Y: 0}, infinity, false, 0)
+		a.links = [b, c]
+		b.links = [a]
+		c.links = [a]
+		graph.graph = [a, b]
+		assert_eq(graph._find_set_lowest_score(a, finish), c)
+		
+		b = node({X: 50, Y: 50}, infinity, false, 0)
+		c = node({X: 0, Y: 50}, infinity, false, 0)
+		a.links = [b, c]
+		b.links = [a]
+		c.links = [a]
+		graph.graph = [a, b]
+		assert_eq(graph._find_set_lowest_score(a, finish), c)
+	},
+	run_tests: function() {
+		test_find_set_lower_score()
+		show_debug_message("TEST_Astar_graph: all tests OK")
+	}
+}
+
+TEST_Astar_graph.run_tests()
 
