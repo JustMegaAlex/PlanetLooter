@@ -1,7 +1,7 @@
 
 function AstarGraph() constructor {
 	graph = {}
-	
+
 	// graph building
 
 	function Node(_point) constructor {
@@ -10,6 +10,7 @@ function AstarGraph() constructor {
 		_score = infinity
 		_dist_walked = 0
 		_in_boundary = false
+		_dist_to_finish = 0
 
 		add_link = function(node) {
 			if array_find(self.links, node) { return }
@@ -37,6 +38,7 @@ function AstarGraph() constructor {
 			self._score = infinity
 			_dist_walked = 0
 			_in_boundary = false
+			_dist_to_finish = 0
 		}
 	}
 
@@ -74,12 +76,18 @@ function AstarGraph() constructor {
 	
 	// path finding
 
-	_set_score = function(from, n, finish) {
-		n._dist_walked = from._dist_walked + point_dist2d(from.point, n.point)
-		n._score = n._dist_walked + point_dist2d(n.point, finish.point)
+	_check_set_score = function(from, n, finish) {
+		var _dist_to_finish = point_dist2d(n.point, finish.point)
+		var _dist_walked = from._dist_walked + point_dist2d(from.point, n.point)
+		var _score = n._dist_walked + n._dist_to_finish
+		if _score < n._score {
+			n._dist_to_finish = _dist_to_finish
+			n._dist_walked = _dist_walked
+			n._score = _score
+		}
 		return n._score
 	}
-	
+
 	_find_set_lowest_score = function(node, finish) {
 		/*	
 			finish = {
@@ -118,8 +126,12 @@ function AstarGraph() constructor {
 			var n = it.get()
 			if n._in_boundary
 				continue
-			if n._score == infinity
-				self._set_score(node, n, finish)
+			//if n._score == infinity {
+			//	//if n == graph.p385_332
+			//	//	var test = true
+				
+			//}
+			self._check_set_score(node, n, finish)
 			if n._score < _min_score {
 				chosen = n
 				_min_score = n._score
@@ -227,7 +239,9 @@ function AstarGraph() constructor {
 			var node = iter.get()
 			var p = node.point
 			var _iter = new IterArray(node.links)
-			draw_text(p.X, p.Y - 20, string(node._score))
+			//draw_text(p.X, p.Y - 60, string(node._score))
+			//draw_text(p.X, p.Y - 40, string(node._dist_walked))
+			//draw_text(p.X, p.Y - 20, string(node._dist_to_finish))
 			while _iter.next() {
 				var pp = _iter.get().point
 				draw_line(p.X, p.Y, pp.X, pp.Y)
