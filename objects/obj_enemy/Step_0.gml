@@ -79,19 +79,15 @@ switch state {
 	}
 
 	case "patrol": {
-		if not patrol_point_to {
-			state_switch_idle()
-			break
-		}
-		var p = patrol_point_to
+		if not move_route_point_to
+			patrol_update_move_to()
+		var p = move_route_point_to
 		dir = point_dir(p.X, p.Y)
 		self.set_sp_to(sp.normal, dir)
-		if point_dist(p.X, p.Y) < sp.normal {
-			patrol_set_next_point()	
-		}
-		if dist_to_player < detection_dist {
+		if point_dist(p.X, p.Y) < sp.normal
+			patrol_update_move_to()
+		if dist_to_player < detection_dist
 			state_switch_attack(obj_looter)
-		}
 		break
 	}
 }

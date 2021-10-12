@@ -11,7 +11,7 @@ function bring_damage() {
 			audio_sound_gain(snd, 0.15, 0)
 			// spark effect
 			var coll_p = instance_line_collision_point(x, y, xprev, yprev, inst)
-			var angle = point_direction(inst.x, inst.y, coll_p.x_, coll_p.y_)
+			var angle = point_direction(inst.x, inst.y, coll_p.X, coll_p.Y)
 			obj_effects.spark(x, y, angle, 10)
 			// knockback
 			inst.hsp += lengthdir_x(knock_back_force, image_angle)

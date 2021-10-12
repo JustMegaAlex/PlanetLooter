@@ -228,6 +228,7 @@ function AstarGraph() constructor {
 	find_path = function(pst, pend) {
 		start = closest_node_to_point(pst)
 		finish = closest_node_to_point(pend)
+		clear_all_scores()
 		path = graph_find_path_points(start, finish)
 		array_push(path, pend)
 		return path
