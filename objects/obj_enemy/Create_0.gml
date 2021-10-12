@@ -78,15 +78,24 @@ function compute_strafe_vec() {
 	battle_strafe_vec.normalize()
 }
 
+function patrol_update_route() {
+	
+}
+
+function patrol_get_next_planet() {
+	var num = array_length(patrol_route)
+	patrol_planet_index = cycle_increase(patrol_planet_index, 0, num)
+	var next_planet = patrol_route[next_planet_index]
+	return next_planet
+}
+
 function patrol_set_next_point() {
 	patrol_point_to = noone
-	var num = array_length(patrol_route)
-	var next_planet_index = cycle_increase(patrol_planet_index, 0, num)
-	var next_planet = patrol_route[next_planet_index]
-	if patrol_try_set_planet(next_planet) {
-		patrol_planet_index = next_planet_index
+	var _prev_index = patrol_planet_index
+	var next_planet = patrol_get_next_planet()
+	if patrol_try_set_planet(next_planet)
 		return true
-	}
+	patrol_planet_index = _prev_index
 	patrol_set_next_local_point()
 	if patrol_point_to
 		return true
