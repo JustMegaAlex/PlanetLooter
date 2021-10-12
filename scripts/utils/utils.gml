@@ -1,4 +1,15 @@
 
+function arr_join(arr, sep) {
+	var len = array_length(arr)
+	if len == 0
+		return ""
+	s = string(arr[0])
+	for (var i = 1; i < len; ++i) {
+	    s += sep + string(arr[i])
+	}
+	return s
+}
+
 function IterStruct(_struct) constructor {
 	struct = _struct
 	current_value = undefined

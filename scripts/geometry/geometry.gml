@@ -237,3 +237,11 @@ function instance_line_collision_point(x0, y0, x1, y1, inst) {
 function point_dist2d(p1, p2) {
 	return point_distance(p1.X, p1.Y, p2.X, p2.Y)
 }
+
+function geom_draw_multiline(points) {
+	for (var i = 0; i < array_length(points) - 1; ++i) {
+	    var p = points[i]
+		var pp = points[i + 1]
+		draw_line(p.X, p.Y, pp.X, pp.Y)
+	}
+}
