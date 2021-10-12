@@ -23,17 +23,19 @@ function IterArray(_arr) constructor {
 	arr = _arr
 	current_value = undefined
 	len = array_length(arr)
-	i = 0
+	i = -1
 	
 	next = function() {
+		i++
 		if i >= len
 			return undefined
 		current_value = arr[i]
-		i++
 		return current_value
 	}
 	
 	get = function() {
+		if i == -1
+			throw "\nIterArray.next() wasn't called after creation of IterArray instance\n"
 		return current_value
 	}
 }

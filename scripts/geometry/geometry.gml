@@ -159,7 +159,7 @@ function Line(_xst, _yst, _xend, _yend) constructor {
 	static get_point_on = function(m) {
 		var xx = xst + (xend - xst) * m
 		var yy = yst + (yend - yst) * m
-		return new Point(xx, yy)
+		return new Vec2d(xx, yy)
 	}
 }
 
