@@ -99,3 +99,5 @@ switch state {
 hsp = approach(hsp, hsp_to + battle_strafe_vec.X, acc)
 vsp = approach(vsp, vsp_to + battle_strafe_vec.Y, acc)
 scr_move_coord_contact_obj(hsp, vsp, obj_block)
+
+position.set(x, y)

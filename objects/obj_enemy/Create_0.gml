@@ -78,14 +78,35 @@ function compute_strafe_vec() {
 	battle_strafe_vec.normalize()
 }
 
+function set_move_route(route) {
+	iter_move_route = new IterArray(route)
+}
+
 function patrol_update_route() {
-	
+	var next_planet = patrol_get_next_planet()
+	var points = planet_get_route_points(next_planet)
+	patrol_point_to = array_choose(points)
+	if !collision_line(x, y, patrol_point_to.x, patrol_point_to.y,
+						obj_planet_mask, false, true) {
+		set_move_route([patrol_point_to])
+		return true
+	}
+	move_route = global.astar_graph.find_route(position, patrol_point_to)
+	set_move_route(move_route)
+}
+
+function patrol_update_move_to() {
+	move_route_point_to = iter_move_route.next()
+	if move_route_point_to == undefined
+		patrol_update_route()
+	move_route_point_to = iter_move_route.next()
+	return true	
 }
 
 function patrol_get_next_planet() {
 	var num = array_length(patrol_route)
 	patrol_planet_index = cycle_increase(patrol_planet_index, 0, num)
-	var next_planet = patrol_route[next_planet_index]
+	var next_planet = patrol_route[patrol_planet_index]
 	return next_planet
 }
 
@@ -145,12 +166,14 @@ function set_start_point(xx, yy) {
 state = "idle"
 patrol_planet_index = 0
 patrol_point_to = noone
+iter_move_route = noone
 ai_attack_move_sign = 1
 // arg: is_patrol = false
 // arg: patrol_route = []
 
 is_moving_object = true
 sp.normal = 2.5
+position = new Vec2d(x, y)
 hsp = 0
 vsp = 0
 hsp_to = 0
