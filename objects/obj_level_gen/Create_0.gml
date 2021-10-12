@@ -135,28 +135,33 @@ function create_enemies(set) {
 	var forposts = set[1]
 	var alert_tower_num = 2
 	for (var i = 0; i < array_length(groups_distribution); ++i) {
-	    var num = i + 1
-		var planet = choose_planet()
-		var patrol_route = generate_patrol_route(planet)
-		var dist = planet.radius + 100
-		var angle = random(360)
-		var xx = planet.x + lengthdir_x(dist, angle)
-		var yy = planet.y + lengthdir_y(dist, angle)
-		var ships = []
-		repeat (num) {
-			if chance(0.25)
-				instance_create_args(0, 0, "Instances", obj_turret, {planet: planet})
-			else {
-				var is_patrol = chance(0.3)
-				var ship = instance_create_args(xx+random(100), yy+random(100),
-									 "Instances", obj_enemy, 
-									 {is_patrol: is_patrol, patrol_route: patrol_route})
-				array_push(ships, ship)
+		var groups_num = groups_distribution[i]
+	    var group_size = i + 1
+		repeat (groups_num) {
+			var planet = choose_planet()
+			var patrol_route = generate_patrol_route(planet)
+			var dist = planet.radius + 100
+			var angle = random(360)
+			var xx = planet.x + lengthdir_x(dist, angle)
+			var yy = planet.y + lengthdir_y(dist, angle)
+			var ships = []
+			var is_patrol = chance(spawn_is_patrol_chance)
+			repeat(group_size) {
+				if chance(spawn_turret_chance)
+					instance_create_args(0, 0, "Instances", obj_turret, {planet: planet})
+				else {
+					var ship = instance_create_args(xx+random(100), yy+random(100),
+										 "Instances", obj_enemy, 
+										 {is_patrol: is_patrol, patrol_route: patrol_route})
+					array_push(ships, ship)
+				}
+			}
+			if group_size and alert_tower_num and !is_patrol {
+				instance_create_args(xx, yy, "Instances", obj_alert_tower, {arr_ships: ships})
+				alert_tower_num--
 			}
 		}
-		if alert_tower_num--
-			instance_create_args(xx, yy, "Instances", obj_alert_tower, {arr_ships: ships})
-		if (num >= (forpost_min_group_size + global.level)) and forposts-- {
+		if (group_size >= (forpost_min_group_size + global.level)) and forposts-- {
 			with instance_create_layer(0, 0, "Instances", obj_production_module) {self.planet = planet}
 		}
 	}
@@ -205,11 +210,13 @@ blocks_max_num = 2500
 rmax = 10000
 rmin = 800
 
-planet_min_size = 10
-planet_max_size = 15
-max_planet_dist = 1600
-min_planet_number = 3
-max_planet_number = 6
+planet_min_size = global.gen_planet_min_size
+planet_max_size = global.gen_planet_max_size
+max_planet_dist = global.gen_max_planet_dist
+min_planet_number = global.gen_min_planet_number
+max_planet_number = global.gen_max_planet_number
+spawn_is_patrol_chance = global.gen_spawn_is_patrol_chance
+spawn_turret_chance = global.get_spawn_turret_chance
 
 forpost_min_group_size = 3
 
@@ -218,6 +225,9 @@ enemies_progression = [
 	//[7, [2, 3]], 0,
 	// [[<1-sized groups>, <2-sized groups>, ..., <n-sized groups>], forposts]
 	//1   2   3   4   5   6   7   8   9  10
+	// debug path finding {
+		[[5,  0,  0,  0,  0,  0], 1],
+	// }
 	[[3,  2,  2,  0,  0,  0], 1],
 	[[0,  3,  3,  1,  0,  0,  0,  2], 1],
 	[[0,  8, 0,  4,  1,  0,  0,  0,  0,  5],  3],
