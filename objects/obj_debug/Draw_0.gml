@@ -14,10 +14,14 @@ if global.show_ai_patrol_routes {
 		for (var i = 0; i < arr_len - 1; ++i) {
 		    pl0 = _patrol_route[i]
 			pl1 = _patrol_route[i + 1]
-			draw_line(pl0.x, pl0.y, pl1.x, pl1.y)
+			draw_line_width_color(pl0.x, pl0.y, pl1.x, pl1.y, 3, c_blue, c_blue)
+			var line = new Line(pl0.x, pl0.y, pl1.x, pl1.y)
+			var middle = line.get_point_on(0.5)
+			var c = c_red
+			draw_text_color(middle.X, middle.X, string(i), c, c, c, c, 1)
 		}
 	}
 }
 
 if global.show_path_finding_graph
-	global.astar_graph.draw_graph()
+	global.astar_graph.draw_graph(c_green)

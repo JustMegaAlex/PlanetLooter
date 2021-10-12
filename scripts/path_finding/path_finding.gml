@@ -233,7 +233,7 @@ function AstarGraph() constructor {
 		return path
 	}
 
-	draw_graph = function() {
+	draw_graph = function(col) {
 		var iter = new IterStruct(self.graph)
 		while iter.next() != undefined {
 			var node = iter.get()
@@ -244,7 +244,7 @@ function AstarGraph() constructor {
 			//draw_text(p.X, p.Y - 20, string(node._dist_to_finish))
 			while _iter.next() {
 				var pp = _iter.get().point
-				draw_line(p.X, p.Y, pp.X, pp.Y)
+				draw_line_color(p.X, p.Y, pp.X, pp.Y, col, col)
 			}
 		}
 	}
