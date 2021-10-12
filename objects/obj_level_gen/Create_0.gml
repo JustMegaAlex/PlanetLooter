@@ -226,7 +226,7 @@ enemies_progression = [
 	// [[<1-sized groups>, <2-sized groups>, ..., <n-sized groups>], forposts]
 	//1   2   3   4   5   6   7   8   9  10
 	// debug path finding {
-		[[1,  0,  0,  0,  0,  0], 1],
+		//[[1,  0,  0,  0,  0,  0], 1],
 	// }
 	[[3,  2,  2,  0,  0,  0], 1],
 	[[0,  3,  3,  1,  0,  0,  0,  2], 1],
