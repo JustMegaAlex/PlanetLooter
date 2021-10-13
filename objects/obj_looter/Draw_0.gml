@@ -14,3 +14,11 @@ for (var i = 0; i < instance_number(obj_planet); ++i) {
 	scale = max(scale, 0.5)
 	draw_sprite_ext(spr_arrow, 0, x0, y0, scale, 1, _dir, c_white, 0.25)
 }
+
+// test 
+var res = collision_line_width(x, y, mouse_x, mouse_y, 20)
+if res.inst {
+	draw_circle(res.inst.x, res.inst.y, 5, false)
+	draw_line(res.x1, res.y1, res.x0, res.y0)
+	draw_line(res.x3, res.y3, res.x2, res.y2)
+}

@@ -14,7 +14,7 @@ global.enable_instant_planet_move = true
 global.enable_change_fps = true
 global.show_planets_data = false
 global.show_ai_patrol_routes = false
-global.show_path_finding_graph = false
+global.show_path_finding_graph = true
 
 // settings
 global.ai_max_partol_route_length = 4

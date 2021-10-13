@@ -269,3 +269,26 @@ function assert_eq_arr(arr, arr1) {
 			throw "\nassert_eq_arr failed: arrays elements differs at index " + string(i)
 	}
 }
+
+function collision_line_width(x0, y0, x1, y1, w) {
+	// 0, 0, 10, -10, 10 --> 
+	//
+	var angle = point_direction(x0, y0, x1, y1)
+	var angle_factor = (angle mod 180) < 90 ? 1 : -1 // 1
+	var half = w * 0.5 // 5
+	var xx0 = x0 - half * angle_factor	// 5
+	var yy0 = y0 - half					// -5
+	var xx1 = x1 - half * angle_factor	// 15
+	var yy1 = y1 - half					// 5
+	var inst = collision_line(xx0, yy0, xx1, yy1, obj_planet_mask, false, true)
+	var xx2 = x0 + half * angle_factor
+	var yy2 = y0 + half
+	var xx3 = x1 + half * angle_factor
+	var yy3 = y1 + half
+
+	if inst 
+		return {inst:inst, x1: xx1, x2: xx2, x3:xx3, x0: xx0, y0: yy0, y1: yy1, y2: yy2, y3: yy3}
+
+	inst = collision_line(xx2, yy2, xx3, yy3, obj_planet_mask, false, true)
+	return {inst:inst, x1: xx1, x2: xx2, x3:xx3, x0: xx0, y0: yy0, y1: yy1, y2: yy2, y3: yy3}
+}
