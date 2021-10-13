@@ -16,7 +16,7 @@ for (var i = 0; i < instance_number(obj_planet); ++i) {
 }
 
 // test 
-var res = collision_line_width(x, y, mouse_x, mouse_y, 20)
+var res = collision_line_width(x, y, mouse_x, mouse_y, obj_planet_mask, 20)
 if res.inst {
 	draw_circle(res.inst.x, res.inst.y, 5, false)
 	draw_line(res.x1, res.y1, res.x0, res.y0)

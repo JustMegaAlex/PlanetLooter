@@ -86,8 +86,8 @@ function patrol_update_route() {
 	var next_planet = patrol_get_next_planet()
 	var points = planet_get_route_points(next_planet)
 	patrol_point_to = array_choose(points)
-	if !collision_line(x, y, patrol_point_to.X, patrol_point_to.Y,
-						obj_planet_mask, false, true) {
+	if !collision_line_width(x, y, patrol_point_to.X, patrol_point_to.Y,
+						obj_planet_mask, 12) {
 		set_move_route([patrol_point_to])
 		return true
 	}
