@@ -1,4 +1,6 @@
 
+AstarPathFindFailed = {}
+
 function AstarGraph() constructor {
 	graph = {}
 
@@ -198,6 +200,9 @@ function AstarGraph() constructor {
 		// compute scores
 		while n != finish {
 			n = self._find_lowest_link_node(boundary, finish)
+			// fail
+			if n == noone
+				return global.AstarPathFindFailed
 			self._add_to_boundary(boundary, n)
 			array_expand(to_clear, n.links)
 			array_push(to_clear, n)
@@ -230,7 +235,8 @@ function AstarGraph() constructor {
 		finish = closest_node_to_point(pend)
 		clear_all_scores()
 		path = graph_find_path_points(start, finish)
-		array_push(path, pend)
+		if path != global.AstarPathFindFailed
+			array_push(path, pend)
 		return path
 	}
 

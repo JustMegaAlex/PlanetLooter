@@ -9,3 +9,6 @@ if !show_tips
 
 var xx = w - 200 + show_tips * show_tips_xoffset
 draw_text_custom(xx, 20, t, fnt_gui, -1, -1)
+
+if TEST_PATH_FIND
+	scr_debug_show_var("test time", test_time)

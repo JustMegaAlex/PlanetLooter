@@ -8,3 +8,7 @@ if not instance_number(obj_looter)
 
 // late init
 alarm[0] = 1
+
+// debug
+if TEST_PATH_FIND
+	test_time = test_room_time_secs

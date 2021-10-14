@@ -31,3 +31,10 @@ tips_text += "Compass arrows point to planets\n"
 tips_header = "Press T to show tips"
 
 instance_create_layer(0, 0, layer, obj_level_gen)
+
+// degugging
+if TEST_PATH_FIND {
+	test_room_time_secs = 60
+	test_time = test_room_time_secs
+	room_speed = 600
+}

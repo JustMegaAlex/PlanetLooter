@@ -18,3 +18,9 @@ if keyboard_check_pressed(ord("T"))
 	show_tips = !show_tips
 
 global.time += delta_time
+
+if TEST_PATH_FIND {
+	test_time -= delta_time / 1000000
+	if !test_time
+		room_restart()
+}

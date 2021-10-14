@@ -5,6 +5,9 @@ function reset_globals() {
 	global.astar_graph.clear()
 }
 
+#macro Default:TEST_PATH_FIND false
+#macro TestPathFinding:TEST_PATH_FIND true
+
 // debug
 global.DEBUG = true
 global.ai_attack_off = true
@@ -25,8 +28,8 @@ global.gen_planet_max_size = 5
 global.gen_max_planet_dist = 400
 global.gen_min_planet_number = 6
 global.gen_max_planet_number = 8
-global.gen_spawn_is_patrol_chance = 0.45
-global.get_spawn_turret_chance = 0.2
+global.gen_spawn_is_patrol_chance = 1 //0.45
+global.get_spawn_turret_chance = 0 //0.2
 
 // objects
 global.astar_graph = noone

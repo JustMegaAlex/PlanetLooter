@@ -92,6 +92,11 @@ function patrol_update_route() {
 		return true
 	}
 	move_route = global.astar_graph.find_path(position, patrol_point_to)
+	// fail
+	if move_route == global.AstarPathFindFailed {
+		self.astar_failed()
+		return false
+	}
 	set_move_route(move_route)
 }
 
@@ -163,6 +168,18 @@ function set_start_point(xx, yy) {
 	yst = yy
 }
 
+function astar_failed() {
+	state = ""
+	set_sp_to(0, 0)
+	find_path_failed_point = patrol_point_to
+	show_debug_message(
+		"ERROR: find path failed\n"
+		+ "   seed: " + string(obj_level_gen.level_seed) + "\n"
+		+ "   pstart: " + string({X:position.X, Y: position.Y})
+		+ "   pfinish: " + string({X:find_path_failed_point.X, Y: find_path_failed_point.Y})
+	)
+}
+
 //// behavior
 state = "idle"
 patrol_planet_index = 0
@@ -171,6 +188,8 @@ move_route = []
 move_route_point_to = noone
 iter_move_route = new IterArray([])
 ai_attack_move_sign = 1
+
+find_path_failed_point = noone
 
 
 // arg: is_patrol = false

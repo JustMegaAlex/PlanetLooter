@@ -32,6 +32,7 @@ function generate_star_system() {
 		ymin = min(n.Y, ymin)
 		ymax = max(n.Y, ymax)
 	}
+	global.astar_graph = new AstarGraph()
 	setup_path_finding_graph(global.astar_graph, planets)
 	//generate_asteroids(xmin, ymin, xmax, ymax)
 	level = min(global.level, array_length(buildings_progression) - 1)
@@ -246,4 +247,4 @@ buildings_progression = [
 	[[7, 7, 4], 14],
 ]
 
-//random_seed = 0
+level_seed  = 0
