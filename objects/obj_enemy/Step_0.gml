@@ -90,6 +90,24 @@ switch state {
 			state_switch_attack(obj_looter)
 		break
 	}
+	
+	case "on_route": {
+		if not move_route_point_to
+			update_route()
+		var p = move_route_point_to
+		if p == undefined {
+			state_switch_idle()
+			move_to_set_coords(xst, yst)
+			break
+		}
+		dir = point_dir(p.X, p.Y)
+		self.set_sp_to(sp.normal, dir)
+		if point_dist(p.X, p.Y) < sp.normal
+			update_route()
+		//if dist_to_player < detection_dist
+		//	state_switch_attack(obj_looter)
+		break
+	}
 }
 
 hsp = approach(hsp, hsp_to + battle_strafe_vec.X, acc)

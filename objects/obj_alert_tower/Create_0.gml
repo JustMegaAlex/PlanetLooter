@@ -24,14 +24,15 @@ function send_emergency_request() {
 	)
 }
 
-function handle_emergency_request(inst) {
+function handle_emergency_request(other_tower) {
 	var num_to_send = ceil(ships_left * send_units_on_emergency)
 	if num_to_send == 0
 		return false
 	for (var i = 0; i < num_to_send; ++i) {
 	    var ship = arr_ships[i]
-		ship.set_start_point(inst.x, inst.y)
-		ship.state_switch_return()
+		var switched = ship.state_switch_on_route(other_tower.x, other_tower.y)
+		if !switched
+			return false
 	}
 	return true
 }

@@ -56,6 +56,14 @@ function state_switch_search() {
 function state_switch_return() {
 	state = "return"
 }
+
+function state_switch_on_route(xx, yy) {
+	if move_to_set_coords(xx, yy) {
+		state = "on_route"
+		return true
+	}
+	return false
+}
 #endregion
 
 function trigger_friendly_units() {
@@ -82,12 +90,16 @@ function set_move_route(route) {
 	iter_move_route = new IterArray(route)
 }
 
+function path_blocked(xx, yy) {
+	return collision_line_width(x, y, xx, yy,
+						obj_planet_mask, 12)
+}
+
 function patrol_update_route() {
 	var next_planet = patrol_get_next_planet()
 	var points = planet_get_route_points(next_planet)
 	patrol_point_to = array_choose(points)
-	if !collision_line_width(x, y, patrol_point_to.X, patrol_point_to.Y,
-						obj_planet_mask, 12) {
+	if !path_blocked(patrol_point_to.X, patrol_point_to.Y) {
 		set_move_route([patrol_point_to])
 		return true
 	}
@@ -100,12 +112,17 @@ function patrol_update_route() {
 	set_move_route(move_route)
 }
 
-function patrol_update_move_to() {
+function update_route() {
 	move_route_point_to = iter_move_route.next()
+	return move_route_point_to
+}
+
+function patrol_update_move_to() {
+	update_route()
 	if move_route_point_to != undefined
 		return true
 	patrol_update_route()
-	move_route_point_to = iter_move_route.next()
+	update_route()
 	return true
 }
 
@@ -166,6 +183,16 @@ function patrol_set_next_local_point() {
 function set_start_point(xx, yy) {
 	xst = xx
 	yst = yy
+}
+
+function move_to_set_coords(xx, yy) {
+	if !path_blocked(xx, yy)
+		return true
+	var route = global.astar_graph.find_path(position, new Vec2d(xx, yy))
+	if move_route == global.AstarPathFindFailed
+		return false
+	set_move_route(route)
+	return true
 }
 
 function astar_failed() {
