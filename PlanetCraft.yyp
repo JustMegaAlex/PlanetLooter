@@ -141,6 +141,8 @@
     "name": "Default",
     "children": [
       {"name":"TestPathFinding","children":[],},
+      {"name":"GodMode","children":[],},
+      {"name":"Custom","children":[],},
     ],
   },
   "RoomOrderNodes": [
