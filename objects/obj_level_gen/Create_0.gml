@@ -132,9 +132,9 @@ function get_planet_collision_coord(xx, yy, size) {
 }
 
 function create_enemies(set) {
-	var groups_distribution = set[0]
-	var forposts = set[1]
-	var alert_tower_num = 2
+	var groups_distribution = set.ships_distr
+	var forposts = set.forposts
+	var alert_tower_num = set.alert_towers
 	for (var i = 0; i < array_length(groups_distribution); ++i) {
 		var groups_num = groups_distribution[i]
 	    var group_size = i + 1
@@ -227,15 +227,11 @@ enemies_progression = [
 	// groups, [min_group_size, max_group_size], forposts
 	//[7, [2, 3]], 0,
 	// [[<1-sized groups>, <2-sized groups>, ..., <n-sized groups>], forposts]
-	//1   2   3   4   5   6   7   8   9  10
-	// debug path finding {
-		//[[1,  0,  0,  0,  0,  0], 1],
-	// }
-	[[3,  2,  2,  0,  0,  0], 1],
-	[[0,  3,  3,  1,  0,  0,  0,  2], 1],
-	[[0,  8, 0,  4,  1,  0,  0,  0,  0,  5],  3],
-	[[0,  0,  0,  0,  5,  4,  2,  0,  0, 10],  6],
-	[[0],  1],
+				 //1   2   3   4   5   6   7   8   9  10
+	{ships_distr: [3,  2,  2,  0,  0,  0], forposts: 1, alert_towers: 2},
+	{ships_distr: [0,  3,  3,  1,  0,  0,  0,  2], forposts: 2, alert_towers: 3},
+	{ships_distr: [0,  8,  0,  4,  1,  0,  0,  0,  0,  5], forposts: 4, alert_towers: 4},
+	{ships_distr: [0,  0,  0,  0,  5,  4,  2,  0,  0, 10], forposts: 4, alert_towers: 4},
 ]
 
 buildings_progression = [
