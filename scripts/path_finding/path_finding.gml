@@ -91,36 +91,6 @@ function AstarGraph() constructor {
 	}
 
 	_find_set_lowest_score = function(node, finish) {
-		/*	
-			finish = {
-				_score: 100,
-				_in_boundary: true,
-				_dist: 50,
-				links: [],
-				point: {X: 300, Y: 300}
-			}
-			node = {
-				_score: 100,
-				_in_boundary: true,
-				_dist: 50,
-				links: [a, b],
-				point: {X: 0, Y: 0}
-			}
-			a = {
-				_score: infinity, // --> 50 + 424 = 474
-				_in_boundary: false,
-				_dist: 0,// --> 283 + 50 = 333	
-				links: [node],
-				point: {X: 200, Y: 200}
-			}
-			b = {
-				_score: infinity,// --> 50 + 224 + 224 = 488
-				_in_boundary: false,
-				_dist: 0, // --> 224 + 50 = 274
-				links: [node],
-				point: {X: 100, Y: 200}
-			}
-		*/
 		var it = new IterArray(node.links)
 		var _min_score = infinity
 		var chosen = noone
@@ -128,11 +98,6 @@ function AstarGraph() constructor {
 			var n = it.get()
 			if n._in_boundary
 				continue
-			//if n._score == infinity {
-			//	//if n == graph.p385_332
-			//	//	var test = true
-				
-			//}
 			self._check_set_score(node, n, finish)
 			if n._score < _min_score {
 				chosen = n
@@ -187,14 +152,18 @@ function AstarGraph() constructor {
 		array_push(boundary, node)
 		node._in_boundary = true
 	}
+	
+	_init_start_node = function(start, boundary) {
+		start._dist_walked = 0
+		start._score = 0
+		self._add_to_boundary(boundary, start)	
+	}
 
 	graph_find_path_points = function(start, finish) {
 		// @arg start, finish - self.Node instances
-		start._dist_walked = 0
-		start._score = 0
 		var boundary = []
 		var to_clear = [start]
-		self._add_to_boundary(boundary, start)
+		self._init_start_node(start, boundary)
 		var n = start
 		array_expand(to_clear, start.links)
 		// compute scores
@@ -231,10 +200,10 @@ function AstarGraph() constructor {
 	}
 
 	find_path = function(pst, pend) {
-		start = closest_node_to_point(pst)
-		finish = closest_node_to_point(pend)
-		clear_all_scores()
-		path = graph_find_path_points(start, finish)
+		start = self.closest_node_to_point(pst)
+		finish = self.closest_node_to_point(pend)
+		self.clear_all_scores()
+		path = self.graph_find_path_points(start, finish)
 		if path != global.AstarPathFindFailed
 			array_push(path, pend)
 		return path
@@ -269,7 +238,6 @@ TEST_Astar_graph = {
 		n._score = score
 		n._in_boundary = in_boundary
 		n._dist_walked = dist
-		//n.links = links
 		return n
 	},
 	test_find_set_lower_score: function() {
