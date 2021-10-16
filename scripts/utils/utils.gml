@@ -13,6 +13,7 @@ function arr_join(arr, sep) {
 function IterStruct(_struct) constructor {
 	struct = _struct
 	current_value = undefined
+	current_key = undefined
 	names = variable_struct_get_names(self.struct)
 	len = array_length(names)
 	i = 0
@@ -20,13 +21,18 @@ function IterStruct(_struct) constructor {
 	next = function() {
 		if i >= len
 			return undefined
-		current_value = variable_struct_get(self.struct, names[i])
+		current_key = names[i]
+		current_value = variable_struct_get(self.struct, current_key)
 		i++
 		return current_value
 	}
 	
-	get = function() {
-		return current_value
+	key = function() {
+		return current_key
+	}
+	
+	value = function() {
+		return current_value	
 	}
 }
 

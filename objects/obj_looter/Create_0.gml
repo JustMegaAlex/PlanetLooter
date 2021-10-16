@@ -14,7 +14,7 @@ function init_resources() {
 	var res_names = variable_struct_get_names(global.resource_types)
 	for (var i = 0; i < array_length(res_names); ++i) {
 	    var name = res_names[i]
-		self.resources[$ name] = 0
+		self.resources[$ name] = global.start_resources_ammount
 	}
 }
 
@@ -79,6 +79,30 @@ function spend_resource(rname, ammount) {
 	return true
 }
 
+function check_has_enough_resources(info, in_ammount, crg, tnk) {
+	var iter = new IterStruct(info)
+	while iter.next() {
+		var _type = iter.key()
+		var _ammount = iter.value()
+		var result_cost_ammount = _ammount * in_ammount
+		if resources[$ _type] < result_cost_ammount
+			return {success: false, msg: "need more\n" + _type}
+		// check loads
+		var out_fuel = (_type == "fuel")
+		crg -= result_cost_ammount * !out_fuel
+		tnk -= result_cost_ammount * out_fuel
+	}
+	return {crg: crg, tnk: tnk, success: true}
+}
+
+function spend_resources_from_struct(info, in_ammount) {
+	var iter = new IterStruct(info)
+	while iter.next() {
+		var _type = iter.key()
+		self.spend_resource(_type, info[$ _type] * in_ammount)
+	}
+}
+
 function exchange_resources(in, in_ammount, cost_info) {
 	// metall 1, ore 3
 	// check resource
@@ -86,31 +110,19 @@ function exchange_resources(in, in_ammount, cost_info) {
 	var in_empty = (in == "empty")
 	var crg = cargo_load + in_ammount * !in_fuel * !in_empty
 	var tnk = tank_load + in_ammount * in_fuel * !in_empty
-	var cost_info_names = variable_struct_get_names(cost_info)
-	for (var i = 0; i < array_length(cost_info_names); ++i) {
-		var _type = cost_info_names[i]
-		var _ammount = cost_info[$ _type]
-		var result_cost_ammount = _ammount * in_ammount
-		if resources[$ _type] < result_cost_ammount
-			return "need more\n" + _type
-		// check loads
-		var out_fuel = (_type == "fuel")
-		crg -= result_cost_ammount * !out_fuel
-		tnk -= result_cost_ammount * out_fuel
-	}
+	var checked = self.check_has_enough_resources(cost_info, in_ammount, crg, tnk)
+	if !checked.success
+		return checked.msg
 	// check cargo and tank fullness
-	if crg > cargo
+	if checked.crg > cargo
 		return "cargo full"
-	if tnk > tank
+	if checked.tnk > tank
 		return "tank full"
 	// exchange
-	for (var i = 0; i < array_length(cost_info_names); ++i) {
-	    var _type = cost_info_names[i]
-		self.spend_resource(_type, cost_info[$ _type] * in_ammount)
-	}
+	self.spend_resources_from_struct(cost_info, in_ammount)
 	self._add_resource(in, in_ammount * !in_empty)
-	cargo_load = crg
-	tank_load = tnk
+	cargo_load = checked.crg
+	tank_load = checked.tnk
 	return "ok"
 }
 
@@ -253,7 +265,7 @@ init_resources()
 // systems
 hull = 10
 hp = hull
-cargo = 100
+cargo = global.start_cargo_space
 tank = 15
 tank_load = tank
 resources[$ "fuel"] = tank

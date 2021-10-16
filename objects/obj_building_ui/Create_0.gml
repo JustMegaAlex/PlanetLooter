@@ -32,6 +32,7 @@ function Producer(resource, ui_parent) constructor {
 	action = function() {
 		var cost_info = global.resource_types[$ self.type].cost
 		var msg = obj_looter.exchange_resources(self.type, 1, cost_info)
+		//var msg = obj_looter.spend_resource(self.type, 
 		if msg != "ok"
 			self.ui_parent.ui_message(msg, true)
 	}

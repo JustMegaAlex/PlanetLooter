@@ -4,7 +4,7 @@
     "path": "sprites/spr_planet_mask/spr_planet_mask.yy",
   },
   "solid": false,
-  "visible": true,
+  "visible": false,
   "spriteMaskId": null,
   "persistent": false,
   "parentObjectId": null,

@@ -144,7 +144,7 @@ function AstarGraph() constructor {
 	clear_all_scores = function() {
 		var it = new IterStruct(self.graph)
 		while it.next() {
-			it.get()._clear_score()	
+			it.value()._clear_score()	
 		}
 	}
 
@@ -189,7 +189,7 @@ function AstarGraph() constructor {
 		var n
 		var it = new IterStruct(self.graph)
 		while it.next() {
-			var n = it.get()
+			var n = it.value()
 			_dist = point_dist2d(p, n.point)
 			if _dist < min_dist {
 				min_dist = _dist
@@ -212,7 +212,7 @@ function AstarGraph() constructor {
 	draw_graph = function(col) {
 		var iter = new IterStruct(self.graph)
 		while iter.next() != undefined {
-			var node = iter.get()
+			var node = iter.value()
 			var p = node.point
 			var _iter = new IterArray(node.links)
 			//draw_text(p.X, p.Y - 60, string(node._score))

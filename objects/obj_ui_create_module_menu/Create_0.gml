@@ -7,7 +7,7 @@ function ModuleCreator(module_type, ui_parent) constructor {
 	self.action = function() {
 		var module = global.module_types[$ self.module_type]
 		var inst = obj_looter
-		var mess = inst.exchange_resources("empty", 1, module.cost)
+		var mess = inst.exchange_resources("empty", 0, module.cost)
 		if mess == "ok"
 			return instance_create_layer(inst.x, inst.y, "Instances", module.object)
 		self.ui_parent.ui_message(mess)
