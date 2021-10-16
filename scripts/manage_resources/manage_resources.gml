@@ -2,12 +2,13 @@
 
 global.resource_types = {}
 
-function ResourceType(name, img_index, cost) constructor {
+function ResourceType(name, img_index, cost, production_time=60) constructor {
 	self.name = name
 	self.is_bullet = false // is defined by weapon system
 	self.bullet_name = ""
 	self.cost = cost
 	self.img_index = img_index
+	self.production_time = production_time
 	if variable_struct_get(global.resource_types, name)
 		throw "\n:ResourceType constructor: resource type with name '" + name + "' already exists"
 	variable_struct_set(global.resource_types, name, self)

@@ -31,10 +31,16 @@ function Producer(resource, ui_parent) constructor {
 	self.ui_parent = ui_parent
 	action = function() {
 		var cost_info = global.resource_types[$ self.type].cost
-		var msg = obj_looter.exchange_resources(self.type, 1, cost_info)
+		var msg = obj_looter.exchange_resources("empty", 1, cost_info)
 		//var msg = obj_looter.spend_resource(self.type, 
+		self.command_start_production()
 		if msg != "ok"
 			self.ui_parent.ui_message(msg, true)
+	}
+	
+	command_start_production = function() {
+		var prod_inst = ui_parent.parent
+		prod_inst.production_enqeue(self.type)
 	}
 }
 
