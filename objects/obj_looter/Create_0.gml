@@ -53,6 +53,15 @@ function _add_resource(rname, ammount) {
 	return true
 }
 
+function check_update_resource_as_weapon(res_name) {
+	var rtype = global.resource_types[$ res_name]
+	if rtype.is_bullet {
+		var wtype = global.weapon_types[$ rtype.bullet_name]
+		if resources[$ res_name] < wtype.resource_ammount
+			use_weapon_remove(rtype.bullet_name)
+	}
+}
+
 function spend_resource(rname, ammount) {
 	if rname == "empty"
 		return true
@@ -70,12 +79,7 @@ function spend_resource(rname, ammount) {
 	resources[$ rname] -= ammount
 	cargo_load -= ammount
 	// affect weapons
-	var rtype = global.resource_types[$ rname]
-	if rtype.is_bullet {
-		var wtype = global.weapon_types[$ rtype.bullet_name]
-		if resources[$ rname] < wtype.resource_ammount
-			use_weapon_remove(rtype.bullet_name)
-	}
+	check_update_resource_as_weapon(rname)
 	return true
 }
 
@@ -100,6 +104,7 @@ function spend_resources_from_struct(info, in_ammount) {
 	while iter.next() {
 		var _type = iter.key()
 		self.spend_resource(_type, info[$ _type] * in_ammount)
+		check_update_resource_as_weapon(_type)
 	}
 }
 
