@@ -206,30 +206,7 @@ function try_repair() {
 		hp++
 }
 
-
-//position = new Vec2d(x, y)
-//velocity = new Vec2d(0, 0)
-//velocity_to = new Vec2d(0, 0)
-//acceleration = new Vec2d(0.5, 0.5)
-//deceleration = new Vec2d(0.2, 0.2)
-//is_moving_object = true
 sp = {normal: 5, cruise: 10, consumption: 0.005}
-//hsp = 0
-//vsp = 0
-//hsp_to = 0
-//vsp_to = 0
-//acc = 0.5
-//decel = 0.2
-//hacc = 0
-//vacc = 0
-//input_h = 0
-//input_v = 0
-//move_h = 0
-//move_v = 0
-//input_dir = 0
-//rotary_sp = 5
-//dir = 0
-//dir_to = 0
 
 image_speed = 0
 
@@ -256,6 +233,7 @@ cruise_sp = 0
 fuel_producer_ratio = 0.001
 fuel_producer_pause_time = 120
 fuel_producer_pause = 0
+fuel_producer_treshold = 1
 
 // new resource sys
 resources = {}
@@ -267,8 +245,8 @@ hull = 10
 hp = hull
 cargo = global.start_cargo_space
 tank = 15
-tank_load = tank
-resources[$ "fuel"] = tank
+tank_load = tank * 0
+resources.fuel = tank_load
 cargo_load = struct_sum(resources) - resources[$ "fuel"]
 core_power = 5
 upgrades_count = 0

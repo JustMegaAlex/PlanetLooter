@@ -68,9 +68,11 @@ if warping {
 	warp_sound = audio_play_sound(snd_warp, 0, false)
 }
 
-if not --fuel_producer_pause {
-	var cost_info = global.resource_types.fuel.cost
-	self.exchange_resources("fuel", fuel_producer_ratio, cost_info)
+if (not --fuel_producer_pause) 
+		and (resources.fuel < fuel_producer_treshold) {
+	//var cost_info = global.resource_types.fuel.cost
+	//self.exchange_resources("fuel", fuel_producer_ratio, cost_info)
+	self._add_resource("fuel", fuel_producer_ratio)
 }
 
 up_free = place_empty(x, y - 1, obj_block)
