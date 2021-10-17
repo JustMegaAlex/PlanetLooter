@@ -10,9 +10,9 @@ function set_dir_to(_dir_to) {
 	dir_to = _dir_to
 }
 
-function update_dir() {
+function update_dir(rot_sp=rotary_sp) {
 	var _diff = angle_difference(dir, dir_to)
-	dir = approach(dir, dir - _diff, rotary_sp)
+	dir = approach(dir, dir - _diff, rot_sp)
 }
 
 // systems

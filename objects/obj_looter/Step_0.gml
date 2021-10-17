@@ -7,16 +7,13 @@ if not global.game_over {
 	key_interact = keyboard_check_pressed(ord("E"))
 	key_create_module = keyboard_check_pressed(ord("Q"))
 	key_shoot = mouse_check_button(mb_left)
+	key_full_thrust = mouse_check_button(mb_right)
 	key_warp = keyboard_check(vk_space)
 	key_cruise = keyboard_check(ord("F"))
 	key_cruise_off = keyboard_check_pressed(ord("F"))
 	key_switch_forward = keyboard_check_pressed(ord("C")) or mouse_wheel_up()
 	key_switch_back = keyboard_check_pressed(ord("X")) or mouse_wheel_down()
 	key_repair = keyboard_check_pressed(ord("R"))
-	if in_cruise_mode < 1 {
-		set_dir_to(point_dir(mouse_x, mouse_y))
-		update_dir()
-	}
 } else {
 	key_left = false
 	key_right = false
@@ -24,6 +21,33 @@ if not global.game_over {
 	key_down = false
 	key_interact = false
 	key_shoot = false
+	key_full_thrust = false
+}
+
+set_dir_to(point_dir(mouse_x, mouse_y))
+if (in_cruise_mode < 1) and !full_thrust_sp and !global.game_over
+	update_dir()
+	
+var is_igninte_full_thrust = key_full_thrust and (tank > 0)
+
+if key_full_thrust and !full_thrust_sp {
+	full_thrust_sp = max(full_thrust_acc, velocity.len())
+}
+if full_thrust_sp > 0 {
+	full_thrust_sp = approach(full_thrust_sp,
+							   full_thrust_sp_max * is_igninte_full_thrust,
+							   full_thrust_acc)
+	var _rot_factor = full_thrust_sp / full_thrust_sp_max
+	var _rot_sp = _rot_factor * full_thrust_rotary_sp
+				 + (1 - _rot_factor) * rotary_sp
+	update_dir(_rot_sp)
+	velocity.set_polar(full_thrust_sp, dir)
+	if !is_igninte_full_thrust and (full_thrust_sp < sp.normal) {
+		velocity.set_polar(full_thrust_sp, dir)
+		full_thrust_sp = 0
+	}
+	self.spend_resource("fuel", full_thrust_consumption)
+	obj_effects.thrust_effect(xprev, yprev, x, y)
 }
 
 // repair
@@ -69,10 +93,10 @@ if warping {
 }
 
 if (not --fuel_producer_pause) 
-		and (resources.fuel < fuel_producer_treshold) {
+		and (tank_load < fuel_producer_treshold) {
 	//var cost_info = global.resource_types.fuel.cost
 	//self.exchange_resources("fuel", fuel_producer_ratio, cost_info)
-	self._add_resource("fuel", fuel_producer_ratio)
+	self.exchange_resources("fuel", fuel_producer_ratio, {})
 }
 
 up_free = place_empty(x, y - 1, obj_block)
@@ -99,18 +123,9 @@ if in_cruise_mode >= 1 {
 	velocity.set_polar(cruise_sp, dir)
 	if !spend_resource("fuel", sp.consumption) or key_cruise_off
 		in_cruise_mode = 0
-
-	// jet effect
-	var dist = point_distance(xprev, yprev, x, y)
-	var xx, yy
-	var step = obj_effects.part_jet_step_size
-	var partnum = max(1, dist div step)
-	for (var i = 0; i < partnum; ++i) {
-	    xx = lerp(xprev, x, step * i / dist)
-		yy = lerp(yprev, y, step * i / dist)
-		obj_effects.jet_long(xx, yy)
-	}
-} else {
+	obj_effects.thrust_effect(xprev, yprev, x, y)
+	
+} else if !full_thrust_sp {
 	in_cruise_mode = (in_cruise_mode + cruise_switch_sp) * key_cruise
 	if input {
 		input_dir = point_direction(0, 0, move_h, move_v)

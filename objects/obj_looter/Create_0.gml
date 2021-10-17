@@ -14,6 +14,8 @@ function init_resources() {
 	var res_names = variable_struct_get_names(global.resource_types)
 	for (var i = 0; i < array_length(res_names); ++i) {
 	    var name = res_names[i]
+		if name == "fuel"
+			continue
 		self.resources[$ name] = global.start_resources_ammount
 	}
 }
@@ -229,6 +231,13 @@ cruise_acc = 1
 cruise_rot_sp = 0.5
 cruise_sp = 0
 
+// full thrust mode
+full_thrust_sp_max = 8
+full_thrust_sp = 0
+full_thrust_acc = 0.35
+full_thrust_rotary_sp = 2
+full_thrust_consumption = 0.005
+
 // devices
 fuel_producer_ratio = 0.001
 fuel_producer_pause_time = 120
@@ -246,8 +255,7 @@ hp = hull
 cargo = global.start_cargo_space
 tank = 15
 tank_load = tank * 0
-resources.fuel = tank_load
-cargo_load = struct_sum(resources) - resources[$ "fuel"]
+cargo_load = struct_sum(resources)
 core_power = 5
 upgrades_count = 0
 warp_fuel_cost = 7.5

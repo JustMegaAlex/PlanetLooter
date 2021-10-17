@@ -106,3 +106,16 @@ function jet_long(xx, yy) {
 function jet(xx, yy) {
 	part_particles_create(part_sys_effects_deep, xx, yy, part_jet, 1)
 }
+
+function thrust_effect(x0, y0, x1, y1) {
+	// jet effect
+	var dist = point_distance(x0, y0, x, y)
+	var xx, yy
+	var step = part_jet_step_size
+	var partnum = max(1, dist div step)
+	for (var i = 0; i < partnum; ++i) {
+	    xx = lerp(x0, x1, step * i / dist)
+		yy = lerp(y0, y1, step * i / dist)
+		obj_effects.jet_long(xx, yy)
+	}
+}
