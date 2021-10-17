@@ -39,11 +39,11 @@ switch state {
 	}
 
 	case "attack": {
-		if not --dir_wiggle_delay {
-			dir_wiggle_delay = dir_wiggle_change_time * (0.5 + random(0.5))
-			dir_wiggle = random_range(-dir_wiggle_magnitude, dir_wiggle_magnitude)
-		}
-		dir = inst_dir(target)
+		//if not --dir_wiggle_delay {
+		//	dir_wiggle_delay = dir_wiggle_change_time * (0.5 + random(0.5))
+		//	dir_wiggle = random_range(-dir_wiggle_magnitude, dir_wiggle_magnitude)
+		//}
+		set_dir_to(inst_dir(target))
 		if dist_to_player < close_dist
 			ai_attack_move_sign = -1
 		else if dist_to_player > loose_dist
@@ -67,7 +67,7 @@ switch state {
 	}
 
 	case "return": {
-		dir = point_dir(xst, yst)
+		set_dir_to(point_dir(xst, yst))
 		self.set_sp_to(sp.normal, dir)
 		if point_dist(xst, yst) < start_area_radius
 			state_switch_idle()
@@ -82,7 +82,7 @@ switch state {
 		if not move_route_point_to
 			patrol_update_move_to()
 		var p = move_route_point_to
-		dir = point_dir(p.X, p.Y)
+		set_dir_to(point_dir(p.X, p.Y))
 		self.set_sp_to(sp.normal, dir)
 		if point_dist(p.X, p.Y) < sp.normal
 			patrol_update_move_to()
@@ -100,7 +100,7 @@ switch state {
 			move_to_set_coords(xst, yst)
 			break
 		}
-		dir = point_dir(p.X, p.Y)
+		set_dir_to(point_dir(p.X, p.Y))
 		self.set_sp_to(sp.normal, dir)
 		if point_dist(p.X, p.Y) < sp.normal
 			update_route()
@@ -109,6 +109,8 @@ switch state {
 		break
 	}
 }
+
+update_dir()
 
 hsp = approach(hsp, hsp_to + battle_strafe_vec.X, acc)
 vsp = approach(vsp, vsp_to + battle_strafe_vec.Y, acc)

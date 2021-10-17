@@ -14,9 +14,8 @@ if not global.game_over {
 	key_switch_back = keyboard_check_pressed(ord("X")) or mouse_wheel_down()
 	key_repair = keyboard_check_pressed(ord("R"))
 	if in_cruise_mode < 1 {
-		dir_to = point_direction(x, y, mouse_x, mouse_y)
-		_diff = angle_difference(dir, dir_to)
-		dir = approach(dir, dir - _diff, rotary_sp)
+		set_dir_to(point_dir(mouse_x, mouse_y))
+		update_dir()
 	}
 } else {
 	key_left = false

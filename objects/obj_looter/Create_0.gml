@@ -207,40 +207,34 @@ function try_repair() {
 }
 
 
-position = new Vec2d(x, y)
-velocity = new Vec2d(0, 0)
-velocity_to = new Vec2d(0, 0)
-acceleration = new Vec2d(0.5, 0.5)
-deceleration = new Vec2d(0.2, 0.2)
-is_moving_object = true
+//position = new Vec2d(x, y)
+//velocity = new Vec2d(0, 0)
+//velocity_to = new Vec2d(0, 0)
+//acceleration = new Vec2d(0.5, 0.5)
+//deceleration = new Vec2d(0.2, 0.2)
+//is_moving_object = true
 sp = {normal: 5, cruise: 10, consumption: 0.005}
-hsp = 0
-vsp = 0
-hsp_to = 0
-vsp_to = 0
-acc = 0.5
-decel = 0.2
-hacc = 0
-vacc = 0
-input_h = 0
-input_v = 0
-move_h = 0
-move_v = 0
-input_dir = 0
-rotary_sp = 5
-dir = 0
-dir_to = 0
+//hsp = 0
+//vsp = 0
+//hsp_to = 0
+//vsp_to = 0
+//acc = 0.5
+//decel = 0.2
+//hacc = 0
+//vacc = 0
+//input_h = 0
+//input_v = 0
+//move_h = 0
+//move_v = 0
+//input_dir = 0
+//rotary_sp = 5
+//dir = 0
+//dir_to = 0
 
 image_speed = 0
 
 reloading = 0
 bullet_sp = 14
-
-grav = 0.0
-gravx = 0
-gravy = 0
-gravity_dist = 300
-gravity_min_dist = 8
 
 current_planet = noone
 

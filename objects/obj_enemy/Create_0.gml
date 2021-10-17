@@ -16,7 +16,7 @@ function set_hit(weapon) {
 	if !global.no_damage
 		hp -= weapon.damage
 	state_switch_attack(obj_looter)
-	dir = point_direction(x, y, obj_looter.x, obj_looter.y)
+	set_dir_to(point_direction(x, y, obj_looter.x, obj_looter.y))
 	trigger_friendly_units()
 	if hp <= 0 {
 		instance_destroy()
@@ -40,7 +40,7 @@ function state_switch_attack(trg) {
 	}
 	self.set_sp_to(0, dir)
 	target = trg
-	dir = inst_dir(target)
+	set_dir_to(inst_dir(target))
 	if warmedup < 1
 		state = "warmup"
 	else
@@ -232,6 +232,8 @@ vsp_to = 0
 acc = 0.25
 decel = 0.2
 dir = 0
+dir_to = 0
+rotation_sp = 5
 
 detection_dist = 300
 trigger_radius_on_detection = 200
