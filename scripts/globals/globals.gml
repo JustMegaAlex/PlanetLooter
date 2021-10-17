@@ -33,7 +33,7 @@ global.gen_max_planet_dist = 1000
 global.gen_min_planet_number = 6
 global.gen_max_planet_number = 8
 global.gen_spawn_is_patrol_chance = 0.45
-global.get_spawn_turret_chance = 0.2
+global.gen_spawn_turret_chance = 0.5
 global.start_resources_ammount = 5
 global.start_cargo_space = 100
 
@@ -44,7 +44,7 @@ switch MODE {
 		global.gen_planet_max_size = 5
 		global.gen_max_planet_dist = 1000
 		global.gen_spawn_is_patrol_chance = 1
-		global.get_spawn_turret_chance = 0
+		global.gen_spawn_turret_chance = 0
 		break
 	}
 	case "god_mode": {

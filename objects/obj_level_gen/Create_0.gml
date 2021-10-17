@@ -219,7 +219,7 @@ max_planet_dist = global.gen_max_planet_dist
 min_planet_number = global.gen_min_planet_number
 max_planet_number = global.gen_max_planet_number
 spawn_is_patrol_chance = global.gen_spawn_is_patrol_chance
-spawn_turret_chance = global.get_spawn_turret_chance
+spawn_turret_chance = global.gen_spawn_turret_chance
 
 forpost_min_group_size = 3
 
