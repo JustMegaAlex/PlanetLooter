@@ -13,8 +13,11 @@ if not global.game_over {
 	key_switch_forward = keyboard_check_pressed(ord("C")) or mouse_wheel_up()
 	key_switch_back = keyboard_check_pressed(ord("X")) or mouse_wheel_down()
 	key_repair = keyboard_check_pressed(ord("R"))
-	if in_cruise_mode < 1
-		dir = point_direction(x, y, mouse_x, mouse_y)
+	if in_cruise_mode < 1 {
+		dir_to = point_direction(x, y, mouse_x, mouse_y)
+		_diff = angle_difference(dir, dir_to)
+		dir = approach(dir, dir - _diff, rotary_sp)
+	}
 } else {
 	key_left = false
 	key_right = false
@@ -131,8 +134,7 @@ if key_shoot
 		and !global.ui_interface_on 
 		and (in_cruise_mode < 1) 
 		and !create_module_ui_inst {
-	shoot_dir = point_direction(x, y, mouse_x, mouse_y)
-	looter_shoot(shoot_dir)
+	looter_shoot(dir)
 }
 
 //// interacting

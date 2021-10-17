@@ -227,11 +227,12 @@ input_v = 0
 move_h = 0
 move_v = 0
 input_dir = 0
+rotary_sp = 5
 dir = 0
+dir_to = 0
 
 image_speed = 0
 
-shoot_dir = 0
 reloading = 0
 bullet_sp = 14
 
