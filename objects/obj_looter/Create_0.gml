@@ -10,145 +10,178 @@ function set_hit(weapon) {
 	}
 }
 
-function init_resources() {
-	var res_names = variable_struct_get_names(global.resource_types)
-	for (var i = 0; i < array_length(res_names); ++i) {
-	    var name = res_names[i]
-		if name == "fuel"
-			continue
-		self.resources[$ name] = global.start_resources_ammount
-	}
-}
-
-function add_resource(rname, ammount) {
-	if self._add_resource(rname, ammount) {
-		audio_play_sound(snd_pick, 0, false)
-		return true
-	}
-	return false
-}
-
-function _add_resource(rname, ammount) {
-	var cur_load = cargo_load
-	var max_load = cargo
-	if rname == "fuel" {
-		cur_load = tank_load
-		max_load = tank
-	}
-	if (cur_load + ammount) > max_load
-		return false
-	if rname == "fuel"
-		tank_load += ammount
-	else {
-		cargo_load += ammount
-		resources[$ rname] += ammount
-	}
-	// affect weapons
-	var rtype = global.resource_types[$ rname]
-	if rtype.is_bullet {
-		if !array_has(use_weapon_arr, rtype.bullet_name) {
-			var wtype = global.weapon_types[$ rtype.bullet_name]
-			if resources[$ rname] > wtype.resource_ammount
-				array_push(use_weapon_arr, rtype.bullet_name)
+Resources = {
+	id: obj_looter,
+	init: function() {
+		var res_names = variable_struct_get_names(global.resource_types)
+		for (var i = 0; i < array_length(res_names); ++i) {
+		    var name = res_names[i]
+			if name == "fuel"
+				continue
+			self[$ name] = global.start_resources_amount
 		}
-	}
-	return true
-}
+	},
 
-function check_update_resource_as_weapon(res_name) {
-	var rtype = global.resource_types[$ res_name]
-	if rtype.is_bullet {
-		var wtype = global.weapon_types[$ rtype.bullet_name]
-		if resources[$ res_name] < wtype.resource_ammount
-			use_weapon_remove(rtype.bullet_name)
-	}
-}
+	get: function(name) {
+		if name == "fuel"
+			return id.tank
+		return self[$ name]
+	},
+	
+	get_sum: function() {
+		var it = new IterStruct(global.resource_types)
+		var sum = 0
+		while it.next() {
+			var name = it.key()
+			if (name != "fuel")
+				sum += self[$ name]
+		}
+		return sum
+	},
+	
+	has_enough: function(name, amount) {
+		if name == "fuel"
+			return id.tank_load >= amount
+		return self[$ name] >= amount
+	},
+	
+	check_overload: function(name, amount) {
+		if name == "fuel"
+			return (id.tank_load + amount) > id.tank
+		return (id.cargo_load + amount) > id.cargo
+	},
 
-function spend_resource(rname, ammount) {
-	if rname == "empty"
-		return true
-
-	if rname == "fuel" {
-		if tank_load < ammount
+	try_add: function(name, amount) {
+		if check_overload(name, amount)
 			return false
-		tank_load -= ammount
-		fuel_producer_pause = fuel_producer_pause_time
+		_add(name, amount)
 		return true
-	}
+	},
 
-	if resources[$ rname] < ammount
-		return false
-	resources[$ rname] -= ammount
-	cargo_load -= ammount
-	// affect weapons
-	check_update_resource_as_weapon(rname)
-	return true
+	try_spend: function(name, amount) {
+		if !has_enough(name, amount)
+			return false
+		_spend(name, amount)
+		return true
+	},
+
+	update_resource_weapon: function(res_name, amount) {
+		var rtype = global.resource_types[$ res_name]
+		if rtype.is_bullet {
+			var wtype = global.weapon_types[$ rtype.bullet_name]
+			if amount >= wtype.resource_amount
+					and !array_has(id.use_weapon_arr, rtype.bullet_name) {				
+				array_push(id.use_weapon_arr, rtype.bullet_name)
+			} else if amount < wtype.resource_amount
+					and array_has(id.use_weapon_arr, rtype.bullet_name) {
+				array_remove(id.use_weapon_arr, rtype.bullet_name)
+			}
+		}
+	},
+	
+	_spend: function(name, amount) {
+		var final
+		if name == "fuel" {
+			id.tank_load -= amount
+			final = id.tank_load
+		} else {
+			if self[$ name] < amount
+				return false
+			self[$ name] -= amount
+			id.cargo_load -= amount
+			final = self[$ name]
+		}
+		update_resource_weapon(name, final)
+		return true
+	},
+	
+	_add: function(name, amount) {
+		var final
+		if name == "fuel" {
+			id.tank_load += amount
+			final = id.tank_load
+		} else {
+			if self[$ name] < amount
+				return false
+			self[$ name] += amount
+			id.cargo_load += amount
+			final = self[$ name]
+		}
+		update_resource_weapon(name, final)
+		return true
+	},
+	
+	exchange: function(in, in_amount, cost_info) {
+		var in_fuel = (in == "fuel")
+		var in_empty = (in == "empty")
+		var crg = id.cargo_load + in_amount * !in_fuel * !in_empty
+		var tnk = id.tank_load + in_amount * in_fuel * !in_empty
+		var checked = check_availability(cost_info, in_amount, crg, tnk)
+		if !checked.success
+			return checked.msg
+		// check cargo and tank fullness
+		if checked.crg > id.cargo
+			return "cargo full"
+		if checked.tnk > id.tank
+			return "tank full"
+		// exchange
+		_spend_via_info(cost_info, in_amount)
+		_add(in, in_amount * !in_empty)
+		id.cargo_load = checked.crg
+		id.tank_load = checked.tnk
+		return "ok"
+	},
+	
+	check_availability: function(info, in_amount, crg, tnk) {
+		var iter = new IterStruct(info)
+		while iter.next() {
+			var _type = iter.key()
+			var _amount = iter.value()
+			var result_cost_amount = _amount * in_amount
+			if self[$ _type] < result_cost_amount
+				return {success: false, msg: "need more\n" + _type}
+			// check loads
+			var out_fuel = (_type == "fuel")
+			crg -= result_cost_amount * !out_fuel
+			tnk -= result_cost_amount * out_fuel
+		}
+		return {crg: crg, tnk: tnk, success: true}
+	},
+
+	_spend_via_info: function(info, multiplier) {
+		var iter = new IterStruct(info)
+		while iter.next() {
+			var _type = iter.key()
+			_spend(_type, info[$ _type] * multiplier)
+		}
+	},
 }
 
-function check_has_enough_resources(info, in_ammount, crg, tnk) {
-	var iter = new IterStruct(info)
-	while iter.next() {
-		var _type = iter.key()
-		var _ammount = iter.value()
-		var result_cost_ammount = _ammount * in_ammount
-		if resources[$ _type] < result_cost_ammount
-			return {success: false, msg: "need more\n" + _type}
-		// check loads
-		var out_fuel = (_type == "fuel")
-		crg -= result_cost_ammount * !out_fuel
-		tnk -= result_cost_ammount * out_fuel
-	}
-	return {crg: crg, tnk: tnk, success: true}
+function spend_resource(name, amount) {
+	return Resources.try_spend(name, amount)
 }
 
-function spend_resources_from_struct(info, in_ammount) {
-	var iter = new IterStruct(info)
-	while iter.next() {
-		var _type = iter.key()
-		self.spend_resource(_type, info[$ _type] * in_ammount)
-		check_update_resource_as_weapon(_type)
-	}
+function add_resource(name, amount) {
+	return Resources.try_add(name, amount)
 }
 
-function exchange_resources(in, in_ammount, cost_info) {
-	// metall 1, ore 3
-	// check resource
-	var in_fuel = (in == "fuel")
-	var in_empty = (in == "empty")
-	var crg = cargo_load + in_ammount * !in_fuel * !in_empty
-	var tnk = tank_load + in_ammount * in_fuel * !in_empty
-	var checked = self.check_has_enough_resources(cost_info, in_ammount, crg, tnk)
-	if !checked.success
-		return checked.msg
-	// check cargo and tank fullness
-	if checked.crg > cargo
-		return "cargo full"
-	if checked.tnk > tank
-		return "tank full"
-	// exchange
-	self.spend_resources_from_struct(cost_info, in_ammount)
-	self._add_resource(in, in_ammount * !in_empty)
-	cargo_load = checked.crg
-	tank_load = checked.tnk
-	return "ok"
+function check_cargo_full(amount) {
+	return (cargo_load + amount) > cargo
 }
 
-function check_cargo_full(ammount) {
-	return (cargo_load + ammount) > cargo
-}
-
-function update_use_weapon_arr() {
+function update_weapon_arr() {
 	var wp_names = variable_struct_get_names(global.weapon_types)
 	for (var i = 0; i < array_length(wp_names); ++i) {
 	    var wname = wp_names[i]
 		var wtype = global.weapon_types[$ wname]
-		if resources[$ wtype.resource] >= 1
+		if Resources.get(wtype.resource) >= 1
 			array_push(use_weapon_arr, wname)
 	}
 	// init use_weapon
-	if (use_weapon_index == -1) and array_length(use_weapon_arr)
+	if (use_weapon_index == -1) and array_length(use_weapon_arr) {
 		use_weapon_index = 0
 		use_weapon = use_weapon_arr[use_weapon_index]
+	}
 }
 
 function use_weapon_remove(wtype) {
@@ -160,6 +193,8 @@ function use_weapon_remove(wtype) {
 
 function switch_weapon(swtch) {
 	var num = array_length(use_weapon_arr)
+	if num == 0
+		return false
 	if swtch
 		use_weapon_index = cycle_increase(use_weapon_index, 0, num)
 	else
@@ -169,42 +204,12 @@ function switch_weapon(swtch) {
 
 function looter_shoot(shoot_dir) {
 	var weapon = global.weapon_types[$ use_weapon]
-	if spend_resource(weapon.resource, weapon.resource_ammount)
+	if Resources.try_spend(weapon.resource, weapon.resource_amount)
 		shoot(shoot_dir, id, use_weapon)
 }
 
-function upgrade_system(sys) {
-	if upgrades_count == core_power
-		return "core power\n depleted"
-	var cur_level = Upgrades[$ sys]
-	var available = AvailableUpgrades[$ sys]
-	if cur_level == array_length(available) - 1
-		return "  system\nfully upgraded"
-	var up_level = cur_level + 1
-	var next = available[up_level]
-	var cost_info = next.cost
-	// check resources are enough
-	var cost_info_names = variable_struct_get_names(cost_info)
-	for (var i = 0; i < array_length(cost_info_names); ++i) {
-		var _type = cost_info_names[i]
-		if resources[$ _type] < cost_info[$ _type]
-			return "need more\n" + restype
-	}
-	// spend resoures
-	for (var i = 0; i < array_length(costarr); ++i) {
-		var restype = costarr[i][0]
-		var resammount = costarr[i][1]
-		spend_resource(restype, resammount)
-	}
-	var val = available[up_level].value
-	upgrades_count++
-	variable_struct_set(Upgrades, sys, up_level)
-	variable_instance_set(id, sys, val)
-	return "ok"
-}
-
 function try_repair() {
-	if spend_resource("repair_kit", 1)
+	if Resources.try_spend("repair_kit", 1)
 		hp++
 }
 
@@ -245,49 +250,22 @@ fuel_producer_pause = 0
 fuel_producer_treshold = 1
 
 // new resource sys
-resources = {}
-resources_display_names = ["ore", "organic", "junk", "metall", "drives", "part", "bullet_homing", "repair_kit"]
-init_resources()
+resources_display_names = ["ore", "organic",
+						   "junk", "metall",
+						   "drives", "part",
+						   "bullet_homing",
+						   "repair_kit"]
+Resources.init()
 
 // systems
 hull = 10
 hp = hull
 cargo = global.start_cargo_space
 tank = 15
-tank_load = tank * 0
-cargo_load = struct_sum(resources)
+tank_load = tank
+cargo_load = Resources.get_sum()
 core_power = 5
-upgrades_count = 0
 warp_fuel_cost = 7.5
-AvailableUpgrades = {
-	weapon: [
-		{cost: {part: 10}, value: {dmg: 1.5, mining: 1.15, reload_time: 8, consumption: 0.05, knock_back_force: 3.5}},
-		{cost: {part: 15}, value: {dmg: 2, mining: 1.3, reload_time: 7.5, consumption: 0.07, knock_back_force: 3.5}},
-		{cost: {part: 25}, value: {dmg: 2.5, mining: 1.35, reload_time: 7.5, consumption: 0.08, knock_back_force: 3.5}},
-		{cost: {part: 40}, value: {dmg: 3.5, mining: 1.35, reload_time: 7, consumption: 0.1, knock_back_force: 3.5}},
-	],
-	cargo: [{cost:{part: 10}, value: 130},
-			{cost:{part: 15}, value: 155},
-			{cost:{part: 20}, value: 175}, ],
-	tank: [{cost:{part: 5}, value: 20},
-		   {cost:{part: 12}, value: 30},
-		   {cost:{part: 24}, value: 40}, ],
-	sp: [{cost:{part: 10}, value: {normal: 6, cruise: 18, consumption: 0.0085}},
-		   {cost:{part: 20}, value: {normal: 7, cruise: 21, consumption: 0.009}},
-		   {cost:{part: 30}, value: {normal: 8, cruise: 24, consumption: 0.0105}},
-		   {cost:{part: 30}, value: {normal: 9, cruise: 27, consumption: 0.012}},
-		   {cost:{part: 30}, value: {normal: 10, cruise: 30, consumption: 0.014}}, ],
-	hull: [{cost:{part: 5}, value: 13},
-			{cost:{part: 12}, value: 16},
-			{cost:{part: 20}, value: 20}, ],
-}
-Upgrades = {
-	weapon: -1,
-	cargo: -1,
-	tank: -1,
-	sp: -1,
-	hull: -1,
-}
 
 // drawing compas
 compas_min_dist = 600
@@ -302,7 +280,7 @@ if not instance_exists(obj_camera) {
 use_weapon_arr = []
 use_weapon_index = -1
 use_weapon = noone
-update_use_weapon_arr()
+update_weapon_arr()
 
 
 // create module ui

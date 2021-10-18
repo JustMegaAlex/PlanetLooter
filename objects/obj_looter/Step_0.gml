@@ -95,8 +95,9 @@ if warping {
 if (not --fuel_producer_pause) 
 		and (tank_load < fuel_producer_treshold) {
 	//var cost_info = global.resource_types.fuel.cost
-	//self.exchange_resources("fuel", fuel_producer_ratio, cost_info)
-	self.exchange_resources("fuel", fuel_producer_ratio, {})
+	//self.Resources.exchange("fuel", fuel_producer_ratio, cost_info)
+	//self.Resources.exchange("fuel", fuel_producer_ratio, {})
+	Resources.try_add("fuel", fuel_producer_ratio)
 }
 
 up_free = place_empty(x, y - 1, obj_block)

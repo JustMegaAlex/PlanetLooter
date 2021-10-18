@@ -24,7 +24,7 @@ if obj_debug.show_planets_data {
 				draw_circle_color(x0 + global.grid_size * (i-1),
 							 y0 + global.grid_size * (j-1),
 							 4, c_blue, c_blue, false)
-			s = string(arr[i][j].resource_data.ammount) + " " + string(arr[i][j].hp)
+			s = string(arr[i][j].resource_data.amount) + " " + string(arr[i][j].hp)
 		    draw_text_custom(x0 + global.grid_size * (i-1),
 							 y0 + global.grid_size * (j-1), s, fnt_small, -1, -1)
 		}

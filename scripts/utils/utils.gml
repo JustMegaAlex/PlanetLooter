@@ -61,11 +61,11 @@ function value_between(val, min_, max_){
 	return (val >= min_) and (val < max_)
 }
 
-function approach(val, to, ammount) {
+function approach(val, to, amount) {
 	var delta = to - val
-	if abs(delta) < ammount
+	if abs(delta) < amount
 		return to
-	var sp = ammount * sign(delta) 
+	var sp = amount * sign(delta) 
 	return val + sp
 }
 
@@ -136,8 +136,8 @@ function cycle_decrease(val, min_, max_) {
 // 5 -7 4 9 -> 7
 // 4 1 0 5 -> 0
 // 6 6 0 6 -> 5
-function cycle_change(val, ammount, min_, max_) {
-	val += ammount // 10
+function cycle_change(val, amount, min_, max_) {
+	val += amount // 10
 	var delta = max_ - min_ // 5
 	if val < min_ {
 		val = max_ - abs(min_ - val) mod delta + 1

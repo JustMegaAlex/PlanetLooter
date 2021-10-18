@@ -1,8 +1,8 @@
 
 
-function ResourceData(type, ammount, tile_index) constructor {
+function ResourceData(type, amount, tile_index) constructor {
 	self.type = type
-	self.ammount = ammount
+	self.amount = amount
 	self.tile_index = tile_index
 }
 
@@ -75,7 +75,7 @@ function get_cell_type(val) {
 }
 
 _resource_data = [
-	// [_min_mesh_val, type, max_ammount, tile_index]
+	// [_min_mesh_val, type, max_amount, tile_index]
 	[0.3, "empty", 0.01, 0],
 	[0.43, "organic", 2, 4],
 	[0.47, "organic", 4, 5],
@@ -90,25 +90,25 @@ function get_resource_data_by_mesh(val) {
 		var data = _resource_data[i]
 		var min_mesh_val = data[0]
 		var type = data[1]
-		var max_ammount = data[2]
+		var max_amount = data[2]
 		var tile_index = data[3]
 	    if val <= min_mesh_val {
-			var ammount = round(val/min_mesh_val * max_ammount)
-			return new ResourceData(type, ammount, tile_index)
+			var amount = round(val/min_mesh_val * max_amount)
+			return new ResourceData(type, amount, tile_index)
 		}
 	}
 	throw " :get_resource_data_by_mesh: input error val = " + string(val)
 
 }
 
-function get_resource_tile_index_by_ammount(ammount, type) {
+function get_resource_tile_index_by_amount(amount, type) {
 	for (var i = 0; i < array_length(_resource_data); ++i) {
 		var data = _resource_data[i]
 		var _type = data[1]
 		if type != _type
 			continue
-		var max_ammount = data[2]
-	    if ammount <= max_ammount {
+		var max_amount = data[2]
+	    if amount <= max_amount {
 			var tile_index = data[3]
 			return tile_index
 		}
@@ -165,9 +165,9 @@ function tiles_redraw_region(i, j, ni, nj) {
 }
 
 function tiles_redraw_resource_tile(i, j) {
-	var ammount = terrain_mesh[i][j].resource_data.ammount
+	var amount = terrain_mesh[i][j].resource_data.amount
 	var type = terrain_mesh[i][j].resource_data.type
-	var rdata = get_resource_tile_index_by_ammount(ammount, type)
+	var rdata = get_resource_tile_index_by_amount(amount, type)
 	tilemap_set(tile_map_resources_id, rdata, i, j)
 }
 

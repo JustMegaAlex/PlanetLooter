@@ -44,7 +44,7 @@ global.weapon_types = {
 		knock_back_force: 2,
 		sprite: spr_bullet_pulse,
 		distance: 400,
-		resource_ammount: 1,
+		resource_amount: 1,
 	},
 	turret_pulse: {
 		damage: 2,
@@ -55,7 +55,7 @@ global.weapon_types = {
 		knock_back_force: 2,
 		sprite: spr_bullet_pulse,
 		distance: 500,
-		resource_ammount: 1,
+		resource_amount: 1,
 	},
 	pulse_spread: {
 		damage: 1,
@@ -67,7 +67,7 @@ global.weapon_types = {
 		sprite: spr_bullet_pulse,
 		distance: 400,
 		object: obj_bullet_pulse_spread,
-		resource_ammount: 1,
+		resource_amount: 1,
 	},
 	plazma: {
 		damage: 3,
@@ -78,7 +78,7 @@ global.weapon_types = {
 		knock_back_force: 3,
 		sprite: spr_bullet_plazma,
 		distance: 400,
-		resource_ammount: 0.2,
+		resource_amount: 0.2,
 	},
 	metall_orbs: {
 		damage: 0.25,
@@ -89,7 +89,7 @@ global.weapon_types = {
 		knock_back_force: 1,
 		sprite: spr_bullet_metall_orb,
 		distance: 250,
-		resource_ammount: 0.05,
+		resource_amount: 0.05,
 	},
 	homing: {
 		damage: 1,
@@ -101,7 +101,7 @@ global.weapon_types = {
 		sprite: spr_bullet_homing,
 		object: obj_bullet_homing,
 		distance: 1000,
-		resource_ammount: 1,
+		resource_amount: 1,
 	}
 }
 
