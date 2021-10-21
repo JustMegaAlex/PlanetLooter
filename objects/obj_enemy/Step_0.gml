@@ -35,14 +35,10 @@ switch state {
 			state_switch_search()
 			break
 		}
-		break	
+		break
 	}
 
 	case "attack": {
-		//if not --dir_wiggle_delay {
-		//	dir_wiggle_delay = dir_wiggle_change_time * (0.5 + random(0.5))
-		//	dir_wiggle = random_range(-dir_wiggle_magnitude, dir_wiggle_magnitude)
-		//}
 		set_dir_to(inst_dir(target))
 		if dist_to_player < close_dist
 			ai_attack_move_sign = -1
@@ -90,7 +86,7 @@ switch state {
 			state_switch_attack(obj_looter)
 		break
 	}
-	
+
 	case "on_route": {
 		if not move_route_point_to
 			update_route()
@@ -104,8 +100,8 @@ switch state {
 		self.set_sp_to(sp.normal, dir)
 		if point_dist(p.X, p.Y) < sp.normal
 			update_route()
-		//if dist_to_player < detection_dist
-		//	state_switch_attack(obj_looter)
+		if dist_to_player < detection_dist
+			state_switch_attack(obj_looter)
 		break
 	}
 }

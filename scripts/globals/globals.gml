@@ -9,7 +9,10 @@ function reset_globals() {
 #macro TestPathFinding:MODE "test_path_finding"
 #macro GodMode:MODE "god_mode"
 #macro Custom:MODE "custom"
+#macro TestStuff:MODE "custom"
 #macro TEST_PATH_FIND (MODE == "test_path_finding")
+#macro Default:START_ROOM rm_game
+#macro TestStuff:START_ROOM rm_game_test
 
 // debug
 global.DEBUG = true

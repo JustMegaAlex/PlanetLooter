@@ -30,7 +30,8 @@ tips_text += "F11 toggle fullscreen (and make those shiny stars disappear LoL)\n
 tips_text += "Compass arrows point to planets\n"
 tips_header = "Press T to show tips"
 
-instance_create_layer(0, 0, layer, obj_level_gen)
+if room == rm_game
+	instance_create_layer(0, 0, layer, obj_level_gen)
 
 // degugging
 if TEST_PATH_FIND {
