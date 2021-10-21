@@ -2,7 +2,7 @@
 event_inherited()
 
 function set_hit(weapon) {
-	if !global.player_immortal or !global.no_damage
+	if !global.player_immortal and !global.no_damage
 		hp -= weapon.damage
 	if hp <= 0 {
 		global.game_over = true

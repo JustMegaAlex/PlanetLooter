@@ -11,6 +11,9 @@ function reset_globals() {
 #macro Custom:MODE "custom"
 #macro TestStuff:MODE "custom"
 #macro TEST_PATH_FIND (MODE == "test_path_finding")
+#macro TestPathFinding:START_ROOM rm_game
+#macro GodMode:START_ROOM rm_game
+#macro Custom:START_ROOM rm_game
 #macro Default:START_ROOM rm_game
 #macro TestStuff:START_ROOM rm_game_test
 
@@ -60,7 +63,11 @@ switch MODE {
 		break	
 	}
 	case "custom": {
-		global.gen_create_enemies = false
+		global.player_immortal = true
+		global.enable_instant_planet_move = true
+		global.enable_change_fps = true
+		global.show_ai_patrol_routes = true
+		global.show_alert_tower_stuff = true
 	}
 	
 }

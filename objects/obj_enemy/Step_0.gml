@@ -24,7 +24,7 @@ switch state {
 			break
 		}
 		if point_dist(xst, yst) > start_area_radius {
-			state_switch_return()
+			state_switch_on_route(xst, yst)
 		}
 		break
 	}
@@ -57,7 +57,7 @@ switch state {
 			break
 		}
 		if not --searching {
-			state_switch_return()
+			state_switch_idle()
 		}
 		break
 	}
