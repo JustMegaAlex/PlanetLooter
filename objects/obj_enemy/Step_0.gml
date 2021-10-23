@@ -40,12 +40,14 @@ switch state {
 
 	case "attack": {
 		set_dir_to(inst_dir(target))
-		if dist_to_player < close_dist
+		if dist_to_player < attack_min_dist
 			ai_attack_move_sign = -1
-		else if dist_to_player > loose_dist
+        else if dist_to_player > attack_max_dist 
+            ai_attack_move_sign = 1
+        else
+            ai_attack_move_sign = 0
+		if dist_to_player > loose_dist
 			state_switch_idle()
-		else
-			ai_attack_move_sign = 1
 		self.set_sp_to(sp.normal * ai_attack_move_sign, dir)
 		break
 	}

@@ -32,8 +32,8 @@
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "ships",
-    "path": "folders/Objects/ships.yy",
+    "name": "projectiles",
+    "path": "folders/Objects/world objects/projectiles.yy",
   },
   "resourceVersion": "1.0",
   "name": "obj_bullet_homing",

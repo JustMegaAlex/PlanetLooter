@@ -30,7 +30,7 @@
   "overriddenProperties": [],
   "parent": {
     "name": "buidlings",
-    "path": "folders/Objects/buidlings.yy",
+    "path": "folders/Objects/world objects/buidlings.yy",
   },
   "resourceVersion": "1.0",
   "name": "obj_building_shipyard",

@@ -29,8 +29,8 @@
   ],
   "overriddenProperties": [],
   "parent": {
-    "name": "Objects",
-    "path": "folders/Objects.yy",
+    "name": "custom",
+    "path": "folders/Objects/world objects/custom.yy",
   },
   "resourceVersion": "1.0",
   "name": "obj_collectable_trailer",

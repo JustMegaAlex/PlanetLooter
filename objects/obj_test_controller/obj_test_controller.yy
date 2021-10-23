@@ -26,7 +26,7 @@
   "overriddenProperties": [],
   "parent": {
     "name": "test",
-    "path": "folders/Objects/test.yy",
+    "path": "folders/Objects/system objects/test.yy",
   },
   "resourceVersion": "1.0",
   "name": "obj_test_controller",

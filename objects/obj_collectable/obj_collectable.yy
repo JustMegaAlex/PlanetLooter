@@ -27,8 +27,8 @@
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "Objects",
-    "path": "folders/Objects.yy",
+    "name": "world objects",
+    "path": "folders/Objects/world objects.yy",
   },
   "resourceVersion": "1.0",
   "name": "obj_collectable",

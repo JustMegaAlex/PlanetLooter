@@ -31,7 +31,7 @@
   "overriddenProperties": [],
   "parent": {
     "name": "ui",
-    "path": "folders/Objects/ui.yy",
+    "path": "folders/Objects/system objects/ui.yy",
   },
   "resourceVersion": "1.0",
   "name": "obj_building_ui",

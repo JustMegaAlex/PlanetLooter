@@ -35,7 +35,7 @@
   "overriddenProperties": [],
   "parent": {
     "name": "ships",
-    "path": "folders/Objects/ships.yy",
+    "path": "folders/Objects/world objects/ships.yy",
   },
   "resourceVersion": "1.0",
   "name": "obj_looter",

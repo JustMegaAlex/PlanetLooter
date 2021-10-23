@@ -84,10 +84,11 @@ function compute_strafe_vec() {
 	    var dist = max(inst_dist(inst), 1)
 		if (dist > battle_friendly_dist) or (inst == id)
 			continue
-		var dir = inst_dir(inst)
-		battle_strafe_vec.add_polar(-1 / dist, dir)
+		var friend_dir = inst_dir(inst)
+		battle_strafe_vec.add_polar(-1 / dist, friend_dir)
 	}
 	battle_strafe_vec.normalize()
+	// manuver if enough space
 }
 
 function set_move_route(route) {
@@ -248,7 +249,8 @@ dir_wiggle_magnitude = 40
 dir_wiggle_change_time = 30
 dir_wiggle_delay = 0
 loose_dist = 500
-close_dist = 200
+attack_min_dist = 200
+attack_max_dist = 300
 detection_dist_search = 400
 target = noone
 search_time = 300
@@ -268,6 +270,8 @@ warmup_sp = 0.01
 // keeping distance with friends
 battle_friendly_dist = 100
 battle_strafe_vec = new Vec2d(0, 0)
+battle_strafe_vec_treshold = sp.normal * 0.1
+battle_strafe_dirsign = choose(-1, 1)
 
 // controlled building
 controlled_building = noone

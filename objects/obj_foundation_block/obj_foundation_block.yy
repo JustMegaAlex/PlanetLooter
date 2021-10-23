@@ -26,8 +26,8 @@
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "Objects",
-    "path": "folders/Objects.yy",
+    "name": "planets",
+    "path": "folders/Objects/world objects/planets.yy",
   },
   "resourceVersion": "1.0",
   "name": "obj_foundation_block",

@@ -29,7 +29,7 @@
   "overriddenProperties": [],
   "parent": {
     "name": "projectiles",
-    "path": "folders/Objects/projectiles.yy",
+    "path": "folders/Objects/world objects/projectiles.yy",
   },
   "resourceVersion": "1.0",
   "name": "obj_crusher",

@@ -31,7 +31,7 @@
   "overriddenProperties": [],
   "parent": {
     "name": "custom",
-    "path": "folders/Objects/custom.yy",
+    "path": "folders/Objects/world objects/custom.yy",
   },
   "resourceVersion": "1.0",
   "name": "obj_block_custom",

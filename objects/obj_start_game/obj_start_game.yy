@@ -23,8 +23,8 @@
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "Objects",
-    "path": "folders/Objects.yy",
+    "name": "system objects",
+    "path": "folders/Objects/system objects.yy",
   },
   "resourceVersion": "1.0",
   "name": "obj_start_game",
