@@ -15,7 +15,8 @@ enum Enemy {
 function set_hit(weapon) {
 	if !global.no_damage
 		hp -= weapon.damage
-	state_switch_attack(obj_looter)
+    var trigger_friends = array_find(["attack", "attack_snipe"], state) == -1
+	state_switch_attack(obj_looter, trigger_friends)
 	set_dir_to(point_direction(x, y, obj_looter.x, obj_looter.y))
 	trigger_friendly_units()
 	if hp <= 0 {
@@ -38,10 +39,22 @@ function state_switch_patrol() {
 	}
 }
 
-function state_switch_attack(trg) {
+function state_switch_attack_snipe(trg) {
 	if global.ai_attack_off {
 		return
 	}
+    self.state_switch_attack(trg)
+    self.use_weapon = "pulse_snipe"
+    state = "attack_snipe"
+}
+
+function state_switch_attack(trg, trigger_friends=false) {
+	if global.ai_attack_off
+			or state == "attack"
+			or state == "attack_snipe" {
+		return
+	}
+    self.use_weapon = "pulse_spread"
 	self.set_sp_to(0, dir)
 	target = trg
 	set_dir_to(inst_dir(target))
@@ -49,7 +62,8 @@ function state_switch_attack(trg) {
 		state = "warmup"
 	else
 		state = "attack"
-	trigger_friendly_units()
+	if trigger_friends
+		trigger_friendly_units()
 }
 
 function state_switch_search() {
@@ -248,9 +262,11 @@ dir_wiggle = 0
 dir_wiggle_magnitude = 40
 dir_wiggle_change_time = 30
 dir_wiggle_delay = 0
-loose_dist = 500
+loose_dist = 700
 attack_min_dist = 200
 attack_max_dist = 300
+attack_snipe_min_dist = 350
+attack_snipe_max_dist = 500
 detection_dist_search = 400
 target = noone
 search_time = 300

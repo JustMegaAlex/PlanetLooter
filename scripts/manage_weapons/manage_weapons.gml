@@ -67,8 +67,20 @@ global.weapon_types = {
 		resource: "empty",
 		knock_back_force: 2,
 		sprite: spr_bullet_pulse,
-		distance: 400,
+		distance: 520,
 		object: obj_bullet_pulse_spread,
+		resource_amount: 1,
+		player_can_use: false
+	},
+    pulse_snipe: {
+		damage: 1,
+		mining: 1,
+		reload_time: 90,
+		sp: 11,
+		resource: "empty",
+		knock_back_force: 2,
+		sprite: spr_bullet_pulse,
+		distance: 520,
 		resource_amount: 1,
 		player_can_use: false
 	},

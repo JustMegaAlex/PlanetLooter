@@ -69,8 +69,8 @@ switch MODE {
 		global.enable_change_fps = true
 		global.show_ai_patrol_routes = true
 		global.show_alert_tower_stuff = true
+		global.gen_create_enemies = false
 	}
-	
 }
 
 // objects
