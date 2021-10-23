@@ -37,7 +37,7 @@ function Producer(resource, ui_parent) constructor {
 		if msg != "ok"
 			self.ui_parent.ui_message(msg, true)
 	}
-	
+
 	command_start_production = function() {
 		var prod_inst = ui_parent.parent
 		prod_inst.production_enqeue(self.type)

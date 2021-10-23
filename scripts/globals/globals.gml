@@ -40,8 +40,9 @@ global.gen_min_planet_number = 6
 global.gen_max_planet_number = 8
 global.gen_spawn_is_patrol_chance = 0.45
 global.gen_spawn_turret_chance = 0.5
-global.start_resources_amount = 5
+global.start_resources_amount = 0
 global.start_cargo_space = 100
+global.view_to_window_ratio = 0.6
 
 switch MODE {
 	case "test_path_finding": {

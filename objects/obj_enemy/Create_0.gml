@@ -32,8 +32,10 @@ function state_switch_idle() {
 
 function state_switch_patrol() {
 	state = "patrol"
-    var p = patrol_point_to
-	state_switch_on_route(p.X, p.Y)
+	if patrol_point_to {
+	    var p = patrol_point_to
+		state_switch_on_route(p.X, p.Y)
+	}
 }
 
 function state_switch_attack(trg) {

@@ -40,11 +40,12 @@ global.weapon_types = {
 		mining: 1,
 		reload_time: 20,
 		sp: 7,
-		resource: "empty",
+		resource: "empty",														  
 		knock_back_force: 2,
 		sprite: spr_bullet_pulse,
 		distance: 400,
 		resource_amount: 1,
+		player_can_use: false
 	},
 	turret_pulse: {
 		damage: 2,
@@ -56,6 +57,7 @@ global.weapon_types = {
 		sprite: spr_bullet_pulse,
 		distance: 500,
 		resource_amount: 1,
+		player_can_use: false
 	},
 	pulse_spread: {
 		damage: 1,
@@ -68,6 +70,7 @@ global.weapon_types = {
 		distance: 400,
 		object: obj_bullet_pulse_spread,
 		resource_amount: 1,
+		player_can_use: false
 	},
 	plazma: {
 		damage: 3,
@@ -79,6 +82,7 @@ global.weapon_types = {
 		sprite: spr_bullet_plazma,
 		distance: 400,
 		resource_amount: 0.2,
+		player_can_use: true
 	},
 	metall_orbs: {
 		damage: 0.25,
@@ -90,6 +94,7 @@ global.weapon_types = {
 		sprite: spr_bullet_metall_orb,
 		distance: 250,
 		resource_amount: 0.05,
+		player_can_use: true
 	},
 	homing: {
 		damage: 1,
@@ -102,6 +107,7 @@ global.weapon_types = {
 		object: obj_bullet_homing,
 		distance: 1000,
 		resource_amount: 1,
+		player_can_use: true
 	}
 }
 

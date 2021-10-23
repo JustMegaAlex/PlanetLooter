@@ -85,8 +85,6 @@ Resources = {
 			id.tank_load -= amount
 			final = id.tank_load
 		} else {
-			if self[$ name] < amount
-				return false
 			self[$ name] -= amount
 			id.cargo_load -= amount
 			final = self[$ name]
@@ -101,8 +99,6 @@ Resources = {
 			id.tank_load += amount
 			final = id.tank_load
 		} else {
-			if self[$ name] < amount
-				return false
 			self[$ name] += amount
 			id.cargo_load += amount
 			final = self[$ name]
@@ -175,6 +171,7 @@ function update_weapon_arr() {
 	    var wname = wp_names[i]
 		var wtype = global.weapon_types[$ wname]
 		if Resources.get(wtype.resource) >= 1
+				and wtype.player_can_use
 			array_push(use_weapon_arr, wname)
 	}
 	// init use_weapon
