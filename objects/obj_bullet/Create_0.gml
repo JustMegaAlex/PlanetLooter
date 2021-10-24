@@ -23,10 +23,11 @@ function bring_damage() {
 }
 
 function move() {
-	scr_move(weapon.sp, image_angle)
+	scr_move(sp, image_angle)
 }
 
 visible = false
+image_speed = 0
 alarm[0] = 1
 sp = 10
 life_distance = 300

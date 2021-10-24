@@ -1,5 +1,5 @@
 {
-  "bboxMode": 0,
+  "bboxMode": 2,
   "collisionKind": 1,
   "type": 0,
   "origin": 5,
@@ -7,14 +7,14 @@
   "edgeFiltering": false,
   "collisionTolerance": 0,
   "swfPrecision": 2.525,
-  "bbox_left": 0,
-  "bbox_right": 15,
+  "bbox_left": 32,
+  "bbox_right": 47,
   "bbox_top": 4,
   "bbox_bottom": 11,
   "HTile": false,
   "VTile": false,
   "For3D": false,
-  "width": 16,
+  "width": 48,
   "height": 16,
   "textureGroupId": {
     "name": "Default",
@@ -27,6 +27,9 @@
     {"compositeImage":{"FrameId":{"name":"8e7df687-78d3-4704-b961-7f3c1fbffd3e","path":"sprites/spr_bullet_pulse/spr_bullet_pulse.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
         {"FrameId":{"name":"8e7df687-78d3-4704-b961-7f3c1fbffd3e","path":"sprites/spr_bullet_pulse/spr_bullet_pulse.yy",},"LayerId":{"name":"302284ef-4766-4828-b8a3-5604b9d8796d","path":"sprites/spr_bullet_pulse/spr_bullet_pulse.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
       ],"parent":{"name":"spr_bullet_pulse","path":"sprites/spr_bullet_pulse/spr_bullet_pulse.yy",},"resourceVersion":"1.0","name":"8e7df687-78d3-4704-b961-7f3c1fbffd3e","tags":[],"resourceType":"GMSpriteFrame",},
+    {"compositeImage":{"FrameId":{"name":"a2df9b9c-91da-40f0-a64b-4cdb7580a0d9","path":"sprites/spr_bullet_pulse/spr_bullet_pulse.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
+        {"FrameId":{"name":"a2df9b9c-91da-40f0-a64b-4cdb7580a0d9","path":"sprites/spr_bullet_pulse/spr_bullet_pulse.yy",},"LayerId":{"name":"302284ef-4766-4828-b8a3-5604b9d8796d","path":"sprites/spr_bullet_pulse/spr_bullet_pulse.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
+      ],"parent":{"name":"spr_bullet_pulse","path":"sprites/spr_bullet_pulse/spr_bullet_pulse.yy",},"resourceVersion":"1.0","name":"a2df9b9c-91da-40f0-a64b-4cdb7580a0d9","tags":[],"resourceType":"GMSpriteFrame",},
   ],
   "sequence": {
     "spriteId": {"name":"spr_bullet_pulse","path":"sprites/spr_bullet_pulse/spr_bullet_pulse.yy",},
@@ -36,13 +39,14 @@
     "playbackSpeedType": 0,
     "autoRecord": true,
     "volume": 1.0,
-    "length": 1.0,
+    "length": 2.0,
     "events": {"Keyframes":[],"resourceVersion":"1.0","resourceType":"KeyframeStore<MessageEventKeyframe>",},
     "moments": {"Keyframes":[],"resourceVersion":"1.0","resourceType":"KeyframeStore<MomentsEventKeyframe>",},
     "tracks": [
       {"name":"frames","spriteId":null,"keyframes":{"Keyframes":[
             {"id":"14394465-5c98-487c-827d-beac1418e6ce","Key":0.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"8e7df687-78d3-4704-b961-7f3c1fbffd3e","path":"sprites/spr_bullet_pulse/spr_bullet_pulse.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
-          ],"resourceVersion":"1.0","resourceType":"KeyframeStore<SpriteFrameKeyframe>",},"trackColour":0,"inheritsTrackColour":true,"builtinName":0,"traits":0,"interpolation":1,"tracks":[],"events":[],"modifiers":[],"isCreationTrack":false,"resourceVersion":"1.0","tags":[],"resourceType":"GMSpriteFramesTrack",},
+            {"id":"9ac319a1-c9bf-4842-b756-a2edab945827","Key":1.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"a2df9b9c-91da-40f0-a64b-4cdb7580a0d9","path":"sprites/spr_bullet_pulse/spr_bullet_pulse.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
+          ],"resourceVersion":"1.0","resourceType":"KeyframeStore<SpriteFrameKeyframe>",},"trackColour":0,"inheritsTrackColour":true,"builtinName":0,"traits":0,"interpolation":1,"tracks":[],"events":[],"isCreationTrack":false,"resourceVersion":"1.0","tags":[],"resourceType":"GMSpriteFramesTrack","modifiers":[],},
     ],
     "visibleRange": null,
     "lockOrigin": false,
@@ -54,7 +58,7 @@
     "backdropHeight": 768,
     "backdropXOffset": 0.0,
     "backdropYOffset": 0.0,
-    "xorigin": 16,
+    "xorigin": 48,
     "yorigin": 8,
     "eventToFunction": {},
     "eventStubScript": null,

@@ -84,11 +84,22 @@ function state_switch_on_route(xx, yy) {
 }
 #endregion
 
+//function attack_create_units_formation(list_units) {
+//	var snipers_num = ds_list_size(list_units) * 
+//}
+
 function trigger_friendly_units() {
+	/*
+	see alarm[1]
+	*/
 	if global.ai_attack_off { return }
 
 	ds_list_empty(friendly_units_to_trigger)
-	collision_circle_list(x, y, trigger_radius_on_detection, obj_enemy, false, true, friendly_units_to_trigger, false)
+	collision_circle_list(x, y, trigger_radius_on_detection,
+						  obj_enemy, false, true,
+						  friendly_units_to_trigger, false)
+	trigger_attack_snipers_num = floor(ds_list_size(friendly_units_to_trigger)
+									   * attack_formation_snipers_fract)
 	alarm[1] = trigger_units_delay
 }
 
@@ -267,6 +278,7 @@ attack_min_dist = 200
 attack_max_dist = 300
 attack_snipe_min_dist = 350
 attack_snipe_max_dist = 500
+attack_formation_snipers_fract = 0.3
 detection_dist_search = 400
 target = noone
 search_time = 300

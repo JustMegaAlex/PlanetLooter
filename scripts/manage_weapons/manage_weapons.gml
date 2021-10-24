@@ -1,5 +1,5 @@
 
-function shoot(shoot_dir, spawner, wtype) {
+function shoot(shoot_dir, spawner, wtype, xx=x, yy=y) {
 	var weapon = global.weapon_types[$ wtype]
 	if object_is_ancestor(spawner.object_index, obj_ship_entity)
 		spawner.reloading = weapon.reload_time
@@ -8,14 +8,18 @@ function shoot(shoot_dir, spawner, wtype) {
 	if variable_struct_exists(weapon, "object")
 		object_bullet = weapon.object
 
-	with(instance_create_layer(x, y, layer, object_bullet)) {
+	with(instance_create_layer(xx, yy, layer, object_bullet)) {
 		self.image_angle = shoot_dir
 		self.sprite_index = weapon.sprite
 		self.spawner = spawner
 		self.side = spawner.side
 		self.weapon = weapon
+		self.sp = weapon.sp
 		self.type = wtype
 		self.life_distance = weapon.distance
+		if object_bullet == obj_bullet_two_phase {
+			self.ph1_distance = weapon.ph1_distance
+		}
 	}
 	var snd = choose(snd_laser1, snd_laser2, snd_laser3, snd_laser4)
 	//audio_play_sound(snd, 0, false)
@@ -39,13 +43,18 @@ global.weapon_types = {
 		damage: 1,
 		mining: 1,
 		reload_time: 20,
-		sp: 7,
+		sp: 14,
 		resource: "empty",														  
 		knock_back_force: 2,
 		sprite: spr_bullet_pulse,
-		distance: 400,
+		distance: 600,
 		resource_amount: 1,
-		player_can_use: false
+		player_can_use: false,
+
+		object: obj_bullet_two_phase,
+		ph2_sp: 7,
+		ph2_img: 1,
+		ph1_distance: 180,
 	},
 	turret_pulse: {
 		damage: 2,
@@ -76,11 +85,11 @@ global.weapon_types = {
 		damage: 1,
 		mining: 1,
 		reload_time: 90,
-		sp: 11,
+		sp: 15,
 		resource: "empty",
 		knock_back_force: 2,
 		sprite: spr_bullet_pulse,
-		distance: 520,
+		distance: 700,
 		resource_amount: 1,
 		player_can_use: false
 	},

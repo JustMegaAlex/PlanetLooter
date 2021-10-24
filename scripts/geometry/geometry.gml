@@ -70,11 +70,13 @@ function Vec2d(xx, yy, is_polar) constructor {
 	set_polar = function(l, dir) {
 		self.X = lengthdir_x(l, dir)
 		self.Y = lengthdir_y(l, dir)
+		return self
 	}
 
 	add_polar = function(l, dir) {
 		self.X += lengthdir_x(l, dir)
 		self.Y += lengthdir_y(l, dir)
+		return self
 	}
 	
 	//add_polar_ = function(l, dir) {
@@ -111,11 +113,13 @@ function Vec2d(xx, yy, is_polar) constructor {
 	approach = function(to, sp) {
 		X = global.approach(X, to.X, sp.X)
 		Y = global.approach(Y, to.Y, sp.Y)
+		return self
 	}
 	
 	absolutize = function() {
 		X = abs(X)
 		Y = abs(Y)
+		return self
 	}
 
 

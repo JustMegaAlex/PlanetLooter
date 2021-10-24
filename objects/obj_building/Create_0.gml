@@ -21,7 +21,7 @@ function place_on_planet() {
 	var side = irandom(4)
 	var r = planet.radius
 	var ps = planet.size
-	while true {
+	repeat 1000 {
 		var side_pos = gridx(irandom(ps - size))
 		image_angle = side * 90
 		var x_factor = lengthdir_x(1, image_angle)
