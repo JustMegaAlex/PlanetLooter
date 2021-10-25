@@ -68,6 +68,7 @@ switch MODE {
 		global.enable_instant_planet_move = false
 		global.enable_change_fps = false
 		global.show_planets_data = false
+		global.player_immortal = true
 	}
 }
 

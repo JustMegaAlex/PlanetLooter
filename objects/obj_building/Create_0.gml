@@ -45,8 +45,6 @@ alarm[0] = 1
 
 size = sprite_get_height(sprite_index) / global.grid_size
 
-ui_object = noone
-
 hp = 20
 side = Sides.neutral
 state = Building.friendly

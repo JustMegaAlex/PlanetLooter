@@ -2,8 +2,7 @@
 reloading--
 
 if target and !reloading and (warmedup >= 1) {
-	var shdir = dir + random(shoot_dir_wiggle) * choose(-1, 1)
-	shoot(shdir, id, use_weapon)
+	shoot(dir, id, use_weapon)
 }
 
 battle_strafe_vec.set(0, 0)	

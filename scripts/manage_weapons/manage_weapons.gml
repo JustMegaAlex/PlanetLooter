@@ -7,6 +7,9 @@ function shoot(shoot_dir, spawner, wtype, xx=x, yy=y) {
 	var object_bullet = obj_bullet
 	if variable_struct_exists(weapon, "object")
 		object_bullet = weapon.object
+	
+	if weapon == global.weapon_types.pulse_snipe
+		test = true
 
 	with(instance_create_layer(xx, yy, layer, object_bullet)) {
 		self.image_angle = shoot_dir
@@ -88,7 +91,7 @@ global.weapon_types = {
 		sp: 15,
 		resource: "empty",
 		knock_back_force: 2,
-		sprite: spr_bullet_pulse,
+		sprite: spr_common_pulse,
 		distance: 700,
 		resource_amount: 1,
 		player_can_use: false
