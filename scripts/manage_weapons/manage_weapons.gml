@@ -47,14 +47,14 @@ global.weapon_types = {
 		resource: "empty",														  
 		knock_back_force: 2,
 		sprite: spr_bullet_pulse,
-		distance: 600,
+		distance: 700,
 		resource_amount: 1,
 		player_can_use: false,
 
 		object: obj_bullet_two_phase,
 		ph2_sp: 7,
 		ph2_img: 1,
-		ph1_distance: 180,
+		ph1_distance: 120,
 	},
 	turret_pulse: {
 		damage: 2,
@@ -63,7 +63,7 @@ global.weapon_types = {
 		sp: 20,
 		resource: "empty",
 		knock_back_force: 2,
-		sprite: spr_bullet_pulse,
+		sprite: spr_common_pulse,
 		distance: 500,
 		resource_amount: 1,
 		player_can_use: false
@@ -76,7 +76,7 @@ global.weapon_types = {
 		resource: "empty",
 		knock_back_force: 2,
 		sprite: spr_bullet_pulse,
-		distance: 520,
+		distance: 0,
 		object: obj_bullet_pulse_spread,
 		resource_amount: 1,
 		player_can_use: false

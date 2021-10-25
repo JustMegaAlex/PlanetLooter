@@ -20,13 +20,13 @@ draw_set_font(fnt)
 global.astar_graph = new AstarGraph()
 
 show_tips = false
-show_tips_xoffset = -300
-tips_text = "WASD to move\nMouse to shoot\nE to interact with buidlings\nF3 to restart\n"
+show_tips_xoffset = -400
+tips_text = "WASD to move\nLeft mouse to shoot\nMouse wheel to switch weapons\n"
+tips_text += "Right mouse to thrust\nE to interact with buidlings\nF3 to restart\n"
 tips_text += "R to repair one hull point (costs 1 repair kit)\n"
 tips_text += "Q to open structure-creation menu\n"
-tips_text += "Hold F to activate cruise mode\n"
 tips_text += "Hold space to warp (costs 5 fuel) \n"
-tips_text += "F11 toggle fullscreen (and make those shiny stars disappear LoL)\n"
+tips_text += "F11 toggle fullscreen (and make those\n                          shiny stars disappear LoL)\n" 
 tips_text += "Compass arrows point to planets\n"
 tips_header = "Press T to show tips"
 

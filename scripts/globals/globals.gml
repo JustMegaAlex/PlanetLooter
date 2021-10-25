@@ -64,12 +64,10 @@ switch MODE {
 		break	
 	}
 	case "custom": {
-		global.player_immortal = true
-		global.enable_instant_planet_move = true
-		global.enable_change_fps = true
-		global.show_ai_patrol_routes = true
-		global.show_alert_tower_stuff = true
-		global.gen_create_enemies = false
+		global.show_alert_tower_stuff = false
+		global.enable_instant_planet_move = false
+		global.enable_change_fps = false
+		global.show_planets_data = false
 	}
 }
 

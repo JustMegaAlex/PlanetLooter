@@ -1,6 +1,4 @@
 
-scr_debug_show_var("velocity_to.x", velocity_to.X)
-scr_debug_show_var("velocity_to.y", velocity_to.Y)
 scr_debug_show_var("hp", string(hp))
 scr_debug_show_var("", "")
 scr_debug_show_var("cargo", string(cargo_load) + "/" + string(cargo))
