@@ -1,12 +1,6 @@
 
 event_inherited()
 
-enum Building {
-	hostile,
-	friendly,
-	unhappy, // slave state
-}
-
 function add_defender(inst) {
 	array_push(defenders, inst)
 }
@@ -47,8 +41,6 @@ size = sprite_get_height(sprite_index) / global.grid_size
 
 hp = 20
 side = Sides.neutral
-state = Building.friendly
-defenders = []
 
 // creation arguments
 planet = noone

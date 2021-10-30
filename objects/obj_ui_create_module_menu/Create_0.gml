@@ -17,3 +17,4 @@ function ModuleCreator(module_type, ui_parent) constructor {
 sprite_index = -1
 
 self.add_item(-1, "productor", new ModuleCreator("productor", id))
+self.add_item(-1, "repair", new ModuleCreator("repair", id))

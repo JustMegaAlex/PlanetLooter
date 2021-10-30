@@ -44,6 +44,19 @@ function Producer(resource, ui_parent) constructor {
 	}
 }
 
+function Repair(ui_parent) constructor {
+	self.repair_cost = {repair_kit: 1}
+	self.ui_parent = ui_parent
+	action = function() {
+		var msg = obj_looter.Resources.exchange("empty", 1, self.repair_cost)
+		if msg != "ok" {
+			self.ui_parent.ui_message(msg, true)
+			return false
+		}
+		obj_looter.hp += 1
+	}
+}
+
 function resource_cost_text(type) {
 	var cost_info = global.resource_types[$ type].cost
 	var text = "produce\n" + type + "\n"
