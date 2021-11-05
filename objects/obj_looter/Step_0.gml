@@ -5,6 +5,7 @@ if not global.game_over {
 	key_up = keyboard_check(ord("W")) or keyboard_check(vk_up)
 	key_down = keyboard_check(ord("S")) or keyboard_check(vk_down)
 	key_interact = keyboard_check_pressed(ord("E"))
+	key_interact_hold = keyboard_check(ord("E"))
 	key_create_module = keyboard_check_pressed(ord("Q"))
 	key_shoot = mouse_check_button(mb_left)
 	key_full_thrust = mouse_check_button(mb_right)
@@ -155,17 +156,22 @@ if key_shoot
 }
 
 //// interacting
-if key_interact {
-	if global.ui_interface_on {
-		instance_destroy(obj_building_ui)
-		global.ui_interface_on = false
-	} else {
-		var building = instance_place(x, y, obj_with_ui)
-		if building
-			building.interface()
+var with_ui = instance_place(x, y, obj_with_ui)
+if !global.ui_interface_on {
+	if with_ui {
+		with_ui.show_prompt()
+		if key_interact {
+			with_ui.UI.on_press_interact()
+		}
+		if key_interact_hold {
+			with_ui.UI.on_hold_interact()	
+		}
+	}
+} else {
+	if key_interact {
+		with_ui.UI.turn_off()
 	}
 }
-
 
 xprev = x
 yprev = y

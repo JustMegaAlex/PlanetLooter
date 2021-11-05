@@ -1,4 +1,5 @@
 
 event_inherited()
 
-ui_object = obj_ui_repair_module
+UI = UI_button_accum
+ui_sprite = spr_ui_filler_indicator

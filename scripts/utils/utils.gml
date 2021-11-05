@@ -303,3 +303,7 @@ function collision_line_width(x0, y0, x1, y1, obj, w) {
 	inst = collision_line(xx2, yy2, xx3, yy3, obj_planet_mask, false, true)
 	return {inst:inst, x1: xx1, x2: xx2, x3:xx3, x0: xx0, y0: yy0, y1: yy1, y2: yy2, y3: yy3}
 }
+
+function make_late_init() {
+	alarm[0] = 1
+}

@@ -1,3 +1,3 @@
 
-if instance_exists(ui_inst)
-	instance_destroy(ui_inst)
+if UI.is_ui_on
+	UI.turn_off()

@@ -1,7 +1,10 @@
 
 event_inherited()
 
+//// ui
+UI = UI_menu
 ui_object = obj_ui_production_module
+
 hp = 20
 side = Sides.ours
 
