@@ -6,3 +6,7 @@ if is_showing_prompt_on and  is_showing_prompt {
 
 if UI
 	UI.draw_event()
+
+if displaying_timer > 0 {
+	draw_text_custom(x, y + text_yoffset, display_text, fnt, fa_center, fa_middle)
+}

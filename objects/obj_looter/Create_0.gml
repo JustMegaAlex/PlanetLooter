@@ -45,10 +45,56 @@ Resources = {
 		return self[$ name] >= amount
 	},
 	
+	has_enough_of_cost: function(cost) {
+		var it = new IterStruct(cost)
+		while it.next() {
+			if !self.has_enough(it.key(), it.value())
+				return "not enough " + it.key()
+		}
+		return "ok"
+	},
+	
+	check_availability: function(info, in_amount, crg, tnk) {
+		var iter = new IterStruct(info)
+		while iter.next() {
+			var _type = iter.key()
+			var _amount = iter.value()
+			var result_cost_amount = _amount * in_amount
+			if self[$ _type] < result_cost_amount
+				return {success: false, msg: "need more\n" + _type}
+			// check loads
+			var out_fuel = (_type == "fuel")
+			crg -= result_cost_amount * !out_fuel
+			tnk -= result_cost_amount * out_fuel
+		}
+		return {crg: crg, tnk: tnk, success: true}
+	},
+	
 	check_overload: function(name, amount) {
 		if name == "fuel"
 			return (id.tank_load + amount) > id.tank
 		return (id.cargo_load + amount) > id.cargo
+	},
+	
+	exchange: function(in, in_amount, cost_info) {
+		var in_fuel = (in == "fuel")
+		var in_empty = (in == "empty")
+		var crg = id.cargo_load + in_amount * !in_fuel * !in_empty
+		var tnk = id.tank_load + in_amount * in_fuel * !in_empty
+		var checked = check_availability(cost_info, in_amount, crg, tnk)
+		if !checked.success
+			return checked.msg
+		// check cargo and tank fullness
+		if checked.crg > id.cargo
+			return "cargo full"
+		if checked.tnk > id.tank
+			return "tank full"
+		// exchange
+		_spend_via_info(cost_info, in_amount)
+		_add(in, in_amount * !in_empty)
+		id.cargo_load = checked.crg
+		id.tank_load = checked.tnk
+		return "ok"
 	},
 
 	try_add: function(name, amount) {
@@ -105,43 +151,6 @@ Resources = {
 		}
 		update_resource_weapon(name, final)
 		return true
-	},
-	
-	exchange: function(in, in_amount, cost_info) {
-		var in_fuel = (in == "fuel")
-		var in_empty = (in == "empty")
-		var crg = id.cargo_load + in_amount * !in_fuel * !in_empty
-		var tnk = id.tank_load + in_amount * in_fuel * !in_empty
-		var checked = check_availability(cost_info, in_amount, crg, tnk)
-		if !checked.success
-			return checked.msg
-		// check cargo and tank fullness
-		if checked.crg > id.cargo
-			return "cargo full"
-		if checked.tnk > id.tank
-			return "tank full"
-		// exchange
-		_spend_via_info(cost_info, in_amount)
-		_add(in, in_amount * !in_empty)
-		id.cargo_load = checked.crg
-		id.tank_load = checked.tnk
-		return "ok"
-	},
-	
-	check_availability: function(info, in_amount, crg, tnk) {
-		var iter = new IterStruct(info)
-		while iter.next() {
-			var _type = iter.key()
-			var _amount = iter.value()
-			var result_cost_amount = _amount * in_amount
-			if self[$ _type] < result_cost_amount
-				return {success: false, msg: "need more\n" + _type}
-			// check loads
-			var out_fuel = (_type == "fuel")
-			crg -= result_cost_amount * !out_fuel
-			tnk -= result_cost_amount * out_fuel
-		}
-		return {crg: crg, tnk: tnk, success: true}
 	},
 
 	_spend_via_info: function(info, multiplier) {

@@ -30,6 +30,7 @@ rtype_bullet_homing = new ResourceType("bullet_homing", 0, {metall:1, drives:1, 
 rtype_drives = new ResourceType("drives", 0, {junk: 1, metall: 3})
 rtype_chip = new ResourceType("chip", 0, {part: 2, metall: 5, junk: 1})
 rtype_repairkit = new ResourceType("repair_kit", 0, {metall: 1, drives: 1})
+raction_repairment = new ResourceType("repairment", 0, {metall: 5})
 
 
 function spawn_resource_item(type, xx, yy, sp, dir) { // sp1, sp2, sp_is_coords) {
