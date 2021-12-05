@@ -1,7 +1,8 @@
 
-function add_item(spr, text, action_struct) {
+function add_item(spr, img, text, action_struct) {
 	var item = instance_create_layer(x, y, layer, obj_ui_item)
 	item.ui_sprite = spr
+	item.ui_sprite_image = img
 	item.text = text
 	item.action_struct = action_struct
 	array_push(items, item)
