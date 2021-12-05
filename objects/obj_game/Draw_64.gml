@@ -7,7 +7,7 @@ var t = tips_text
 if !show_tips
 	t = tips_header
 
-var xx = w - 200 + show_tips * show_tips_xoffset
+var xx = w - 200 + show_tips_xoffset // * show_tips
 draw_text_custom(xx, 20, t, fnt_gui, -1, -1)
 
 if TEST_PATH_FIND
