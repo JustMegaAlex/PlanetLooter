@@ -17,7 +17,7 @@ if global.enable_change_fps {
 		if keyboard_check_pressed(vk_add)
 			room_speed += 20
 		else if keyboard_check_pressed(vk_subtract)
-			room_speed -= 20
+			room_speed = max(1, room_speed - 20)
 		room_speed = clamp(room_speed, 5, 1000)
 	}
 }

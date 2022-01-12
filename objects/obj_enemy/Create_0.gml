@@ -31,14 +31,6 @@ function state_switch_idle() {
 	target = noone
 }
 
-function state_switch_patrol() {
-	state = "patrol"
-	if patrol_point_to {
-	    var p = patrol_point_to
-		state_switch_on_route(p.X, p.Y)
-	}
-}
-
 function state_switch_attack_snipe(trg) {
 	if global.ai_attack_off {
 		return
@@ -243,6 +235,7 @@ patrol_planet_index = 0
 patrol_point_to = noone
 move_route = []
 move_route_point_to = noone
+prev_dist_to_route_point = -1
 iter_move_route = new IterArray([])
 ai_attack_move_sign = 1
 
