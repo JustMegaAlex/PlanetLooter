@@ -57,6 +57,27 @@ function IterArray(_arr) constructor {
 	}
 }
 
+function IterInstances(_obj) constructor {
+	obj = _obj
+	current_value = undefined
+	len = instance_number(obj)
+	i = -1
+	
+	next = function() {
+		i++
+		if i >= len
+			return undefined
+		current_value = instance_find(obj, i)
+		return current_value
+	}
+	
+	get = function() {
+		if i == -1
+			throw "\IterInstances.next() wasn't called after creation of IterArray instance\n"
+		return current_value
+	}
+}
+
 function value_between(val, min_, max_){
 	return (val >= min_) and (val < max_)
 }
