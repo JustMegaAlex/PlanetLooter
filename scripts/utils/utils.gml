@@ -42,6 +42,9 @@ function IterArray(_arr) constructor {
 	len = array_length(arr)
 	i = -1
 	
+	if !is_array(arr)
+		test = true
+	
 	next = function() {
 		i++
 		if i >= len

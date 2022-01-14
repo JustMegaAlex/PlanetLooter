@@ -15,6 +15,7 @@
     {"id":{"name":"obj_ui_use_weapons","path":"objects/obj_ui_use_weapons/obj_ui_use_weapons.yy",},"order":6,},
     {"id":{"name":"obj_gui_toggle_button","path":"objects/obj_gui_toggle_button/obj_gui_toggle_button.yy",},"order":5,},
     {"id":{"name":"spr_common_pulse","path":"sprites/spr_common_pulse/spr_common_pulse.yy",},"order":7,},
+    {"id":{"name":"planets_api","path":"scripts/planets_api/planets_api.yy",},"order":15,},
     {"id":{"name":"obj_solid","path":"objects/obj_solid/obj_solid.yy",},"order":5,},
     {"id":{"name":"obj_alert_tower","path":"objects/obj_alert_tower/obj_alert_tower.yy",},"order":5,},
     {"id":{"name":"rm_start","path":"rooms/rm_start/rm_start.yy",},"order":3,},

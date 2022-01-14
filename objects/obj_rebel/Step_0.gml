@@ -14,8 +14,10 @@ switch state {
 			state_switch_attack(obj_looter, true)
 			break
 		}
+		if array_length(move_route)
+			state_switch_on_route(move_route)
 		if point_dist(xst, yst) > start_area_radius {
-			state_switch_on_route(xst, yst)
+			ai_travel_to_point(xst, yst)
 		}
 		break
 	}

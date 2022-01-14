@@ -7,3 +7,8 @@ if find_path_failed_point {
 	var c = c_red
 	draw_line_width_color(x, y, find_path_failed_point.X, find_path_failed_point.Y, 10, c, c)
 }
+
+if harvest_point {
+	var c = c_green
+	draw_line_width_color(x, y, harvest_point.X, harvest_point.Y, 3, c, c)
+}

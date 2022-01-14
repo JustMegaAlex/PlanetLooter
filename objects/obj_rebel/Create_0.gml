@@ -21,14 +21,6 @@ function state_switch_idle() {
 	target = noone
 }
 
-function state_switch_patrol() {
-	state = "patrol"
-	if patrol_point_to {
-	    var p = patrol_point_to
-		state_switch_on_route(p.X, p.Y)
-	}
-}
-
 function state_switch_attack_snipe(trg) {
 	if global.ai_attack_off {
 		return
@@ -65,7 +57,12 @@ function state_switch_return() {
 	state = "return"
 }
 
-function state_switch_on_route(xx, yy) {
+function state_switch_on_route(route) {
+	state = "on_route"
+	set_move_route(route)
+}
+
+function ai_travel_to_point(xx, yy) {
 	if move_to_set_coords(xx, yy) {
 		state = "on_route"
 		return true
@@ -181,6 +178,46 @@ function astar_failed() {
 	)
 }
 
+function find_harvesting_block() {
+	it = new IterInstances(obj_planet)
+	var block = noone
+	while it.next() != undefined {
+		var planet = it.get()
+		block = get_resource_block_most_close_to_surface(planet)
+		if block == noone
+			continue
+		var block_depth_i = block.i
+		var block_depth_j = block.j
+		var i_side = -1
+		var j_side = -1
+		if block.i > (planet.size - block.i) {
+			i_side = 1
+			block_depth_i = planet.size - block.i
+		}
+		if block.j > (planet.size - block.j) {
+			j_side = 1
+			block_depth_j = planet.size - block.j
+		}
+		
+		var nearest_point_to_block = new Vec2d(block.x + (block_depth_i + 2) * i_side * global.grid_size, block.y)
+		if block_depth_i > block_depth_j {
+			var nearest_point_to_block = new Vec2d(block.x, block.y + (block_depth_j + 2) * j_side * global.grid_size)
+		}
+		
+		harvest_point = nearest_point_to_block
+		
+		move_route = global.astar_graph.find_path(position, nearest_point_to_block)
+		// fail
+		if move_route == global.AstarPathFindFailed {
+			self.astar_failed()
+			return noone
+		}
+		set_move_route(move_route)
+	}
+	block.visible = true
+	return block
+}
+
 //// behavior
 state = "idle"
 move_route = []
@@ -190,6 +227,8 @@ ai_attack_move_sign = 1
 
 find_path_failed_point = noone
 
+harvesting_block = noone
+harvest_point = undefined
 
 is_moving_object = true
 sp.normal = 2.5
@@ -241,3 +280,4 @@ side = Sides.theirs
 use_weapon = "pulse"
 
 assign_creation_arguments()
+make_late_init()
