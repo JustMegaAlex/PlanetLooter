@@ -66,9 +66,7 @@ switch MODE {
 	case "custom": {
 		global.show_alert_tower_stuff = false
 		global.enable_instant_planet_move = false
-		global.show_planets_data = false+
 		global.player_immortal = true
-		global.show_planets_data = true
 		global.show_ai_patrol_routes = true
 		
 		global.gen_spawn_is_patrol_chance = 1

@@ -5,16 +5,10 @@ if target and !reloading and (warmedup >= 1) {
 	shoot(dir, id, use_weapon)
 }
 
-battle_strafe_vec.set(0, 0)	
-
 dist_to_player = inst_dist(obj_looter)
 
 switch state {
 	case "idle": {
-		if is_patrol {
-			state_switch_patrol()
-			break
-		}
 		if dist_to_player < detection_dist {
 			warmedup = 1
 			state_switch_attack(obj_looter, true)
@@ -34,21 +28,6 @@ switch state {
 		}
 		break
 	}
-
-    case "attack_snipe": {
-        compute_strafe_vec()
-        set_dir_to(inst_dir(target))
-		if dist_to_player < attack_snipe_min_dist
-			ai_attack_move_sign = -1
-        else if dist_to_player > attack_snipe_max_dist 
-            ai_attack_move_sign = 1
-        else
-            ai_attack_move_sign = 0
-		if dist_to_player > loose_dist
-			state_switch_idle()
-		self.set_sp_to(sp.normal * ai_attack_move_sign, dir)
-		break
-    }
 
 	case "attack": {
         compute_strafe_vec()
@@ -86,19 +65,6 @@ switch state {
 			state_switch_attack(obj_looter, true)
 			break
 		}
-		break
-	}
-
-	case "patrol": {
-		if not move_route_point_to
-			patrol_update_move_to()
-		var p = move_route_point_to
-		set_dir_to(point_dir(p.X, p.Y))
-		self.set_sp_to(sp.normal, dir)
-		if point_dist(p.X, p.Y) < sp.normal
-			patrol_update_move_to()
-		if dist_to_player < detection_dist
-			state_switch_attack(obj_looter, true)
 		break
 	}
 

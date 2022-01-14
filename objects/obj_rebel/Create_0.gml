@@ -2,14 +2,6 @@
 
 event_inherited()
 
-enum Enemy {
-	idle,
-	wander,
-	enclose,
-	distantiate,
-	search,
-}
-
 function set_hit(weapon) {
 	if !global.no_damage
 		hp -= weapon.damage
