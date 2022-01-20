@@ -40,6 +40,7 @@ global.gen_min_planet_number = 6
 global.gen_max_planet_number = 8
 global.gen_spawn_is_patrol_chance = 0.45
 global.gen_spawn_turret_chance = 0.5
+global.gen_setup_mobs_override = undefined
 global.start_resources_amount = 0
 global.start_cargo_space = 100
 global.view_to_window_ratio = 0.6
@@ -72,6 +73,7 @@ switch MODE {
 		
 		global.gen_spawn_is_patrol_chance = 1
 		global.gen_spawn_turret_chance = 0
+		global.gen_setup_mobs_override = {ships_distr: [1], forposts: 0, alert_towers: 2}
 	}
 }
 
