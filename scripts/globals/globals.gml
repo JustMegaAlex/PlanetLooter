@@ -40,7 +40,8 @@ global.gen_max_planet_dist = 1000
 global.gen_min_planet_number = 6
 global.gen_max_planet_number = 8
 global.gen_spawn_is_patrol_chance = 0.45
-global.gen_spawn_turret_chance = 0.5
+//global.gen_spawn_turret_chance = 0.5
+global.gen_spawn_forpost_turret_fract = 0.5
 global.gen_setup_mobs_override = undefined
 global.start_resources_amount = 0
 global.start_cargo_space = 100
@@ -70,7 +71,7 @@ switch MODE {
 		global.enable_instant_planet_move = false
 		global.player_immortal = true
 		global.enemy_attack_formation_snipers_fract = 0
-		//global.show_ai_patrol_routes = true
+		global.show_ai_patrol_routes = true
 		//global.ai_attack_off = true
 	
 		//global.gen_spawn_is_patrol_chance = 1
