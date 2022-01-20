@@ -32,6 +32,7 @@ global.show_path_finding_graph = false
 // settings
 global.ai_max_partol_route_length = 4
 global.path_finding_graph_collison_line_width = 30
+global.enemy_attack_formation_snipers_fract = 0.5
 global.gen_create_enemies = true
 global.gen_planet_min_size = 10
 global.gen_planet_max_size = 15
@@ -68,12 +69,13 @@ switch MODE {
 		global.show_alert_tower_stuff = false
 		global.enable_instant_planet_move = false
 		global.player_immortal = true
-		global.show_ai_patrol_routes = true
-		global.ai_attack_off = true
-		
-		global.gen_spawn_is_patrol_chance = 1
+		global.enemy_attack_formation_snipers_fract = 0
+		//global.show_ai_patrol_routes = true
+		//global.ai_attack_off = true
+	
+		//global.gen_spawn_is_patrol_chance = 1
 		global.gen_spawn_turret_chance = 0
-		global.gen_setup_mobs_override = {ships_distr: [1], forposts: 0, alert_towers: 2}
+		global.gen_setup_mobs_override = {ships_distr: [0], forposts: 0, alert_towers: 2}
 	}
 }
 

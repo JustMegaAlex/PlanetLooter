@@ -291,3 +291,6 @@ update_weapon_arr()
 
 // create module ui
 create_module_ui_inst = noone
+
+// ui interacting
+current_ui_source = noone

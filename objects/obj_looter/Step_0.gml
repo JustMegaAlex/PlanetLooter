@@ -159,6 +159,7 @@ if key_shoot
 var with_ui = instance_place(x, y, obj_with_ui)
 if !global.ui_interface_on {
 	if with_ui {
+		current_ui_source = with_ui
 		with_ui.show_prompt()
 		if key_interact {
 			with_ui.UI.on_press_interact()
@@ -168,8 +169,8 @@ if !global.ui_interface_on {
 		}
 	}
 } else {
-	if key_interact {
-		with_ui.UI.turn_off()
+	if key_interact and current_ui_source != noone {
+		current_ui_source.UI.turn_off()
 	}
 }
 
