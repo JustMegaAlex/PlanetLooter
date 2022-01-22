@@ -69,11 +69,15 @@ function resource_cost_text(type) {
 	return text
 }
 
+function check_destroy_on_parent_far_away() {
+	if point_distance(parent.x, parent.y, obj_looter.x, obj_looter.y) > disconnect_dist
+		instance_destroy()
+}
+
 items = []
 items_number = 0
 ui_radius = 150
 ui_angle_step = 60
-sprite_index = spr_building_ui
 image_speed = 0
 display_text = ""
 mouse_over = noone

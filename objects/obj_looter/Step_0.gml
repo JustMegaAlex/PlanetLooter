@@ -56,13 +56,13 @@ if key_repair
 	try_repair()
 
 // create module ui
-if key_create_module and !global.ui_interface_on {
+if key_create_module {
 	if create_module_ui_inst {
 		instance_destroy(create_module_ui_inst)
 		global.ui_interface_on = false
 	}
 	else {
-		create_module_ui_inst = instance_create_layer(x, y, layer, obj_ui_create_module_menu)
+		create_module_ui_inst = instance_create_layer(x, y, "ui", obj_ui_create_module_menu)
 		create_module_ui_inst.parent = id
 		global.ui_interface_on = true
 	}
@@ -95,9 +95,6 @@ if warping {
 
 if (not --fuel_producer_pause) 
 		and (tank_load < fuel_producer_treshold) {
-	//var cost_info = global.resource_types.fuel.cost
-	//self.Resources.exchange("fuel", fuel_producer_ratio, cost_info)
-	//self.Resources.exchange("fuel", fuel_producer_ratio, {})
 	Resources.try_add("fuel", fuel_producer_ratio)
 }
 
@@ -111,7 +108,7 @@ input_h = key_right - key_left
 input_v = key_down - key_up
 move_h = key_right * right_free - key_left * left_free
 move_v = key_down * down_free - key_up * up_free
-var input = (abs(move_h) or abs(move_v)) * !create_module_ui_inst
+var input = (abs(move_h) or abs(move_v)) // * !create_module_ui_inst
 
 // cruise mode
 if in_cruise_mode >= 1 {

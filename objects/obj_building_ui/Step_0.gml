@@ -20,5 +20,4 @@ if mouse_check_button_pressed(mb_left) {
 	}
 }
 
-if point_distance(parent.x, parent.y, obj_looter.x, obj_looter.y) > disconnect_dist
-	instance_destroy()
+check_destroy_on_parent_far_away()

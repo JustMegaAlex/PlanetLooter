@@ -1,5 +1,8 @@
 {
-  "spriteId": null,
+  "spriteId": {
+    "name": "spr_building_ui_transp",
+    "path": "sprites/spr_building_ui_transp/spr_building_ui_transp.yy",
+  },
   "solid": false,
   "visible": true,
   "spriteMaskId": null,
