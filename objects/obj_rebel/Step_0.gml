@@ -77,7 +77,29 @@ switch state {
 	}
 	
 	case "mining": {
-		
+		if !instance_exists(mining_block) {
+			mining_block = find_mining_block()
+			target = mining_block
+			if mining_block == noone {
+				state_switch_idle()
+				break
+			}
+			// check collision line excluding mining_block
+			var xx = mining_block.x
+			var yy = mining_block.y
+			var line = new Line(x, y, xx, yy)
+			var len = line.len()
+			line.mult((len + 50)/len)
+			inst_set_pos(mining_block, line.xend, line.yend)
+			if collision_line(x, y, xx, yy, obj_block, false, false) {
+				state_switch_on_route(move_route)
+				target = noone
+			}
+			inst_set_pos(mining_block, xx, yy)
+			break
+		}
+		var p = get_instance_center(mining_block)
+		set_dir_to(point_dir(p.X, p.Y))
 		break
 	}
 }

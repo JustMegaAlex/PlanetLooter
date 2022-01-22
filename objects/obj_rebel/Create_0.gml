@@ -64,9 +64,9 @@ function state_switch_on_route(route) {
 
 function state_switch_mining() {
 	var d = global.grid_size * 0.5
-	set_dir_to(point_dir(mining_block.x + d, mining_block.y + d))
 	self.set_sp_to(0, 0)
 	target = mining_block
+	state = "mining"
 }
 
 function ai_travel_to_point(xx, yy) {
@@ -220,7 +220,8 @@ function find_mining_block() {
 		}
 		set_move_route(move_route)
 	}
-	block.visible = true
+	if block != noone
+		block.visible = true
 	return block
 }
 
