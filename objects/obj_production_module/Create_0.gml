@@ -21,7 +21,8 @@ function production_deqeue() {
 
 function start_producing(res_name) {
 	production_current_resource = res_name
-	production_time_left = global.resource_types[$ res_name].production_time
+	production_time_total = global.resource_types[$ res_name].production_time
+	production_time_left = production_time_total
 }
 
 function do_production() {
@@ -40,6 +41,7 @@ function do_production() {
 // in - last element
 production_qeue = []
 production_time_left = 0
+production_time_total = 0
 production_current_resource = noone
 spawn_resource_sp = 0.4
 #endregion

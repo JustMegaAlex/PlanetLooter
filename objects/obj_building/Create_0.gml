@@ -63,6 +63,7 @@ function place_on_planet_close_to(close_to) {
 
 visible = false
 alarm[0] = 1
+image_speed = 0
 
 size = sprite_get_height(sprite_index) / global.grid_size
 
