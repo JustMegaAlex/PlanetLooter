@@ -70,13 +70,18 @@ switch MODE {
 		global.show_alert_tower_stuff = false
 		global.enable_instant_planet_move = false
 		global.player_immortal = true
-		global.enemy_attack_formation_snipers_fract = 0
-		global.show_ai_patrol_routes = true
+		global.enemy_attack_formation_snipers_fract = 0.5
+		//global.show_ai_patrol_routes = true
 		//global.ai_attack_off = true
-	
-		//global.gen_spawn_is_patrol_chance = 1
+
+		//global.ai_max_partol_route_length = 10
+		global.gen_min_planet_number = 1
+		global.gen_max_planet_number = 1
+
+		global.gen_spawn_is_patrol_chance = 0
 		global.gen_spawn_turret_chance = 0
-		global.gen_setup_mobs_override = {ships_distr: [0], forposts: 0, alert_towers: 2}
+		global.gen_spawn_forpost_turret_fract = 1
+		global.gen_setup_mobs_override = {ships_distr: [0], forposts: [2]}
 	}
 }
 

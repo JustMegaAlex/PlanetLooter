@@ -88,10 +88,10 @@ global.weapon_types = {
 		damage: 1,
 		mining: 1,
 		reload_time: 90,
-		sp: 15,
+		sp: 22,
 		resource: "empty",
 		knock_back_force: 2,
-		sprite: spr_common_pulse,
+		sprite: spr_snipe_pulse,
 		distance: 700,
 		resource_amount: 1,
 		player_can_use: false

@@ -58,7 +58,7 @@ function place_on_planet_close_to(close_to) {
 	}
 	x = chosen_plc.X
 	y = chosen_plc.Y
-	image_angle = plc.angle
+	image_angle = chosen_plc.angle
 }
 
 visible = false

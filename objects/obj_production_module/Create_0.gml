@@ -29,7 +29,7 @@ function do_production() {
 		--production_time_left
 		if production_time_left <= 0 {
 			spawn_resource_item(production_current_resource,
-								x, y, spawn_resource_sp, 0)
+								x, y, spawn_resource_sp, random(360))
 		}
 	} else if array_length(production_qeue) {
 		var res_name = production_deqeue()
@@ -41,5 +41,5 @@ function do_production() {
 production_qeue = []
 production_time_left = 0
 production_current_resource = noone
-spawn_resource_sp = 0.3
+spawn_resource_sp = 0.4
 #endregion

@@ -108,9 +108,7 @@ function path_blocked(xx, yy) {
 }
 
 function patrol_update_route() {
-	var next_planet = patrol_get_next_planet()
-	var points = planet_get_route_points(next_planet)
-	patrol_point_to = array_choose(points)
+	patrol_point_to = patrol_get_next_point()
 	if !path_blocked(patrol_point_to.X, patrol_point_to.Y) {
 		set_move_route([patrol_point_to])
 		return true
@@ -140,11 +138,11 @@ function patrol_update_move_to() {
 
 function patrol_set_next_point() {
 	patrol_point_to = noone
-	var _prev_index = patrol_planet_index
-	var next_planet = patrol_get_next_planet()
-	if patrol_try_set_planet(next_planet)
+	var _prev_index = patrol_point_index
+	var next_planet = patrol_get_next_point()
+	if patrol_try_set_point(next_planet)
 		return true
-	patrol_planet_index = _prev_index
+	patrol_point_index = _prev_index
 	patrol_set_next_local_point()
 	if patrol_point_to
 		return true

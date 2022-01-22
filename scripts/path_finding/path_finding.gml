@@ -209,7 +209,7 @@ function AstarGraph() constructor {
 		return path
 	}
 
-	draw_graph = function(col) {
+	draw_graph = function(col=c_blue) {
 		var iter = new IterStruct(self.graph)
 		while iter.next() != undefined {
 			var node = iter.value()
