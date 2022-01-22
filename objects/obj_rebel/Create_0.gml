@@ -62,6 +62,13 @@ function state_switch_on_route(route) {
 	set_move_route(route)
 }
 
+function state_switch_mining() {
+	var d = global.grid_size * 0.5
+	set_dir_to(point_dir(mining_block.x + d, mining_block.y + d))
+	self.set_sp_to(0, 0)
+	target = mining_block
+}
+
 function ai_travel_to_point(xx, yy) {
 	if move_to_set_coords(xx, yy) {
 		state = "on_route"
@@ -176,9 +183,10 @@ function astar_failed() {
 	)
 }
 
-function find_harvesting_block() {
+function find_mining_block() {
 	it = new IterInstances(obj_planet)
 	var block = noone
+	var block_extra_dist = global.ai_rebel_block_extra_dist
 	while it.next() != undefined {
 		var planet = it.get()
 		block = get_resource_block_most_close_to_surface(planet)
@@ -197,9 +205,9 @@ function find_harvesting_block() {
 			block_depth_j = planet.size - block.j
 		}
 		
-		var nearest_point_to_block = new Vec2d(block.x + (block_depth_i + 2) * i_side * global.grid_size, block.y)
+		var nearest_point_to_block = new Vec2d(block.x + (block_depth_i + 2 + block_extra_dist) * i_side * global.grid_size, block.y)
 		if block_depth_i > block_depth_j {
-			var nearest_point_to_block = new Vec2d(block.x, block.y + (block_depth_j + 2) * j_side * global.grid_size)
+			var nearest_point_to_block = new Vec2d(block.x, block.y + (block_depth_j + 2 + block_extra_dist) * j_side * global.grid_size)
 		}
 		
 		harvest_point = nearest_point_to_block
@@ -219,13 +227,13 @@ function find_harvesting_block() {
 //// behavior
 state = "idle"
 move_route = []
-move_route_point_to = noone
+move_route_point_to = undefined
 iter_move_route = new IterArray([])
 ai_attack_move_sign = 1
 
 find_path_failed_point = noone
 
-harvesting_block = noone
+mining_block = noone
 harvest_point = undefined
 
 is_moving_object = true

@@ -1,2 +1,2 @@
 
-harvesting_block = find_harvesting_block()
+mining_block = find_mining_block()

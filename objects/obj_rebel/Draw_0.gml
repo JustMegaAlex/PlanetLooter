@@ -1,6 +1,6 @@
 
 draw_sprite_ext(sprite_index, image_index, x, y, 1, 1, dir, c_white, 1)
-//draw_text_above_me(state)
+draw_text_above_me(string(array_length(move_route)) + " " + string(move_route_point_to))
 //geom_draw_multiline(move_route, 5, c_navy)
 
 if find_path_failed_point {

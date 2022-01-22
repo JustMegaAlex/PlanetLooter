@@ -31,6 +31,7 @@ global.show_path_finding_graph = false
 
 // settings
 global.ai_max_partol_route_length = 4
+global.ai_rebel_block_extra_dist = 2
 global.path_finding_graph_collison_line_width = 30
 global.enemy_attack_formation_snipers_fract = 0.5
 global.gen_create_enemies = true
@@ -40,7 +41,6 @@ global.gen_max_planet_dist = 1000
 global.gen_min_planet_number = 6
 global.gen_max_planet_number = 8
 global.gen_spawn_is_patrol_chance = 0.45
-//global.gen_spawn_turret_chance = 0.5
 global.gen_spawn_forpost_turret_fract = 0.5
 global.gen_setup_mobs_override = undefined
 global.start_resources_amount = 0
@@ -81,7 +81,7 @@ switch MODE {
 		global.gen_spawn_is_patrol_chance = 0
 		global.gen_spawn_turret_chance = 0
 		global.gen_spawn_forpost_turret_fract = 1
-		global.gen_setup_mobs_override = {ships_distr: [0], forposts: [2]}
+		global.gen_setup_mobs_override = {ships_distr: [0], forposts: [0]}
 		
 		global.start_resources_amount = 10
 		global.start_cargo_space = 200

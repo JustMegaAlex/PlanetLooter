@@ -1,7 +1,7 @@
 
 reloading--
 
-if target and !reloading and (warmedup >= 1) {
+if target and !reloading {
 	shoot(dir, id, use_weapon)
 }
 
@@ -9,11 +9,6 @@ dist_to_player = inst_dist(obj_looter)
 
 switch state {
 	case "idle": {
-		if dist_to_player < detection_dist {
-			warmedup = 1
-			state_switch_attack(obj_looter, true)
-			break
-		}
 		if array_length(move_route)
 			state_switch_on_route(move_route)
 		if point_dist(xst, yst) > start_area_radius {
@@ -48,10 +43,6 @@ switch state {
 
 	case "search": {
 		self.set_sp_to(sp.normal, dir)
-		if dist_to_player < detection_dist_search {
-			state_switch_attack(obj_looter, true)
-			break
-		}
 		if not --searching {
 			state_switch_idle()
 		}
@@ -63,16 +54,15 @@ switch state {
 		self.set_sp_to(sp.normal, dir)
 		if point_dist(xst, yst) < start_area_radius
 			state_switch_idle()
-		if dist_to_player < detection_dist {
-			state_switch_attack(obj_looter, true)
-			break
-		}
 		break
 	}
 
 	case "on_route": {
-		if not move_route_point_to
-			update_route()
+		if move_route_point_to == undefined
+				and update_route() == undefined {
+			state_switch_mining()
+			break
+		}
 		var p = move_route_point_to
 		if p == undefined {
 			state_switch_idle()
@@ -83,8 +73,11 @@ switch state {
 		self.set_sp_to(sp.normal, dir)
 		if point_dist(p.X, p.Y) < sp.normal
 			update_route()
-		if dist_to_player < detection_dist
-			state_switch_attack(obj_looter, true)
+		break
+	}
+	
+	case "mining": {
+		
 		break
 	}
 }
