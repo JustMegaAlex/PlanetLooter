@@ -234,6 +234,12 @@ function point_dir(xx, yy) {
 	return point_direction(id.x, id.y, xx, yy)
 }
 
+function get_instance_center(inst) {
+	var w = sprite_get_width(inst.sprite_index)
+	var h = sprite_get_height(inst.sprite_index)
+	return new Vec2d(inst.x + w * 0.5, inst.y + h * 0.5)
+}
+
 function struct_sum(struct) {
 	var names = variable_struct_get_names(struct)
 	var res = 0
@@ -330,4 +336,9 @@ function collision_line_width(x0, y0, x1, y1, obj, w) {
 
 function make_late_init() {
 	alarm[0] = 1
+}
+
+function inst_set_pos(inst, xx, yy) {
+	inst.x = xx
+	inst.y = yy
 }
