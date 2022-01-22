@@ -165,6 +165,10 @@ function Line(_xst, _yst, _xend, _yend) constructor {
 		var yy = yst + (yend - yst) * m
 		return new Vec2d(xx, yy)
 	}
+	
+	static len = function() {
+		return point_distance(xst, yst, xend, yend)
+	}
 }
 
 function line_intersection(l1, l2, segment) {
