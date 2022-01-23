@@ -78,28 +78,39 @@ switch state {
 	
 	case "mining": {
 		if !instance_exists(mining_block) {
-			mining_block = find_mining_block()
-			target = mining_block
-			if mining_block == noone {
-				state_switch_idle()
-				break
-			}
-			// check collision line excluding mining_block
-			var xx = mining_block.x
-			var yy = mining_block.y
-			var line = new Line(x, y, xx, yy)
-			var len = line.len()
-			line.mult((len + 50)/len)
-			inst_set_pos(mining_block, line.xend, line.yend)
-			if collision_line(x, y, xx, yy, obj_block, false, false) {
-				state_switch_on_route(move_route)
-				target = noone
-			}
-			inst_set_pos(mining_block, xx, yy)
+			get_collectibles_around_me()
+			target = noone
+			state_switch_collect()
 			break
 		}
 		var p = get_instance_center(mining_block)
 		set_dir_to(point_dir(p.X, p.Y))
+		break
+	}
+	
+	case "collect": {
+		var list = collectibles_around_me
+		current_collectible = list[| 0]
+		if current_collectible == undefined {
+			ai_start_mining_or_idle()
+			break
+		}
+		var _exit = false
+		while !instance_exists(current_collectible) {
+			ds_list_delete(list, 0)
+			if ds_list_size(list) == 0 {
+				ai_start_mining_or_idle()
+				_exit = true
+				break
+			}
+			current_collectible = list[| 0]
+		}
+		if _exit
+			break
+		set_dir_to(inst_dir(current_collectible))
+		self.set_sp_to(sp.normal * 0.25, dir)
+		if inst_dist(current_collectible) < current_collectible.pull_dist
+			self.set_sp_to(0, 0)
 		break
 	}
 }

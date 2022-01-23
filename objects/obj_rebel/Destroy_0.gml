@@ -1,4 +1,6 @@
 
+event_inherited()
+
 obj_effects.create_ship_explosion(id)
 var chnc = random(1)
 if chnc > 0.85

@@ -1,7 +1,14 @@
 
 event_inherited()
 
-function add_resource(name, amount) {}
+function add_resource(name, amount) { return true }
+
+function get_collectibles_around_me() {
+	ds_list_clear(collectibles_around_me)
+	collision_circle_list(x, y, global.ai_mobs_look_for_collectibles_radius,
+						  obj_collectable, false, false, collectibles_around_me, true)
+	return collectibles_around_me
+}
 
 function set_sp_to(sp, dir) {
 	hsp_to = lengthdir_x(sp, dir)
@@ -36,6 +43,8 @@ acceleration = new Vec2d(0.5, 0.5)
 deceleration = new Vec2d(0.2, 0.2)
 is_moving_object = true
 is_collecting_things = true
+collectibles_around_me = ds_list_create()
+current_collectible = noone
 hsp = 0
 vsp = 0
 hsp_to = 0

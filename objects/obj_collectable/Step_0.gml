@@ -13,7 +13,7 @@ for (var i = 0; i < ds_list_size(collectors); ++i) {
 
 if nearest != noone {
 	var dist = point_distance(x, y, nearest.x, nearest.y)
-	if dist < min_dist {
+	if dist < sp {
 		if nearest.add_resource(resource_type, 1) {
 			audio_play_sound(snd_pick, 0, false)
 			instance_destroy()

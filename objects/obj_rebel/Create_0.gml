@@ -14,6 +14,16 @@ function set_hit(attacker, weapon) {
 	}
 }
 
+function get_collectibles_around_me() {
+	ds_list_clear(collectibles_around_me)
+	if mining_block_pos != undefined {
+		collision_circle_list(mining_block_pos.X, mining_block_pos.Y,
+							  global.ai_mobs_look_for_collectibles_radius,
+							  obj_collectable, false, false, collectibles_around_me, true)
+	}
+	return collectibles_around_me
+}
+
 #region ai states
 function state_switch_idle() {
 	state = "idle"
@@ -69,12 +79,41 @@ function state_switch_mining() {
 	state = "mining"
 }
 
+function state_switch_collect() {
+	state = "collect"
+}
+
 function ai_travel_to_point(xx, yy) {
 	if move_to_set_coords(xx, yy) {
 		state = "on_route"
 		return true
 	}
 	return false
+}
+
+function ai_start_mining_or_idle() {
+	mining_block = find_mining_block()
+	target = mining_block
+	if mining_block == noone {
+		state_switch_idle()
+		return true
+	}
+	// check collision line excluding mining_block
+	var xx = mining_block.x
+	var yy = mining_block.y
+	var line = new Line(x, y, xx, yy)
+	var len = line.len()
+	line.mult((len + 50)/len)
+	inst_set_pos(mining_block, line.xend, line.yend)
+	var collision = collision_line(x, y, xx, yy, obj_block, false, false)
+	inst_set_pos(mining_block, xx, yy)
+	if collision {
+		state_switch_on_route(move_route)
+		target = noone
+		return true
+	}
+	state_switch_mining()
+	return true
 }
 #endregion
 
@@ -111,7 +150,7 @@ function set_move_route(route) {
 
 function path_blocked(xx, yy) {
 	return collision_line_width(x, y, xx, yy,
-						obj_planet_mask, 12)
+						obj_planet_mask, 16)
 }
 
 function patrol_update_route() {
@@ -220,8 +259,10 @@ function find_mining_block() {
 		}
 		set_move_route(move_route)
 	}
-	if block != noone
+	if block != noone {
 		block.visible = true
+		mining_block_pos = new Vec2d(block.x, block.y)
+	}
 	return block
 }
 
@@ -235,6 +276,7 @@ ai_attack_move_sign = 1
 find_path_failed_point = noone
 
 mining_block = noone
+mining_block_pos = undefined
 harvest_point = undefined
 
 is_moving_object = true
