@@ -13,3 +13,4 @@ min_dist = 8
 image_speed = 0
 inertial_moving = true
 resource_type = "empty"
+collectors = ds_list_create()

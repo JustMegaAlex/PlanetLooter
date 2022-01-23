@@ -4,7 +4,7 @@ patrol_route = []
 
 event_inherited()
 
-function set_hit(weapon) {
+function set_hit(attacker, weapon) {
 	if !global.no_damage
 		hp -= weapon.damage
     var trigger_friends = array_find(["attack", "attack_snipe"], state) == -1
@@ -225,6 +225,7 @@ find_path_failed_point = noone
 // arg: patrol_route = []
 
 is_moving_object = true
+is_collecting_things = false
 sp.normal = 2.5
 position = new Vec2d(x, y)
 hsp = 0

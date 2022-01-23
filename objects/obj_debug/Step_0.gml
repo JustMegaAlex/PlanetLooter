@@ -13,7 +13,7 @@ if global.enable_instant_planet_move {
 }
 
 if global.enable_change_fps {
-	if keyboard_check(vk_rshift) {
+	if keyboard_check(vk_lshift) {
 		if keyboard_check_pressed(vk_add)
 			room_speed += 20
 		else if keyboard_check_pressed(vk_subtract)

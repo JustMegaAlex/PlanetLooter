@@ -21,23 +21,23 @@ function Vec2d(xx, yy, is_polar) constructor {
 	add_coords_ = function(xx, yy) {
 		return new Vec2d(self.X + xx, self.Y + yy)
 	}
-	
+
 	add = function(vec) {
 		self.X += vec.X
 		self.Y += vec.Y
 		return self
 	}
-	
+
 	add_ = function(vec) {
 		return new Vec2d(self.X + vec.X, self.Y + vec.Y)
 	}
-	
+
 	sub = function(vec) {
 		self.X -= vec.X
 		self.Y -= vec.Y
 		return self
 	}
-	
+
 	sub_ = function(vec) {
 		return new Vec2d(self.X - vec.X, self.Y - vec.Y)
 	}

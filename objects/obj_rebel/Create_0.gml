@@ -2,7 +2,7 @@
 
 event_inherited()
 
-function set_hit(weapon) {
+function set_hit(attacker, weapon) {
 	if !global.no_damage
 		hp -= weapon.damage
     var trigger_friends = array_find(["attack", "attack_snipe"], state) == -1

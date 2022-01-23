@@ -17,7 +17,7 @@ function bring_damage() {
 			inst.hsp += lengthdir_x(knock_back_force, image_angle)
 			inst.vsp += lengthdir_y(knock_back_force, image_angle)
 		}
-		inst.set_hit(weapon)
+		inst.set_hit(spawner, weapon)
 		instance_destroy()
 	}
 }

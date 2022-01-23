@@ -8,7 +8,7 @@ function set_resource_data(rdata) {
 }
 
 
-function set_hit(weapon) {
+function set_hit(attacker, weapon) {
 	hp -= weapon.mining
 	if resource_data.amount {
 		resource_fract_amount = resource_start_amount * hp / hp_start

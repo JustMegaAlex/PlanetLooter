@@ -31,7 +31,7 @@ global.show_path_finding_graph = false
 
 // settings
 global.ai_max_partol_route_length = 4
-global.ai_rebel_block_extra_dist = 2
+global.ai_rebel_block_extra_dist = 1
 global.path_finding_graph_collison_line_width = 30
 global.enemy_attack_formation_snipers_fract = 0.5
 global.gen_create_enemies = true

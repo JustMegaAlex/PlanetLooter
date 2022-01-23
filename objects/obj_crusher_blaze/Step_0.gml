@@ -35,7 +35,7 @@ switch phase {
 		if timer < (phase1_time / 2) {
 			var hitted = instance_place(x, y, obj_ship_entity)
 			if hitted {
-				hitted.set_hit(self.weapon)
+				hitted.set_hit(obj_looter, self.weapon)
 				obj_effects.explosion(x, y)
 			}
 		}

@@ -8,7 +8,7 @@ function set_resource_data(rdata) {
 }
 
 
-function set_hit(weapon) {
+function set_hit(attacker, weapon) {
 	hp -= weapon.mining
 	if resource_data.amount {
 		resource_fract_amount = resource_start_amount * hp / hp_start
@@ -16,8 +16,8 @@ function set_hit(weapon) {
 		if _amount < resource_data.amount {
 			var spawn_amount = resource_data.amount - _amount
 			repeat spawn_amount
-				spawn_resource_item(resource_data.type, x, y, 0.5,
-									inst_dir(obj_looter) + random_range(-45, 45))
+			var _dir = instance_exists(attacker) ? inst_dir(attacker) + random_range(-45, 45) : random(360)
+			spawn_resource_item(resource_data.type, x, y, 0.5, _dir)
 			resource_data.amount = _amount
 			if !resource_data.amount {
 				resource_data.type = "empty"

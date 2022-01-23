@@ -1,6 +1,8 @@
 
 event_inherited()
 
+function add_resource(name, amount) {}
+
 function set_sp_to(sp, dir) {
 	hsp_to = lengthdir_x(sp, dir)
 	vsp_to = lengthdir_y(sp, dir)
@@ -33,6 +35,7 @@ velocity_to = new Vec2d(0, 0)
 acceleration = new Vec2d(0.5, 0.5)
 deceleration = new Vec2d(0.2, 0.2)
 is_moving_object = true
+is_collecting_things = true
 hsp = 0
 vsp = 0
 hsp_to = 0
