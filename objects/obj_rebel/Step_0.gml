@@ -9,8 +9,10 @@ dist_to_player = inst_dist(obj_looter)
 
 switch state {
 	case "idle": {
-		if array_length(move_route)
+		if array_length(move_route) {
 			state_switch_on_route(move_route)
+			on_route_finished_method = state_switch_mining
+		}
 		if point_dist(xst, yst) > start_area_radius {
 			ai_travel_to_point(xst, yst)
 		}
@@ -60,7 +62,7 @@ switch state {
 	case "on_route": {
 		if move_route_point_to == undefined
 				and update_route() == undefined {
-			state_switch_mining()
+			on_route_finished_method()
 			break
 		}
 		var p = move_route_point_to
@@ -87,8 +89,19 @@ switch state {
 		set_dir_to(point_dir(p.X, p.Y))
 		break
 	}
-	
+
 	case "collect": {
+		if check_cargo_full(1) {
+			ai_return_to_home()
+			break
+		}
+		if colliding_with {
+			if !collect_wait_on_collision-- {
+				collect_wait_on_collision = 30
+				ai_start_mining_or_idle()
+				break
+			}
+		}
 		var list = collectibles_around_me
 		current_collectible = list[| 0]
 		if current_collectible == undefined {
@@ -119,6 +132,6 @@ update_dir()
 
 hsp = approach(hsp, hsp_to + battle_strafe_vec.X, acc)
 vsp = approach(vsp, vsp_to + battle_strafe_vec.Y, acc)
-scr_move_coord_contact_obj(hsp, vsp, obj_block)
+colliding_with = scr_move_coord_contact_obj(hsp, vsp, obj_block)
 
 position.set(x, y)

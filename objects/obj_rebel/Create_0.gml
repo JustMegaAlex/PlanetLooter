@@ -63,10 +63,6 @@ function state_switch_search() {
 	searching = search_time
 }
 
-function state_switch_return() {
-	state = "return"
-}
-
 function state_switch_on_route(route) {
 	state = "on_route"
 	set_move_route(route)
@@ -81,6 +77,22 @@ function state_switch_mining() {
 
 function state_switch_collect() {
 	state = "collect"
+}
+
+function ai_return_to_home() {
+	ai_travel_to_point(home_base.x, home_base.y)
+	on_route_finished_method = ai_start_mining_or_idle
+}
+
+
+function ai_return_to_base_or_idle() {
+	if !instance_exists(home_base) {
+		state = "idle"
+		return false
+	}
+	state = "on_route"
+	move_route = global.astar_graph.find_path(position, get_instance_center(home_base))
+	set_move_route(move_route)
 }
 
 function ai_travel_to_point(xx, yy) {
@@ -268,16 +280,20 @@ function find_mining_block() {
 
 //// behavior
 state = "idle"
+on_route_finished_method = undefined
 move_route = []
 move_route_point_to = undefined
 iter_move_route = new IterArray([])
 ai_attack_move_sign = 1
 
 find_path_failed_point = noone
+colliding_with = noone
 
 mining_block = noone
 mining_block_pos = undefined
 harvest_point = undefined
+home_base = noone
+collect_wait_on_collision = 30
 
 is_moving_object = true
 sp.normal = 2.5
@@ -327,6 +343,7 @@ hp = 7
 
 side = Sides.theirs
 use_weapon = "pulse"
-
+cargo = 20
+Resources.init()
 assign_creation_arguments()
 make_late_init()
