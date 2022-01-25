@@ -77,6 +77,7 @@ items = []
 items_number = 0
 ui_radius = 150
 ui_angle_step = 60
+sprite_index = spr_building_ui
 image_speed = 0
 display_text = ""
 mouse_over = noone

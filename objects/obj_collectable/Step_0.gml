@@ -6,10 +6,10 @@ for (var i = 0; i < ds_list_size(collectors); ++i) {
     var inst = collectors[| i]
 	if inst.is_collecting_things {
 		nearest = inst
-		ds_list_clear(collectors)
 		break
 	}
 }
+ds_list_clear(collectors)
 
 if nearest != noone {
 	var dist = point_distance(x, y, nearest.x, nearest.y)

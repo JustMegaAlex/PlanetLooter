@@ -1,5 +1,6 @@
 
 graph = new AstarGraph()
+global.astar_graph = graph
 link_len = 100
 
 start = new Vec2d(0, 0)

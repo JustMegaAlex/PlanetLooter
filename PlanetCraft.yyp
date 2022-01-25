@@ -23,6 +23,7 @@
     {"id":{"name":"utils","path":"scripts/utils/utils.yy",},"order":5,},
     {"id":{"name":"spr_particle_jet","path":"sprites/spr_particle_jet/spr_particle_jet.yy",},"order":20,},
     {"id":{"name":"spr_planet_ground_bgr_tileset","path":"sprites/spr_planet_ground_bgr_tileset/spr_planet_ground_bgr_tileset.yy",},"order":0,},
+    {"id":{"name":"path_finding","path":"scripts/path_finding/path_finding.yy",},"order":16,},
     {"id":{"name":"spr_building_ui","path":"sprites/spr_building_ui/spr_building_ui.yy",},"order":1,},
     {"id":{"name":"obj_rebel","path":"objects/obj_rebel/obj_rebel.yy",},"order":4,},
     {"id":{"name":"obj_test_controller","path":"objects/obj_test_controller/obj_test_controller.yy",},"order":1,},
@@ -114,7 +115,7 @@
     {"id":{"name":"snd_laser4","path":"sounds/snd_laser4/snd_laser4.yy",},"order":1,},
     {"id":{"name":"obj_dummy","path":"objects/obj_dummy/obj_dummy.yy",},"order":0,},
     {"id":{"name":"icon","path":"sprites/icon/icon.yy",},"order":1,},
-    {"id":{"name":"path_finding","path":"scripts/path_finding/path_finding.yy",},"order":14,},
+    {"id":{"name":"astar","path":"scripts/astar/astar.yy",},"order":14,},
     {"id":{"name":"manage_weapons","path":"scripts/manage_weapons/manage_weapons.yy",},"order":7,},
     {"id":{"name":"snd_warp","path":"sounds/snd_warp/snd_warp.yy",},"order":6,},
     {"id":{"name":"obj_bullet_pulse_spread","path":"objects/obj_bullet_pulse_spread/obj_bullet_pulse_spread.yy",},"order":1,},
@@ -153,9 +154,9 @@
     ],
   },
   "RoomOrderNodes": [
+    {"roomId":{"name":"rm_test","path":"rooms/rm_test/rm_test.yy",},},
     {"roomId":{"name":"rm_start","path":"rooms/rm_start/rm_start.yy",},},
     {"roomId":{"name":"rm_game","path":"rooms/rm_game/rm_game.yy",},},
-    {"roomId":{"name":"rm_test","path":"rooms/rm_test/rm_test.yy",},},
     {"roomId":{"name":"rm_game_test","path":"rooms/rm_game_test/rm_game_test.yy",},},
   ],
   "Folders": [
