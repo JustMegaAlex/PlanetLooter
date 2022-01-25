@@ -61,10 +61,13 @@ switch state {
 
 	case "on_route": {
 		if move_route_point_to == undefined
-				and update_route() == undefined {
-			on_route_finished_method()
-			break
-		}
+			if update_route() == undefined {
+				var on_finished = on_route_finished_method
+				on_route_finished_method = undefined
+				if on_finished != undefined
+					on_finished()
+				break
+			}
 		var p = move_route_point_to
 		if p == undefined {
 			state_switch_idle()
@@ -77,7 +80,7 @@ switch state {
 			update_route()
 		break
 	}
-	
+
 	case "mining": {
 		if !instance_exists(mining_block) {
 			get_collectibles_around_me()

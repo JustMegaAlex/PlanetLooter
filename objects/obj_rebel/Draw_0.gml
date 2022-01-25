@@ -1,6 +1,15 @@
 
+event_inherited()
+
 draw_sprite_ext(sprite_index, image_index, x, y, 1, 1, dir, c_white, 1)
-draw_text_above_me(string(Resources.get_sum()) + " " + string(cargo_load))
+var text = state 
+			+ " " + string(Resources.get_sum()) 
+			+ " " + string(cargo_load)
+if move_route_point_to {
+	text += " " + string(point_dist(move_route_point_to.X, move_route_point_to.Y))
+	draw_line(x, y, move_route_point_to.X, move_route_point_to.Y)
+}
+draw_text_above_me(text)
 //geom_draw_multiline(move_route, 5, c_navy)
 
 if find_path_failed_point {

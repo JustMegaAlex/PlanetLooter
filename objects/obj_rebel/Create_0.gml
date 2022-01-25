@@ -69,7 +69,6 @@ function state_switch_on_route(route) {
 }
 
 function state_switch_mining() {
-	var d = global.grid_size * 0.5
 	self.set_sp_to(0, 0)
 	target = mining_block
 	state = "mining"
@@ -81,7 +80,7 @@ function state_switch_collect() {
 
 function ai_return_to_home() {
 	ai_travel_to_point(home_base.x, home_base.y)
-	on_route_finished_method = ai_start_mining_or_idle
+	on_route_finished_method = ai_ship_cargo_start_mining
 }
 
 
@@ -104,28 +103,29 @@ function ai_travel_to_point(xx, yy) {
 }
 
 function ai_start_mining_or_idle() {
-	mining_block = find_mining_block()
-	target = mining_block
+	var res = find_mining_block_and_point()
+	mining_block = res.block
+	var mining_point = res.mining_point
 	if mining_block == noone {
 		state_switch_idle()
-		return true
+		return false
 	}
-	// check collision line excluding mining_block
-	var xx = mining_block.x
-	var yy = mining_block.y
-	var line = new Line(x, y, xx, yy)
-	var len = line.len()
-	line.mult((len + 50)/len)
-	inst_set_pos(mining_block, line.xend, line.yend)
-	var collision = collision_line(x, y, xx, yy, obj_block, false, false)
-	inst_set_pos(mining_block, xx, yy)
-	if collision {
-		state_switch_on_route(move_route)
+	
+	if inst_dist(mining_block) > 100 {
+		on_route_finished_method = state_switch_mining
+		ai_travel_to_point(mining_point.X, mining_point.Y)
 		target = noone
 		return true
 	}
 	state_switch_mining()
 	return true
+}
+
+function ai_ship_cargo_start_mining() {
+	if place_meeting(x, y, obj_rebel_refinery) {
+		cargo_load = 0
+	}
+	ai_start_mining_or_idle()
 }
 #endregion
 
@@ -158,6 +158,8 @@ function compute_strafe_vec() {
 
 function set_move_route(route) {
 	iter_move_route = new IterArray(route)
+	move_route = route
+	test = true
 }
 
 function path_blocked(xx, yy) {
@@ -215,7 +217,7 @@ function set_start_point(xx, yy) {
 function move_to_set_coords(xx, yy) {
 	if !path_blocked(xx, yy)
 		return true
-	var route = global.astar_graph.find_path(position, new Vec2d(xx, yy))
+	var route = astar_find_path(position, new Vec2d(xx, yy))
 	if move_route == global.AstarPathFindFailed
 		return false
 	set_move_route(route)
@@ -234,9 +236,10 @@ function astar_failed() {
 	)
 }
 
-function find_mining_block() {
+function find_mining_block_and_point() {
 	it = new IterInstances(obj_planet)
 	var block = noone
+	var nearest_point_to_block = undefined
 	var block_extra_dist = global.ai_rebel_block_extra_dist
 	while it.next() != undefined {
 		var planet = it.get()
@@ -256,26 +259,16 @@ function find_mining_block() {
 			block_depth_j = planet.size - block.j
 		}
 		
-		var nearest_point_to_block = new Vec2d(block.x + (block_depth_i + 2 + block_extra_dist) * i_side * global.grid_size, block.y)
+		nearest_point_to_block = new Vec2d(block.x + (block_depth_i + 2 + block_extra_dist) * i_side * global.grid_size, block.y)
 		if block_depth_i > block_depth_j {
 			var nearest_point_to_block = new Vec2d(block.x, block.y + (block_depth_j + 2 + block_extra_dist) * j_side * global.grid_size)
 		}
-		
-		harvest_point = nearest_point_to_block
-		
-		move_route = global.astar_graph.find_path(position, nearest_point_to_block)
-		// fail
-		if move_route == global.AstarPathFindFailed {
-			self.astar_failed()
-			return noone
-		}
-		set_move_route(move_route)
 	}
 	if block != noone {
 		block.visible = true
 		mining_block_pos = new Vec2d(block.x, block.y)
 	}
-	return block
+	return {block: block, mining_point: nearest_point_to_block}
 }
 
 //// behavior
@@ -283,7 +276,7 @@ state = "idle"
 on_route_finished_method = undefined
 move_route = []
 move_route_point_to = undefined
-iter_move_route = new IterArray([])
+iter_move_route = new IterArray(move_route)
 ai_attack_move_sign = 1
 
 find_path_failed_point = noone

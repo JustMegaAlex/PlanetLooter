@@ -1,2 +1,2 @@
 
-mining_block = find_mining_block()
+ai_start_mining_or_idle()

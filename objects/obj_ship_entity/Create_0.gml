@@ -237,3 +237,6 @@ cargo = global.start_cargo_space
 tank = 0
 tank_load = tank
 cargo_load = 0
+
+// ai
+move_route = []
