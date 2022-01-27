@@ -1,29 +1,38 @@
 
+function point_to_name(point) {
+	return "p" + string(point.X) + "_" + string(point.Y)
+}
+
 AstarPathFindFailed = {}
 
 function AstarGraph() constructor {
 	graph = {}
 
-	// graph building
-
 	function Node(_point) constructor {
 		point = _point
-		links = []
+		links = {}
 		_score = infinity
 		_dist_walked = 0
 		_in_boundary = false
 		_dist_to_finish = 0
 
 		add_link = function(node) {
-			if array_find(self.links, node) { return }
-			array_push(self.links, node)
+			var name = point_to_name(node.point)
+			variable_struct_set(links, name, node)
+		}
+		
+		remove_link = function(node) {
+			var name = point_to_name(node.point)
+			if variable_struct_exists(links, name)
+				variable_struct_remove(links, name)
 		}
 
 		_lowest_score_link = function() {
 			var _score = infinity
 			var chosen = noone
-			for (var i = 0; i < array_length(links); ++i) {
-			    var n = links[i]
+			var it = new IterStruct(links)
+			while it.next() {
+			    var n = it.value()
 				if n._score == infinity
 					continue
 				if (n._score < _score)
@@ -42,10 +51,6 @@ function AstarGraph() constructor {
 			_in_boundary = false
 			_dist_to_finish = 0
 		}
-	}
-
-	point_to_name = function (point) {
-		return "p" + string(point.X) + "_" + string(point.Y)
 	}
 
 	get_or_create = function(node_name, point_to_assign) {
@@ -76,15 +81,17 @@ function AstarGraph() constructor {
 		node2.add_link(node1)
 	}
 
-	add_node_from_point = function(point, link_points=[]) {
-		var node_name = self.point_to_name(point)
+	add_node_from_point = function(point, link_points) {
+		if link_points == undefined
+			link_points = {}
+		var node_name = point_to_name(point)
 		if array_length(link_points) == 0 {
 			return self.get_or_create(node_name, point)
 		}
-		var it = new IterArray(link_points)
+		var it = new IterStruct(link_points)
 		while it.next() {
-			var link_name = self.point_to_name(it.get())
-			self.add_link_from_names(node_name, link_name, point, it.get())
+			var link_name = point_to_name(it.value())
+			self.add_link_from_names(node_name, link_name, point, it.value())
 		}
 		return self.get_or_create(node_name, point)
 	}
@@ -104,11 +111,11 @@ function AstarGraph() constructor {
 	}
 
 	_find_set_lowest_score = function(node, finish) {
-		var it = new IterArray(node.links)
+		var it = new IterStruct(node.links)
 		var _min_score = infinity
 		var chosen = noone
 		while it.next() != undefined {
-			var n = it.get()
+			var n = it.value()
 			if n._in_boundary
 				continue
 			self._check_set_score(node, n, finish)
@@ -215,12 +222,14 @@ function AstarGraph() constructor {
 	find_path = function(pst, pend) {
 		start = undefined
 		finish = undefined
-		if !check_node_by_point(pst)
-			start = self.closest_node_to_point(pst)
-		if !check_node_by_point(pend)
-			finish = self.closest_node_to_point(pend)
-		start = get_or_create_by_point(pst)
-		finish = get_or_create_by_point(pend)
+		start = self.closest_node_to_point(pst)
+		finish = self.closest_node_to_point(pend)
+		//if !check_node_by_point(pst)
+		//	start = self.closest_node_to_point(pst)
+		//if !check_node_by_point(pend)
+		//	finish = self.closest_node_to_point(pend)
+		//start = get_or_create_by_point(pst)
+		//finish = get_or_create_by_point(pend)
 		self.clear_all_scores()
 		path = self.graph_find_path_points(start, finish)
 		if path != global.AstarPathFindFailed
@@ -233,12 +242,12 @@ function AstarGraph() constructor {
 		while iter.next() != undefined {
 			var node = iter.value()
 			var p = node.point
-			var _iter = new IterArray(node.links)
+			var _iter = new IterStruct(node.links)
 			//draw_text(p.X, p.Y - 60, string(node._score))
 			//draw_text(p.X, p.Y - 40, string(node._dist_walked))
 			//draw_text(p.X, p.Y - 20, string(node._dist_to_finish))
 			while _iter.next() {
-				var pp = _iter.get().point
+				var pp = _iter.value().point
 				draw_line_color(p.X, p.Y, pp.X, pp.Y, col, col)
 			}
 		}

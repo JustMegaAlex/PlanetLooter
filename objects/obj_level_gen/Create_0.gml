@@ -186,14 +186,12 @@ function setup_path_finding_graph(graph_struct, planets) {
 	var p, p1
 	for (var i = 0; i < num - 1; ++i) {
 		p = points[i]
-		var link_points = []
+		var link_points = {}
 	    for (var j = i + 1; j < num; ++j) {
 		    p1 = points[j]
-			//if !collision_line(p.X, p.Y, p1.X, p1.Y,
-			//				   obj_planet_mask, false, true)
 			if !collision_line_width(p.X, p.Y, p1.X, p1.Y,
 							   obj_planet_mask, global.path_finding_graph_collison_line_width).inst
-				array_push(link_points, p1)
+				variable_struct_set(link_points, point_to_name(p1), p1)
 				
 		}
 		graph_struct.add_node_from_point(p, link_points)
