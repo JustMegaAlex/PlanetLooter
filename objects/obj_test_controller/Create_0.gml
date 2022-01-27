@@ -19,3 +19,20 @@ for (var i = 0; i < instance_number(obj_test); ++i) {
 	}
 	graph.add_node_from_point(new Vec2d(inst.x, inst.y), links)
 }
+
+iter0 = new IterStruct(graph.graph)
+iter0.next()
+iter1 = new IterStruct(iter0.value().links)
+p0 = iter0.value().point
+if !iter1.next() {
+	if !iter0.next() {
+		iter0 = new IterStruct(graph)
+		iter0.next()
+	}
+	p0 = iter0.value().point
+	iter1 = new IterStruct(iter0.value().links)
+	iter1.next()
+}
+p1 = iter1.value().point
+
+alarm[0] = 20

@@ -90,7 +90,8 @@ function ai_return_to_base_or_idle() {
 		return false
 	}
 	state = "on_route"
-	move_route = global.astar_graph.find_path(position, get_instance_center(home_base))
+	//move_route = global.astar_graph.find_path(position, get_instance_center(home_base))
+	move_route  = astar_find_path(position, get_instance_center(home_base))
 	set_move_route(move_route)
 }
 
@@ -167,21 +168,6 @@ function path_blocked(xx, yy) {
 						obj_planet_mask, 16)
 }
 
-function patrol_update_route() {
-	patrol_point_to = patrol_get_next_point()
-	if !path_blocked(patrol_point_to.X, patrol_point_to.Y) {
-		set_move_route([patrol_point_to])
-		return true
-	}
-	move_route = global.astar_graph.find_path(position, patrol_point_to)
-	// fail
-	if move_route == global.AstarPathFindFailed {
-		self.astar_failed()
-		return false
-	}
-	set_move_route(move_route)
-}
-
 function update_route() {
 	move_route_point_to = iter_move_route.next()
 	return move_route_point_to
@@ -217,9 +203,9 @@ function set_start_point(xx, yy) {
 function move_to_set_coords(xx, yy) {
 	if !path_blocked(xx, yy)
 		return true
-	//var route = astar_find_path(position, new Vec2d(xx, yy))
-	var route = global.astar_graph.find_path(position, new Vec2d(xx, yy))
-	if move_route == global.AstarPathFindFailed
+	var route = astar_find_path(position, new Vec2d(xx, yy))
+	//var route = global.astar_graph.find_path(position, new Vec2d(xx, yy))
+	if route == global.AstarPathFindFailed
 		return false
 	set_move_route(route)
 	return true

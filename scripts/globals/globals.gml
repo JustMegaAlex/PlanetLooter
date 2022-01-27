@@ -77,8 +77,8 @@ switch MODE {
 		//global.ai_attack_off = true
 
 		//global.ai_max_partol_route_length = 10
-		global.gen_min_planet_number = 1
-		global.gen_max_planet_number = 1
+		global.gen_min_planet_number = 6
+		global.gen_max_planet_number = 6
 		global.ai_show_move_routes = true
 		global.show_path_finding_graph = true
 

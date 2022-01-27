@@ -80,20 +80,31 @@ function AstarGraph() constructor {
 		node1.add_link(node2)
 		node2.add_link(node1)
 	}
+	
+	add_node = function(node) {
+		variable_struct_set(self.graph, point_to_name(node.point), node)
+	}
 
 	add_node_from_point = function(point, link_points) {
 		if link_points == undefined
 			link_points = {}
 		var node_name = point_to_name(point)
-		if array_length(link_points) == 0 {
-			return self.get_or_create(node_name, point)
-		}
 		var it = new IterStruct(link_points)
 		while it.next() {
 			var link_name = point_to_name(it.value())
 			self.add_link_from_names(node_name, link_name, point, it.value())
 		}
 		return self.get_or_create(node_name, point)
+	}
+	
+	remove_node = function(node) {
+		var name = point_to_name(node.point)
+		variable_struct_remove(graph, name)
+		var it = new IterStruct(node.links)
+		while it.next() {
+			var _links = it.value().links
+			variable_struct_remove(_links, name)
+		}
 	}
 
 	// path finding
@@ -220,16 +231,10 @@ function AstarGraph() constructor {
 	}
 
 	find_path = function(pst, pend) {
-		start = undefined
-		finish = undefined
-		start = self.closest_node_to_point(pst)
-		finish = self.closest_node_to_point(pend)
-		//if !check_node_by_point(pst)
-		//	start = self.closest_node_to_point(pst)
-		//if !check_node_by_point(pend)
-		//	finish = self.closest_node_to_point(pend)
-		//start = get_or_create_by_point(pst)
-		//finish = get_or_create_by_point(pend)
+		//start = self.closest_node_to_point(pst)
+		//finish = self.closest_node_to_point(pend)
+		start = get_or_create_by_point(pst)
+		finish = get_or_create_by_point(pend)
 		self.clear_all_scores()
 		path = self.graph_find_path_points(start, finish)
 		if path != global.AstarPathFindFailed
@@ -243,9 +248,6 @@ function AstarGraph() constructor {
 			var node = iter.value()
 			var p = node.point
 			var _iter = new IterStruct(node.links)
-			//draw_text(p.X, p.Y - 60, string(node._score))
-			//draw_text(p.X, p.Y - 40, string(node._dist_walked))
-			//draw_text(p.X, p.Y - 20, string(node._dist_to_finish))
 			while _iter.next() {
 				var pp = _iter.value().point
 				draw_line_color(p.X, p.Y, pp.X, pp.Y, col, col)
