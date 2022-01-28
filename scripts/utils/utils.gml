@@ -34,6 +34,12 @@ function IterStruct(_struct) constructor {
 	value = function() {
 		return current_value	
 	}
+	
+	reset = function() {
+		current_value = undefined
+		current_key = undefined
+		i = -1
+	}
 }
 
 function IterArray(_arr) constructor {
@@ -58,6 +64,11 @@ function IterArray(_arr) constructor {
 			throw "\nIterArray.next() wasn't called after creation of IterArray instance\n"
 		return current_value
 	}
+	
+	reset = function() {
+		current_value = undefined
+		i = -1
+	}
 }
 
 function IterInstances(_obj) constructor {
@@ -78,6 +89,11 @@ function IterInstances(_obj) constructor {
 		if i == -1
 			throw "\IterInstances.next() wasn't called after creation of IterArray instance\n"
 		return current_value
+	}
+	
+	reset = function() {
+		current_value = undefined
+		i = -1
 	}
 }
 

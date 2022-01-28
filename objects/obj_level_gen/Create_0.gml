@@ -177,6 +177,30 @@ function create_enemies(set) {
 }
 
 function setup_path_finding_graph(graph_struct, planets) {
+	function _add_inner_node(i, j, size, points) {
+		function _add_link(node, i, j, points) {
+			var lnk_point = points[i, j]
+			if collision_line(node.point.X, node.point.Y, lnk_point.X, lnk_point.Y, obj_block, false, false)
+				return false
+			var lnk_name = point_to_name(lnk_point)
+			var lnk = global.astar_graph.get_or_create(lnk_name, lnk_point)
+			node.add_link(lnk)
+			return true
+		}
+
+		var p = points[i][j]
+		var name = point_to_name(p)
+		var node = global.astar_graph.get_or_create(name, p)
+		if (i > 0)
+			_add_link(node, i-1, j, points)
+		if (i < (size - 1))
+			_add_link(node, i+1, j, points)
+		if (j > 0)
+			_add_link(node, i, j-1, points)
+		if (j < (size - 1))
+			_add_link(node, i, j+1, points)
+	}
+	// interplanetary graph
 	var it = new IterArray(planets)
 	var points = []
 	while it.next() != undefined {
@@ -195,6 +219,32 @@ function setup_path_finding_graph(graph_struct, planets) {
 				
 		}
 		graph_struct.add_node_from_point(p, link_points)
+	}
+
+	// innerplanetary graph
+	it.reset()
+	while it.next() {
+		// init points
+		var pl = it.get()
+		var x0 = pl.left_coord()
+		var y0 = pl.top_coord()
+		var size = pl.size
+		var points = []
+		for (var i = 0; i < size; ++i) {
+		    var row = []
+			points[i] = row
+			var xx = x0 + (i+0.5) * global.grid_size
+			for (var j = 0; j < size; ++j) {
+				var yy = y0 + (j+0.5) * global.grid_size
+			    row[j] = new Vec2d(xx, yy)
+			}
+		}
+		// add nodes
+		for (var i = 0; i < size; ++i) {
+			for(var j = 0; j < size; ++j) {
+				_add_inner_node(i, j, size, points)
+			}
+		}
 	}
 }
 

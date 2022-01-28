@@ -86,7 +86,7 @@ switch MODE {
 		global.gen_spawn_turret_chance = 0
 		global.gen_spawn_forpost_turret_fract = 1
 		global.gen_setup_mobs_override = {ships_distr: [0], forposts: [0]}
-		
+
 		global.start_resources_amount = 10
 		global.start_cargo_space = 200
 	}
