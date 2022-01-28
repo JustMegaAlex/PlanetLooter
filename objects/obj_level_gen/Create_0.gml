@@ -200,7 +200,9 @@ function setup_path_finding_graph(graph_struct, planets) {
 		if (j < (size - 1))
 			_add_link(node, i, j+1, points)
 	}
+
 	// interplanetary graph
+	all_the_points = []
 	var it = new IterArray(planets)
 	var points = []
 	while it.next() != undefined {
@@ -213,6 +215,7 @@ function setup_path_finding_graph(graph_struct, planets) {
 		var link_points = {}
 	    for (var j = i + 1; j < num; ++j) {
 		    p1 = points[j]
+			array_push(all_the_points, p1)
 			if !collision_line_width(p.X, p.Y, p1.X, p1.Y,
 							   obj_planet_mask, global.path_finding_graph_collison_line_width).inst
 				variable_struct_set(link_points, point_to_name(p1), p1)
@@ -237,6 +240,7 @@ function setup_path_finding_graph(graph_struct, planets) {
 			for (var j = 0; j < size; ++j) {
 				var yy = y0 + (j+0.5) * global.grid_size
 			    row[j] = new Vec2d(xx, yy)
+				array_push(all_the_points, row[j])
 			}
 		}
 		// add nodes

@@ -1,5 +1,10 @@
 
 
+for (var i = 0; i < array_length(all_the_points); ++i) {
+	var p = all_the_points[i]
+	draw_circle(p.X, p.Y, 4, false)
+}
+
 //var to_draw = [nodes[0]]
 //var ratio = 1/100
 //var k = 0
