@@ -1,4 +1,9 @@
 
+function initialize_path_finding() {
+	global.astar_graph = new AstarGraph()
+	global.astar_graph_inner = new AstarGraph()
+}
+
 function node_gather_links(node, graph) {
 	var links = {}
 	var all_nodes = new IterStruct(graph)

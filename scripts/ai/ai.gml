@@ -37,10 +37,10 @@ function planet_get_route_points(planet) {
 	var rr = planet.radius + extra_dist
 	var v_center = new Vec2d(planet.x, planet.y)
 	var arr = [
-		v_center.add_coords_(rr, rr),
+		v_center.add_coords_(-rr, -rr),
 		v_center.add_coords_(rr, -rr),
 		v_center.add_coords_(-rr, rr),
 	]
-	array_push(arr, v_center.add_coords(-rr, -rr))
+	array_push(arr, v_center.add_coords(rr, rr))
 	return arr
 }

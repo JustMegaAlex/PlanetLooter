@@ -94,3 +94,4 @@ switch MODE {
 
 // objects
 global.astar_graph = noone
+global.astar_graph_inner = noone

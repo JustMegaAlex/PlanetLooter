@@ -33,7 +33,7 @@ function generate_star_system() {
 		ymax = max(n.Y, ymax)
 	}
 	global.astar_graph = new AstarGraph()
-	setup_path_finding_graph(global.astar_graph, planets)
+	setup_path_finding_graph(global.astar_graph, global.astar_graph_inner, planets)
 	//generate_asteroids(xmin, ymin, xmax, ymax)
 	level = min(global.level, array_length(buildings_progression) - 1)
 	var buildings_set = buildings_progression[level]
@@ -176,29 +176,47 @@ function create_enemies(set) {
 	}
 }
 
-function setup_path_finding_graph(graph_struct, planets) {
-	function _add_inner_node(i, j, size, points) {
-		function _add_link(node, i, j, points) {
+function setup_path_finding_graph(outer_graph, inner_graph, planets) {
+	function _add_inner_node(i, j, size, points, graph) {
+		function _add_link(node, i, j, points, graph) {
 			var lnk_point = points[i, j]
 			if collision_line(node.point.X, node.point.Y, lnk_point.X, lnk_point.Y, obj_block, false, false)
 				return false
-			var lnk_name = point_to_name(lnk_point)
-			var lnk = global.astar_graph.get_or_create(lnk_name, lnk_point)
+			var lnk = graph.get_or_create(lnk_point)
 			node.add_link(lnk)
 			return true
 		}
 
 		var p = points[i][j]
-		var name = point_to_name(p)
-		var node = global.astar_graph.get_or_create(name, p)
+		var node = graph.get_or_create(p)
 		if (i > 0)
-			_add_link(node, i-1, j, points)
+			_add_link(node, i-1, j, points, graph)
 		if (i < (size - 1))
-			_add_link(node, i+1, j, points)
+			_add_link(node, i+1, j, points, graph)
 		if (j > 0)
-			_add_link(node, i, j-1, points)
+			_add_link(node, i, j-1, points, graph)
 		if (j < (size - 1))
-			_add_link(node, i, j+1, points)
+			_add_link(node, i, j+1, points, graph)
+	}
+	
+	function _connect_inner_with_outer(outer_p, inner_points, ii, jj, size, graph) {
+		var outer_n = graph.get_or_create(outer_p)
+		for (var i = 0; i < size; ++i) {
+		    var p = inner_points[i, jj]
+			if !collision_line(outer_p.X, outer_p.Y, p.X, p.Y, obj_block, false, false) {
+				var n = graph.get_or_create(p)
+				outer_n.add_link(n)
+				n.add_link(outer_n)
+			}
+		}
+		for (var j = 0; j < size; ++j) {
+		    var p = inner_points[jj, j]
+			if !collision_line(outer_p.X, outer_p.Y, p.X, p.Y, obj_block, false, false) {
+				var n = graph.get_or_create(p)
+				outer_n.add_link(n)
+				n.add_link(outer_n)
+			}
+		}
 	}
 
 	// interplanetary graph
@@ -219,9 +237,9 @@ function setup_path_finding_graph(graph_struct, planets) {
 			if !collision_line_width(p.X, p.Y, p1.X, p1.Y,
 							   obj_planet_mask, global.path_finding_graph_collison_line_width).inst
 				variable_struct_set(link_points, point_to_name(p1), p1)
-				
+
 		}
-		graph_struct.add_node_from_point(p, link_points)
+		outer_graph.add_node_from_point(p, link_points)
 	}
 
 	// innerplanetary graph
@@ -232,23 +250,44 @@ function setup_path_finding_graph(graph_struct, planets) {
 		var x0 = pl.left_coord()
 		var y0 = pl.top_coord()
 		var size = pl.size
-		var points = []
+		var inner_points = []
 		for (var i = 0; i < size; ++i) {
 		    var row = []
-			points[i] = row
+			inner_points[i] = row
 			var xx = x0 + (i+0.5) * global.grid_size
 			for (var j = 0; j < size; ++j) {
 				var yy = y0 + (j+0.5) * global.grid_size
 			    row[j] = new Vec2d(xx, yy)
-				array_push(all_the_points, row[j])
 			}
 		}
-		// add nodes
+		// add planet inner nodes
 		for (var i = 0; i < size; ++i) {
 			for(var j = 0; j < size; ++j) {
-				_add_inner_node(i, j, size, points)
+				_add_inner_node(i, j, size, inner_points, outer_graph)
 			}
 		}
+		// bind inner and outer nodes
+		points = planet_get_route_points(it.get())
+		var topleft = points[0]
+		var topright = points[1]
+		var bottomleft = points[2]
+		var bottomright = points[3]
+		_connect_inner_with_outer(topleft, inner_points, 0, 0, size, outer_graph)
+		_connect_inner_with_outer(topright, inner_points, 0, size-1, size, outer_graph)
+		_connect_inner_with_outer(bottomleft, inner_points, size-1, 0, size, outer_graph)
+		_connect_inner_with_outer(bottomright, inner_points, size-1, size-1, size, outer_graph)
+		//var n_tl = inner_graph.get_or_create(topleft)
+		//var n_tr = inner_graph.get_or_create(topright)
+		//var n_bl = inner_graph.get_or_create(bottomleft)
+		//var n_br = inner_graph.get_or_create(bottomright)
+		//n_tl.add_link(n_tr);
+		//n_tl.add_link(n_bl);
+		//n_tr.add_link(n_tl);
+		//n_tr.add_link(n_bl);
+		//n_br.add_link(n_tr);
+		//n_br.add_link(n_bl);
+		//n_bl.add_link(n_br);
+		//n_bl.add_link(n_tl);
 	}
 }
 

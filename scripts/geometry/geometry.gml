@@ -69,7 +69,7 @@ function Vec2d(xx, yy, is_polar) constructor {
 
 	set_polar = function(l, dir) {
 		self.X = lengthdir_x(l, dir)
-		self.Y = lengthdir_y(l, dir)
+		self.Y = lengthdir_y(l, dir)	
 		return self
 	}
 

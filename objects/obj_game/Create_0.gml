@@ -17,7 +17,7 @@ global._level_gen_planet_size = -1 // pass size parameter to obj_planet inst on 
 draw_set_font(fnt)
 
 // objects
-global.astar_graph = new AstarGraph()
+initialize_path_finding()
 
 show_tips = false
 show_tips_xoffset = -400

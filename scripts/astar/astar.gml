@@ -53,17 +53,17 @@ function AstarGraph() constructor {
 		}
 	}
 
-	get_or_create = function(node_name, point_to_assign) {
-		if variable_struct_exists(self.graph, node_name)
-			return variable_struct_get(self.graph, node_name)
+	get_or_create = function(point_to_assign) {
+		var name = point_to_name(point_to_assign)
+		if variable_struct_exists(self.graph, name)
+			return variable_struct_get(self.graph, name)
 		var node = new Node(point_to_assign)
-		variable_struct_set(self.graph, node_name, node)
+		variable_struct_set(self.graph, name, node)
 		return node
 	}
 	
 	get_or_create_by_point = function(point) {
-		var name = point_to_name(point)
-		return get_or_create(name, point)
+		return get_or_create(point)
 	}
 	
 	get_by_point = function(point) {
@@ -74,9 +74,9 @@ function AstarGraph() constructor {
 		return variable_struct_exists(self.graph, point_to_name(point))
 	}
 
-	add_link_from_names = function(nm1, nm2, p1, p2) {
-		var node1 = self.get_or_create(nm1, p1)
-		var node2 = self.get_or_create(nm2, p2)
+	add_link_from_points = function(p1, p2) {
+		var node1 = self.get_or_create(p1)
+		var node2 = self.get_or_create(p2)
 		node1.add_link(node2)
 		node2.add_link(node1)
 	}
@@ -88,13 +88,11 @@ function AstarGraph() constructor {
 	add_node_from_point = function(point, link_points) {
 		if link_points == undefined
 			link_points = {}
-		var node_name = point_to_name(point)
 		var it = new IterStruct(link_points)
 		while it.next() {
-			var link_name = point_to_name(it.value())
-			self.add_link_from_names(node_name, link_name, point, it.value())
+			self.add_link_from_points(point, it.value())
 		}
-		return self.get_or_create(node_name, point)
+		return self.get_or_create(point)
 	}
 	
 	remove_node = function(node) {

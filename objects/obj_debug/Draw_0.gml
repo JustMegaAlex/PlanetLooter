@@ -21,5 +21,7 @@ if global.show_ai_patrol_routes {
 	}
 }
 
-if global.show_path_finding_graph
+if global.show_path_finding_graph {
 	global.astar_graph.draw_graph(c_green)
+	//global.astar_graph_inner.draw_graph(c_green)
+}
