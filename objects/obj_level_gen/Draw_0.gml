@@ -5,6 +5,11 @@ for (var i = 0; i < array_length(all_the_points); ++i) {
 	draw_circle(p.X, p.Y, 4, false)
 }
 
+for (var i = 0; i < array_length(inner_points_to_draw); ++i) {
+    var p = inner_points_to_draw[i]
+	draw_text(p.X, p.Y, string(p.X) + " " + string(p.Y))
+}
+
 //var to_draw = [nodes[0]]
 //var ratio = 1/100
 //var k = 0

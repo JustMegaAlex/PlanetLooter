@@ -29,6 +29,7 @@ global.show_ai_patrol_routes = false
 global.ai_show_move_routes = false
 global.show_alert_tower_stuff = true
 global.show_path_finding_graph = false
+global.debug_test_path_finding = true
 
 // settings
 global.ai_max_partol_route_length = 4
@@ -81,6 +82,7 @@ switch MODE {
 		global.gen_max_planet_number = 6
 		global.ai_show_move_routes = true
 		global.show_path_finding_graph = true
+		global.show_planets_data = true
 
 		global.gen_spawn_is_patrol_chance = 0
 		global.gen_spawn_turret_chance = 0

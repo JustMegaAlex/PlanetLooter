@@ -25,3 +25,8 @@ if global.show_path_finding_graph {
 	global.astar_graph.draw_graph(c_green)
 	//global.astar_graph_inner.draw_graph(c_green)
 }
+
+if global.debug_test_path_finding {
+	testPathFinding.draw_event()
+	draw_text(mouse_x, mouse_y - 40, string(mouse_x) + " " + string(mouse_y))
+}

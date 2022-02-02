@@ -22,6 +22,10 @@ if global.enable_change_fps {
 	}
 }
 
+if global.debug_test_path_finding {
+	testPathFinding.step_event()
+}
+
 if keyboard_check_pressed(ord("E"))
 	state = "editor"
 

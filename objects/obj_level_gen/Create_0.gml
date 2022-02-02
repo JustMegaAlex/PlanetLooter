@@ -244,6 +244,7 @@ function setup_path_finding_graph(outer_graph, inner_graph, planets) {
 
 	// innerplanetary graph
 	it.reset()
+	inner_points_to_draw = []
 	while it.next() {
 		// init points
 		var pl = it.get()
@@ -260,6 +261,7 @@ function setup_path_finding_graph(outer_graph, inner_graph, planets) {
 			    row[j] = new Vec2d(xx, yy)
 			}
 		}
+		array_push(inner_points_to_draw, inner_points[0][0])
 		// add planet inner nodes
 		for (var i = 0; i < size; ++i) {
 			for(var j = 0; j < size; ++j) {

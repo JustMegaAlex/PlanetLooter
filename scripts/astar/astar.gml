@@ -1,6 +1,8 @@
 
 function point_to_name(point) {
-	return "p" + string(point.X) + "_" + string(point.Y)
+	var prefX = point.X >= 0 ? "" : "m";
+	var prefY = point.Y >= 0 ? "" : "m";
+	return "p" + prefX + string(abs(point.X)) + "_" + prefY + string(abs(point.Y))
 }
 
 AstarPathFindFailed = {}

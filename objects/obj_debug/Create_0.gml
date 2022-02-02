@@ -32,3 +32,34 @@ for (var i = 0; i < array_length(editor_objects_list); ++i) {
 		}
 	}
 }
+
+testPathFinding = {
+	start: new Vec2d(0, 0),
+	finish: new Vec2d(0, 0),
+	graph: undefined,
+	path: undefined,
+	step_event: function() {
+		if mouse_check_button_pressed(mb_left) {
+			self.start = new Vec2d(mouse_x, mouse_y)
+			self.graph.clear_all_scores()
+			self.path = astar_find_path(start, finish)
+		}
+		if mouse_check_button_pressed(mb_right) {
+			self.finish = new Vec2d(mouse_x, mouse_y)
+			self.graph.clear_all_scores()
+			self.path = astar_find_path(start, finish)
+		}
+	},
+	draw_event: function() {
+		if is_array(self.path)
+				and self.path != undefined {
+			for (var i = 0; i < array_length(self.path) - 1; ++i) {
+			    var p = self.path[i]
+				var pp = self.path[i + 1]
+				draw_line_color(p.X, p.Y, pp.X, pp.Y, c_yellow, c_yellow)
+			}
+		}
+	}
+}
+
+make_late_init()
