@@ -82,7 +82,7 @@ switch MODE {
 		global.gen_max_planet_number = 6
 		global.ai_show_move_routes = true
 		global.show_path_finding_graph = true
-		global.show_planets_data = true
+		global.show_planets_data = false
 
 		global.gen_spawn_is_patrol_chance = 0
 		global.gen_spawn_turret_chance = 0

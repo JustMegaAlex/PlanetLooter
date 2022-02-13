@@ -49,6 +49,10 @@ testPathFinding = {
 			self.graph.clear_all_scores()
 			self.path = astar_find_path(start, finish)
 		}
+		if keyboard_check_pressed(ord("N"))
+			graph.DebugDrawer.switch_iteration(1)
+		if keyboard_check_pressed(ord("B"))
+			graph.DebugDrawer.switch_iteration(-1)
 	},
 	draw_event: function() {
 		if is_array(self.path)
@@ -59,6 +63,7 @@ testPathFinding = {
 				draw_line_color(p.X, p.Y, pp.X, pp.Y, c_yellow, c_yellow)
 			}
 		}
+		self.graph.DebugDrawer.draw()
 	}
 }
 
