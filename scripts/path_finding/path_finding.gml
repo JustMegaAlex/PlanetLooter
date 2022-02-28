@@ -15,7 +15,7 @@ function get_inner_point(point, planet) {
 	var top = planet.top_coord() + gs * 0.5
 	var i = (p.X - left) div gs
 	var j = (p.Y - top) div gs
-	var p = new Vec2d(left + i * gs, top + j * gs)
+	p = new Vec2d(left + i * gs, top + j * gs)
 	return p
 }
 
@@ -41,9 +41,11 @@ function node_gather_links(node, graph) {
 }
 
 function astar_graph_add_point(p) {
+	var x0 = p.X, y0 = p.Y
 	p = try_get_inner_point(p)
 	if p == undefined
 		return p
+	var x1 = p.X, y1 = p.Y
 	if global.astar_graph.check_node_by_point(p)
 		return global.astar_graph.get_by_point(p)
 	var node = new global.astar_graph.Node(p)
@@ -63,7 +65,7 @@ function astar_find_path(st, end_) {
 	var nend = astar_graph_add_point(end_)
 	if nst == undefined or nend == undefined
 		return global.AstarPathBlocked
-	var path = global.astar_graph.find_path(st, end_)
+	var path = global.astar_graph.find_path(nst.point, nend.point)
 	if variable_struct_exists(nst, "use_once")
 		global.astar_graph.remove_node(nst)
 	if variable_struct_exists(nend, "use_once")

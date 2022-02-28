@@ -240,11 +240,12 @@ function AstarGraph() constructor {
 
 	find_path = function(pst, pend) {
 		self.DebugDrawer.clear()
-		start = get_or_create_by_point(pst)
-		finish = get_or_create_by_point(pend)
+		var start = get_or_create_by_point(pst)
+		var finish = get_or_create_by_point(pend)
+		self.DebugDrawer.finish = finish
 		self.clear_all_scores()
 		path = self.graph_find_path_points(start, finish)
-		self.DebugDrawer.finish()
+		self.DebugDrawer.finilize()
 		if path != global.AstarPathFindFailed
 			array_push(path, pend)
 		return path
@@ -254,9 +255,10 @@ function AstarGraph() constructor {
 		self.DebugDrawer.clear()
 		start = self.closest_node_to_point(pst)
 		finish = self.closest_node_to_point(pend)
+		self.DebugDrawer.finish = finish
 		self.clear_all_scores()
 		path = self.graph_find_path_points(start, finish)
-		self.DebugDrawer.finish()
+		self.DebugDrawer.finilize()
 		if path != global.AstarPathFindFailed
 			array_push(path, pend)
 		return path
@@ -295,14 +297,16 @@ function AstarGraph() constructor {
 		
 		iterations: [],
 		current: {scores: [], boundary: [], chosen: undefined},
+		finish: undefined,
 		cur_i: 0,
 		
 		clear: function() { 
 			self.iterations = []
 			self.current = self.init_current()
+			self.finish = undefined
 		},
 		
-		finish: function() {
+		finilize: function() {
 			if array_length(iterations)
 				self.current = iterations[0]
 		},
@@ -343,7 +347,12 @@ function AstarGraph() constructor {
 			var c = c_green
 			while boundary.next() != undefined {
 				var p = boundary.get().point
-				
+				draw_circle_color(p.X, p.Y, 4, c, c, false)
+			}
+
+			if self.finish {
+				var c = c_red
+				var p = self.finish.point
 				draw_circle_color(p.X, p.Y, 4, c, c, false)
 			}
 		},
