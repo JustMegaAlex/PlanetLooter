@@ -60,6 +60,11 @@ switch state {
 	}
 
 	case "on_route": {
+		var block = instance_place(x, y, obj_block)
+		if block {
+			var new_dir = point_dir(block.x, block.y)
+			dir = new_dir
+		}
 		if move_route_point_to == undefined
 			if update_route() == undefined {
 				var on_finished = on_route_finished_method
@@ -76,8 +81,12 @@ switch state {
 		}
 		set_dir_to(point_dir(p.X, p.Y))
 		self.set_sp_to(sp.normal, dir)
-		if point_dist(p.X, p.Y) < sp.normal
+		var _dist = point_dist(p.X, p.Y)
+		var _sp = self.get_abs_sp()
+		if _dist < sp.normal
 			update_route()
+		else if (_dist < sp.normal * 2) and (_sp > sp.normal * 0.1)
+			self.set_sp_to(_sp * 0.5, dir)
 		break
 	}
 

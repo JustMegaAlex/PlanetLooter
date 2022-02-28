@@ -22,6 +22,10 @@ function update_dir(rot_sp=rotary_sp) {
 	dir = approach(dir, dir - _diff, rot_sp)
 }
 
+function get_abs_sp() {
+	return point_distance(0, 0, hsp, vsp)
+}
+
 #region resources
 
 Resources = {

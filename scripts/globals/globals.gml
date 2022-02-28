@@ -29,7 +29,7 @@ global.show_ai_patrol_routes = false
 global.ai_show_move_routes = false
 global.show_alert_tower_stuff = true
 global.show_path_finding_graph = false
-global.debug_test_path_finding = true
+global.debug_test_path_finding = false
 
 // settings
 global.ai_max_partol_route_length = 4
@@ -74,6 +74,8 @@ switch MODE {
 		global.enable_instant_planet_move = false
 		global.player_immortal = true
 		global.enemy_attack_formation_snipers_fract = 0.5
+		global.debug_test_path_finding = true
+		global.show_path_finding_graph = false
 		//global.show_ai_patrol_routes = true
 		//global.ai_attack_off = true
 
@@ -81,7 +83,6 @@ switch MODE {
 		global.gen_min_planet_number = 6
 		global.gen_max_planet_number = 6
 		global.ai_show_move_routes = true
-		global.show_path_finding_graph = true
 		global.show_planets_data = false
 
 		global.gen_spawn_is_patrol_chance = 0
