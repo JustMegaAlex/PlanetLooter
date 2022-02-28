@@ -275,21 +275,9 @@ function setup_path_finding_graph(outer_graph, inner_graph, planets) {
 		var bottomleft = points[2]
 		var bottomright = points[3]
 		_connect_inner_with_outer(topleft, inner_points, 0, 0, size, outer_graph)
-		_connect_inner_with_outer(topright, inner_points, 0, size-1, size, outer_graph)
-		_connect_inner_with_outer(bottomleft, inner_points, size-1, 0, size, outer_graph)
+		_connect_inner_with_outer(topright, inner_points, size-1, 0, size, outer_graph)
+		_connect_inner_with_outer(bottomleft, inner_points, 0, size-1, size, outer_graph)
 		_connect_inner_with_outer(bottomright, inner_points, size-1, size-1, size, outer_graph)
-		//var n_tl = inner_graph.get_or_create(topleft)
-		//var n_tr = inner_graph.get_or_create(topright)
-		//var n_bl = inner_graph.get_or_create(bottomleft)
-		//var n_br = inner_graph.get_or_create(bottomright)
-		//n_tl.add_link(n_tr);
-		//n_tl.add_link(n_bl);
-		//n_tr.add_link(n_tl);
-		//n_tr.add_link(n_bl);
-		//n_br.add_link(n_tr);
-		//n_br.add_link(n_bl);
-		//n_bl.add_link(n_br);
-		//n_bl.add_link(n_tl);
 	}
 }
 
