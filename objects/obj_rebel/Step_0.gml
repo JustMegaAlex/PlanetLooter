@@ -60,9 +60,8 @@ switch state {
 	}
 
 	case "on_route": {
-		var block = instance_place(x, y, obj_block)
-		if block {
-			var new_dir = point_dir(block.x, block.y)
+		if colliding_with {
+			var new_dir = point_direction(colliding_with.x, colliding_with.y, x, y)
 			dir = new_dir
 		}
 		if move_route_point_to == undefined
@@ -80,13 +79,16 @@ switch state {
 			break
 		}
 		set_dir_to(point_dir(p.X, p.Y))
-		self.set_sp_to(sp.normal, dir)
 		var _dist = point_dist(p.X, p.Y)
 		var _sp = self.get_abs_sp()
-		if _dist < sp.normal
+		if _dist < sp.normal {
 			update_route()
+			self.set_sp_to(sp.normal, dir)
+		}
 		else if (_dist < sp.normal * 2) and (_sp > sp.normal * 0.1)
 			self.set_sp_to(_sp * 0.5, dir)
+		else 
+			self.set_sp_to(sp.normal, dir)
 		break
 	}
 

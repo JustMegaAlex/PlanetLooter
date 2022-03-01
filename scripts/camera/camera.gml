@@ -29,3 +29,9 @@ function scr_camx_cent(ind) {
 function scr_camy_cent(ind) {
 	return camera_get_view_y(view_camera[ind]) + scr_camh(ind) * 0.5
 }
+
+function point_in_camera(xx, yy, ind) {
+	var cx = scr_camx(ind), cy = scr_camy(ind)
+	return (xx > cx) and (xx < (cx + scr_camw(ind)))
+		   and (yy > cy) and (yy < (cy + scr_camy(ind)))
+}

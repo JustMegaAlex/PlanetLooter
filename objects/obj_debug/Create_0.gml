@@ -55,12 +55,12 @@ testPathFinding = {
 			graph.DebugDrawer.switch_iteration(-1)
 	},
 	draw_event: function() {
-		if is_array(self.path)
-				and self.path != undefined {
+		if is_array(self.path) {
 			for (var i = 0; i < array_length(self.path) - 1; ++i) {
 			    var p = self.path[i]
 				var pp = self.path[i + 1]
-				draw_line_color(p.X, p.Y, pp.X, pp.Y, c_yellow, c_yellow)
+				if point_in_camera(p.X, p.Y, 0) or point_in_camera(pp.X, pp.Y, 0)
+					draw_line_color(p.X, p.Y, pp.X, pp.Y, c_yellow, c_yellow)
 			}
 		}
 		self.graph.DebugDrawer.draw()

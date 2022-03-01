@@ -75,7 +75,7 @@ switch MODE {
 		global.player_immortal = true
 		global.enemy_attack_formation_snipers_fract = 0.5
 		global.debug_test_path_finding = true
-		global.show_path_finding_graph = false
+		global.show_path_finding_graph = true
 		//global.show_ai_patrol_routes = true
 		//global.ai_attack_off = true
 
