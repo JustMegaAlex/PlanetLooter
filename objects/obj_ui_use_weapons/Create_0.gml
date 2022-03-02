@@ -1,5 +1,5 @@
 
-function draw_element(img, xx, spr) {
+function draw_element(img, xx, spr=undefined) {
 	if spr == undefined
 		spr = sprite_index
 	draw_sprite_ext(spr, img, x + xx*scale, y, scale, scale, 0, c_white, 1)

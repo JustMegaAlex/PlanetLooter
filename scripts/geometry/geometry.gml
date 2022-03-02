@@ -8,7 +8,7 @@ function Point(_x, _y) constructor {
 	}
 }
 
-function Vec2d(xx, yy, is_polar) constructor {
+function Vec2d(xx, yy, is_polar=false) constructor {
 	X = xx
 	Y = yy
 

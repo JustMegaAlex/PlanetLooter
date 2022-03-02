@@ -1,5 +1,8 @@
 {
-  "spriteId": null,
+  "spriteId": {
+    "name": "spr_debug_console_joint",
+    "path": "sprites/spr_debug_console_joint/spr_debug_console_joint.yy",
+  },
   "solid": false,
   "visible": true,
   "spriteMaskId": null,
@@ -18,6 +21,7 @@
   "physicsKinematic": false,
   "physicsShapePoints": [],
   "eventList": [
+    {"isDnD":false,"eventNum":64,"eventType":8,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
     {"isDnD":false,"eventNum":0,"eventType":0,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
   ],
   "properties": [],
@@ -27,7 +31,7 @@
     "path": "folders/Objects/system objects.yy",
   },
   "resourceVersion": "1.0",
-  "name": "obj_debug_console",
+  "name": "obj_debug_console_joint",
   "tags": [],
   "resourceType": "GMObject",
 }
