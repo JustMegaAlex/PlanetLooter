@@ -59,8 +59,7 @@ testPathFinding = {
 			for (var i = 0; i < array_length(self.path) - 1; ++i) {
 			    var p = self.path[i]
 				var pp = self.path[i + 1]
-				if point_in_camera(p.X, p.Y, 0) or point_in_camera(pp.X, pp.Y, 0)
-					draw_line_color(p.X, p.Y, pp.X, pp.Y, c_yellow, c_yellow)
+				draw_line_color(p.X, p.Y, pp.X, pp.Y, c_yellow, c_yellow)
 			}
 		}
 		self.graph.DebugDrawer.draw()

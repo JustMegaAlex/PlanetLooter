@@ -273,6 +273,7 @@ function AstarGraph() constructor {
 			var _iter = new IterStruct(node.links)
 			while _iter.next() {
 				var pp = _iter.value().point
+				//if point_in_camera(p.X, p.Y, 0) or point_in_camera(pp.X, pp.Y, 0)
 				draw_line_color(p.X, p.Y, pp.X, pp.Y, col, col)
 			}
 		}

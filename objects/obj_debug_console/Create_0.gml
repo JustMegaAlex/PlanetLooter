@@ -3,28 +3,44 @@ configuration = {
     toggle_path_finding: {
         action: function() {
             global.debug_test_path_finding = !global.debug_test_path_finding
+			global.show_path_finding_graph = !global.show_path_finding_graph
         }
     }
 }
 
 turned_on = false
+use_fnt = fnt_gui
+
+joint_width = -1
+joint_border_gap = 8
 
 // joints placement
-console_x = window_get_width() - sprite_get_width(spr_debug_console_joint)
+console_y = 10
 console_ystep = sprite_get_height(spr_debug_console_joint)
+
+function get_joint_width(text) {
+	return string_width(text) + joint_border_gap * 2
+}
 
 function turn_on() {
     turned_on = true
     var joints = new IterStruct(configuration)
     var i = 0
+	draw_set_font(use_fnt)
+
     while joints.next() {
         var name = joints.key()
-        var action = joints.value()
-        var jnt = instance_create_layer(console_x, console_ystep * i,
+        var action = joints.value().action
+        var jnt = instance_create_layer(0, console_y + console_ystep * i,
                                         layer, obj_debug_console_joint)
-        jnt.action = action
+        jnt.action_function = action
         jnt.name = name
+		joint_width = max(joint_width, get_joint_width(name))
     }
+	
+	with(obj_debug_console_joint) {
+		setup()
+	}
 }
 
 function turn_off() {

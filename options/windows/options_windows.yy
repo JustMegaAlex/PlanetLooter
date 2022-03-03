@@ -1,6 +1,6 @@
 {
   "ConfigValues": {
-    "Custom": {"option_windows_start_fullscreen":"false","option_windows_scale":"0",},
+    "Custom": {"option_windows_start_fullscreen":"false","option_windows_scale":"1",},
   },
   "option_windows_display_name": "Created with GameMaker Studio 2",
   "option_windows_executable_name": "${project_name}.exe",
