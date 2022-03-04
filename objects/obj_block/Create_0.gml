@@ -7,7 +7,6 @@ function set_resource_data(rdata) {
 	resource_fract_amount = rdata.amount
 }
 
-
 function set_hit(attacker, weapon) {
 	hp -= weapon.mining
 	if resource_data.amount {
@@ -36,7 +35,7 @@ vsp = 0
 hp_start = 8
 hp = hp_start
 image_speed = 0
-resource_data = noone
+resource_data = new BlockResourceData()
 resource_start_amount = 0
 resource_fract_amount = 0
 i = -1

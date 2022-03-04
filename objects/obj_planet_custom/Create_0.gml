@@ -1,6 +1,6 @@
 
 
-function ResourceData(type, amount, tile_index) constructor {
+function BlockResourceData(type, amount, tile_index) constructor {
 	self.type = type
 	self.amount = amount
 	self.tile_index = tile_index
@@ -94,7 +94,7 @@ function get_resource_data_by_mesh(val) {
 		var tile_index = data[3]
 	    if val <= min_mesh_val {
 			var amount = round(val/min_mesh_val * max_amount)
-			return new ResourceData(type, amount, tile_index)
+			return new BlockResourceData(type, amount, tile_index)
 		}
 	}
 	throw " :get_resource_data_by_mesh: input error val = " + string(val)

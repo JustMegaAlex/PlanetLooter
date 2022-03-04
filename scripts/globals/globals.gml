@@ -20,13 +20,13 @@ function reset_globals() {
 // debug
 global.DEBUG = true
 global.ai_attack_off = false
-global.player_immortal = false
-global.no_damage = false
+global.ai_show_move_routes = false
 global.enable_instant_planet_move = true
 global.enable_change_fps = true
+global.player_immortal = false
+global.no_damage = false
 global.show_planets_data = false
 global.show_ai_patrol_routes = false
-global.ai_show_move_routes = false
 global.show_alert_tower_stuff = true
 global.show_path_finding_graph = false
 global.debug_test_path_finding = false

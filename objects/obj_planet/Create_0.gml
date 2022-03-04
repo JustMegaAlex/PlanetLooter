@@ -4,10 +4,13 @@ size = 0
 background_is_drawn = true
 assign_creation_arguments()
 
-function ResourceData(type, amount, tile_index) constructor {
-	self.type = type
-	self.amount = amount
-	self.tile_index = tile_index
+function default_init() {
+	if size == 0 {
+		if image_xscale != image_yscale
+			throw "\nPlanet default dimensions must be equal"
+		size = image_xscale
+		is_generated = false
+	}
 }
 
 function generate_terrain(tmesh) {
@@ -30,6 +33,21 @@ function generate_terrain(tmesh) {
 			}
 			tmesh[@ i][@ j] = terrain_add(i, j, terrain_type, rdata)
 		}
+	}
+	return tmesh
+}
+
+function get_terrain(tmesh) {
+	var list = ds_list_create()
+	var list_size = instance_place_list(x, y, obj_block, list, false)
+    var x0 = left_coord()
+    var y0 = top_coord()
+	for (var i = 0; i < list_size; ++i) {
+	    var inst = list[| i]
+        var ii = (inst.x - x0) / global.grid_size
+        var jj = (inst.y - y0) / global.grid_size
+        tmesh[@ ii][@ jj] = inst
+        inst.planet_inst = id
 	}
 	return tmesh
 }
@@ -115,10 +133,10 @@ function get_resource_data_by_mesh(val) {
 		tile_index = data[3]
 	    if val <= min_mesh_val {
 			amount = round(val/min_mesh_val * max_amount)
-			return new ResourceData(type, amount, tile_index)
+			return new BlockResourceData(type, amount, tile_index)
 		}
 	}
-	return new ResourceData(type, max_amount, tile_index)
+	return new BlockResourceData(type, max_amount, tile_index)
 	//throw " :get_resource_data_by_mesh: input error val = " + string(val)
 
 }
@@ -181,7 +199,7 @@ function draw_tiles() {
 function tiles_redraw_region(i, j, ni, nj) {
 	for (var ii = i; ii< i + ni; ++ii) {
 	    for (var jj = j; jj < j + nj; ++jj) {
-			self._draw_tile(ii, jj, true)
+			    self._draw_tile(ii, jj, true)
 		}
 	}
 }
@@ -227,6 +245,8 @@ function collapse_mesh_cells(mesh, bound_value) {
 	return mesh
 }
 
+is_generated = true
+default_init()
 
 visible = true
 
@@ -255,7 +275,11 @@ organic_layer_depth = 3
 perlin_grads_cell_size = 4
 terrain_mesh = array2d(size+2, size+2, noone)
 resource_mesh = array2d(size+2, size+2, noone)
-terrain_mesh = generate_terrain(terrain_mesh)
+
+if is_generated
+	terrain_mesh = generate_terrain(terrain_mesh)
+else
+	make_late_init()
 
 //// tiles
 tm_size = size + 1
@@ -271,6 +295,7 @@ tile_map_resources_id = layer_tilemap_create("tiles_resources",
 											ts_planet_resources,
 											tm_size,
 											tm_size)
+
 draw_tiles()
 
 if background_is_drawn {

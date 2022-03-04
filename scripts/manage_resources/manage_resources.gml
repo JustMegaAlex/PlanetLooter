@@ -2,6 +2,12 @@
 
 global.resource_types = {}
 
+function BlockResourceData(type="empty", amount=0, tile_index=0) constructor { // "
+	self.type = type
+	self.amount = amount
+	self.tile_index = tile_index
+}
+
 function ResourceType(name, img_index, cost, production_time=60) constructor {
 	self.name = name
 	self.is_bullet = false // is defined by weapon system
