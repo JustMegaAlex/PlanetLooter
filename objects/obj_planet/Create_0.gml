@@ -44,10 +44,12 @@ function get_terrain(tmesh) {
     var y0 = top_coord()
 	for (var i = 0; i < list_size; ++i) {
 	    var inst = list[| i]
-        var ii = (inst.x - x0) / global.grid_size
-        var jj = (inst.y - y0) / global.grid_size
+        var ii = (inst.x - x0) / global.grid_size + 1
+        var jj = (inst.y - y0) / global.grid_size + 1
         tmesh[@ ii][@ jj] = inst
         inst.planet_inst = id
+		inst.i = ii
+		inst.j = jj
 	}
 	return tmesh
 }
