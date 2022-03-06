@@ -63,9 +63,10 @@ function state_switch_search() {
 	searching = search_time
 }
 
-function state_switch_on_route(route) {
+function state_switch_on_route(route=undefined) {
 	state = "on_route"
-	set_move_route(route)
+	if route
+		set_move_route(route)
 }
 
 function state_switch_mining() {
@@ -76,6 +77,12 @@ function state_switch_mining() {
 
 function state_switch_collect() {
 	state = "collect"
+}
+
+function state_switch_set_direction(_dir) {
+	set_dir_to(_dir)
+	set_sp_to(0, _dir)
+	state = "set_direction"
 }
 
 function ai_return_to_home() {
@@ -260,6 +267,7 @@ function find_mining_block_and_point() {
 
 //// behavior
 state = "idle"
+on_finished_method = undefined
 on_route_finished_method = undefined
 move_route = []
 move_route_point_to = undefined

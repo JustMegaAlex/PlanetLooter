@@ -18,8 +18,13 @@ function set_dir_to(_dir_to) {
 }
 
 function update_dir(rot_sp=rotary_sp) {
-	var _diff = angle_difference(dir, dir_to)
-	dir = approach(dir, dir - _diff, rot_sp)
+	var diff = angle_difference(dir_to, dir)
+	if abs(diff) < rot_sp {
+		dir = dir_to
+		return true
+	}
+	var sign_ = sign(diff)
+	dir += rotary_sp * sign_
 }
 
 function get_abs_sp() {

@@ -35,6 +35,7 @@ global.debug_test_path_finding = false
 global.ai_max_partol_route_length = 4
 global.ai_rebel_block_extra_dist = 1
 global.ai_mobs_look_for_collectibles_radius = 80
+global.ai_fine_movement_dist_treshold = 100
 global.path_finding_graph_collison_line_width = 30
 global.enemy_attack_formation_snipers_fract = 0.5
 global.gen_create_enemies = true

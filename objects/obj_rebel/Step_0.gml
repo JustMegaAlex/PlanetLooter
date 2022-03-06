@@ -60,10 +60,6 @@ switch state {
 	}
 
 	case "on_route": {
-		if colliding_with {
-			var new_dir = point_direction(colliding_with.x, colliding_with.y, x, y)
-			dir = new_dir
-		}
 		if move_route_point_to == undefined
 			if update_route() == undefined {
 				var on_finished = on_route_finished_method
@@ -79,16 +75,28 @@ switch state {
 			break
 		}
 		set_dir_to(point_dir(p.X, p.Y))
+		self.set_sp_to(sp.normal, dir)
 		var _dist = point_dist(p.X, p.Y)
 		var _sp = self.get_abs_sp()
-		if _dist < sp.normal {
+		if _dist < global.grid_size * 0.5 {
 			update_route()
-			self.set_sp_to(sp.normal, dir)
 		}
-		else if (_dist < sp.normal * 2) and (_sp > sp.normal * 0.1)
-			self.set_sp_to(_sp * 0.5, dir)
-		else 
-			self.set_sp_to(sp.normal, dir)
+		else if (_dist < global.ai_fine_movement_dist_treshold)
+				and (abs(dir - dir_to) > 1) {
+			state_switch_set_direction(point_dir(p.X, p.Y))
+			on_finished_method = state_switch_on_route
+		}
+		break
+	}
+	
+	case "set_direction": {
+		if dir == dir_to and get_abs_sp() == 0 {
+			if on_finished_method != undefined {
+				on_finished_method()
+				break
+			}
+			state_switch_idle()	
+		}
 		break
 	}
 
