@@ -108,7 +108,7 @@ input_h = key_right - key_left
 input_v = key_down - key_up
 move_h = key_right * right_free - key_left * left_free
 move_v = key_down * down_free - key_up * up_free
-var input = (abs(move_h) or abs(move_v)) // * !create_module_ui_inst
+var input = (abs(move_h) or abs(move_v))
 
 // cruise mode
 if in_cruise_mode >= 1 {

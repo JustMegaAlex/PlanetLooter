@@ -117,7 +117,9 @@
     {"id":{"name":"spr_enemy","path":"sprites/spr_enemy/spr_enemy.yy",},"order":5,},
     {"id":{"name":"snd_laser4","path":"sounds/snd_laser4/snd_laser4.yy",},"order":1,},
     {"id":{"name":"obj_dummy","path":"objects/obj_dummy/obj_dummy.yy",},"order":0,},
+    {"id":{"name":"obj_rebel_custom","path":"objects/obj_rebel_custom/obj_rebel_custom.yy",},"order":5,},
     {"id":{"name":"icon","path":"sprites/icon/icon.yy",},"order":1,},
+    {"id":{"name":"obj_test_beacon","path":"objects/obj_test_beacon/obj_test_beacon.yy",},"order":0,},
     {"id":{"name":"astar","path":"scripts/astar/astar.yy",},"order":14,},
     {"id":{"name":"manage_weapons","path":"scripts/manage_weapons/manage_weapons.yy",},"order":7,},
     {"id":{"name":"snd_warp","path":"sounds/snd_warp/snd_warp.yy",},"order":6,},
@@ -191,6 +193,7 @@
     {"folderPath":"folders/Objects/world objects/planets.yy","order":3,"resourceVersion":"1.0","name":"planets","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/Objects/system objects.yy","order":27,"resourceVersion":"1.0","name":"system objects","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/Objects/system objects/effects.yy","order":10,"resourceVersion":"1.0","name":"effects","tags":[],"resourceType":"GMFolder",},
+    {"folderPath":"folders/Objects/world objects/test.yy","order":10,"resourceVersion":"1.0","name":"test","tags":[],"resourceType":"GMFolder",},
   ],
   "AudioGroups": [
     {"targets":-1,"resourceVersion":"1.3","name":"audiogroup_default","resourceType":"GMAudioGroup",},

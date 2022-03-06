@@ -16,6 +16,23 @@ function SectorNode(xx, yy, nodes) constructor {
 }
 
 function generate_star_system() {
+	var custom_planets = get_instances(obj_planet)
+	var planets = generate_planets()
+	array_expand(planets, custom_planets)
+	global.astar_graph = new AstarGraph()
+	setup_path_finding_graph(global.astar_graph, global.astar_graph_inner, planets)
+	//generate_asteroids(xmin, ymin, xmax, ymax)
+	level = min(global.level, array_length(buildings_progression) - 1)
+	// enemies
+	var level = min(global.level, array_length(enemies_progression) - 1)
+	var enemies_set = enemies_progression[level]
+	if global.gen_create_enemies
+		create_enemies(enemies_set)
+}
+
+function generate_planets() {
+	if !global.gen_create_planets
+		return []
 	generate_star_system_graph()
 	var xmin = infinity
 	var ymin = infinity
@@ -32,16 +49,7 @@ function generate_star_system() {
 		ymin = min(n.Y, ymin)
 		ymax = max(n.Y, ymax)
 	}
-	global.astar_graph = new AstarGraph()
-	setup_path_finding_graph(global.astar_graph, global.astar_graph_inner, planets)
-	//generate_asteroids(xmin, ymin, xmax, ymax)
-	level = min(global.level, array_length(buildings_progression) - 1)
-	var buildings_set = buildings_progression[level]
-	// enemies
-	var level = min(global.level, array_length(enemies_progression) - 1)
-	var enemies_set = enemies_progression[level]
-	if global.gen_create_enemies
-		create_enemies(enemies_set)
+	return planets
 }
 
 function generate_star_system_graph() {
