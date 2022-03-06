@@ -78,24 +78,8 @@ switch state {
 		self.set_sp_to(sp.normal, dir)
 		var _dist = point_dist(p.X, p.Y)
 		var _sp = self.get_abs_sp()
-		if _dist < global.grid_size * 0.5 {
+		if _dist < global.grid_size {
 			update_route()
-		}
-		else if (_dist < global.ai_fine_movement_dist_treshold)
-				and (abs(dir - dir_to) > 1) {
-			state_switch_set_direction(point_dir(p.X, p.Y))
-			on_finished_method = state_switch_on_route
-		}
-		break
-	}
-	
-	case "set_direction": {
-		if dir == dir_to and get_abs_sp() == 0 {
-			if on_finished_method != undefined {
-				on_finished_method()
-				break
-			}
-			state_switch_idle()	
 		}
 		break
 	}
@@ -154,6 +138,8 @@ update_dir()
 
 hsp = approach(hsp, hsp_to + battle_strafe_vec.X, acc)
 vsp = approach(vsp, vsp_to + battle_strafe_vec.Y, acc)
-colliding_with = scr_move_coord_contact_obj(hsp, vsp, obj_block)
+//colliding_with = scr_move_coord_contact_obj(hsp, vsp, obj_block)
+scr_move_coord(hsp, vsp)
+colliding_with = instance_place(x, y, obj_block)
 
 position.set(x, y)

@@ -65,7 +65,7 @@ function state_switch_search() {
 
 function state_switch_on_route(route=undefined) {
 	state = "on_route"
-	if route
+	if route != undefined
 		set_move_route(route)
 }
 
