@@ -38,6 +38,7 @@ global.ai_mobs_look_for_collectibles_radius = 80
 global.path_finding_graph_collison_line_width = 30
 global.enemy_attack_formation_snipers_fract = 0.5
 global.gen_create_enemies = true
+global.gen_create_planets = true
 global.gen_planet_min_size = 10
 global.gen_planet_max_size = 15
 global.gen_max_planet_dist = 1000
@@ -79,7 +80,8 @@ switch MODE {
 		//global.show_ai_patrol_routes = true
 		//global.ai_attack_off = true
 
-		//global.ai_max_partol_route_length = 10
+		//global.ai_max_patrol_route_length = 10
+		global.gen_create_planets = false
 		global.gen_min_planet_number = 6
 		global.gen_max_planet_number = 6
 		global.ai_show_move_routes = true

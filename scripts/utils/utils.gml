@@ -358,3 +358,11 @@ function inst_set_pos(inst, xx, yy) {
 	inst.x = xx
 	inst.y = yy
 }
+
+function get_instances(obj) {
+    var it = new IterInstances(obj)
+    var arr = []
+    while it.next()
+        array_push(arr, it.get())
+    return arr
+}
