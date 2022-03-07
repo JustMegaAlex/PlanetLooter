@@ -83,7 +83,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_collectible","path":"sprites/spr_collectible/spr_collectible.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_collectible",
     "tags": [],
     "resourceType": "GMSequence",

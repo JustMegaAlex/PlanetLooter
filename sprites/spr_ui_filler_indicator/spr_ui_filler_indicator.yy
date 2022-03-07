@@ -63,7 +63,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_ui_filler_indicator","path":"sprites/spr_ui_filler_indicator/spr_ui_filler_indicator.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_ui_filler_indicator",
     "tags": [],
     "resourceType": "GMSequence",

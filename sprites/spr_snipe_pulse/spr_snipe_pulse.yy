@@ -59,7 +59,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_snipe_pulse","path":"sprites/spr_snipe_pulse/spr_snipe_pulse.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_snipe_pulse",
     "tags": [],
     "resourceType": "GMSequence",

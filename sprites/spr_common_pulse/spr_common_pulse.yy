@@ -59,7 +59,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_common_pulse","path":"sprites/spr_common_pulse/spr_common_pulse.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_common_pulse",
     "tags": [],
     "resourceType": "GMSequence",

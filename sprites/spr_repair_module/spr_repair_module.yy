@@ -59,7 +59,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_repair_module","path":"sprites/spr_repair_module/spr_repair_module.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_repair_module",
     "tags": [],
     "resourceType": "GMSequence",

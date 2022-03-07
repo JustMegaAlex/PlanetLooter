@@ -63,7 +63,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_building_ui_transp","path":"sprites/spr_building_ui_transp/spr_building_ui_transp.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_building_ui_transp",
     "tags": [],
     "resourceType": "GMSequence",

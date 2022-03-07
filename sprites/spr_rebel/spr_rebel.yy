@@ -59,7 +59,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_rebel","path":"sprites/spr_rebel/spr_rebel.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_rebel",
     "tags": [],
     "resourceType": "GMSequence",

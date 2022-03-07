@@ -142,7 +142,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_debug_console_joint","path":"sprites/spr_debug_console_joint/spr_debug_console_joint.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_debug_console_joint",
     "tags": [],
     "resourceType": "GMSequence",

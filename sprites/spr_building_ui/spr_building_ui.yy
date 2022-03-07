@@ -63,7 +63,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_building_ui","path":"sprites/spr_building_ui/spr_building_ui.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_building_ui",
     "tags": [],
     "resourceType": "GMSequence",

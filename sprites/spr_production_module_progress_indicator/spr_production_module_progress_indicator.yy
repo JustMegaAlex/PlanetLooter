@@ -138,7 +138,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_production_module_progress_indicator","path":"sprites/spr_production_module_progress_indicator/spr_production_module_progress_indicator.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_production_module_progress_indicator",
     "tags": [],
     "resourceType": "GMSequence",

@@ -59,7 +59,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_planet_mask","path":"sprites/spr_planet_mask/spr_planet_mask.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_planet_mask",
     "tags": [],
     "resourceType": "GMSequence",

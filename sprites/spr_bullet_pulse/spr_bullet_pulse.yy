@@ -63,7 +63,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_bullet_pulse","path":"sprites/spr_bullet_pulse/spr_bullet_pulse.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_bullet_pulse",
     "tags": [],
     "resourceType": "GMSequence",

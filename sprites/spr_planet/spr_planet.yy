@@ -59,7 +59,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_planet","path":"sprites/spr_planet/spr_planet.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_planet",
     "tags": [],
     "resourceType": "GMSequence",

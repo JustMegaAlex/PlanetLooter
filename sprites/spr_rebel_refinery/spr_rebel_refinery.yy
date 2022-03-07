@@ -59,7 +59,7 @@
     "eventToFunction": {},
     "eventStubScript": null,
     "parent": {"name":"spr_rebel_refinery","path":"sprites/spr_rebel_refinery/spr_rebel_refinery.yy",},
-    "resourceVersion": "1.3",
+    "resourceVersion": "1.4",
     "name": "spr_rebel_refinery",
     "tags": [],
     "resourceType": "GMSequence",
