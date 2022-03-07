@@ -109,33 +109,9 @@ function path_blocked(xx, yy) {
 						obj_planet_mask, 12)
 }
 
-function patrol_update_route() {
-	patrol_point_to = patrol_get_next_point()
-	if !path_blocked(patrol_point_to.X, patrol_point_to.Y) {
-		set_move_route([patrol_point_to])
-		return true
-	}
-	move_route = global.astar_graph.find_path(position, patrol_point_to)
-	// fail
-	if move_route == global.AstarPathFindFailed {
-		self.astar_failed()
-		return false
-	}
-	set_move_route(move_route)
-}
-
 function update_route() {
 	move_route_point_to = iter_move_route.next()
 	return move_route_point_to
-}
-
-function patrol_update_move_to() {
-	update_route()
-	if move_route_point_to != undefined
-		return true
-	patrol_update_route()
-	update_route()
-	return true
 }
 
 function patrol_get_next_point() {

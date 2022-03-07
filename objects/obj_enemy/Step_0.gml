@@ -12,11 +12,7 @@ dist_to_player = inst_dist(obj_looter)
 switch state {
 	case "idle": {
 		if is_patrol {
-			if patrol_point_to {
-			    var p = patrol_point_to
-				state_switch_on_route(p.X, p.Y)
-			}
-			break
+
 		}
 		if dist_to_player < detection_dist {
 			warmedup = 1
@@ -107,11 +103,10 @@ switch state {
 				break
 			}
 		}
+
 		if not move_route_point_to
 			update_route()
 		var p = move_route_point_to
-		if (p == undefined) and is_patrol
-			patrol_update_move_to()
 		if p == undefined {
 			state_switch_idle()
 			move_to_set_coords(xst, yst)
@@ -121,11 +116,8 @@ switch state {
 		set_dir_to(point_dir(p.X, p.Y))
 		self.set_sp_to(sp.normal, dir)
 		var dist_to_route_point = point_dist(p.X, p.Y)
-		if dist_to_route_point > prev_dist_to_route_point
-			self.set_sp_to(sp.normal*0.25, dir)
 		if point_dist(p.X, p.Y) < global.grid_size
 			update_route()
-		prev_dist_to_route_point = dist_to_route_point
 		if (dist_to_player < detection_dist) and !is_pursuing_target
 			state_switch_attack(obj_looter, true)
 		break

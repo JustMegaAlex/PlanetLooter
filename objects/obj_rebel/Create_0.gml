@@ -172,15 +172,6 @@ function update_route() {
 	return move_route_point_to
 }
 
-function patrol_update_move_to() {
-	update_route()
-	if move_route_point_to != undefined
-		return true
-	patrol_update_route()
-	update_route()
-	return true
-}
-
 function patrol_set_next_point() {
 	patrol_point_to = noone
 	var _prev_index = patrol_point_index
