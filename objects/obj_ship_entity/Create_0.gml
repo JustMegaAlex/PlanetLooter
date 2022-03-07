@@ -31,6 +31,27 @@ function get_abs_sp() {
 	return point_distance(0, 0, hsp, vsp)
 }
 
+#region ai
+
+function move_to_set_coords(xx, yy) {
+	if !path_blocked(xx, yy)
+		return true
+	var route = astar_find_path(position, new Vec2d(xx, yy))
+	if route == global.AstarPathFindFailed
+		return false
+	set_move_route(route)
+	return true
+}
+
+function ai_travel_to_point(xx, yy) {
+	if move_to_set_coords(xx, yy) {
+		state = "on_route"
+		return true
+	}
+	return false
+}
+#endregion
+
 #region resources
 
 Resources = {
@@ -202,6 +223,8 @@ function try_repair() {
 		hp++
 }
 #endregion
+
+make_late_init()
 
 // systems
 hp = 7

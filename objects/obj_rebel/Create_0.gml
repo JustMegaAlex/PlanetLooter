@@ -102,14 +102,6 @@ function ai_return_to_base_or_idle() {
 	set_move_route(move_route)
 }
 
-function ai_travel_to_point(xx, yy) {
-	if move_to_set_coords(xx, yy) {
-		state = "on_route"
-		return true
-	}
-	return false
-}
-
 function ai_start_mining_or_idle() {
 	var res = find_mining_block_and_point()
 	mining_block = res.block
@@ -205,17 +197,6 @@ function patrol_set_next_point() {
 function set_start_point(xx, yy) {
 	xst = xx
 	yst = yy
-}
-
-function move_to_set_coords(xx, yy) {
-	if !path_blocked(xx, yy)
-		return true
-	var route = astar_find_path(position, new Vec2d(xx, yy))
-	//var route = global.astar_graph.find_path(position, new Vec2d(xx, yy))
-	if route == global.AstarPathFindFailed
-		return false
-	set_move_route(route)
-	return true
 }
 
 function astar_failed() {

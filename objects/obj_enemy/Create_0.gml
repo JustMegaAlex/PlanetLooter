@@ -186,16 +186,6 @@ function set_start_point(xx, yy) {
 	yst = yy
 }
 
-function move_to_set_coords(xx, yy) {
-	if !path_blocked(xx, yy)
-		return true
-	var route = global.astar_graph.find_path(position, new Vec2d(xx, yy))
-	if route == global.AstarPathFindFailed
-		return false
-	set_move_route(route)
-	return true
-}
-
 function astar_failed() {
 	state = ""
 	set_sp_to(0, 0)

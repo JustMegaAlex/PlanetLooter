@@ -63,9 +63,12 @@ function astar_graph_add_point(p) {
 function astar_find_path(st, end_) {
 	var nst = astar_graph_add_point(st)
 	var nend = astar_graph_add_point(end_)
-	if nst == undefined or nend == undefined
+	var path = undefined
+	if nst and nend {
+		path = global.astar_graph.find_path(nst.point, nend.point)
+	} else {
 		return global.AstarPathBlocked
-	var path = global.astar_graph.find_path(nst.point, nend.point)
+	}
 	if variable_struct_exists(nst, "use_once")
 		global.astar_graph.remove_node(nst)
 	if variable_struct_exists(nend, "use_once")

@@ -62,8 +62,15 @@ switch state {
             ai_attack_move_sign = 1
         else
             ai_attack_move_sign = 0
-		if dist_to_player > loose_dist
+		if dist_to_player > loose_dist {
 			state_switch_idle()
+			break
+		}
+		if collision_line(x, y, target.x, target.y, obj_block, false, true) {
+			is_pursuing_target = true
+			ai_travel_to_point(target.x, target.y)
+			break
+		}
 		self.set_sp_to(sp.normal * ai_attack_move_sign, dir)
 		break
 	}
@@ -93,6 +100,13 @@ switch state {
 	}
 
 	case "on_route": {
+		if is_pursuing_target {
+			if !collision_line(x, y, target.x, target.y, obj_block, false, true) {
+				state_switch_attack(target)
+				is_pursuing_target = false
+				break
+			}
+		}
 		if not move_route_point_to
 			update_route()
 		var p = move_route_point_to
@@ -109,10 +123,10 @@ switch state {
 		var dist_to_route_point = point_dist(p.X, p.Y)
 		if dist_to_route_point > prev_dist_to_route_point
 			self.set_sp_to(sp.normal*0.25, dir)
-		if point_dist(p.X, p.Y) < (sp.normal * 5)
+		if point_dist(p.X, p.Y) < global.grid_size
 			update_route()
 		prev_dist_to_route_point = dist_to_route_point
-		if dist_to_player < detection_dist
+		if (dist_to_player < detection_dist) and !is_pursuing_target
 			state_switch_attack(obj_looter, true)
 		break
 	}
@@ -122,6 +136,8 @@ update_dir()
 
 hsp = approach(hsp, hsp_to + battle_strafe_vec.X, acc)
 vsp = approach(vsp, vsp_to + battle_strafe_vec.Y, acc)
-scr_move_coord_contact_obj(hsp, vsp, obj_block)
+//colliding_with = scr_move_coord_contact_obj(hsp, vsp, obj_block)
+scr_move_coord(hsp, vsp)
+colliding_with = instance_place(x, y, obj_block)
 
 position.set(x, y)
