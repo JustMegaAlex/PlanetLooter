@@ -73,5 +73,31 @@ function astar_find_path(st, end_) {
 		global.astar_graph.remove_node(nst)
 	if variable_struct_exists(nend, "use_once")
 		global.astar_graph.remove_node(nend)
-	return path
+	return smooth_out_path(path)
+}
+
+function smooth_out_path(path) {
+    if array_length(path) <= 2
+        return path
+    var it = new IterArray(path)
+    var smooth_from = it.next()
+    var new_path = [smooth_from]
+    var smooth_to
+    var prev_smooth_to = it.next()
+    while it.next() {
+        smooth_to = it.get()
+        if collision_line(smooth_from.X, smooth_from.Y,
+                          smooth_to.X, smooth_to.Y, obj_block, false, true) {
+            array_push(new_path, prev_smooth_to)
+            array_push(new_path, smooth_to)
+            smooth_from = smooth_to
+            prev_smooth_to = it.next()
+            continue
+        }
+        prev_smooth_to = smooth_to
+    }
+    if array_back(new_path) != smooth_to {
+        array_push(new_path, smooth_to)
+    }
+    return new_path
 }

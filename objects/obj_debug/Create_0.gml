@@ -43,11 +43,13 @@ testPathFinding = {
 			self.start = new Vec2d(mouse_x, mouse_y)
 			self.graph.clear_all_scores()
 			self.path = astar_find_path(start, finish)
+            self.path = smooth_out_path(self.path)
 		}
 		if mouse_check_button_pressed(mb_right) {
 			self.finish = new Vec2d(mouse_x, mouse_y)
 			self.graph.clear_all_scores()
 			self.path = astar_find_path(start, finish)
+            self.path = smooth_out_path(self.path)
 		}
 		if keyboard_check_pressed(ord("N"))
 			graph.DebugDrawer.switch_iteration(1)

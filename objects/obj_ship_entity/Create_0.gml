@@ -33,6 +33,11 @@ function get_abs_sp() {
 
 #region ai
 
+function set_move_route(route) {
+	iter_move_route = new IterArray(route)
+	move_route = route
+}
+
 function move_to_set_coords(xx, yy) {
 	if !path_blocked(xx, yy)
 		return true

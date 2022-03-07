@@ -109,6 +109,10 @@ function approach(val, to, amount) {
 	return val + sp
 }
 
+function array_back(arr) {
+    return arr[array_length(arr) - 1]
+}
+
 function array_sum(arr) {
 	var res = 0
 	for (var i = 0; i < array_length(resources); ++i) {

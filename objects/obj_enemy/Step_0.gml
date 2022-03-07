@@ -15,21 +15,11 @@ switch state {
 
 		}
 		if dist_to_player < detection_dist {
-			warmedup = 1
 			state_switch_attack(obj_looter, true)
 			break
 		}
 		if point_dist(xst, yst) > start_area_radius {
 			state_switch_on_route(xst, yst)
-		}
-		break
-	}
-
-	case "warmup": {
-		warmedup += warmup_sp
-		if warmedup >= 1 {
-			state_switch_search()	
-			break
 		}
 		break
 	}
@@ -52,12 +42,9 @@ switch state {
 	case "attack": {
         compute_strafe_vec()
 		set_dir_to(inst_dir(target))
-		if dist_to_player < attack_min_dist
-			ai_attack_move_sign = -1
-        else if dist_to_player > attack_max_dist 
-            ai_attack_move_sign = 1
-        else
-            ai_attack_move_sign = 0
+        if dist_to_player > attack_max_dist {
+            ai_travel_to_point(target.x, target.y)
+        }
 		if dist_to_player > loose_dist {
 			state_switch_idle()
 			break
@@ -67,19 +54,16 @@ switch state {
 			ai_travel_to_point(target.x, target.y)
 			break
 		}
-		self.set_sp_to(sp.normal * ai_attack_move_sign, dir)
-		break
-	}
 
-	case "search": {
-		self.set_sp_to(sp.normal, dir)
-		if dist_to_player < detection_dist_search {
-			state_switch_attack(obj_looter, true)
-			break
-		}
-		if not --searching {
-			state_switch_idle()
-		}
+        var p = move_route_point_to
+        if p {
+            set_dir_to(point_dir(p.X, p.Y))
+            self.set_sp_to(sp.normal, dir)
+            if point_dist(p.X, p.Y) < global.grid_size
+                update_route()
+            break
+        }
+        self.set_sp_to(0, dir)
 		break
 	}
 
@@ -128,7 +112,6 @@ update_dir()
 
 hsp = approach(hsp, hsp_to + battle_strafe_vec.X, acc)
 vsp = approach(vsp, vsp_to + battle_strafe_vec.Y, acc)
-//colliding_with = scr_move_coord_contact_obj(hsp, vsp, obj_block)
 scr_move_coord(hsp, vsp)
 colliding_with = instance_place(x, y, obj_block)
 

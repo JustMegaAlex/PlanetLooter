@@ -100,10 +100,6 @@ function compute_strafe_vec() {
 	// manuver if enough space
 }
 
-function set_move_route(route) {
-	iter_move_route = new IterArray(route)
-}
-
 function path_blocked(xx, yy) {
 	return collision_line_width(x, y, xx, yy,
 						obj_planet_mask, 12)
@@ -231,7 +227,7 @@ shoot_dir_wiggle = 8
 reloading = 0
 weapon.reload_time = 25
 bullet_sp = 10
-warmedup = 0
+warmedup = 1
 warmup_sp = 0.01
 
 // keeping distance with friends

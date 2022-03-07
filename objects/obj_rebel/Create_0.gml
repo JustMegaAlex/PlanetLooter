@@ -156,12 +156,6 @@ function compute_strafe_vec() {
 	// manuver if enough space
 }
 
-function set_move_route(route) {
-	iter_move_route = new IterArray(route)
-	move_route = route
-	test = true
-}
-
 function path_blocked(xx, yy) {
 	return collision_line_width(x, y, xx, yy,
 						obj_planet_mask, 16)
