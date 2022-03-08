@@ -218,7 +218,7 @@ function setup_path_finding_graph(outer_graph, inner_graph, planets) {
 			}
 		}
 		for (var j = 0; j < size; ++j) {
-		    var p = inner_points[jj, j]
+		    var p = inner_points[ii, j]
 			if !collision_line(outer_p.X, outer_p.Y, p.X, p.Y, obj_block, false, false) {
 				var n = graph.get_or_create(p)
 				outer_n.add_link(n)

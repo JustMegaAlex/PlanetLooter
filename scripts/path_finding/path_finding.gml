@@ -73,7 +73,9 @@ function astar_find_path(st, end_) {
 		global.astar_graph.remove_node(nst)
 	if variable_struct_exists(nend, "use_once")
 		global.astar_graph.remove_node(nend)
-	return smooth_out_path(path)
+    if is_array(path)
+        return smooth_out_path(path)
+    return global.AstarPathFindFailed
 }
 
 function smooth_out_path(path) {

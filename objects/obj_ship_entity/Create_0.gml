@@ -43,6 +43,7 @@ function move_to_set_coords(xx, yy) {
 		return true
 	var route = astar_find_path(position, new Vec2d(xx, yy))
 	if route == global.AstarPathFindFailed
+            or route == global.AstarPathBlocked
 		return false
 	set_move_route(route)
 	return true
