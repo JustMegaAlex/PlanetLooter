@@ -123,10 +123,10 @@ function AstarGraph() constructor {
 
 	_form_path_points = function(start, finish) {
 		path = [finish.point]
-		var n = finish
+		var n = finish._lowest_score_link()
 		while n != start {
-			n = n._lowest_score_link()
 			array_insert(path, 0, n.point)
+			n = n._lowest_score_link()
 		}
 		return path
 	}

@@ -79,11 +79,9 @@ function Vec2d(xx, yy, is_polar=false) constructor {
 		return self
 	}
 	
-	//add_polar_ = function(l, dir) {
-	//	self.X += lengthdir_x(l, dir)
-	//	self.Y += lengthdir_y(l, dir)
-	//	return new Vec2d(self.X, self.Y).add_polar(
-	//}
+	add_polar_ = function(l, dir) {
+		return new Vec2d(self.X, self.Y).add_polar(l, dir)
+	}
 
 	rotated = function(angle) {
 		return new Vec2d(self.len(), self.dir() + angle, true)

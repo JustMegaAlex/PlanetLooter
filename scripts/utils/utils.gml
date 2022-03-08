@@ -59,10 +59,13 @@ function IterArray(_arr) constructor {
 		return current_value
 	}
 	
-	get = function() {
+	get = function(shift=0) {
 		if i == -1
 			throw "\nIterArray.next() wasn't called after creation of IterArray instance\n"
-		return current_value
+		var ii = i + shift
+        if ii < 0 or ii >= len
+            return undefined
+        return arr[ii]
 	}
 	
 	reset = function() {

@@ -78,7 +78,7 @@ switch state {
 		self.set_sp_to(sp.normal, dir)
 		var _dist = point_dist(p.X, p.Y)
 		var _sp = self.get_abs_sp()
-		if _dist < global.grid_size {
+		if _dist < global.ai_mobs_reach_point_treshold {
 			update_route()
 		}
 		break

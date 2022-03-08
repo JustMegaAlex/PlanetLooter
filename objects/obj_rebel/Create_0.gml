@@ -161,11 +161,6 @@ function path_blocked(xx, yy) {
 						obj_planet_mask, 16)
 }
 
-function update_route() {
-	move_route_point_to = iter_move_route.next()
-	return move_route_point_to
-}
-
 function patrol_set_next_point() {
 	patrol_point_to = noone
 	var _prev_index = patrol_point_index

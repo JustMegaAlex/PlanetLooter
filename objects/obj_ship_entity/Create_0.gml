@@ -36,6 +36,18 @@ function get_abs_sp() {
 function set_move_route(route) {
 	iter_move_route = new IterArray(route)
 	move_route = route
+	update_route()
+}
+
+function update_route() {
+	move_route_point_to = iter_move_route.next()
+	return move_route_point_to
+}
+
+function reset_route() {
+    iter_move_route = undefined
+	move_route = []
+    move_route_point_to = undefined
 }
 
 function move_to_set_coords(xx, yy) {
@@ -56,6 +68,21 @@ function ai_travel_to_point(xx, yy) {
 	}
 	return false
 }
+
+function try_move_forward(distance) {
+    var p = position.add_polar_(distance, dir)
+    if !collision_point(p.X, p.Y, obj_block, false, true)
+        set_move_route([p.add_polar(global.ai_mobs_reach_point_treshold, dir)])
+}
+
+function ensure_out_of_terrain() {
+    if !colliding_with
+        return true
+    var p = position_prev
+    set_dir_to(point_dir(p.X, p.Y))
+    try_move_forward(global.grid_size * 0.5)
+}
+
 #endregion
 
 #region resources
@@ -245,6 +272,7 @@ weapon = {
 sp = {normal: 5, cruise: 15, consumption: 0.007}
 
 position = new Vec2d(x, y)
+position_prev = position
 velocity = new Vec2d(0, 0)
 velocity_to = new Vec2d(0, 0)
 acceleration = new Vec2d(0.5, 0.5)
@@ -278,3 +306,4 @@ cargo_load = 0
 
 // ai
 move_route = []
+is_pursuing_target = false
