@@ -40,6 +40,7 @@ global.path_finding_graph_collison_line_width = 30
 global.enemy_attack_formation_snipers_fract = 0
 global.gen_create_enemies = true
 global.gen_create_planets = true
+global.get_optimize_astar_graph = true
 global.gen_planet_min_size = 10
 global.gen_planet_max_size = 15
 global.gen_max_planet_dist = 1000

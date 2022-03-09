@@ -288,6 +288,8 @@ function setup_path_finding_graph(outer_graph, inner_graph, planets) {
 		_connect_inner_with_outer(bottomleft, inner_points, 0, size-1, size, outer_graph)
 		_connect_inner_with_outer(bottomright, inner_points, size-1, size-1, size, outer_graph)
 	}
+	if global.get_optimize_astar_graph
+		optimize_graph(global.astar_graph.graph)
 }
 
 blocks_max_num = 2500

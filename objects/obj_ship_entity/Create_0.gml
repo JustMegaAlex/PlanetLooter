@@ -32,6 +32,12 @@ function get_abs_sp() {
 }
 
 #region ai
+function state_switch_idle() {
+	state = "idle"
+	self.set_sp_to(0, dir)
+	target = noone
+	is_pursuing_target = false
+}
 
 function set_move_route(route) {
 	iter_move_route = new IterArray(route)

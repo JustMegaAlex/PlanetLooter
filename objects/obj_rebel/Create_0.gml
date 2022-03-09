@@ -25,12 +25,6 @@ function get_collectibles_around_me() {
 }
 
 #region ai states
-function state_switch_idle() {
-	state = "idle"
-	self.set_sp_to(0, dir)
-	target = noone
-}
-
 function state_switch_attack_snipe(trg) {
 	if global.ai_attack_off {
 		return

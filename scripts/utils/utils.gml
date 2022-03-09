@@ -12,32 +12,32 @@ function arr_join(arr, sep) {
 
 function IterStruct(_struct) constructor {
 	struct = _struct
-	current_value = undefined
-	current_key = undefined
 	names = variable_struct_get_names(self.struct)
 	len = array_length(names)
-	i = 0
+	i = -1
 
 	next = function() {
+		i++
 		if i >= len
 			return undefined
-		current_key = names[i]
-		current_value = variable_struct_get(self.struct, current_key)
-		i++
-		return current_value
+		return variable_struct_get(self.struct, names[i])
 	}
 	
-	key = function() {
-		return current_key
+	key = function(shift=0) {
+		var ii = i + shift
+        if ii < 0 or ii >= len
+            return undefined
+		return names[ii]
 	}
 	
-	value = function() {
-		return current_value	
+	value = function(shift=0) {
+		var ii = i + shift
+        if ii < 0 or ii >= len
+            return undefined
+		return variable_struct_get(self.struct, names[ii])
 	}
 	
 	reset = function() {
-		current_value = undefined
-		current_key = undefined
 		i = -1
 	}
 }

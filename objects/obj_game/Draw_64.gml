@@ -2,6 +2,8 @@
 scr_debug_show_var("level", global.level)
 scr_debug_show_var("ships", instance_number(obj_enemy))
 scr_debug_show_var("turrets", instance_number(obj_turret))
+scr_debug_show_var("graph", 
+	variable_struct_names_count(global.astar_graph.graph))
 var w = scr_camw(0)
 var t = tips_text
 if !show_tips

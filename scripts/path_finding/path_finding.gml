@@ -34,18 +34,16 @@ function node_gather_links(node, graph) {
 		var lnk = all_nodes.value()
 		if !collision_line(node.point.X, node.point.Y,
 						   lnk.point.X, lnk.point.Y,
-						   obj_planet_mask, false, false)
+						   obj_block, false, false)
 			variable_struct_set(links, point_to_name(lnk.point), lnk)
 	}
 	return links
 }
 
 function astar_graph_add_point(p) {
-	var x0 = p.X, y0 = p.Y
-	p = try_get_inner_point(p)
-	if p == undefined
-		return p
-	var x1 = p.X, y1 = p.Y
+	//p = try_get_inner_point(p)
+	//if p == undefined
+	//	return p
 	if global.astar_graph.check_node_by_point(p)
 		return global.astar_graph.get_by_point(p)
 	var node = new global.astar_graph.Node(p)
@@ -102,4 +100,51 @@ function smooth_out_path(path) {
         array_push(new_path, smooth_to)
     }
     return new_path
+}
+
+function can_be_connected(lnk1, lnk2) {
+	var p = lnk1.point
+	var pp = lnk2.point
+	return !collision_line(p.X, p.Y, pp.X, pp.Y, obj_block, false, true)
+}
+
+function links_connectable(links) {
+	var it = new IterStruct(links)
+	while it.next() {
+		var lnk = it.value()
+		var i = 1
+		while it.value(i) {
+			if !can_be_connected(lnk, it.value(i))
+				return false
+			i++
+		}
+	}
+	return true
+}
+
+function remove_node(graph, node) {
+	var it = new IterStruct(node.links)
+	while it.next() {
+		var lnk = it.value()
+		var i = 1
+		while it.value(i) {
+			var _lnk = it.value(i)
+			lnk.add_link(_lnk)
+			_lnk.add_link(lnk)
+			lnk.remove_link(node)
+			_lnk.remove_link(node)
+			i++
+		}
+	}
+	var name = point_to_name(node.point)
+	variable_struct_remove(graph, name)
+}
+
+function optimize_graph(graph) {
+	var it = new IterStruct(graph)
+	while it.next() {
+		var node = it.value()
+		if links_connectable(node.links)
+			remove_node(graph, node)
+	}
 }
