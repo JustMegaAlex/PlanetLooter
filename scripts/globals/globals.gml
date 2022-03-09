@@ -82,7 +82,7 @@ switch MODE {
 		//global.ai_attack_off = true
 
 		//global.ai_max_patrol_route_length = 10
-		global.gen_create_planets = false
+		global.gen_create_planets = true
 		global.gen_min_planet_number = 6
 		global.gen_max_planet_number = 6
 		global.ai_show_move_routes = true

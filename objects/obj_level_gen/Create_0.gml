@@ -83,7 +83,8 @@ function generate_star_system_graph() {
 				var yy = root.Y + lengthdir_y(dist, dir)
 				for (var ii = 0; ii < array_length(nodes); ++ii) {
 				    var check = nodes[ii]
-					if point_distance(check.X, check.Y, xx, yy) < (dist - 1) {
+					if point_distance(check.X, check.Y, xx, yy) < (dist - 1)
+							or collision_point(check.X, check.Y, obj_planet, false, true) {
 						added = false
 						break
 					}
