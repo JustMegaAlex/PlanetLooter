@@ -1,5 +1,5 @@
 
-// room_resta
+// room_reset
 function reset_globals() {
 	global.arr_patrol_routes = []
 	global.astar_graph.clear()
@@ -76,7 +76,7 @@ switch MODE {
 		global.show_alert_tower_stuff = false
 		global.enable_instant_planet_move = false
 		global.player_immortal = true
-		global.enemy_attack_formation_snipers_fract = 0.5
+		global.enemy_attack_formation_snipers_fract = 0
 		global.debug_test_path_finding = true
 		global.show_path_finding_graph = true
 		//global.show_ai_patrol_routes = true

@@ -1,11 +1,10 @@
 
 event_inherited()
 
-function get_collectibles_around_me() {
-	ds_list_clear(collectibles_around_me)
-	collision_circle_list(x, y, global.ai_mobs_look_for_collectibles_radius,
-						  obj_collectable, false, false, collectibles_around_me, true)
-	return collectibles_around_me
+enum Sides {
+	ours,
+	theirs,
+	neutral,
 }
 
 function set_sp_to(sp, dir) {
@@ -29,6 +28,13 @@ function update_dir(rot_sp=rotary_sp) {
 
 function get_abs_sp() {
 	return point_distance(0, 0, hsp, vsp)
+}
+
+function get_collectibles_around_me() {
+	ds_list_clear(collectibles_around_me)
+	collision_circle_list(x, y, global.ai_mobs_look_for_collectibles_radius,
+						  obj_collectable, false, false, collectibles_around_me, true)
+	return collectibles_around_me
 }
 
 #region ai

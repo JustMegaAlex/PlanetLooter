@@ -63,10 +63,6 @@ function state_switch_on_route(xx, yy) {
 }
 #endregion
 
-//function attack_create_units_formation(list_units) {
-//	var snipers_num = ds_list_size(list_units) * 
-//}
-
 function trigger_friendly_units() {
 	/*
 	see alarm[1]

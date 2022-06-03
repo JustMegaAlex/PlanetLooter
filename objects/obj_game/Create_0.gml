@@ -4,12 +4,6 @@ window_set_cursor(cr_none)
 cursor_sprite = spr_aim
 global.time = 0
 
-enum Sides {
-	ours,
-	theirs,
-	neutral,
-}
-
 global.ui_interface_on = false
 global.game_over = false
 global.level = 0
