@@ -10,6 +10,7 @@ function add_item(spr, img, text, action_struct) {
 }
 
 function setup_ui() {
+	ui_angle_step = items_number ? 360 / items_number : undefined
 	var start_angle = 90 + (items_number - 1) * ui_angle_step * 0.5
 	for (var i = 0; i < items_number; ++i) {
 	    var it = items[i]
@@ -76,7 +77,7 @@ function check_destroy_on_parent_far_away() {
 items = []
 items_number = 0
 ui_radius = 150
-ui_angle_step = 60
+ui_angle_step = undefined
 sprite_index = spr_building_ui
 image_speed = 0
 display_text = ""

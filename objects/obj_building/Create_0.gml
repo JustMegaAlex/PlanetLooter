@@ -1,16 +1,6 @@
 
 event_inherited()
 
-function add_defender(inst) {
-	array_push(defenders, inst)
-}
-
-function pop_defender(inst) {
-	array_remove(defenders, inst)
-	if not array_length(defenders)
-		state = Building.unhappy
-}
-
 function get_planet_placement() {
 	var r = planet.radius
 	var ps = planet.size

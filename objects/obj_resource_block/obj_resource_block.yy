@@ -1,11 +1,11 @@
 {
-  "spriteId": {
-    "name": "spr_debug_console_joint",
-    "path": "sprites/spr_debug_console_joint/spr_debug_console_joint.yy",
-  },
+  "spriteId": null,
   "solid": false,
   "visible": true,
-  "spriteMaskId": null,
+  "spriteMaskId": {
+    "name": "spr_block_mask",
+    "path": "sprites/spr_block_mask/spr_block_mask.yy",
+  },
   "persistent": false,
   "parentObjectId": null,
   "physicsObject": false,
@@ -21,18 +21,17 @@
   "physicsKinematic": false,
   "physicsShapePoints": [],
   "eventList": [
-    {"isDnD":false,"eventNum":64,"eventType":8,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
     {"isDnD":false,"eventNum":0,"eventType":0,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
-    {"isDnD":false,"eventNum":0,"eventType":8,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
+    {"isDnD":false,"eventNum":0,"eventType":2,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
   ],
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "system objects",
-    "path": "folders/Objects/system objects.yy",
+    "name": "resource_blocks",
+    "path": "folders/Objects/world objects/planets/resource_blocks.yy",
   },
   "resourceVersion": "1.0",
-  "name": "obj_debug_console_joint",
+  "name": "obj_resource_block",
   "tags": [],
   "resourceType": "GMObject",
 }

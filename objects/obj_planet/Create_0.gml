@@ -50,6 +50,11 @@ function get_terrain(tmesh) {
         inst.planet_inst = id
 		inst.i = ii
 		inst.j = jj
+		// pick resource for block
+		var resource = collision_point(inst.x, inst.y, 
+							obj_resource_block, false, true)
+		if resource
+			inst.set_resource_data(resource.resource_data)
 	}
 	return tmesh
 }
