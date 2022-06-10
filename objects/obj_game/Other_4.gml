@@ -7,7 +7,7 @@ if not instance_number(obj_looter)
 	instance_create_layer(0, 0, "Instances", obj_looter)
 
 // late init
-alarm[0] = 1
+make_late_init()
 
 // debug
 if TEST_PATH_FIND
