@@ -10,6 +10,19 @@ function scr_move_coord(hsp, vsp) {
 	y += vsp
 }
 
+function scr_move_coord_contact_glide(hsp, vsp, obj) {
+	x += hsp
+	//collision
+	var dir = point_direction(0, 0, hsp, vsp)
+	while place_meeting(x, y, obj) {
+		x -= lengthdir_x(1, dir)
+	}
+	y += vsp
+	while place_meeting(x, y, obj) {
+		y -= lengthdir_y(1, dir)
+	}
+}
+
 function scr_move_coord_contact_obj(hsp, vsp, obj) {
 	scr_move_coord(hsp, vsp)
 	//collision

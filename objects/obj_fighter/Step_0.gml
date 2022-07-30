@@ -29,5 +29,5 @@ switch state {
 	}
 }
 
-scr_move_coord_contact_obj(velocity.X, velocity.Y, obj_block)
+scr_move_coord_contact_glide(velocity.X, velocity.Y, obj_block)
 position.set(x, y)

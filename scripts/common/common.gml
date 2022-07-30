@@ -27,10 +27,15 @@ AIVelocity = {
 	ray_scanners_config: [
 		{len: 80, angle: 10, gain: 1},
 		{len: 80, angle: -10, gain: 1},
-		{len: 50, angle: 30, gain: 0.7},
-		{len: 50, angle: -30, gain: 0.7},
-		{len: 30, angle: 45, gain: 0.7},
-		{len: 30, angle: -45, gain: 0.7},
+		{len: 60, angle: 30, gain: 0.7},
+		{len: 60, angle: -30, gain: 0.7},
+		{len: 50, angle: 45, gain: 0.7},
+		{len: 50, angle: -45, gain: 0.7},
+
+		{len: 30, angle: 90, gain: 0.6},
+		{len: 30, angle: 120, gain: 0.6},
+		{len: 30, angle: -90, gain: 0.6},
+		{len: 30, angle: -120, gain: 0.6},
 	],
 	ray_scanners: [],
 	update_velocity_avoid_obstacles_v2: function(vel, pos, dir, sp_max, avoid_obj) {
