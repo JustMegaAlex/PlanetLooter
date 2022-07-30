@@ -18,7 +18,7 @@ function reset_globals() {
 #macro TestStuff:START_ROOM rm_game_test
 
 // debug
-global.DEBUG = true
+global.DEBUG = false
 global.ai_attack_off = false
 global.ai_show_move_routes = false
 global.enable_instant_planet_move = true
@@ -38,6 +38,7 @@ global.ai_mobs_look_for_collectibles_radius = 80
 global.ai_mobs_reach_point_treshold = global.grid_size
 global.path_finding_graph_collison_line_width = 30
 global.enemy_attack_formation_snipers_fract = 0
+global.enemy_collisions_on = false
 global.gen_create_enemies = true
 global.gen_create_planets = true
 global.get_optimize_astar_graph = true
@@ -79,6 +80,7 @@ switch MODE {
 		global.enemy_attack_formation_snipers_fract = 0
 		global.debug_test_path_finding = false
 		global.show_path_finding_graph = false
+		global.enemy_collisions_on = true
 		//global.show_ai_patrol_routes = true
 		//global.ai_attack_off = true
 
@@ -86,7 +88,7 @@ switch MODE {
 		global.gen_create_planets = false
 		global.gen_min_planet_number = 6
 		global.gen_max_planet_number = 6
-		global.ai_show_move_routes = false
+		global.ai_show_move_routes = true
 		global.show_planets_data = false
 
 		global.gen_spawn_is_patrol_chance = 0

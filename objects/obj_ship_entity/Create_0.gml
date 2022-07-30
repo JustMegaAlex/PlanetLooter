@@ -63,6 +63,8 @@ function reset_route() {
 }
 
 function move_to_set_coords(xx, yy) {
+	if place_meeting(x, y, obj_block)
+		return false
 	if !path_blocked(xx, yy)
 		return true
 	var route = astar_find_path(position, new Vec2d(xx, yy))
@@ -282,6 +284,7 @@ weapon = {
 }
 
 sp = {normal: 5, cruise: 15, consumption: 0.007}
+sp_max = 5
 
 position = new Vec2d(x, y)
 position_prev = position

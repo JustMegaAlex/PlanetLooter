@@ -14,7 +14,7 @@ draw_set_font(fnt)
 initialize_path_finding()
 
 show_tips = false
-show_tips_xoffset = -400
+show_tips_xoffset = -200
 tips_text = "WASD to move\nLeft mouse to shoot\nMouse wheel to switch weapons\n"
 tips_text += "Right mouse to thrust\nE to interact with buidlings\nF3 to restart\n"
 tips_text += "R to repair one hull point (costs 1 repair kit)\n"

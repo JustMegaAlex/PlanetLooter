@@ -251,3 +251,7 @@ function geom_draw_multiline(points, w=1, c=c_white) {
 		draw_line_width_color(p.X, p.Y, pp.X, pp.Y, w, c, c)
 	}
 }
+
+function geometry_draw_line(line) {
+	draw_line(line.xst, line.yst, line.xend, line.yend)
+}

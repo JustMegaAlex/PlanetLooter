@@ -127,6 +127,12 @@ if enemy_in_sight and !reloading and (warmedup >= 1) {
 
 hsp = approach(hsp, hsp_to + battle_strafe_vec.X, acc)
 vsp = approach(vsp, vsp_to + battle_strafe_vec.Y, acc)
-scr_move_coord(hsp, vsp)
+
 position.set(x, y)
 colliding_with = instance_place(x, y, obj_block)
+
+if global.enemy_collisions_on {
+	scr_move_coord_contact_obj(hsp, vsp, obj_block)
+} else {
+	scr_move_coord(hsp, vsp)
+}

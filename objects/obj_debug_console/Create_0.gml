@@ -1,11 +1,21 @@
 
 configuration = {
-    toggle_path_finding: {
+    show_path_finding_graph: {
         action: function() {
             global.debug_test_path_finding = !global.debug_test_path_finding
 			global.show_path_finding_graph = !global.show_path_finding_graph
         }
-    }
+    },
+	show_enemy_routes: {
+		action: function() {
+			global.ai_show_move_routes = !global.ai_show_move_routes
+		}
+	},
+	toggle_enemy_collisions: {
+		action: function() {
+			global.enemy_collisions_on = !global.enemy_collisions_on
+		}
+	}
 }
 
 turned_on = false
@@ -36,6 +46,7 @@ function turn_on() {
         jnt.action_function = action
         jnt.name = name
 		joint_width = max(joint_width, get_joint_width(name))
+		i++
     }
 	
 	with(obj_debug_console_joint) {

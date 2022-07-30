@@ -8,6 +8,7 @@ if keyboard_check_pressed(vk_f3) {
 	reset_globals()
 	global.level = 0
 	room_restart()
+	make_adjust_window_size()
 }
 
 if keyboard_check_pressed(vk_escape)
@@ -19,7 +20,9 @@ if keyboard_check_pressed(vk_f11)
 if keyboard_check_pressed(ord("T"))
 	show_tips = !show_tips
 
-if keyboard_check_pressed(ord("`")) or keyboard_check_pressed(ord("R")) {
+if MODE != "default" and
+		(keyboard_check_pressed(ord("`")) 
+		 or keyboard_check_pressed(ord("R"))) {
     if instance_exists(obj_debug_console) {
         if obj_debug_console.turned_on
             obj_debug_console.turn_off()
