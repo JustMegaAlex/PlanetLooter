@@ -55,7 +55,7 @@
   "isEcma": false,
   "LibraryEmitters": [],
   "MetaData": {
-    "IDEVersion": "2023.2.1.75",
+    "IDEVersion": "2023.6.0.92",
   },
   "resources": [
     {"id":{"name":"obj_block_custom","path":"objects/obj_block_custom/obj_block_custom.yy",},},
@@ -136,6 +136,7 @@
     {"id":{"name":"spr_planet_mask","path":"sprites/spr_planet_mask/spr_planet_mask.yy",},},
     {"id":{"name":"spr_ui_use_weapon","path":"sprites/spr_ui_use_weapon/spr_ui_use_weapon.yy",},},
     {"id":{"name":"obj_with_ui","path":"objects/obj_with_ui/obj_with_ui.yy",},},
+    {"id":{"name":"Notes","path":"notes/Notes/Notes.yy",},},
     {"id":{"name":"obj_crusher_blaze","path":"objects/obj_crusher_blaze/obj_crusher_blaze.yy",},},
     {"id":{"name":"obj_start_game","path":"objects/obj_start_game/obj_start_game.yy",},},
     {"id":{"name":"obj_building","path":"objects/obj_building/obj_building.yy",},},
@@ -153,7 +154,6 @@
     {"id":{"name":"spr_building_ui_item","path":"sprites/spr_building_ui_item/spr_building_ui_item.yy",},},
     {"id":{"name":"obj_collectable","path":"objects/obj_collectable/obj_collectable.yy",},},
     {"id":{"name":"obj_ui_create_module_menu","path":"objects/obj_ui_create_module_menu/obj_ui_create_module_menu.yy",},},
-    {"id":{"name":"tasks","path":"notes/tasks/tasks.yy",},},
     {"id":{"name":"snd_hit","path":"sounds/snd_hit/snd_hit.yy",},},
     {"id":{"name":"obj_debug","path":"objects/obj_debug/obj_debug.yy",},},
     {"id":{"name":"obj_bullet_two_phase","path":"objects/obj_bullet_two_phase/obj_bullet_two_phase.yy",},},

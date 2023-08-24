@@ -59,4 +59,4 @@ function toggle_fullscreen() {
 	make_adjust_window_size()
 }
 
-make_adjust_window_size()
+//make_adjust_window_size()

@@ -8,14 +8,14 @@ if keyboard_check_pressed(vk_f3) {
 	reset_globals()
 	global.level = 0
 	room_restart()
-	make_adjust_window_size()
+	//make_adjust_window_size()
 }
 
 if keyboard_check_pressed(vk_escape)
 	game_end()
 
-if keyboard_check_pressed(vk_f11)
-	toggle_fullscreen()
+//if keyboard_check_pressed(vk_f11)
+//	toggle_fullscreen()
 
 if keyboard_check_pressed(ord("T"))
 	show_tips = !show_tips

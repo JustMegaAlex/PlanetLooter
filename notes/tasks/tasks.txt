@@ -1,4 +1,0 @@
-- enemy avoiding collisions
-	- написать update_velocity
-	- написать цикл управления мобом
-	- добавить поиск путей
