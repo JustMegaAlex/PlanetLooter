@@ -13,6 +13,15 @@ ds_list_clear(global.AIVelocity.affectors)
 
 var iter = new IterArray(global.AIVelocity.ray_scanners)
 while iter.next() {
-	var line = iter.get()
-	geometry_draw_line(line)
+	var scanner = iter.get()
+	var col = scanner.positive ? c_red : c_white
+	geometry_draw_line(scanner.line, col)
 }
+
+var vec = global.AIVelocity.resulting_vector
+vec.mult(30)
+draw_line(x, y, x + vec.X, y + vec.Y)
+
+vec = velocity.mult_(30)
+draw_line(x, y, x + vec.X, y + vec.Y)
+

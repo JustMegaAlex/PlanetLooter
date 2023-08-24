@@ -119,7 +119,16 @@ function Vec2d(xx, yy, is_polar=false) constructor {
 		Y = abs(Y)
 		return self
 	}
-
+	
+	mult = function(n) {
+		X *= n
+		Y *= n
+		return self
+	}
+	
+	mult_ = function(n) {
+		return new Vec2d(X*n, Y*n)	
+	}
 
 	if is_polar == true
 		self.set_polar(xx, yy)
@@ -252,6 +261,6 @@ function geom_draw_multiline(points, w=1, c=c_white) {
 	}
 }
 
-function geometry_draw_line(line) {
-	draw_line(line.xst, line.yst, line.xend, line.yend)
+function geometry_draw_line(line, col=c_white) {
+	draw_line_color(line.xst, line.yst, line.xend, line.yend, col, col)
 }

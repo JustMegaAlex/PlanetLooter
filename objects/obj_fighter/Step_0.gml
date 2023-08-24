@@ -22,7 +22,7 @@ switch state {
 
 		CmpMovement.update_velocity(velocity, position, dir)
 		if CmpMovement.destination_reached() {
-			state = "idle"
+			state = "idle"   
 			target_point = null
 		}
 		break
