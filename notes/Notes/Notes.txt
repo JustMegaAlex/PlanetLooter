@@ -1,0 +1,21 @@
+
+
+ToDo:
+- redesign plazma weapon
+
+- add more tools
+	- big bomb exploding on projectile contact
+
+- add more enemies
+	- planet eaters
+
+- updates:
+	- turret
+		- make visible charge
+	- scout
+		- make flee from bombs
+		- improve persuing player and shooting
+
+- fixes:
+	- detect when pathfinding causes huge lag
+	- fix huge lag

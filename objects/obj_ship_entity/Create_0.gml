@@ -205,11 +205,11 @@ Resources = {
 	update_resource_weapon: function(res_name, amount) {
 		var rtype = global.resource_types[$ res_name]
 		if rtype.is_bullet {
-			var wtype = global.weapon_types[$ rtype.bullet_name]
-			if amount >= wtype.resource_amount
+			var weapon = GetWeapon(rtype.bullet_name)
+			if amount >= weapon.resource_amount
 					and !array_has(id.use_weapon_arr, rtype.bullet_name) {				
 				array_push(id.use_weapon_arr, rtype.bullet_name)
-			} else if amount < wtype.resource_amount
+			} else if amount < weapon.resource_amount
 					and array_has(id.use_weapon_arr, rtype.bullet_name) {
 				array_remove(id.use_weapon_arr, rtype.bullet_name)
 			}

@@ -14,10 +14,10 @@ function update_weapon_arr() {
 	var wp_names = variable_struct_get_names(global.weapon_types)
 	for (var i = 0; i < array_length(wp_names); ++i) {
 	    var wname = wp_names[i]
-		var wtype = global.weapon_types[$ wname]
-		if Resources.get(wtype.resource) >= 1
-				and wtype.player_can_use
-			array_push(use_weapon_arr, wname)
+		var weapon = GetWeapon(wname)
+		if Resources.get(weapon.resource) >= 1
+				and weapon.player_can_use
+			array_push(use_weapon_arr, weapon)
 	}
 	// init use_weapon
 	if (use_weapon_index == -1) and array_length(use_weapon_arr) {
@@ -45,9 +45,8 @@ function switch_weapon(swtch) {
 }
 
 function looter_shoot(shoot_dir) {
-	var weapon = global.weapon_types[$ use_weapon]
-	if Resources.try_spend(weapon.resource, weapon.resource_amount)
-		shoot(shoot_dir, id, use_weapon)
+	if Resources.try_spend(use_weapon.resource, use_weapon.resource_amount)
+		use_weapon.shoot(shoot_dir, id)
 }
 
 sp = {normal: 5, cruise: 10, consumption: 0.005}

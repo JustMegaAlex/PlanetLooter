@@ -23,7 +23,7 @@ function state_switch_attack_snipe(trg) {
 		return
 	}
     self.state_switch_attack(trg)
-    self.use_weapon = "pulse_snipe"
+    self.use_weapon = GetWeapon("pulse_snipe")
     state = "attack_snipe"
 }
 
@@ -33,7 +33,7 @@ function state_switch_attack(trg, trigger_friends=false) {
 			or state == "attack_snipe" {
 		return
 	}
-    self.use_weapon = "pulse_spread"
+    self.use_weapon = GetWeapon("pulse_spread")
 	self.set_sp_to(0, dir)
 	target = trg
 	set_dir_to(inst_dir(target))
@@ -233,7 +233,7 @@ controlled_building = noone
 hp = 7
 
 side = Sides.theirs
-use_weapon = "pulse_spread"
+use_weapon = GetWeapon("pulse_spread")
 
 // alert tower
 alert_tower_inst = noone

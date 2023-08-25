@@ -122,7 +122,7 @@ switch state {
 update_dir()
 
 if enemy_in_sight and !reloading and (warmedup >= 1) {
-	shoot(dir, id, use_weapon)
+	use_weapon.shoot(dir, id)
 }
 
 hsp = approach(hsp, hsp_to + battle_strafe_vec.X, acc)
