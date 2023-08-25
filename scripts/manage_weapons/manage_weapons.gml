@@ -1,29 +1,4 @@
 
-function shoot(shoot_dir, spawner, wtype, xx=x, yy=y) {
-	var weapon = global.weapon_types[$ wtype]
-	if object_is_ancestor(spawner.object_index, obj_ship_entity)
-		spawner.reloading = weapon.reload_time
-
-	var object_bullet = obj_bullet
-	if variable_struct_exists(weapon, "object")
-		object_bullet = weapon.object
-
-	var inst = instance_create_layer(xx, yy, layer, object_bullet)
-	inst.image_angle = shoot_dir
-	inst.sprite_index = weapon.sprite
-	inst.spawner = spawner
-	inst.side = spawner.side
-	inst.weapon = weapon
-	inst.sp = weapon.sp
-	inst.type = wtype
-	inst.life_distance = weapon.distance
-	if object_bullet == obj_bullet_two_phase {
-		inst.ph1_distance = weapon.ph1_distance
-	}
-	var snd = choose(snd_laser1, snd_laser2, snd_laser3, snd_laser4)
-	//audio_play_sound(snd, 0, false)
-}
-
 function init_resource_bullet_names() {
 	var weapon_names = variable_struct_get_names(global.weapon_types)
 	for (var i = 0; i < array_length(weapon_names); ++i) {
@@ -38,7 +13,8 @@ function init_resource_bullet_names() {
 	}
 }
 
-function WeaponBase() constructor {
+function WeaponBase(name) constructor {
+	self.name = name
 	damage = 1
 	mining = 1
 	reload_time = 20
@@ -49,17 +25,16 @@ function WeaponBase() constructor {
 	distance = 700
 	resource_amount = 1
 	player_can_use = false
-	object = obj_bullet_two_phase
 	ph2_sp = 7
 	ph2_img = 1
-	ph1_distance = 120
+	ph1_distance = 0
 	object_bullet = obj_bullet
 
 	shoot = function(shoot_dir, spawner) {
 		if object_is_ancestor(spawner.object_index, obj_ship_entity)
 			spawner.reloading = reload_time
 
-		var inst = instance_create_layer(xx, yy, "Instances", object_bullet)
+		var inst = instance_create_layer(spawner.x, spawner.y, "Instances", object_bullet)
 		inst.image_angle = shoot_dir
 		inst.sprite_index = sprite
 		inst.spawner = spawner
@@ -75,7 +50,7 @@ function WeaponBase() constructor {
 	}
 }
 
-function WeaponPulse() : WeaponBase() constructor {
+function WeaponPulse(name) : WeaponBase(name) constructor {
 	damage = 1
 	mining = 1
 	reload_time = 20
@@ -86,13 +61,29 @@ function WeaponPulse() : WeaponBase() constructor {
 	distance = 700
 	resource_amount = 1
 	player_can_use = false
-	object = obj_bullet_two_phase
 	ph2_sp = 7
 	ph2_img = 1
 	ph1_distance = 120
 }
 
-function WeaponTurretPulse() : WeaponBase() constructor {
+function WeaponPulseTwoPhase(name) : WeaponBase(name) constructor {
+	damage = 1
+	mining = 1
+	reload_time = 20
+	sp = 14
+	resource = "empty"												 
+	knock_back_force = 2
+	sprite = spr_bullet_pulse
+	distance = 700
+	resource_amount = 1
+	player_can_use = false
+	ph2_sp = 7
+	ph2_img = 1
+	ph1_distance = 120
+	object_bullet = obj_bullet_two_phase
+}
+
+function WeaponTurretPulse(name) : WeaponBase(name) constructor {
 	damage = 2
 	mining = 1
 	reload_time = 20
@@ -105,7 +96,7 @@ function WeaponTurretPulse() : WeaponBase() constructor {
 	player_can_use = false
 }
 
-function WeaponPulseSpread() : WeaponBase() constructor {
+function WeaponPulseSpread(name) : WeaponBase(name) constructor {
 	damage = 1
 	mining = 1
 	reload_time = 90
@@ -113,13 +104,14 @@ function WeaponPulseSpread() : WeaponBase() constructor {
 	resource = "empty"
 	knock_back_force = 2
 	sprite = spr_bullet_pulse
-	distance = 0
-	object = obj_bullet_pulse_spread
+	distance = 500
+	object_bullet = obj_bullet_pulse_spread
 	resource_amount = 1
 	player_can_use = false
+	ph1_distance = 120
 }
 
-function WeaponPulseSnipe() : WeaponBase() constructor {
+function WeaponPulseSnipe(name) : WeaponBase(name) constructor {
 	damage = 1
 	mining = 1
 	reload_time = 90
@@ -132,7 +124,7 @@ function WeaponPulseSnipe() : WeaponBase() constructor {
 	player_can_use = false
 }
 
-function WeaponPlazma() : WeaponBase() constructor {
+function WeaponPlazma(name) : WeaponBase(name) constructor {
 	damage = 3
 	mining = 1
 	reload_time = 20
@@ -145,12 +137,12 @@ function WeaponPlazma() : WeaponBase() constructor {
 	player_can_use = true
 }
 
-function WeaponMetalOrbs() : WeaponBase() constructor {
+function WeaponMetalOrbs(name) : WeaponBase(name) constructor {
 	damage = 1
 	mining = 1
 	reload_time = 90
 	sp = 7
-	resource = "empty"
+	resource = "metall"
 	knock_back_force = 2
 	sprite = spr_bullet_pulse
 	distance = 0
@@ -159,12 +151,12 @@ function WeaponMetalOrbs() : WeaponBase() constructor {
 	player_can_use = false
 }
 
-function WeaponHoming() : WeaponBase() constructor {
+function WeaponHoming(name) : WeaponBase(name) constructor {
 	damage = 1
 	mining = 1
 	reload_time = 90
 	sp = 7
-	resource = "empty"
+	resource = "bullet_homing"
 	knock_back_force = 2
 	sprite = spr_bullet_pulse
 	distance = 0
@@ -181,11 +173,12 @@ weapon_types = {
 	plazma: WeaponPlazma,
 	metall_orbs: WeaponMetalOrbs,
 	homing: WeaponHoming,
+	pulse_two_phase: WeaponPulseTwoPhase,
 }
 
 function GetWeapon(name) {
 	var constr = variable_struct_get(global.weapon_types, name)
-	return new constr()
+	return new constr(name)
 }
 
 init_resource_bullet_names()

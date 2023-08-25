@@ -203,15 +203,24 @@ Resources = {
 	},
 
 	update_resource_weapon: function(res_name, amount) {
+		static _checker = {
+			name: "",
+			check: function(wpn) {
+				return wpn.resource == self.name
+			}
+		}
+
+		_checker.name = res_name
+
 		var rtype = global.resource_types[$ res_name]
 		if rtype.is_bullet {
 			var weapon = GetWeapon(rtype.bullet_name)
-			if amount >= weapon.resource_amount
-					and !array_has(id.use_weapon_arr, rtype.bullet_name) {				
-				array_push(id.use_weapon_arr, rtype.bullet_name)
+			var is_in_array = array_has2(id.use_weapon_arr, _checker)
+			if amount >= weapon.resource_amount and !is_in_array {		
+				array_push(id.use_weapon_arr, weapon)
 			} else if amount < weapon.resource_amount
-					and array_has(id.use_weapon_arr, rtype.bullet_name) {
-				array_remove(id.use_weapon_arr, rtype.bullet_name)
+					and is_in_array {
+				array_remove_if(id.use_weapon_arr, _checker)
 			}
 		}
 	},

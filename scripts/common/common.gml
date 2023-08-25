@@ -108,7 +108,7 @@ function generate_patrol_route(first_planet) {
 	while planets_num {
 		n = irandom(total_num - 1)
 		var pl = instance_find(obj_planet, n)
-		if array_find(route, pl) != -1
+		if array_find_ind(route, pl) != -1
 			continue
 		planets_num--
 

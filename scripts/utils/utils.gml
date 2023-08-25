@@ -132,6 +132,14 @@ function array_has(arr, val) {
 	return false
 }
 
+function array_has2(arr, checker) {
+	for (var i = 0; i < array_length(arr); ++i) {
+	    if checker.check(arr[i])
+			return true
+	}
+	return false
+}
+
 function array_count(arr, val) {
 	var count = 0
 	for (var i = 0; i < array_length(arr); ++i) {
@@ -141,7 +149,7 @@ function array_count(arr, val) {
 	return count
 }
 
-function array_find(arr, val) {
+function array_find_ind(arr, val) {
 	for (var i = 0; i < array_length(arr); ++i) {
 	    if val == arr[i]
 			return i
@@ -150,10 +158,20 @@ function array_find(arr, val) {
 }
 
 function array_remove(arr, val) {
-	var i = array_find(arr, val)
+	var i = array_find_ind(arr, val)
 	if i == -1
 		throw " :array_remove: no value in array: " + string(val)
 	array_delete(arr, i, 1)
+}
+
+function array_remove_if(arr, checker) {
+	for (var i = 0; i < array_length(arr); ++i) {
+	    if checker.check(arr[i]) {
+			array_delete(arr, i, 1)
+			return true
+		}
+	}
+	return false
 }
 
 function array_choose(arr) {

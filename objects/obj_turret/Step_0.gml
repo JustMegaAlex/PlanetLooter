@@ -5,7 +5,7 @@ if instance_exists(obj_looter) and !global.ai_attack_off {
 		if !collision_line(x, y, obj_looter.x, obj_looter.y, obj_block, false, false) {
 			angle_to = inst_dir(obj_looter)
 			if !--reloading {
-				shoot(angle, id, wtype)
+				weapon.shoot(angle, id)
 				reloading = reload_time
 			}
 		}

@@ -26,13 +26,6 @@ function update_weapon_arr() {
 	}
 }
 
-function use_weapon_remove(wtype) {
-	array_remove(use_weapon_arr, wtype)
-	use_weapon_index = max(use_weapon_index - 1, 0)
-	if array_length(use_weapon_arr)
-		use_weapon = use_weapon_arr[use_weapon_index]
-}
-
 function switch_weapon(swtch) {
 	var num = array_length(use_weapon_arr)
 	if num == 0

@@ -7,7 +7,7 @@ event_inherited()
 function set_hit(attacker, weapon) {
 	if !global.no_damage
 		hp -= weapon.damage
-    var trigger_friends = array_find(["attack", "attack_snipe"], state) == -1
+    var trigger_friends = array_find_ind(["attack", "attack_snipe"], state) == -1
 	state_switch_attack(obj_looter, trigger_friends)
 	set_dir_to(point_direction(x, y, obj_looter.x, obj_looter.y))
 	trigger_friendly_units()
