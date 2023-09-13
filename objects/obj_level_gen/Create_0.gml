@@ -263,12 +263,12 @@ function setup_path_finding_graph(outer_graph, inner_graph, planets) {
 		var inner_points = []
 		for (var i = 0; i < size; ++i) {
 		    var row = []
-			inner_points[i] = row
 			var xx = x0 + (i+0.5) * global.grid_size
 			for (var j = 0; j < size; ++j) {
 				var yy = y0 + (j+0.5) * global.grid_size
 			    row[j] = new Vec2d(xx, yy)
 			}
+			inner_points[i] = row
 		}
 		array_push(inner_points_to_draw, inner_points[0][0])
 		// add planet inner nodes

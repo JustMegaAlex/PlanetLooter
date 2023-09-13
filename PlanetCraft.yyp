@@ -136,7 +136,6 @@
     {"id":{"name":"spr_planet_mask","path":"sprites/spr_planet_mask/spr_planet_mask.yy",},},
     {"id":{"name":"spr_ui_use_weapon","path":"sprites/spr_ui_use_weapon/spr_ui_use_weapon.yy",},},
     {"id":{"name":"obj_with_ui","path":"objects/obj_with_ui/obj_with_ui.yy",},},
-    {"id":{"name":"Notes","path":"notes/Notes/Notes.yy",},},
     {"id":{"name":"obj_crusher_blaze","path":"objects/obj_crusher_blaze/obj_crusher_blaze.yy",},},
     {"id":{"name":"obj_start_game","path":"objects/obj_start_game/obj_start_game.yy",},},
     {"id":{"name":"obj_building","path":"objects/obj_building/obj_building.yy",},},
