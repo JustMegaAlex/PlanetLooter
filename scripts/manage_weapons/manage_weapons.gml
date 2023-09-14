@@ -31,7 +31,6 @@ function WeaponBase(name) constructor {
 	object_bullet = obj_bullet
 
 	shoot = function(shoot_dir, spawner) {
-
 		var inst = instance_create_layer(spawner.x, spawner.y, "Instances", object_bullet)
 		inst.image_angle = shoot_dir
 		inst.sprite_index = sprite
@@ -133,6 +132,26 @@ function WeaponPlazma(name) : WeaponBase(name) constructor {
 	distance = 400
 	resource_amount = 0.2
 	player_can_use = true
+	
+	start_xshift = 8
+	start_shift_dir = 1
+	
+	shoot = function(shoot_dir, spawner) {
+		var point = new Vec2d(spawner.x, spawner.y)
+		var dir = shoot_dir + 90 * start_shift_dir
+		point.add_polar(start_xshift, dir)
+		start_shift_dir *= -1
+		var inst = instance_create_layer(point.X, point.Y, "Instances", object_bullet)
+		inst.image_angle = shoot_dir
+		inst.sprite_index = sprite
+		inst.spawner = spawner
+		inst.side = spawner.side
+		inst.weapon = self
+		inst.sp = sp
+		inst.life_distance = distance
+		var snd = choose(snd_laser1, snd_laser2, snd_laser3, snd_laser4)
+		//audio_play_sound(snd, 0, false)
+	}
 }
 
 function WeaponMetalOrbs(name) : WeaponBase(name) constructor {
