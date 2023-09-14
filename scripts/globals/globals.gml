@@ -1,8 +1,8 @@
 
 // room_reset
 function reset_globals() {
-	arr_patrol_routes = []
-	astar_graph.clear()
+	array_resize(global.arr_patrol_routes, 0)
+	global.astar_graph.clear()
 }
 
 #macro Default:MODE "default"
