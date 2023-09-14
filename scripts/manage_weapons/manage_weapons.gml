@@ -18,7 +18,7 @@ function WeaponBase(name) constructor {
 	damage = 1
 	mining = 1
 	reload_time = 20
-	sp = 14
+	sp = global.weapon_base_sp
 	resource = "empty"												 
 	knock_back_force = 2
 	sprite = spr_bullet_pulse
@@ -51,7 +51,6 @@ function WeaponPulse(name) : WeaponBase(name) constructor {
 	damage = 1
 	mining = 1
 	reload_time = 20
-	sp = 14
 	resource = "empty"												 
 	knock_back_force = 2
 	sprite = spr_bullet_pulse
@@ -67,14 +66,13 @@ function WeaponPulseTwoPhase(name) : WeaponBase(name) constructor {
 	damage = 1
 	mining = 1
 	reload_time = 20
-	sp = 14
 	resource = "empty"												 
 	knock_back_force = 2
 	sprite = spr_bullet_pulse
 	distance = 700
 	resource_amount = 1
 	player_can_use = false
-	ph2_sp = 7
+	ph2_sp = global.weapon_phase2_sp
 	ph2_img = 1
 	ph1_distance = 120
 	object_bullet = obj_bullet_two_phase
