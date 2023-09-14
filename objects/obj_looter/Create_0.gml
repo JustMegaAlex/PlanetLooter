@@ -37,6 +37,13 @@ function switch_weapon(swtch) {
 	use_weapon = use_weapon_arr[use_weapon_index]
 }
 
+function activate_weapon(ind) {
+	if ind != clamp(ind, 0, array_length(use_weapon_arr) - 1)
+		return;
+	use_weapon_index = ind
+	use_weapon = use_weapon_arr[use_weapon_index]
+}
+
 function looter_shoot(shoot_dir) {
 	if Resources.try_spend(use_weapon.resource, use_weapon.resource_amount) {
 		use_weapon.shoot(shoot_dir, id)

@@ -7,6 +7,8 @@ function move_to_planet(num) {
 	obj_looter.y = planet.y
 }
 
+last_key = undefined
+
 current_planet = 0
 
 state = "none"
@@ -64,6 +66,10 @@ testPathFinding = {
 		}
 		self.graph.DebugDrawer.draw()
 	}
+}
+
+function show(str, val) {
+	scr_debug_show_var(str, val)
 }
 
 make_late_init()

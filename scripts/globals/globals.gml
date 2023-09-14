@@ -53,7 +53,7 @@ gen_max_planet_number = 8
 gen_spawn_is_patrol_chance = 0
 gen_spawn_forpost_turret_fract = 0.5
 gen_setup_mobs_override = undefined
-start_resources_amount = 0
+start_resources_amount = 2
 start_cargo_space = 100
 view_to_window_ratio = 0.6
 

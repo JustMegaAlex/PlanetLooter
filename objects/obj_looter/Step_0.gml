@@ -73,6 +73,11 @@ if key_switch_forward
 	switch_weapon(1)
 if key_switch_back
 	switch_weapon(-1)
+// switch via numbuttons
+if keyboard_check_pressed(vk_anykey) 
+		and keyboard_lastkey == clamp(keyboard_lastkey, ord("1"), ord("9")) {
+	activate_weapon(keyboard_lastkey - ord("1"))
+}
 
 // warping
 if warping {

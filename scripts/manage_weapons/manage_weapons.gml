@@ -159,11 +159,11 @@ function WeaponMetalOrbs(name) : WeaponBase(name) constructor {
 	sp = 7
 	resource = "metall"
 	knock_back_force = 2
-	sprite = spr_bullet_pulse
+	sprite = spr_bullet_metall_orb
 	distance = 0
-	object = obj_bullet_pulse_spread
-	resource_amount = 1
-	player_can_use = false
+	object = obj_bullet
+	resource_amount = 0.03
+	player_can_use = true
 }
 
 function WeaponHoming(name) : WeaponBase(name) constructor {
@@ -173,11 +173,11 @@ function WeaponHoming(name) : WeaponBase(name) constructor {
 	sp = 7
 	resource = "bullet_homing"
 	knock_back_force = 2
-	sprite = spr_bullet_pulse
+	sprite = spr_bullet_homing
 	distance = 0
-	object = obj_bullet_pulse_spread
+	object = obj_bullet_homing
 	resource_amount = 1
-	player_can_use = false
+	player_can_use = true
 }
 
 weapon_types = {
