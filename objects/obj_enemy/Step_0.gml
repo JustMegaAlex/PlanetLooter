@@ -123,6 +123,7 @@ update_dir()
 
 if enemy_in_sight and !reloading and (warmedup >= 1) {
 	use_weapon.shoot(dir, id)
+	reloading = use_weapon.reload_time
 }
 
 hsp = approach(hsp, hsp_to + battle_strafe_vec.X, acc)

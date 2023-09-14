@@ -31,8 +31,6 @@ function WeaponBase(name) constructor {
 	object_bullet = obj_bullet
 
 	shoot = function(shoot_dir, spawner) {
-		if object_is_ancestor(spawner.object_index, obj_ship_entity)
-			spawner.reloading = reload_time
 
 		var inst = instance_create_layer(spawner.x, spawner.y, "Instances", object_bullet)
 		inst.image_angle = shoot_dir

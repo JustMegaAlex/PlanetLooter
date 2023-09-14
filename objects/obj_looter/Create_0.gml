@@ -38,8 +38,10 @@ function switch_weapon(swtch) {
 }
 
 function looter_shoot(shoot_dir) {
-	if Resources.try_spend(use_weapon.resource, use_weapon.resource_amount)
+	if Resources.try_spend(use_weapon.resource, use_weapon.resource_amount) {
 		use_weapon.shoot(shoot_dir, id)
+		reloading = use_weapon.reload_time
+	}
 }
 
 sp = {normal: 5, cruise: 10, consumption: 0.005}
