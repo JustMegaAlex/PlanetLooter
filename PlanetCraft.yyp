@@ -34,7 +34,6 @@
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"ships","folderPath":"folders/Objects/world objects/ships.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"test","folderPath":"folders/Objects/world objects/test.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Rooms","folderPath":"folders/Rooms.yy",},
-    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Paths","folderPath":"folders/Rooms/Paths.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Scripts","folderPath":"folders/Scripts.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"ai","folderPath":"folders/Scripts/ai.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Sequences","folderPath":"folders/Sequences.yy",},
