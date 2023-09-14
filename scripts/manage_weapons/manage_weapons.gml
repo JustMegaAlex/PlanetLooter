@@ -153,14 +153,14 @@ function WeaponPlazma(name) : WeaponBase(name) constructor {
 }
 
 function WeaponMetalOrbs(name) : WeaponBase(name) constructor {
-	damage = 1
+	damage = 0.15
 	mining = 1
-	reload_time = 90
-	sp = 7
+	reload_time = 5
+	sp = 20
 	resource = "metall"
 	knock_back_force = 2
 	sprite = spr_bullet_metall_orb
-	distance = 0
+	distance = 260
 	object = obj_bullet
 	resource_amount = 0.03
 	player_can_use = true
