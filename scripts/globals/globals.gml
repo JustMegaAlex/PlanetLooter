@@ -5,6 +5,7 @@ function reset_globals() {
 	global.astar_graph.clear()
 }
 
+#macro MODE "default"
 #macro Default:MODE "default"
 #macro TestPathFinding:MODE "test_path_finding"
 #macro GodMode:MODE "god_mode"
@@ -35,6 +36,9 @@ debug_test_path_finding = false
 ai_max_partol_route_length = 4
 ai_rebel_block_extra_dist = 1
 ai_mobs_look_for_collectibles_radius = 80
+
+grid_size = 24 // FIX: this is defined twice
+
 ai_mobs_reach_point_treshold = grid_size
 path_finding_graph_collison_line_width = 30
 enemy_attack_formation_snipers_fract = 0
