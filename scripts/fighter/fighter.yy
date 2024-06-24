@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "fighter",
-  "isCompatibility": false,
-  "isDnD": false,
-  "parent": {
-    "name": "ai",
-    "path": "folders/Scripts/ai.yy",
+  "$GMScript":"",
+  "%Name":"fighter",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"fighter",
+  "parent":{
+    "name":"ai",
+    "path":"folders/Scripts/ai.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }
